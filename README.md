@@ -1,0 +1,53 @@
+vcard-core
+==========
+
+A library for working with [vCards](https://en.wikipedia.org/wiki/VCard).
+
+Heads Up!
+---------
+This is still very much a WIP project and is __*not*__ feature complete.
+
+Testing
+-------
+
+```sh
+$ npm test
+```
+
+Reference
+---------
+
+### Property Cardinalities
+
+Property cardinalities are indicated using the following notation,
+which is based on ABNF (see [RFC5234], Section 3.6):
+
+| Cardinality | Meaning                                          |
+|:-----------:|--------------------------------------------------|
+|      1      | Exactly one instance per vCard MUST be present.  |
+|      *1     | Exactly one instance per vCard MAY be present.   |
+|      1*     | One or more instances per vCard MUST be present. |
+|      *      | One or more instances per vCard MAY be present.  |
+
+Properties defined in a vCard instance may have multiple values
+depending on the property cardinality.  The general rule for encoding
+multi-valued properties is to simply create a new content line for
+each value (including the property name).  However, it should be
+noted that some value types support encoding multiple values in a
+single content line by separating the values with a comma ",".  This
+approach has been taken for several of the content types defined
+below (date, time, integer, float).
+
+### Links
+
+- [vCard Format Specification](https://datatracker.ietf.org/doc/html/rfc6350)
+- [vCard KIND:application](https://datatracker.ietf.org/doc/html/rfc6473)
+- [Additional Data Related to an Emergency Call § vCard Parameter Value Registration](https://datatracker.ietf.org/doc/html/rfc7852/#section-11.7)
+- [vCard Format Extensions: ICANN Extensions for the Registration Data Access Protocol (RDAP)](https://datatracker.ietf.org/doc/html/rfc8605/)
+- [vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group](https://datatracker.ietf.org/doc/html/rfc6715/)
+- [vCard Format Extensions: Place of Birth, Place and Date of Death](https://datatracker.ietf.org/doc/html/rfc6474/)
+
+License
+-------
+
+The MIT License (Expat). See the [license file](LICENSE) for details.

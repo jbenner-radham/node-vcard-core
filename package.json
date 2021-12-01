@@ -1,0 +1,39 @@
+{
+  "name": "@vcard/core",
+  "version": "0.0.0",
+  "description": "A vCard library.",
+  "keywords": [
+    "vcard"
+  ],
+  "homepage": "https://github.com/jbenner-radham/node-vcard-core#readme",
+  "bugs": {
+    "url": "https://github.com/jbenner-radham/node-vcard-core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbenner-radham/node-vcard-core.git"
+  },
+  "license": "MIT",
+  "author": "James Benner <james.benner@gmail.com> (http://www.jamesbenner.com/)",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha --require ts-node/register --extension ts test/**"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.11.11",
+    "chai": "^4.3.4",
+    "eslint": "^8.3.0",
+    "eslint-plugin-no-only-tests": "^2.6.0",
+    "mocha": "^9.1.3",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  }
+}
