@@ -64,6 +64,7 @@ export default class Adr implements Property {
     }
 
     constructor(value: string) {
+        this.validate(value);
         (this as any)[Symbol.for('value')] = value;
     }
 
