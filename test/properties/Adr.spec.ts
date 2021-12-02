@@ -8,7 +8,7 @@ describe('Adr', () => {
 
     describe('#postOfficeBox', () => {
         it('is a string property', () => {
-            const adr = new Adr('PO Box 1337;;1234 Acme Rd.;Sometown;OH;43204;US');
+            const adr = new Adr('PO Box 1337;;1234 Acme Rd.;Sometown;OH;43204;United States of America');
 
             expect(adr.postOfficeBox).to.be.a('string');
         });
@@ -101,6 +101,32 @@ describe('Adr', () => {
             const adr = new Adr('PO Box 1337;;1234 Acme Rd.;Sometown;OH;43204;United States of America');
 
             expect(adr.countryName).to.equal('United States of America');
+        });
+    });
+
+    describe('#components()', () => {
+        it('is a method', () => {
+            expect(Adr.prototype.components).to.be.a('function');
+        });
+
+        it('returns an array', () => {
+            const adr = new Adr(';;1234 Acme Rd.;Sometown;OH;43204;United States of America');
+
+            expect(adr.components()).to.be.an('array');
+        });
+
+        it('returns an array of strings', () => {
+            const adr = new Adr(';;1234 Acme Rd.;Sometown;OH;43204;United States of America');
+
+            expect(adr.components().every(component => typeof component === 'string')).to.equal(true);
+        });
+
+        it('returns the components of the property value', () => {
+            const value = ';;1234 Acme Rd.;Sometown;OH;43204;United States of America';
+            const adr = new Adr(value);
+            const components = value.split(';');
+
+            expect(adr.components()).to.deep.equal(components);
         });
     });
 });
