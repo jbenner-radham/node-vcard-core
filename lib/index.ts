@@ -29,12 +29,12 @@ export default class Vcard {
 
     validate(): void {
         if (!(this.version instanceof Version))
-            throw new TypeError(`The VERSION property is invalid`)
+            throw new TypeError(`The VERSION property is invalid`);
 
         if (this.fn.length === 0)
-            throw new TypeError(`The FN property is required`)
+            throw new TypeError(`The FN property is required`);
 
         if (!this.fn.every(fn => fn instanceof Fn))
-            throw new TypeError(`One or more FN properties are invalid`)
+            throw new TypeError(`One or more FN properties are invalid`);
     }
 }
