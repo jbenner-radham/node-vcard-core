@@ -4,4 +4,4 @@ export default interface Property {
     cardinality: Cardinality;
     toString: () => string;
     valueOf: () => any;
-}
+};

@@ -21,31 +21,31 @@ export default class N implements Property {
     [VALUE]: string;
 
     get familyName(): string {
-        const [familyName=''] = this.components();
+        const [familyName = ''] = this.components();
 
         return familyName;
     }
 
     get givenName(): string {
-        const [, givenName=''] = this.components();
+        const [, givenName = ''] = this.components();
 
         return givenName;
     }
 
     get additionalName(): string {
-        const [, , additionalName=''] = this.components();
+        const [, , additionalName = ''] = this.components();
 
         return additionalName;
     }
 
     get honorificPrefix(): string {
-        const [, , , honorificPrefix=''] = this.components();
+        const [, , , honorificPrefix = ''] = this.components();
 
         return honorificPrefix;
     }
 
     get honorificSuffix(): string {
-        const [, , , , honorificSuffix=''] = this.components();
+        const [, , , , honorificSuffix = ''] = this.components();
 
         return honorificSuffix;
     }

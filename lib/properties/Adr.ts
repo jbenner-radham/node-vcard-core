@@ -26,43 +26,43 @@ export default class Adr implements Property {
     [VALUE]: string;
 
     get postOfficeBox(): string {
-        const [postOfficeBox=''] = this.components();
+        const [postOfficeBox = ''] = this.components();
 
         return postOfficeBox;
     }
 
     get extendedAddress(): string {
-        const [, extendedAddress=''] = this.components();
+        const [, extendedAddress = ''] = this.components();
 
         return extendedAddress;
     }
 
     get streetAddress(): string {
-        const [, , streetAddress=''] = this.components();
+        const [, , streetAddress = ''] = this.components();
 
         return streetAddress;
     }
 
     get locality(): string {
-        const [, , , locality=''] = this.components();
+        const [, , , locality = ''] = this.components();
 
         return locality;
     }
 
     get region(): string {
-        const [, , , , region=''] = this.components();
+        const [, , , , region = ''] = this.components();
 
         return region;
     }
 
     get postalCode(): string {
-        const [, , , , , postalCode=''] = this.components();
+        const [, , , , , postalCode = ''] = this.components();
 
         return postalCode;
     }
 
     get countryName(): string {
-        const [, , , , , , countryName=''] = this.components();
+        const [, , , , , , countryName = ''] = this.components();
 
         return countryName;
     }

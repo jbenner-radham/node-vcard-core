@@ -11,6 +11,9 @@ env:
   es2021: true
   node: true
 rules:
+  '@typescript-eslint/no-explicit-any': off
+  '@typescript-eslint/no-extra-semi': off
+  '@typescript-eslint/semi': error
   arrow-spacing: error
   block-spacing: error
   camelcase: error
@@ -69,9 +72,7 @@ rules:
     - error
     - single
     - allowTemplateLiterals: true
-  semi:
-    - error
-    - always
+  semi: off
   sort-keys:
     - error
     - asc
