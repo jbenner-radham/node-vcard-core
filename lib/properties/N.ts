@@ -7,6 +7,8 @@ export interface NParameters {
     sortAs?: string;
 }
 
+const VALUE: unique symbol = Symbol.for('value');
+
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
  */
@@ -15,6 +17,8 @@ export default class N implements Property {
     cardinality: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
     parameters?: NParameters;
+
+    [VALUE]: string;
 
     get familyName(): string {
         const [familyName=''] = this.components();
@@ -48,7 +52,7 @@ export default class N implements Property {
 
     constructor(value: string) {
         this.validate(value);
-        (this as any)[Symbol.for('value')] = value;
+        this[VALUE] = value;
     }
 
     components(): string[] {
@@ -60,7 +64,7 @@ export default class N implements Property {
     }
 
     valueOf() {
-        return (this as any)[Symbol.for('value')];
+        return this[VALUE];
     }
 
     validate(value: string): void {

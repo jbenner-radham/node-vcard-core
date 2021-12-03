@@ -12,6 +12,8 @@ export interface AdrParameters {
     tz?: string;
 }
 
+const VALUE: unique symbol = Symbol.for('value');
+
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1
  */
@@ -20,6 +22,8 @@ export default class Adr implements Property {
     cardinality: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
     parameters?: AdrParameters;
+
+    [VALUE]: string;
 
     get postOfficeBox(): string {
         const [postOfficeBox=''] = this.components();
@@ -65,7 +69,7 @@ export default class Adr implements Property {
 
     constructor(value: string) {
         this.validate(value);
-        (this as any)[Symbol.for('value')] = value;
+        this[VALUE] = value;
     }
 
     components(): string[] {
@@ -77,7 +81,7 @@ export default class Adr implements Property {
     }
 
     valueOf() {
-        return (this as any)[Symbol.for('value')];
+        return this[VALUE];
     }
 
     validate(value: string): void {

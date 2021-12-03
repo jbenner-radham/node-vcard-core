@@ -9,6 +9,8 @@ export interface FnParameters {
     type?: 'home' | 'work';
 }
 
+const VALUE: unique symbol = Symbol.for('value');
+
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.1
  */
@@ -18,8 +20,10 @@ export default class Fn implements Property {
 
     parameters?: FnParameters;
 
+    [VALUE]: string;
+
     constructor(value: string) {
-        (this as any)[Symbol.for('value')] = value;
+        this[VALUE] = value;
     }
 
     toString() {
@@ -27,6 +31,6 @@ export default class Fn implements Property {
     }
 
     valueOf() {
-        return (this as any)[Symbol.for('value')];
+        return this[VALUE];
     }
 }
