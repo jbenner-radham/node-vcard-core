@@ -35,7 +35,7 @@ To-Do
   - [ ] `LANG`
   - [ ] `LOGO`
   - [ ] `MEMBER`
-  - [ ] `N`
+  - [x] `N`
   - [ ] `NICKNAME`
   - [ ] `NOTE`
   - [ ] `ORG`

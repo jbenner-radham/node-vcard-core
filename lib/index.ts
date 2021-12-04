@@ -2,6 +2,8 @@ import AdrProperty from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
 import FnProperty from './properties/FnProperty';
 import FnPropertyArray from './properties/arrays/FnPropertyArray';
+import NProperty from './properties/NProperty';
+import NullProperty from './properties/NullProperty';
 import VersionProperty from './properties/VersionProperty';
 
 export default class Vcard {
@@ -11,20 +13,29 @@ export default class Vcard {
 
     fn: FnPropertyArray = new FnPropertyArray();
 
+    n: NProperty | NullProperty;
+
     version: VersionProperty;
 
-    constructor({ fn, version }: { fn?: FnProperty | string, version?: VersionProperty }) {
+    constructor({ fn, n, version }: { fn?: FnProperty | string, n?: NProperty, version?: VersionProperty }) {
         fn && this.fn.push(fn);
+        this.n = n ?? new NullProperty();
         this.version = version ?? new VersionProperty();
     }
 
     toString(): string {
-        return [
+        const properties = [
             'BEGIN:VCARD',
             this.version.toString(),
             ...this.fn.map(fn => fn.toString()),
+            this.n.toString(),
             'END:VCARD'
-        ].join(Vcard.EOL);
+        ];
+        const isNotEmptyString = (value: string): boolean => value !== '';
+
+        return properties
+            .filter(isNotEmptyString)
+            .join(Vcard.EOL);
     }
 
     validate(): void {
