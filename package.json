@@ -22,6 +22,10 @@
   },
   "scripts": {
     "build": "tsc",
+    "lint": "eslint {lib,test}",
+    "lint:fix": "eslint --fix {lib,test}",
+    "prepare": "husky install",
+    "sort:pkg": "sort-package-json",
     "test": "mocha --require ts-node/register --extension ts test/**"
   },
   "dependencies": {},
@@ -34,7 +38,9 @@
     "chai": "^4.3.4",
     "eslint": "^8.3.0",
     "eslint-plugin-no-only-tests": "^2.6.0",
+    "husky": "^7.0.0",
     "mocha": "^9.1.3",
+    "sort-package-json": "^1.53.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   }
