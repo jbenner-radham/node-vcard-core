@@ -1,6 +1,5 @@
 vcard-core
 ==========
-
 A library for working with [vCards](https://en.wikipedia.org/wiki/VCard).
 
 Heads Up!
@@ -9,16 +8,68 @@ This is still very much a WIP project and is __*not*__ feature complete.
 
 Testing
 -------
-
 ```sh
 $ npm test
 ```
+
+To-Do
+-----
+- [ ] Properties
+  - [ ] `ADR`
+  - [ ] `ANNIVERSARY`
+  - [ ] `BDAY`
+  - [x] `BEGIN`
+  - [ ] `CALADRURI`
+  - [ ] `CALURI`
+  - [ ] `CATEGORIES`
+  - [ ] `CLIENTPIDMAP`
+  - [ ] `EMAIL`
+  - [x] `END`
+  - [ ] `FBURL`
+  - [x] `FN`
+  - [ ] `GENDER`
+  - [ ] `GEO`
+  - [ ] `IMPP`
+  - [ ] `KEY`
+  - [ ] `KIND`
+  - [ ] `LANG`
+  - [ ] `LOGO`
+  - [ ] `MEMBER`
+  - [ ] `N`
+  - [ ] `NICKNAME`
+  - [ ] `NOTE`
+  - [ ] `ORG`
+  - [ ] `PHOTO`
+  - [ ] `PRODID`
+  - [ ] `RELATED`
+  - [ ] `REV`
+  - [ ] `ROLE`
+  - [ ] `SOUND`
+  - [ ] `SOURCE`
+  - [ ] `TEL`
+  - [ ] `TITLE`
+  - [ ] `TZ`
+  - [ ] `UID`
+  - [ ] `URL`
+  - [x] `VERSION`
+  - [ ] `XML`
+- [ ] Parameters
+  - [ ] `ALTID`
+  - [ ] `CALSCALE`
+  - [ ] `GEO`
+  - [ ] `LANGUAGE`
+  - [ ] `MEDIATYPE`
+  - [ ] `PID`
+  - [ ] `PREF`
+  - [ ] `SORT-AS`
+  - [ ] `TYPE`
+  - [ ] `TZ`
+  - [ ] `VALUE`
 
 Reference
 ---------
 
 ### Property Cardinalities
-
 Property cardinalities are indicated using the following notation,
 which is based on ABNF (see [RFC5234], Section 3.6):
 
@@ -39,7 +90,6 @@ approach has been taken for several of the content types defined
 below (date, time, integer, float).
 
 ### Links
-
 - [vCard Format Specification](https://datatracker.ietf.org/doc/html/rfc6350)
 - [vCard KIND:application](https://datatracker.ietf.org/doc/html/rfc6473)
 - [Additional Data Related to an Emergency Call § vCard Parameter Value Registration](https://datatracker.ietf.org/doc/html/rfc7852/#section-11.7)
@@ -49,5 +99,4 @@ below (date, time, integer, float).
 
 License
 -------
-
 The MIT License (Expat). See the [license file](LICENSE) for details.
