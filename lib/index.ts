@@ -2,9 +2,17 @@ import AdrProperty from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
 import FnProperty from './properties/FnProperty';
 import FnPropertyArray from './properties/arrays/FnPropertyArray';
+import KindProperty from './properties/KindProperty';
 import NProperty from './properties/NProperty';
 import NullProperty from './properties/NullProperty';
 import VersionProperty from './properties/VersionProperty';
+
+export interface VcardConfig {
+    fn?: FnProperty | string;
+    kind?: KindProperty;
+    n?: NProperty;
+    version?: VersionProperty;
+}
 
 export default class Vcard {
     static readonly EOL: string = '\r\n';
@@ -13,12 +21,15 @@ export default class Vcard {
 
     fn: FnPropertyArray = new FnPropertyArray();
 
+    kind: KindProperty | NullProperty;
+
     n: NProperty | NullProperty;
 
     version: VersionProperty;
 
-    constructor({ fn, n, version }: { fn?: FnProperty | string, n?: NProperty, version?: VersionProperty }) {
+    constructor({ fn, kind, n, version }: VcardConfig) {
         fn && this.fn.push(fn);
+        this.kind = kind ?? new NullProperty();
         this.n = n ?? new NullProperty();
         this.version = version ?? new VersionProperty();
     }
@@ -28,6 +39,7 @@ export default class Vcard {
             'BEGIN:VCARD',
             this.version.toString(),
             ...this.fn.map(fn => fn.toString()),
+            this.kind.toString(),
             this.n.toString(),
             'END:VCARD'
         ];

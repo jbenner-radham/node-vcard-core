@@ -31,7 +31,7 @@ To-Do
   - [ ] `GEO`
   - [ ] `IMPP`
   - [ ] `KEY`
-  - [ ] `KIND`
+  - [x] `KIND`
   - [ ] `LANG`
   - [ ] `LOGO`
   - [ ] `MEMBER`
