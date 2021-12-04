@@ -1,21 +1,21 @@
-import Adr from './properties/Adr';
-import AdrArray from './properties/arrays/AdrArray';
-import Fn from './properties/Fn';
-import FnArray from './properties/arrays/FnArray';
-import Version from './properties/Version';
+import AdrProperty from './properties/AdrProperty';
+import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
+import FnProperty from './properties/FnProperty';
+import FnPropertyArray from './properties/arrays/FnPropertyArray';
+import VersionProperty from './properties/VersionProperty';
 
 export default class Vcard {
     static readonly EOL: string = '\r\n';
 
-    adr: AdrArray = new AdrArray();
+    adr: AdrPropertyArray = new AdrPropertyArray();
 
-    fn: FnArray = new FnArray();
+    fn: FnPropertyArray = new FnPropertyArray();
 
-    version: Version;
+    version: VersionProperty;
 
-    constructor({ fn, version }: { fn?: Fn | string, version?: Version }) {
+    constructor({ fn, version }: { fn?: FnProperty | string, version?: VersionProperty }) {
         fn && this.fn.push(fn);
-        this.version = version ?? new Version();
+        this.version = version ?? new VersionProperty();
     }
 
     toString(): string {
@@ -28,13 +28,13 @@ export default class Vcard {
     }
 
     validate(): void {
-        if (!(this.version instanceof Version))
+        if (!(this.version instanceof VersionProperty))
             throw new TypeError(`The VERSION property is invalid`);
 
         if (this.fn.length === 0)
             throw new TypeError(`The FN property is required`);
 
-        if (!this.fn.every(fn => fn instanceof Fn))
+        if (!this.fn.every(fn => fn instanceof FnProperty))
             throw new TypeError(`One or more FN properties are invalid`);
     }
 }

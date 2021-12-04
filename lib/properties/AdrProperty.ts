@@ -17,9 +17,8 @@ const VALUE: unique symbol = Symbol.for('value');
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1
  */
-export default class Adr implements Property {
-    // Metadata
-    cardinality: Cardinality = '*'; // One or more instances per vCard MAY be present.
+export default class AdrProperty implements Property {
+    static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
     parameters?: AdrParameters;
 

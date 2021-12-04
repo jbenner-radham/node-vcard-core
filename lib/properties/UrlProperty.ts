@@ -6,9 +6,8 @@ const VALUE: unique symbol = Symbol.for('value');
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.8
  */
-export default class Url implements Property {
-    // Metadata
-    cardinality: Cardinality = '*'; // One or more instances per vCard MAY be present.
+export default class UrlProperty implements Property {
+    static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
     [VALUE]: string;
 

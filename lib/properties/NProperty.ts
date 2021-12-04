@@ -12,9 +12,8 @@ const VALUE: unique symbol = Symbol.for('value');
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
  */
-export default class N implements Property {
-    // Metadata
-    cardinality: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
+export default class NProperty implements Property {
+    static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
     parameters?: NParameters;
 
