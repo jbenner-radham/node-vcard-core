@@ -21,6 +21,7 @@
     "test": "test"
   },
   "scripts": {
+    "prebuild": "rm -rf ./dist",
     "build": "tsc",
     "lint": "eslint {lib,test}",
     "lint:fix": "eslint --fix {lib,test}",
