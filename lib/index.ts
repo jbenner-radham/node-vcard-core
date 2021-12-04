@@ -17,9 +17,9 @@ export interface VcardConfig {
 export default class Vcard {
     static readonly EOL: string = '\r\n';
 
-    adr: AdrPropertyArray = new AdrPropertyArray();
+    adr: AdrPropertyArray;
 
-    fn: FnPropertyArray = new FnPropertyArray();
+    fn: FnPropertyArray;
 
     kind: KindProperty | NullProperty;
 
@@ -28,6 +28,8 @@ export default class Vcard {
     version: VersionProperty;
 
     constructor({ fn, kind, n, version }: VcardConfig) {
+        this.adr = new AdrPropertyArray();
+        this.fn = new FnPropertyArray();
         fn && this.fn.push(fn);
         this.kind = kind ?? new NullProperty();
         this.n = n ?? new NullProperty();
