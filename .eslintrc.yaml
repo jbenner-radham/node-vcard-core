@@ -3,7 +3,6 @@ root: true
 parser: '@typescript-eslint/parser'
 plugins:
   - '@typescript-eslint'
-  - no-only-tests
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
