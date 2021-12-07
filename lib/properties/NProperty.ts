@@ -62,7 +62,7 @@ export default class NProperty implements Property {
         return `N:${this.valueOf()}`;
     }
 
-    valueOf() {
+    valueOf(): string {
         return this[VALUE];
     }
 

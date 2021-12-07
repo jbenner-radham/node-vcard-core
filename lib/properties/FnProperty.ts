@@ -29,7 +29,7 @@ export default class FnProperty implements Property {
         return `FN:${this.valueOf()}`;
     }
 
-    valueOf() {
+    valueOf(): string {
         return this[VALUE];
     }
 }

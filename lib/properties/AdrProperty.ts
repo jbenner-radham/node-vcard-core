@@ -79,7 +79,7 @@ export default class AdrProperty implements Property {
         return `ADR:${this.valueOf()}`;
     }
 
-    valueOf() {
+    valueOf(): string {
         return this[VALUE];
     }
 

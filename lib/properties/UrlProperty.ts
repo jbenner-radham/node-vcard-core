@@ -19,7 +19,7 @@ export default class UrlProperty implements Property {
         return `URL:${this.valueOf()}`;
     }
 
-    valueOf() {
+    valueOf(): string {
         return this[VALUE];
     }
 }

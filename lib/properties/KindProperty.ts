@@ -21,7 +21,7 @@ export default class KindProperty implements Property {
         return `KIND:${this.valueOf()}`;
     }
 
-    valueOf() {
+    valueOf(): string {
         return this[VALUE];
     }
 }

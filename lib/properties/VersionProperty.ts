@@ -19,7 +19,7 @@ export default class VersionProperty implements Property {
         return `VERSION:${this.valueOf().toFixed(1)}`;
     }
 
-    valueOf() {
+    valueOf(): number {
         return this[VALUE];
     }
 }
