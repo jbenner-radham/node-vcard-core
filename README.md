@@ -1,5 +1,7 @@
 vcard-core
 ==========
+![CI Status](https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml/badge.svg)
+
 A library for working with [vCards](https://en.wikipedia.org/wiki/VCard).
 
 Heads Up!
