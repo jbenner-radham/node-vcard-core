@@ -14,6 +14,28 @@ Testing
 $ npm test
 ```
 
+Usage
+-----
+```ts
+// NOTE: This module is not yet available from npm!
+import Vcard, { VcardConfig } from '@vcard/core';
+
+const config: VcardConfig = {
+    fn: 'Captain Awesome',
+    email: 'hello@example.com',
+    url: 'http://www.example.com/'
+};
+const vcard = new Vcard(config);
+
+vcard.toString();
+// >> BEGIN:VCARD
+// >> VERSION:4.0
+// >> EMAIL:hello@example.com
+// >> FN:Captain Awesome
+// >> URL:http://www.example.com/
+// >> END:VCARD
+```
+
 To-Do
 -----
 - [ ] Properties
