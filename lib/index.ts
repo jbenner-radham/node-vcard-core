@@ -6,6 +6,7 @@ import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty'
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
 import NProperty, { NPropertyLike } from './properties/NProperty';
 import NullProperty from './properties/NullProperty';
+// import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
 import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty';
 
 export interface VcardConfig {
