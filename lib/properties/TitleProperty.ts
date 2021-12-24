@@ -19,6 +19,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >
  * > Example:
  * >   TITLE:Research Scientist
+ *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.1
  */
 export default class TitleProperty implements Property {
