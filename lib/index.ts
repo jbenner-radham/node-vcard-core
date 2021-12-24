@@ -6,7 +6,8 @@ import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty'
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
 import NProperty, { NPropertyLike } from './properties/NProperty';
 import NullProperty from './properties/NullProperty';
-// import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
+import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
+import UrlPropertyArray from './properties/arrays/UrlPropertyArray';
 import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty';
 
 export interface VcardConfig {
@@ -15,6 +16,7 @@ export interface VcardConfig {
     gender?: GenderPropertyLike;
     kind?: KindPropertyLike;
     n?: NPropertyLike;
+    url?: UrlPropertyLike;
     version?: VersionProperty;
 }
 
@@ -31,13 +33,17 @@ export default class Vcard {
 
     n: NPropertyLike | NullProperty;
 
+    url: UrlPropertyArray;
+
     version: VersionPropertyLike;
 
-    constructor({ adr, fn, gender, kind, n, version }: VcardConfig) {
+    constructor({ adr, fn, gender, kind, n, url, version }: VcardConfig) {
         this.adr = new AdrPropertyArray();
         this.fn = new FnPropertyArray();
+        this.url = new UrlPropertyArray();
         adr && this.adr.push(adr);
         fn && this.fn.push(fn);
+        url && this.url.push(url);
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
         this.n = n ? NProperty.factory(n) : new NullProperty();
@@ -45,13 +51,15 @@ export default class Vcard {
     }
 
     toString(): string {
+        const toString = (value: any): string => value.toString();
         const properties = [
             'BEGIN:VCARD',
             this.version.toString(),
-            ...this.fn.map(fn => fn.toString()),
+            ...this.fn.map(toString),
             this.gender.toString(),
             this.kind.toString(),
             this.n.toString(),
+            ...this.url.map(toString),
             'END:VCARD'
         ];
         const isNotEmptyString = (value: string): boolean => value !== '';
@@ -73,5 +81,8 @@ export default class Vcard {
 
         if (!this.fn.every(fn => fn instanceof FnProperty))
             throw new TypeError('One or more FN properties are invalid');
+
+        if (!this.url.every(url => url instanceof UrlProperty))
+            throw new TypeError('One or more URL properties are invalid');
     }
 }

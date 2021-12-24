@@ -52,7 +52,7 @@ To-Do
   - [ ] `TITLE`
   - [ ] `TZ`
   - [ ] `UID`
-  - [ ] `URL`
+  - [x] `URL`
   - [x] `VERSION`
   - [ ] `XML`
 - [ ] Parameters
