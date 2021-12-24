@@ -18,11 +18,29 @@ describe('Vcard', () => {
             const expected = [
                 'BEGIN:VCARD',
                 'VERSION:4.0',
-                'FN:Bella',
+                `FN:${fn}`,
                 'END:VCARD'
             ].join(Vcard.EOL);
 
             expect(actual).to.equal(expected);
+        });
+
+        describe('when passed a minimal vCard with a TITLE property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Captain Awesome';
+                const title = 'Rockstar';
+                const vcard = new Vcard({ fn, title });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `TITLE:${title}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
         });
 
         describe('when passed a minimal vCard with a URL property', () => {
@@ -34,8 +52,8 @@ describe('Vcard', () => {
                 const expected = [
                     'BEGIN:VCARD',
                     'VERSION:4.0',
-                    'FN:Captain Awesome',
-                    'URL:http://www.example.com/',
+                    `FN:${fn}`,
+                    `URL:${url}`,
                     'END:VCARD'
                 ].join(Vcard.EOL);
 

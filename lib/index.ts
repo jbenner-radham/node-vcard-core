@@ -6,6 +6,8 @@ import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty'
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
 import NProperty, { NPropertyLike } from './properties/NProperty';
 import NullProperty from './properties/NullProperty';
+import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
+import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
 import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
 import UrlPropertyArray from './properties/arrays/UrlPropertyArray';
 import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty';
@@ -16,6 +18,7 @@ export interface VcardConfig {
     gender?: GenderPropertyLike;
     kind?: KindPropertyLike;
     n?: NPropertyLike;
+    title?: TitlePropertyLike;
     url?: UrlPropertyLike;
     version?: VersionProperty;
 }
@@ -33,16 +36,20 @@ export default class Vcard {
 
     n: NPropertyLike | NullProperty;
 
+    title: TitlePropertyArray;
+
     url: UrlPropertyArray;
 
     version: VersionPropertyLike;
 
-    constructor({ adr, fn, gender, kind, n, url, version }: VcardConfig) {
+    constructor({ adr, fn, gender, kind, n, title, url, version }: VcardConfig) {
         this.adr = new AdrPropertyArray();
         this.fn = new FnPropertyArray();
+        this.title = new TitlePropertyArray();
         this.url = new UrlPropertyArray();
         adr && this.adr.push(adr);
         fn && this.fn.push(fn);
+        title && this.title.push(title);
         url && this.url.push(url);
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
@@ -59,6 +66,7 @@ export default class Vcard {
             this.gender.toString(),
             this.kind.toString(),
             this.n.toString(),
+            ...this.title.map(toString),
             ...this.url.map(toString),
             'END:VCARD'
         ];
@@ -81,6 +89,9 @@ export default class Vcard {
 
         if (!this.fn.every(fn => fn instanceof FnProperty))
             throw new TypeError('One or more FN properties are invalid');
+
+        if (!this.title.every(title => title instanceof TitleProperty))
+            throw new TypeError('One or more TITLE properties are invalid');
 
         if (!this.url.every(url => url instanceof UrlProperty))
             throw new TypeError('One or more URL properties are invalid');

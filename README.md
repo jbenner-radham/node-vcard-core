@@ -49,7 +49,7 @@ To-Do
   - [ ] `SOUND`
   - [ ] `SOURCE`
   - [ ] `TEL`
-  - [ ] `TITLE`
+  - [x] `TITLE`
   - [ ] `TZ`
   - [ ] `UID`
   - [x] `URL`
