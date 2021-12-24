@@ -29,6 +29,7 @@
     "prepare": "husky install",
     "sort:pkg": "sort-package-json",
     "test": "mocha test/**",
+    "test:watch": "mocha test/** --watch",
     "typecheck": "tsc"
   },
   "dependencies": {

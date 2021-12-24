@@ -1,6 +1,8 @@
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export type VersionPropertyLike = VersionProperty | number;
+
 const VALUE: unique symbol = Symbol.for('value');
 
 /**
@@ -21,5 +23,13 @@ export default class VersionProperty implements Property {
 
     valueOf(): number {
         return this[VALUE];
+    }
+
+    static factory(value: VersionPropertyLike): VersionProperty {
+        if (value instanceof VersionProperty) return value;
+
+        if (typeof value === 'string') return new VersionProperty(value);
+
+        throw new TypeError(`The value "${value}" is not a VersionPropertyLike type`);
     }
 }

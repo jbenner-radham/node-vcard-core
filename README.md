@@ -17,7 +17,7 @@ $ npm test
 To-Do
 -----
 - [ ] Properties
-  - [ ] `ADR`
+  - [x] `ADR`
   - [ ] `ANNIVERSARY`
   - [ ] `BDAY`
   - [x] `BEGIN`

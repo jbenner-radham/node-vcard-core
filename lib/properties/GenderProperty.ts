@@ -62,6 +62,6 @@ export default class GenderProperty implements Property {
 
         if (typeof value === 'string') return new GenderProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a valid GenderPropertyLike format`);
+        throw new TypeError(`The value "${value}" is not a GenderPropertyLike type`);
     }
 }

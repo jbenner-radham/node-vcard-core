@@ -1,18 +1,19 @@
-import AdrProperty from './properties/AdrProperty';
+import AdrProperty, { AdrPropertyLike } from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
-import FnProperty from './properties/FnProperty';
+import FnProperty, { FnPropertyLike } from './properties/FnProperty';
 import FnPropertyArray from './properties/arrays/FnPropertyArray';
 import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty';
-import KindProperty from './properties/KindProperty';
-import NProperty from './properties/NProperty';
+import KindProperty, { KindPropertyLike } from './properties/KindProperty';
+import NProperty, { NPropertyLike } from './properties/NProperty';
 import NullProperty from './properties/NullProperty';
-import VersionProperty from './properties/VersionProperty';
+import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty';
 
 export interface VcardConfig {
-    fn?: FnProperty | string;
+    adr?: AdrPropertyLike;
+    fn?: FnPropertyLike;
     gender?: GenderPropertyLike;
-    kind?: KindProperty;
-    n?: NProperty;
+    kind?: KindPropertyLike;
+    n?: NPropertyLike;
     version?: VersionProperty;
 }
 
@@ -25,20 +26,21 @@ export default class Vcard {
 
     gender: GenderPropertyLike | NullProperty;
 
-    kind: KindProperty | NullProperty;
+    kind: KindPropertyLike | NullProperty;
 
-    n: NProperty | NullProperty;
+    n: NPropertyLike | NullProperty;
 
-    version: VersionProperty;
+    version: VersionPropertyLike;
 
-    constructor({ fn, gender, kind, n, version }: VcardConfig) {
+    constructor({ adr, fn, gender, kind, n, version }: VcardConfig) {
         this.adr = new AdrPropertyArray();
         this.fn = new FnPropertyArray();
+        adr && this.adr.push(adr);
         fn && this.fn.push(fn);
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
-        this.kind = kind ?? new NullProperty();
-        this.n = n ?? new NullProperty();
-        this.version = version ?? new VersionProperty();
+        this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
+        this.n = n ? NProperty.factory(n) : new NullProperty();
+        this.version = version ? VersionProperty.factory(version) : new VersionProperty();
     }
 
     toString(): string {
@@ -60,12 +62,15 @@ export default class Vcard {
 
     validate(): void {
         if (!(this.version instanceof VersionProperty))
-            throw new TypeError(`The VERSION property is invalid`);
+            throw new TypeError('The VERSION property is invalid');
 
         if (this.fn.length === 0)
-            throw new TypeError(`The FN property is required`);
+            throw new TypeError('The FN property is required');
+
+        if (!this.adr.every(adr => adr instanceof AdrProperty))
+            throw new TypeError('One or more ADR properties are invalid');
 
         if (!this.fn.every(fn => fn instanceof FnProperty))
-            throw new TypeError(`One or more FN properties are invalid`);
+            throw new TypeError('One or more FN properties are invalid');
     }
 }

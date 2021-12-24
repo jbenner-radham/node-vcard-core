@@ -3,6 +3,8 @@ import Property from './Property';
 
 export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
 
+export type KindPropertyLike = KindProperty | Kind;
+
 const VALUE: unique symbol = Symbol.for('value');
 
 /**
@@ -23,5 +25,13 @@ export default class KindProperty implements Property {
 
     valueOf(): string {
         return this[VALUE];
+    }
+
+    static factory(value: KindPropertyLike): KindProperty {
+        if (value instanceof KindProperty) return value;
+
+        if (typeof value === 'string') return new KindProperty(value);
+
+        throw new TypeError(`The value "${value}" is not a KindPropertyLike type`);
     }
 }

@@ -1,5 +1,6 @@
 import { Cardinality } from '../types';
 import Property from './Property';
+import getSemicolonCount from '../get-semicolon-count';
 
 export interface AdrParameters {
     altid?: string;
@@ -11,6 +12,8 @@ export interface AdrParameters {
     type?: 'home' | 'work';
     tz?: string;
 }
+
+export type AdrPropertyLike = AdrProperty | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -84,13 +87,17 @@ export default class AdrProperty implements Property {
     }
 
     validate(value: string): void {
-        const semicolonCount = [...value].reduce((accumulator, character) => {
-            return (character === ';')
-                ? accumulator + 1
-                : accumulator;
-        }, 0);
+        const semicolonCount = getSemicolonCount(value);
 
         if (semicolonCount !== 6)
             throw new TypeError(`The value "${value}" is not a valid ADR format`);
+    }
+
+    static factory(value: AdrPropertyLike): AdrProperty {
+        if (value instanceof AdrProperty) return value;
+
+        if (typeof value === 'string') return new AdrProperty(value);
+
+        throw new TypeError(`The value "${value}" is not a AdrPropertyLike type`);
     }
 }

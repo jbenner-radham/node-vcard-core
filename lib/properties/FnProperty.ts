@@ -9,6 +9,8 @@ export interface FnParameters {
     type?: 'home' | 'work';
 }
 
+export type FnPropertyLike = FnProperty | string;
+
 const VALUE: unique symbol = Symbol.for('value');
 
 /**
@@ -31,5 +33,13 @@ export default class FnProperty implements Property {
 
     valueOf(): string {
         return this[VALUE];
+    }
+
+    static factory(value: FnPropertyLike): FnProperty {
+        if (value instanceof FnProperty) return value;
+
+        if (typeof value === 'string') return new FnProperty(value);
+
+        throw new TypeError(`The value "${value}" is not a FnPropertyLike type`);
     }
 }

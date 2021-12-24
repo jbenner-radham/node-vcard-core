@@ -1,11 +1,14 @@
 import { Cardinality } from '../types';
 import Property from './Property';
+import getSemicolonCount from '../get-semicolon-count';
 
 export interface NParameters {
     altid?: string;
     language?: string;
     sortAs?: string;
 }
+
+export type NPropertyLike = NProperty | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -67,13 +70,17 @@ export default class NProperty implements Property {
     }
 
     validate(value: string): void {
-        const semicolonCount = [...value].reduce((accumulator, character) => {
-            return (character === ';')
-                ? accumulator + 1
-                : accumulator;
-        }, 0);
+        const semicolonCount = getSemicolonCount(value);
 
         if (semicolonCount !== 4)
             throw new TypeError(`The value "${value}" is not a valid N format`);
+    }
+
+    static factory(value: NPropertyLike): NProperty {
+        if (value instanceof NProperty) return value;
+
+        if (typeof value === 'string') return new NProperty(value);
+
+        throw new TypeError(`The value "${value}" is not a NPropertyLike type`);
     }
 }
