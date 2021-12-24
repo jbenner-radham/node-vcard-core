@@ -12,6 +12,7 @@ export default class UrlProperty implements Property {
     [VALUE]: string;
 
     constructor(value: string) {
+        this.validate(value);
         this[VALUE] = value;
     }
 
@@ -21,5 +22,13 @@ export default class UrlProperty implements Property {
 
     valueOf(): string {
         return this[VALUE];
+    }
+
+    validate(value: string): void {
+        try {
+            new URL(value);
+        } catch (_) {
+            throw new TypeError(`The value "${value}" is not a valid URL format`);
+        }
     }
 }

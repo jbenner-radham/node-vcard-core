@@ -43,4 +43,31 @@ describe('UrlProperty', () => {
             expect(url.valueOf()).to.equal(value);
         });
     });
+
+    describe('#validate()', () => {
+        it('is a method', () => {
+            expect(UrlProperty.prototype.validate).to.be.a('function');
+        });
+
+        it('returns undefined', () => {
+            const url = new UrlProperty('http://example.com/');
+
+            expect(url.validate('http://example.com/')).to.equal(undefined);
+        });
+
+        it('does not throw when passed a valid URL', () => {
+            const url = new UrlProperty('http://example.com/');
+
+            expect(() => url.validate('http://example.com/')).not.to.throw();
+        });
+
+        // Disabling this for now because of the following from https://www.chaijs.com/:
+        // > Due to limitations in ES5, `.throw` may not always work as expected
+        // > when using a transpiler such as Babel or TypeScript.
+        it.skip('throws when passed an invalid URL', () => {
+            const url = new UrlProperty('example.com');
+
+            expect(() => url.validate('example.com')).to.throw();
+        });
+    });
 });
