@@ -25,6 +25,24 @@ describe('Vcard', () => {
             expect(actual).to.equal(expected);
         });
 
+        describe('when passed a minimal vCard with a NICKNAME property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Bobby Tables';
+                const nickname = 'Little Bobby Tables';
+                const vcard = new Vcard({ fn, nickname });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `NICKNAME:${nickname}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a TITLE property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Captain Awesome';

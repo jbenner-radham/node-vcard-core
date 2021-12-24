@@ -5,6 +5,8 @@ import FnPropertyArray from './properties/arrays/FnPropertyArray';
 import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty';
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
 import NProperty, { NPropertyLike } from './properties/NProperty';
+import NicknameProperty, { NicknamePropertyLike } from './properties/NicknameProperty';
+import NicknamePropertyArray from './properties/arrays/NicknamePropertyArray';
 import NullProperty from './properties/NullProperty';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
@@ -18,6 +20,7 @@ export interface VcardConfig {
     gender?: GenderPropertyLike;
     kind?: KindPropertyLike;
     n?: NPropertyLike;
+    nickname?: NicknamePropertyLike;
     title?: TitlePropertyLike;
     url?: UrlPropertyLike;
     version?: VersionProperty;
@@ -36,19 +39,23 @@ export default class Vcard {
 
     n: NPropertyLike | NullProperty;
 
+    nickname: NicknamePropertyArray;
+
     title: TitlePropertyArray;
 
     url: UrlPropertyArray;
 
     version: VersionPropertyLike;
 
-    constructor({ adr, fn, gender, kind, n, title, url, version }: VcardConfig) {
+    constructor({ adr, fn, gender, kind, n, nickname, title, url, version }: VcardConfig) {
         this.adr = new AdrPropertyArray();
         this.fn = new FnPropertyArray();
+        this.nickname = new NicknamePropertyArray();
         this.title = new TitlePropertyArray();
         this.url = new UrlPropertyArray();
         adr && this.adr.push(adr);
         fn && this.fn.push(fn);
+        nickname && this.nickname.push(nickname);
         title && this.title.push(title);
         url && this.url.push(url);
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
@@ -66,6 +73,7 @@ export default class Vcard {
             this.gender.toString(),
             this.kind.toString(),
             this.n.toString(),
+            ...this.nickname.map(toString),
             ...this.title.map(toString),
             ...this.url.map(toString),
             'END:VCARD'
@@ -89,6 +97,9 @@ export default class Vcard {
 
         if (!this.fn.every(fn => fn instanceof FnProperty))
             throw new TypeError('One or more FN properties are invalid');
+
+        if (!this.nickname.every(nickname => nickname instanceof NicknameProperty))
+            throw new TypeError('One or more NICKNAME properties are invalid');
 
         if (!this.title.every(title => title instanceof TitleProperty))
             throw new TypeError('One or more TITLE properties are invalid');

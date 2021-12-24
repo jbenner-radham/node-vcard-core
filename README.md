@@ -38,7 +38,7 @@ To-Do
   - [ ] `LOGO`
   - [ ] `MEMBER`
   - [x] `N`
-  - [ ] `NICKNAME`
+  - [x] `NICKNAME`
   - [ ] `NOTE`
   - [ ] `ORG`
   - [ ] `PHOTO`
