@@ -29,7 +29,7 @@ To-Do
   - [x] `END`
   - [ ] `FBURL`
   - [x] `FN`
-  - [ ] `GENDER`
+  - [x] `GENDER`
   - [ ] `GEO`
   - [ ] `IMPP`
   - [ ] `KEY`
