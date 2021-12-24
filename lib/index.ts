@@ -1,5 +1,7 @@
 import AdrProperty, { AdrPropertyLike } from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
+import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
+import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
 import FnPropertyArray from './properties/arrays/FnPropertyArray';
 import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty';
@@ -16,6 +18,7 @@ import VersionProperty, { VersionPropertyLike } from './properties/VersionProper
 
 export interface VcardConfig {
     adr?: AdrPropertyLike;
+    email?: EmailPropertyLike;
     fn?: FnPropertyLike;
     gender?: GenderPropertyLike;
     kind?: KindPropertyLike;
@@ -30,6 +33,8 @@ export default class Vcard {
     static readonly EOL: string = '\r\n';
 
     adr: AdrPropertyArray;
+
+    email: EmailPropertyArray;
 
     fn: FnPropertyArray;
 
@@ -47,13 +52,15 @@ export default class Vcard {
 
     version: VersionPropertyLike;
 
-    constructor({ adr, fn, gender, kind, n, nickname, title, url, version }: VcardConfig) {
+    constructor({ adr, email, fn, gender, kind, n, nickname, title, url, version }: VcardConfig) {
         this.adr = new AdrPropertyArray();
+        this.email = new EmailPropertyArray();
         this.fn = new FnPropertyArray();
         this.nickname = new NicknamePropertyArray();
         this.title = new TitlePropertyArray();
         this.url = new UrlPropertyArray();
         adr && this.adr.push(adr);
+        email && this.email.push(email);
         fn && this.fn.push(fn);
         nickname && this.nickname.push(nickname);
         title && this.title.push(title);
@@ -69,6 +76,7 @@ export default class Vcard {
         const properties = [
             'BEGIN:VCARD',
             this.version.toString(),
+            ...this.email.map(toString),
             ...this.fn.map(toString),
             this.gender.toString(),
             this.kind.toString(),
@@ -94,6 +102,9 @@ export default class Vcard {
 
         if (!this.adr.every(adr => adr instanceof AdrProperty))
             throw new TypeError('One or more ADR properties are invalid');
+
+        if (!this.email.every(email => email instanceof EmailProperty))
+            throw new TypeError('One or more EMAIL properties are invalid');
 
         if (!this.fn.every(fn => fn instanceof FnProperty))
             throw new TypeError('One or more FN properties are invalid');

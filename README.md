@@ -25,7 +25,7 @@ To-Do
   - [ ] `CALURI`
   - [ ] `CATEGORIES`
   - [ ] `CLIENTPIDMAP`
-  - [ ] `EMAIL`
+  - [x] `EMAIL`
   - [x] `END`
   - [ ] `FBURL`
   - [x] `FN`
