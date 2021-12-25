@@ -61,7 +61,7 @@ To-Do
   - [ ] `MEMBER`
   - [x] `N`
   - [x] `NICKNAME`
-  - [ ] `NOTE`
+  - [x] `NOTE`
   - [ ] `ORG`
   - [ ] `PHOTO`
   - [ ] `PRODID`

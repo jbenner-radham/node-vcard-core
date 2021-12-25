@@ -61,6 +61,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a NOTE property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const note = 'Available Mon-Fri.';
+                const vcard = new Vcard({ fn, note });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `NOTE:${note}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a TITLE property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Captain Awesome';

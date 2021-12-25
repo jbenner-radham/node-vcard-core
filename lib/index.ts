@@ -9,6 +9,8 @@ import KindProperty, { KindPropertyLike } from './properties/KindProperty';
 import NProperty, { NPropertyLike } from './properties/NProperty';
 import NicknameProperty, { NicknamePropertyLike } from './properties/NicknameProperty';
 import NicknamePropertyArray from './properties/arrays/NicknamePropertyArray';
+import NoteProperty, { NotePropertyLike } from './properties/NoteProperty';
+import NotePropertyArray from './properties/arrays/NotePropertyArray';
 import NullProperty from './properties/NullProperty';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
@@ -24,6 +26,7 @@ export interface VcardConfig {
     kind?: KindPropertyLike;
     n?: NPropertyLike;
     nickname?: NicknamePropertyLike;
+    note?: NotePropertyLike;
     title?: TitlePropertyLike;
     url?: UrlPropertyLike;
     version?: VersionProperty;
@@ -46,23 +49,27 @@ export default class Vcard {
 
     nickname: NicknamePropertyArray;
 
+    note: NotePropertyArray;
+
     title: TitlePropertyArray;
 
     url: UrlPropertyArray;
 
     version: VersionPropertyLike;
 
-    constructor({ adr, email, fn, gender, kind, n, nickname, title, url, version }: VcardConfig) {
+    constructor({ adr, email, fn, gender, kind, n, nickname, note, title, url, version }: VcardConfig) {
         this.adr = new AdrPropertyArray();
         this.email = new EmailPropertyArray();
         this.fn = new FnPropertyArray();
         this.nickname = new NicknamePropertyArray();
+        this.note = new NotePropertyArray();
         this.title = new TitlePropertyArray();
         this.url = new UrlPropertyArray();
         adr && this.adr.push(adr);
         email && this.email.push(email);
         fn && this.fn.push(fn);
         nickname && this.nickname.push(nickname);
+        note && this.note.push(note);
         title && this.title.push(title);
         url && this.url.push(url);
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
@@ -82,6 +89,7 @@ export default class Vcard {
             this.kind.toString(),
             this.n.toString(),
             ...this.nickname.map(toString),
+            ...this.note.map(toString),
             ...this.title.map(toString),
             ...this.url.map(toString),
             'END:VCARD'
@@ -111,6 +119,9 @@ export default class Vcard {
 
         if (!this.nickname.every(nickname => nickname instanceof NicknameProperty))
             throw new TypeError('One or more NICKNAME properties are invalid');
+
+        if (!this.note.every(note => note instanceof NoteProperty))
+            throw new TypeError('One or more NOTE properties are invalid');
 
         if (!this.title.every(title => title instanceof TitleProperty))
             throw new TypeError('One or more TITLE properties are invalid');
