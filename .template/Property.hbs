@@ -1,0 +1,47 @@
+import { Cardinality } from '../types';
+import Property from './Property';
+
+export type {{{capitalize property}}}PropertyLike = {{{capitalize property}}}Property | string;
+
+const VALUE: unique symbol = Symbol.for('value');
+
+/**
+ * > Purpose:  ...
+ * >
+ * > Value type:  ...
+ * >
+ * > ABNF:
+ * >   {{{upperCase property}}}-param =
+ * >
+ * >   {{{upperCase property}}}-value =
+ * >
+ * > Example:
+ * >   {{{upperCase property}}}:
+ *
+ * @see https://datatracker.ietf.org/doc/html/rfc6350#section-
+ */
+export default class {{{capitalize property}}}Property implements Property {
+    static readonly CARDINALITY: Cardinality = '{{{cardinality}}}'; // ...
+
+    [VALUE]: string;
+
+    constructor(value: string) {
+        this[VALUE] = value;
+    }
+
+    toString() {
+        return `{{{upperCase property}}}:${this.valueOf()}`;
+    }
+
+    valueOf(): string {
+        return this[VALUE];
+    }
+
+    static factory(value: {{{capitalize property}}}PropertyLike): {{{capitalize property}}}Property {
+        if (value instanceof {{{capitalize property}}}Property) return value;
+
+        if (typeof value === 'string') return new {{{capitalize property}}}Property(value);
+
+        throw new TypeError(`The value "${value}" is not a {{{capitalize property}}}PropertyLike type`);
+    }
+}
