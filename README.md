@@ -8,6 +8,12 @@ Heads Up!
 ---------
 This is still very much a WIP project and is __*not*__ feature complete.
 
+Building
+--------
+```sh
+$ npm run build
+```
+
 Testing
 -------
 ```sh
