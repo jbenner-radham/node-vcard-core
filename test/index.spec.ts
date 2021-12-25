@@ -79,6 +79,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a PHOTO property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Q. Public';
+                const photo = 'Phttp://www.example.com/pub/photos/jqpublic.gif';
+                const vcard = new Vcard({ fn, photo });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `PHOTO:${photo}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a ROLE property', () => {
             it('returns the proper string format', () => {
                 const fn = 'J. Doe';
