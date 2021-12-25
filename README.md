@@ -73,7 +73,7 @@ To-Do
   - [ ] `PRODID`
   - [ ] `RELATED`
   - [ ] `REV`
-  - [ ] `ROLE`
+  - [x] `ROLE`
   - [ ] `SOUND`
   - [ ] `SOURCE`
   - [ ] `TEL`
