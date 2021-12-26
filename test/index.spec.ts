@@ -25,6 +25,24 @@ describe('Vcard', () => {
             expect(actual).to.equal(expected);
         });
 
+        describe('when passed a minimal vCard with a ANNIVERSARY property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Example McExampleton';
+                const anniversary = '19960415';
+                const vcard = new Vcard({ anniversary, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `ANNIVERSARY:${anniversary}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a EMAIL property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';

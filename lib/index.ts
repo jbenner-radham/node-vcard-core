@@ -1,5 +1,6 @@
 import AdrProperty, { AdrPropertyLike } from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
+import AnniversaryProperty, { AnniversaryPropertyLike } from './properties/AnniversaryProperty';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
@@ -24,6 +25,7 @@ import VersionProperty, { VersionPropertyLike } from './properties/VersionProper
 
 export interface VcardConfig {
     adr?: AdrPropertyLike;
+    anniversary?: AnniversaryPropertyLike;
     email?: EmailPropertyLike;
     fn?: FnPropertyLike;
     gender?: GenderPropertyLike;
@@ -42,6 +44,8 @@ export default class Vcard {
     static readonly EOL: string = '\r\n';
 
     adr: AdrPropertyArray;
+
+    anniversary: AnniversaryPropertyLike | NullProperty;
 
     email: EmailPropertyArray;
 
@@ -67,7 +71,23 @@ export default class Vcard {
 
     version: VersionPropertyLike;
 
-    constructor({ adr, email, fn, gender, kind, n, nickname, note, photo, role, title, url, version }: VcardConfig) {
+    constructor(config: VcardConfig) {
+        const {
+            adr,
+            anniversary,
+            email,
+            fn,
+            gender,
+            kind,
+            n,
+            nickname,
+            note,
+            photo,
+            role,
+            title,
+            url,
+            version
+        } = config;
         this.adr = new AdrPropertyArray();
         this.email = new EmailPropertyArray();
         this.fn = new FnPropertyArray();
@@ -86,6 +106,7 @@ export default class Vcard {
         role && this.role.push(role);
         title && this.title.push(title);
         url && this.url.push(url);
+        this.anniversary = anniversary ? AnniversaryProperty.factory(anniversary) : new NullProperty();
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
         this.n = n ? NProperty.factory(n) : new NullProperty();
@@ -97,6 +118,7 @@ export default class Vcard {
         const properties = [
             'BEGIN:VCARD',
             this.version.toString(),
+            this.anniversary.toString(),
             ...this.email.map(toString),
             ...this.fn.map(toString),
             this.gender.toString(),
@@ -126,6 +148,9 @@ export default class Vcard {
 
         if (!this.adr.every(adr => adr instanceof AdrProperty))
             throw new TypeError('One or more ADR properties are invalid');
+
+        if (!(this.anniversary instanceof AnniversaryProperty))
+            throw new TypeError('The ANNIVERSARY property is invalid');
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');
