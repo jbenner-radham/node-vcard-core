@@ -43,6 +43,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a BDAY property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Example McExampleton';
+                const bday = '19960415';
+                const vcard = new Vcard({ bday, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `BDAY:${bday}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a EMAIL property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';

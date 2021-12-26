@@ -47,7 +47,7 @@ To-Do
 - [ ] Properties
   - [x] `ADR`
   - [x] `ANNIVERSARY`
-  - [ ] `BDAY`
+  - [x] `BDAY`
   - [x] `BEGIN`
   - [ ] `CALADRURI`
   - [ ] `CALURI`

@@ -1,6 +1,7 @@
 import AdrProperty, { AdrPropertyLike } from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
 import AnniversaryProperty, { AnniversaryPropertyLike } from './properties/AnniversaryProperty';
+import BdayProperty, { BdayPropertyLike } from './properties/BdayProperty';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
@@ -26,6 +27,7 @@ import VersionProperty, { VersionPropertyLike } from './properties/VersionProper
 export interface VcardConfig {
     adr?: AdrPropertyLike;
     anniversary?: AnniversaryPropertyLike;
+    bday?: BdayPropertyLike;
     email?: EmailPropertyLike;
     fn?: FnPropertyLike;
     gender?: GenderPropertyLike;
@@ -46,6 +48,8 @@ export default class Vcard {
     adr: AdrPropertyArray;
 
     anniversary: AnniversaryPropertyLike | NullProperty;
+
+    bday: BdayPropertyLike | NullProperty;
 
     email: EmailPropertyArray;
 
@@ -75,6 +79,7 @@ export default class Vcard {
         const {
             adr,
             anniversary,
+            bday,
             email,
             fn,
             gender,
@@ -107,6 +112,7 @@ export default class Vcard {
         title && this.title.push(title);
         url && this.url.push(url);
         this.anniversary = anniversary ? AnniversaryProperty.factory(anniversary) : new NullProperty();
+        this.bday = bday ? BdayProperty.factory(bday) : new NullProperty();
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
         this.n = n ? NProperty.factory(n) : new NullProperty();
@@ -119,6 +125,7 @@ export default class Vcard {
             'BEGIN:VCARD',
             this.version.toString(),
             this.anniversary.toString(),
+            this.bday.toString(),
             ...this.email.map(toString),
             ...this.fn.map(toString),
             this.gender.toString(),
@@ -151,6 +158,9 @@ export default class Vcard {
 
         if (!(this.anniversary instanceof AnniversaryProperty))
             throw new TypeError('The ANNIVERSARY property is invalid');
+
+        if (!(this.bday instanceof BdayProperty))
+            throw new TypeError('The BDAY property is invalid');
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');
