@@ -51,7 +51,7 @@ To-Do
   - [x] `BEGIN`
   - [x] `CALADRURI`
   - [x] `CALURI`
-  - [ ] `CATEGORIES`
+  - [x] `CATEGORIES`
   - [ ] `CLIENTPIDMAP`
   - [x] `EMAIL`
   - [x] `END`

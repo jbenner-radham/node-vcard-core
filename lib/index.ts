@@ -6,6 +6,8 @@ import CaladruriProperty, { CaladruriPropertyLike } from './properties/Caladruri
 import CaladruriPropertyArray from './properties/arrays/CaladruriPropertyArray';
 import CaluriProperty, { CaluriPropertyLike } from './properties/CaluriProperty';
 import CaluriPropertyArray from './properties/arrays/CaluriPropertyArray';
+import CategoriesProperty, { CategoriesPropertyLike } from './properties/CategoriesProperty';
+import CategoriesPropertyArray from './properties/arrays/CategoriesPropertyArray';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
@@ -36,6 +38,7 @@ export interface VcardConfig {
     bday?: BdayPropertyLike;
     caluri?: CaluriPropertyLike;
     caladruri?: CaladruriPropertyLike;
+    categories?: CategoriesPropertyLike;
     email?: EmailPropertyLike;
     fn?: FnPropertyLike;
     gender?: GenderPropertyLike;
@@ -62,6 +65,8 @@ export default class Vcard {
     caluri: CaluriPropertyArray;
 
     caladruri: CaladruriPropertyArray;
+
+    categories: CategoriesPropertyArray;
 
     email: EmailPropertyArray;
 
@@ -94,6 +99,7 @@ export default class Vcard {
             bday,
             caluri,
             caladruri,
+            categories,
             email,
             fn,
             gender,
@@ -110,6 +116,7 @@ export default class Vcard {
         this.adr = new AdrPropertyArray();
         this.caluri = new CaluriPropertyArray();
         this.caladruri = new CaladruriPropertyArray();
+        this.categories = new CategoriesPropertyArray();
         this.email = new EmailPropertyArray();
         this.fn = new FnPropertyArray();
         this.nickname = new NicknamePropertyArray();
@@ -121,6 +128,7 @@ export default class Vcard {
         adr && this.adr.push(adr);
         caluri && this.caluri.push(caluri);
         caladruri && this.caladruri.push(caladruri);
+        categories && this.categories.push(categories);
         email && this.email.push(email);
         fn && this.fn.push(fn);
         nickname && this.nickname.push(nickname);
@@ -145,6 +153,7 @@ export default class Vcard {
             this.bday.toString(),
             ...this.caluri.map(toString),
             ...this.caladruri.map(toString),
+            ...this.categories.map(toString),
             ...this.email.map(toString),
             ...this.fn.map(toString),
             this.gender.toString(),
@@ -181,10 +190,13 @@ export default class Vcard {
             throw new TypeError('The BDAY property is invalid');
 
         if (!this.caluri.every(caluri => caluri instanceof CaluriProperty))
-            throw new TypeError('The CALADRURI property is invalid');
+            throw new TypeError('The CALURI property is invalid');
 
         if (!this.caladruri.every(caladruri => caladruri instanceof CaladruriProperty))
             throw new TypeError('The CALADRURI property is invalid');
+
+        if (!this.categories.every(categories => categories instanceof CategoriesProperty))
+            throw new TypeError('The CATEGORIES property is invalid');
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');

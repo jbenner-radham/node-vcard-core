@@ -79,6 +79,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a CATEGORIES property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const categories = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
+                const vcard = new Vcard({ categories, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `CATEGORIES:${categories}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a BDAY property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';
