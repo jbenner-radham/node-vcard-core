@@ -11,6 +11,7 @@ import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
 import FnPropertyArray from './properties/arrays/FnPropertyArray';
 import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty';
+import isNotEmptyString from './util/is-not-empty-string';
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
 import NProperty, { NPropertyLike } from './properties/NProperty';
 import NicknameProperty, { NicknamePropertyLike } from './properties/NicknameProperty';
@@ -24,6 +25,7 @@ import RoleProperty, { RolePropertyLike } from './properties/RoleProperty';
 import RolePropertyArray from './properties/arrays/RolePropertyArray';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
+import toString from './util/to-string';
 import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
 import UrlPropertyArray from './properties/arrays/UrlPropertyArray';
 import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty';
@@ -136,7 +138,6 @@ export default class Vcard {
     }
 
     toString(): string {
-        const toString = (value: any): string => value.toString();
         const properties = [
             'BEGIN:VCARD',
             this.version.toString(),
@@ -157,7 +158,6 @@ export default class Vcard {
             ...this.url.map(toString),
             'END:VCARD'
         ];
-        const isNotEmptyString = (value: string): boolean => value !== '';
 
         return properties
             .filter(isNotEmptyString)
