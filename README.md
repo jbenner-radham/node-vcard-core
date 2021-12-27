@@ -60,7 +60,7 @@ To-Do
   - [x] `GENDER`
   - [x] `GEO`
   - [x] `IMPP`
-  - [ ] `KEY`
+  - [x] `KEY`
   - [x] `KIND`
   - [ ] `LANG`
   - [ ] `LOGO`

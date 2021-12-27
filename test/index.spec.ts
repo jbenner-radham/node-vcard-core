@@ -187,6 +187,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a KEY property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const key = 'http://www.example.com/keys/jdoe.cer';
+                const vcard = new Vcard({ fn, key });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `KEY:${key}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a NICKNAME property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Bobby Tables';
