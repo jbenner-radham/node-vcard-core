@@ -43,6 +43,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a CALURI property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Example McExampleton';
+                const caluri = 'http://cal.example.com/calA';
+                const vcard = new Vcard({ caluri, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `CALURI:${caluri}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a CALADRURI property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';

@@ -50,7 +50,7 @@ To-Do
   - [x] `BDAY`
   - [x] `BEGIN`
   - [x] `CALADRURI`
-  - [ ] `CALURI`
+  - [x] `CALURI`
   - [ ] `CATEGORIES`
   - [ ] `CLIENTPIDMAP`
   - [x] `EMAIL`
