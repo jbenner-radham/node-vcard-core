@@ -27,6 +27,8 @@ import LangProperty, { LangPropertyLike } from './properties/LangProperty';
 import LangPropertyArray from './properties/arrays/LangPropertyArray';
 import LogoProperty, { LogoPropertyLike } from './properties/LogoProperty';
 import LogoPropertyArray from './properties/arrays/LogoPropertyArray';
+import MemberProperty, { MemberPropertyLike } from './properties/MemberProperty';
+import MemberPropertyArray from './properties/arrays/MemberPropertyArray';
 import NProperty, { NPropertyLike } from './properties/NProperty';
 import NicknameProperty, { NicknamePropertyLike } from './properties/NicknameProperty';
 import NicknamePropertyArray from './properties/arrays/NicknamePropertyArray';
@@ -61,6 +63,7 @@ export interface VcardConfig {
     kind?: KindPropertyLike;
     lang?: LangPropertyLike;
     logo?: LogoPropertyLike;
+    member?: MemberPropertyLike;
     n?: NPropertyLike;
     nickname?: NicknamePropertyLike;
     note?: NotePropertyLike;
@@ -106,6 +109,8 @@ export default class Vcard {
 
     logo: LogoPropertyArray;
 
+    member: MemberPropertyArray;
+
     n: NPropertyLike | NullProperty;
 
     nickname: NicknamePropertyArray;
@@ -140,6 +145,7 @@ export default class Vcard {
             kind,
             lang,
             logo,
+            member,
             n,
             nickname,
             note,
@@ -161,6 +167,7 @@ export default class Vcard {
         this.key = new KeyPropertyArray();
         this.lang = new LangPropertyArray();
         this.logo = new LogoPropertyArray();
+        this.member = new MemberPropertyArray();
         this.nickname = new NicknamePropertyArray();
         this.note = new NotePropertyArray();
         this.photo = new PhotoPropertyArray();
@@ -179,6 +186,7 @@ export default class Vcard {
         key && this.key.push(key);
         lang && this.lang.push(lang);
         logo && this.logo.push(logo);
+        member && this.member.push(member);
         nickname && this.nickname.push(nickname);
         note && this.note.push(note);
         photo && this.photo.push(photo);
@@ -212,6 +220,7 @@ export default class Vcard {
             this.kind.toString(),
             ...this.lang.map(toString),
             ...this.logo.map(toString),
+            ...this.member.map(toString),
             this.n.toString(),
             ...this.nickname.map(toString),
             ...this.note.map(toString),
@@ -275,6 +284,9 @@ export default class Vcard {
 
         if (!this.logo.every(logo => logo instanceof LogoProperty))
             throw new TypeError('One or more Logo properties are invalid');
+
+        if (!this.member.every(member => member instanceof MemberProperty))
+            throw new TypeError('One or more MEMBER properties are invalid');
 
         if (!this.nickname.every(nickname => nickname instanceof NicknameProperty))
             throw new TypeError('One or more NICKNAME properties are invalid');

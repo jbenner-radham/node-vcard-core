@@ -64,7 +64,7 @@ To-Do
   - [x] `KIND`
   - [x] `LANG`
   - [x] `LOGO`
-  - [ ] `MEMBER`
+  - [x] `MEMBER`
   - [x] `N`
   - [x] `NICKNAME`
   - [x] `NOTE`

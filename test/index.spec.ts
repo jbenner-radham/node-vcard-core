@@ -241,6 +241,26 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a MEMBER property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Funky distribution list';
+                const kind = 'group';
+                const member = 'mailto:subscriber1@example.com';
+                const vcard = new Vcard({ fn, kind, member });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `KIND:${kind}`,
+                    `MEMBER:${member}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a NICKNAME property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Bobby Tables';
