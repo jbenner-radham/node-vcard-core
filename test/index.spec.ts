@@ -223,6 +223,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a LOGO property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const logo = 'http://www.example.com/pub/logos/abccorp.jpg';
+                const vcard = new Vcard({ fn, logo });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `LOGO:${logo}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a NICKNAME property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Bobby Tables';
