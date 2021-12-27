@@ -58,7 +58,7 @@ To-Do
   - [x] `FBURL`
   - [x] `FN`
   - [x] `GENDER`
-  - [ ] `GEO`
+  - [x] `GEO`
   - [ ] `IMPP`
   - [ ] `KEY`
   - [x] `KIND`

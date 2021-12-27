@@ -151,6 +151,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a GEO property', () => {
+            it('returns the proper string format', () => {
+                const geo = 'geo:37.386013,-122.082932';
+                const fn = 'Jane Doe';
+                const vcard = new Vcard({ fn, geo });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `GEO:${geo}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a NICKNAME property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Bobby Tables';

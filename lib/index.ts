@@ -15,6 +15,8 @@ import FburlPropertyArray from './properties/arrays/FburlPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
 import FnPropertyArray from './properties/arrays/FnPropertyArray';
 import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty';
+import GeoProperty, { GeoPropertyLike } from './properties/GeoProperty';
+import GeoPropertyArray from './properties/arrays/GeoPropertyArray';
 import isNotEmptyString from './util/is-not-empty-string';
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
 import NProperty, { NPropertyLike } from './properties/NProperty';
@@ -45,6 +47,7 @@ export interface VcardConfig {
     fburl?: FburlPropertyLike;
     fn?: FnPropertyLike;
     gender?: GenderPropertyLike;
+    geo?: GeoPropertyLike;
     kind?: KindPropertyLike;
     n?: NPropertyLike;
     nickname?: NicknamePropertyLike;
@@ -79,6 +82,8 @@ export default class Vcard {
 
     gender: GenderPropertyLike | NullProperty;
 
+    geo: GeoPropertyArray;
+
     kind: KindPropertyLike | NullProperty;
 
     n: NPropertyLike | NullProperty;
@@ -109,6 +114,7 @@ export default class Vcard {
             fburl,
             fn,
             gender,
+            geo,
             kind,
             n,
             nickname,
@@ -126,6 +132,7 @@ export default class Vcard {
         this.email = new EmailPropertyArray();
         this.fburl = new FburlPropertyArray();
         this.fn = new FnPropertyArray();
+        this.geo = new GeoPropertyArray();
         this.nickname = new NicknamePropertyArray();
         this.note = new NotePropertyArray();
         this.photo = new PhotoPropertyArray();
@@ -139,6 +146,7 @@ export default class Vcard {
         email && this.email.push(email);
         fburl && this.fburl.push(fburl);
         fn && this.fn.push(fn);
+        geo && this.geo.push(geo);
         nickname && this.nickname.push(nickname);
         note && this.note.push(note);
         photo && this.photo.push(photo);
@@ -166,6 +174,7 @@ export default class Vcard {
             ...this.fburl.map(toString),
             ...this.fn.map(toString),
             this.gender.toString(),
+            ...this.geo.map(toString),
             this.kind.toString(),
             this.n.toString(),
             ...this.nickname.map(toString),
@@ -215,6 +224,9 @@ export default class Vcard {
 
         if (!this.fn.every(fn => fn instanceof FnProperty))
             throw new TypeError('One or more FN properties are invalid');
+
+        if (!this.geo.every(geo => geo instanceof GeoProperty))
+            throw new TypeError('One or more GEO properties are invalid');
 
         if (!this.nickname.every(nickname => nickname instanceof NicknameProperty))
             throw new TypeError('One or more NICKNAME properties are invalid');
