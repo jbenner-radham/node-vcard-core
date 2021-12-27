@@ -169,6 +169,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a IMPP property', () => {
+            it('returns the proper string format', () => {
+                const impp = 'xmpp:alice@example.com';
+                const fn = 'Alice Example';
+                const vcard = new Vcard({ fn, impp });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `IMPP:${impp}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a NICKNAME property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Bobby Tables';

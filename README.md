@@ -59,7 +59,7 @@ To-Do
   - [x] `FN`
   - [x] `GENDER`
   - [x] `GEO`
-  - [ ] `IMPP`
+  - [x] `IMPP`
   - [ ] `KEY`
   - [x] `KIND`
   - [ ] `LANG`
