@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const _ = require('lodash');
 const fs = require('fs');
 const Handlebars = require('handlebars');

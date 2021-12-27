@@ -101,3 +101,7 @@ rules:
     - error
     - after: true
       before: false
+overrides:
+  - files: '**/*.cjs'
+    rules:
+      '@typescript-eslint/no-var-requires': off
