@@ -133,6 +133,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a FBURL property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Jane Doe';
+                const fburl = 'http://www.example.com/busy/janedoe';
+                const vcard = new Vcard({ fburl, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FBURL:${fburl}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a NICKNAME property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Bobby Tables';

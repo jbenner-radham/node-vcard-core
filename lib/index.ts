@@ -10,6 +10,8 @@ import CategoriesProperty, { CategoriesPropertyLike } from './properties/Categor
 import CategoriesPropertyArray from './properties/arrays/CategoriesPropertyArray';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
+import FburlProperty, { FburlPropertyLike } from './properties/FburlProperty';
+import FburlPropertyArray from './properties/arrays/FburlPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
 import FnPropertyArray from './properties/arrays/FnPropertyArray';
 import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty';
@@ -40,6 +42,7 @@ export interface VcardConfig {
     caladruri?: CaladruriPropertyLike;
     categories?: CategoriesPropertyLike;
     email?: EmailPropertyLike;
+    fburl?: FburlPropertyLike;
     fn?: FnPropertyLike;
     gender?: GenderPropertyLike;
     kind?: KindPropertyLike;
@@ -69,6 +72,8 @@ export default class Vcard {
     categories: CategoriesPropertyArray;
 
     email: EmailPropertyArray;
+
+    fburl: FburlPropertyArray;
 
     fn: FnPropertyArray;
 
@@ -101,6 +106,7 @@ export default class Vcard {
             caladruri,
             categories,
             email,
+            fburl,
             fn,
             gender,
             kind,
@@ -118,6 +124,7 @@ export default class Vcard {
         this.caladruri = new CaladruriPropertyArray();
         this.categories = new CategoriesPropertyArray();
         this.email = new EmailPropertyArray();
+        this.fburl = new FburlPropertyArray();
         this.fn = new FnPropertyArray();
         this.nickname = new NicknamePropertyArray();
         this.note = new NotePropertyArray();
@@ -130,6 +137,7 @@ export default class Vcard {
         caladruri && this.caladruri.push(caladruri);
         categories && this.categories.push(categories);
         email && this.email.push(email);
+        fburl && this.fburl.push(fburl);
         fn && this.fn.push(fn);
         nickname && this.nickname.push(nickname);
         note && this.note.push(note);
@@ -155,6 +163,7 @@ export default class Vcard {
             ...this.caladruri.map(toString),
             ...this.categories.map(toString),
             ...this.email.map(toString),
+            ...this.fburl.map(toString),
             ...this.fn.map(toString),
             this.gender.toString(),
             this.kind.toString(),
@@ -200,6 +209,9 @@ export default class Vcard {
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');
+
+        if (!this.fburl.every(fburl => fburl instanceof FburlProperty))
+            throw new TypeError('One or more FBURL properties are invalid');
 
         if (!this.fn.every(fn => fn instanceof FnProperty))
             throw new TypeError('One or more FN properties are invalid');

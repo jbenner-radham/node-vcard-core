@@ -55,7 +55,7 @@ To-Do
   - [ ] `CLIENTPIDMAP`
   - [x] `EMAIL`
   - [x] `END`
-  - [ ] `FBURL`
+  - [x] `FBURL`
   - [x] `FN`
   - [x] `GENDER`
   - [ ] `GEO`
