@@ -1,6 +1,6 @@
 import { Cardinality } from '../types';
 import Property from './Property';
-import getSemicolonCount from '../get-semicolon-count';
+import getSemicolonCount from '../util/get-semicolon-count';
 
 export interface NParameters {
     altid?: string;
