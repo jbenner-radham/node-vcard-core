@@ -13,12 +13,19 @@ Handlebars.registerHelper('capitalize', (string) => _.capitalize(string));
 Handlebars.registerHelper('upperCase', (string) => string.toUpperCase());
 Handlebars.registerHelper('lowerCase', (string) => string.toLowerCase());
 
+const cardinalityDescriptions = {
+    '*': 'One or more instances per vCard MAY be present.',
+    '*1': 'Exactly one instance per vCard MAY be present.',
+    1: 'Exactly one instance per vCard MUST be present.',
+    '1*': 'One or more instances per vCard MUST be present.'
+};
 const cardinality = process.argv[3] ?? '...';
+const cardinalityDescription = cardinalityDescriptions[cardinality] ?? '...';
 const property = process.argv[2];
 const propertyTemplateFilepath = path.resolve(__dirname, '..', '.template', 'Property.hbs');
 const propertyTemplateSrc = fs.readFileSync(propertyTemplateFilepath).toString();
 const propertyTemplate = Handlebars.compile(propertyTemplateSrc);
-const propertySrc = propertyTemplate({ cardinality, property });
+const propertySrc = propertyTemplate({ cardinality, cardinalityDescription, property });
 const propertyFilename = `${_.capitalize(property)}Property.ts`;
 const propertyFilepath = path.resolve(__dirname, '..', 'lib', 'properties', propertyFilename);
 
