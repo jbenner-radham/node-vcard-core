@@ -63,7 +63,7 @@ describe('Vcard', () => {
 
         describe('when passed a minimal vCard with a CALADRURI property', () => {
             it('returns the proper string format', () => {
-                const fn = 'Example McExampleton';
+                const fn = 'J. Doe';
                 const caladruri = 'http://example.com/calendar/jdoe';
                 const vcard = new Vcard({ caladruri, fn });
                 const actual = vcard.toString();
