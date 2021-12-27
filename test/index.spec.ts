@@ -205,6 +205,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a LANG property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const lang = 'en';
+                const vcard = new Vcard({ fn, lang });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `LANG:${lang}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a NICKNAME property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Bobby Tables';

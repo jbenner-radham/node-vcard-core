@@ -62,7 +62,7 @@ To-Do
   - [x] `IMPP`
   - [x] `KEY`
   - [x] `KIND`
-  - [ ] `LANG`
+  - [x] `LANG`
   - [ ] `LOGO`
   - [ ] `MEMBER`
   - [x] `N`

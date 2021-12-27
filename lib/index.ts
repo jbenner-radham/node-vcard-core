@@ -23,6 +23,8 @@ import isNotEmptyString from './util/is-not-empty-string';
 import KeyProperty, { KeyPropertyLike } from './properties/KeyProperty';
 import KeyPropertyArray from './properties/arrays/KeyPropertyArray';
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
+import LangProperty, { LangPropertyLike } from './properties/LangProperty';
+import LangPropertyArray from './properties/arrays/LangPropertyArray';
 import NProperty, { NPropertyLike } from './properties/NProperty';
 import NicknameProperty, { NicknamePropertyLike } from './properties/NicknameProperty';
 import NicknamePropertyArray from './properties/arrays/NicknamePropertyArray';
@@ -55,6 +57,7 @@ export interface VcardConfig {
     impp?: ImppPropertyLike;
     key?: KeyPropertyLike;
     kind?: KindPropertyLike;
+    lang?: LangPropertyLike;
     n?: NPropertyLike;
     nickname?: NicknamePropertyLike;
     note?: NotePropertyLike;
@@ -96,6 +99,8 @@ export default class Vcard {
 
     kind: KindPropertyLike | NullProperty;
 
+    lang: LangPropertyArray;
+
     n: NPropertyLike | NullProperty;
 
     nickname: NicknamePropertyArray;
@@ -128,6 +133,7 @@ export default class Vcard {
             impp,
             key,
             kind,
+            lang,
             n,
             nickname,
             note,
@@ -147,6 +153,7 @@ export default class Vcard {
         this.geo = new GeoPropertyArray();
         this.impp = new ImppPropertyArray();
         this.key = new KeyPropertyArray();
+        this.lang = new LangPropertyArray();
         this.nickname = new NicknamePropertyArray();
         this.note = new NotePropertyArray();
         this.photo = new PhotoPropertyArray();
@@ -163,6 +170,7 @@ export default class Vcard {
         geo && this.geo.push(geo);
         impp && this.impp.push(impp);
         key && this.key.push(key);
+        lang && this.lang.push(lang);
         nickname && this.nickname.push(nickname);
         note && this.note.push(note);
         photo && this.photo.push(photo);
@@ -194,6 +202,7 @@ export default class Vcard {
             ...this.impp.map(toString),
             ...this.key.map(toString),
             this.kind.toString(),
+            ...this.lang.map(toString),
             this.n.toString(),
             ...this.nickname.map(toString),
             ...this.note.map(toString),
@@ -251,6 +260,9 @@ export default class Vcard {
 
         if (!this.key.every(key => key instanceof KeyProperty))
             throw new TypeError('One or more KEY properties are invalid');
+
+        if (!this.lang.every(lang => lang instanceof LangProperty))
+            throw new TypeError('One or more LANG properties are invalid');
 
         if (!this.nickname.every(nickname => nickname instanceof NicknameProperty))
             throw new TypeError('One or more NICKNAME properties are invalid');
