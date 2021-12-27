@@ -49,7 +49,7 @@ To-Do
   - [x] `ANNIVERSARY`
   - [x] `BDAY`
   - [x] `BEGIN`
-  - [ ] `CALADRURI`
+  - [x] `CALADRURI`
   - [ ] `CALURI`
   - [ ] `CATEGORIES`
   - [ ] `CLIENTPIDMAP`
