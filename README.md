@@ -44,46 +44,83 @@ vcard.toString();
 
 To-Do
 -----
-- [ ] Property Value Escaping
 - [ ] Properties
   - [x] `ADR`
+    - [ ] Value Escaping
   - [x] `ANNIVERSARY`
+    - [ ] Value Escaping
   - [x] `BDAY`
+    - [ ] Value Escaping
   - [x] `BEGIN`
+    - [ ] Value Escaping
   - [x] `CALADRURI`
+    - [ ] Value Escaping
   - [x] `CALURI`
+    - [ ] Value Escaping
   - [x] `CATEGORIES`
+    - [ ] Value Escaping
   - [ ] `CLIENTPIDMAP`
+    - [ ] Value Escaping
   - [x] `EMAIL`
+    - [ ] Value Escaping
   - [x] `END`
+    - [ ] Value Escaping
   - [x] `FBURL`
+    - [ ] Value Escaping
   - [x] `FN`
+    - [ ] Value Escaping
   - [x] `GENDER`
+    - [ ] Value Escaping
   - [x] `GEO`
+    - [ ] Value Escaping
   - [x] `IMPP`
+    - [ ] Value Escaping
   - [x] `KEY`
+    - [ ] Value Escaping
   - [x] `KIND`
+    - [ ] Value Escaping
   - [x] `LANG`
+    - [ ] Value Escaping
   - [x] `LOGO`
+    - [ ] Value Escaping
   - [x] `MEMBER`
+    - [ ] Value Escaping
   - [x] `N`
+    - [ ] Value Escaping
   - [x] `NICKNAME`
+    - [ ] Value Escaping
   - [x] `NOTE`
+    - [ ] Value Escaping
   - [x] `ORG`
+    - [ ] Value Escaping
   - [x] `PHOTO`
+    - [ ] Value Escaping
   - [x] `PRODID`
+    - [ ] Value Escaping
   - [ ] `RELATED`
+    - [ ] Value Escaping
   - [x] `REV`
+    - [ ] Value Escaping
   - [x] `ROLE`
+    - [ ] Value Escaping
   - [x] `SOUND`
+    - [ ] Value Escaping
   - [x] `SOURCE`
+    - [ ] Value Escaping
   - [ ] `TEL`
+    - [ ] Value Escaping
   - [x] `TITLE`
+    - [ ] Value Escaping
   - [x] `TZ`
+    - [ ] Value Escaping
   - [x] `UID`
+    - [ ] Value Escaping
   - [x] `URL`
+    - [ ] Value Escaping
   - [x] `VERSION`
+    - [ ] Value Escaping
   - [ ] `XML`
+    - [ ] Value Escaping
 - [ ] Parameters
   - [ ] `ALTID`
   - [ ] `CALSCALE`
