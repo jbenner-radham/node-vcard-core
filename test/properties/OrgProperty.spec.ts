@@ -19,7 +19,6 @@ describe('OrgProperty', () => {
 
         /** @todo Un-skip this once property value escaping is implemented! */
         it.skip('returns the proper string format', () => {
-            // eslint-disable-next-line no-useless-escape
             const escapedvalue = 'ABC\, Inc.;North American Division;Marketing';
             const org = new OrgProperty('ABC, Inc.;North American Division;Marketing');
 
