@@ -44,6 +44,7 @@ vcard.toString();
 
 To-Do
 -----
+- [ ] Property Value Escaping
 - [ ] Properties
   - [x] `ADR`
   - [x] `ANNIVERSARY`
