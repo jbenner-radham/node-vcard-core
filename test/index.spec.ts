@@ -351,6 +351,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a REV property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const rev = '19951031T222710Z';
+                const vcard = new Vcard({ fn, rev });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `REV:${rev}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a ROLE property', () => {
             it('returns the proper string format', () => {
                 const fn = 'J. Doe';

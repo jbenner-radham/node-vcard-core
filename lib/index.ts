@@ -40,6 +40,7 @@ import OrgPropertyArray from './properties/arrays/OrgPropertyArray';
 import PhotoProperty, { PhotoPropertyLike } from './properties/PhotoProperty';
 import PhotoPropertyArray from './properties/arrays/PhotoPropertyArray';
 import ProdidProperty, { ProdidPropertyLike } from './properties/ProdidProperty';
+import RevProperty, { RevPropertyLike } from './properties/RevProperty';
 import RoleProperty, { RolePropertyLike } from './properties/RoleProperty';
 import RolePropertyArray from './properties/arrays/RolePropertyArray';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
@@ -73,6 +74,7 @@ export interface VcardConfig {
     org?: OrgPropertyLike;
     photo?: PhotoPropertyLike;
     prodid?: ProdidPropertyLike;
+    rev?: RevPropertyLike;
     role?: RolePropertyLike;
     title?: TitlePropertyLike;
     url?: UrlPropertyLike;
@@ -128,6 +130,8 @@ export default class Vcard {
 
     prodid: ProdidPropertyLike | NullProperty;
 
+    rev: RevPropertyLike | NullProperty;
+
     role: RolePropertyArray;
 
     title: TitlePropertyArray;
@@ -161,6 +165,7 @@ export default class Vcard {
             org,
             photo,
             prodid,
+            rev,
             role,
             title,
             url,
@@ -212,6 +217,7 @@ export default class Vcard {
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
         this.n = n ? NProperty.factory(n) : new NullProperty();
         this.prodid = prodid ? ProdidProperty.factory(prodid) : new NullProperty();
+        this.rev = rev ? RevProperty.factory(rev) : new NullProperty();
         this.version = version ? VersionProperty.factory(version) : new VersionProperty();
     }
 
@@ -241,6 +247,7 @@ export default class Vcard {
             ...this.org.map(toString),
             ...this.photo.map(toString),
             this.prodid.toString(),
+            this.rev.toString(),
             ...this.role.map(toString),
             ...this.title.map(toString),
             ...this.url.map(toString),
@@ -318,6 +325,9 @@ export default class Vcard {
 
         if (!(this.prodid instanceof ProdidProperty))
             throw new TypeError('The PRODID property is invalid');
+
+        if (!(this.rev instanceof RevProperty))
+            throw new TypeError('The REV property is invalid');
 
         if (!this.role.every(role => role instanceof RoleProperty))
             throw new TypeError('One or more ROLE properties are invalid');
