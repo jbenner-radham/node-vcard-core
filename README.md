@@ -76,7 +76,7 @@ To-Do
   - [x] `REV`
   - [x] `ROLE`
   - [x] `SOUND`
-  - [ ] `SOURCE`
+  - [x] `SOURCE`
   - [ ] `TEL`
   - [x] `TITLE`
   - [ ] `TZ`

@@ -405,6 +405,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a SOURCE property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Babs Jensen';
+                const source = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
+                const vcard = new Vcard({ fn, source });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `SOURCE:${source}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a TITLE property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Captain Awesome';
