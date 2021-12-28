@@ -255,6 +255,7 @@ export default class Vcard {
         const properties = [
             'BEGIN:VCARD',
             this.version.toString(),
+            ...this.adr.map(toString),
             this.anniversary.toString(),
             this.bday.toString(),
             ...this.caluri.map(toString),

@@ -25,6 +25,24 @@ describe('Vcard', () => {
             expect(actual).to.equal(expected);
         });
 
+        describe('when passed a minimal vCard with a ADR property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Example McExampleton';
+                const adr = ';;1234 Acme Rd.;Sometown;OH;43204;United States of America';
+                const vcard = new Vcard({ adr, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `ADR:${adr}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a ANNIVERSARY property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';
