@@ -49,6 +49,8 @@ import SourceProperty, { SourcePropertyLike } from './properties/SourceProperty'
 import SourcePropertyArray from './properties/arrays/SourcePropertyArray';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
+import TzProperty, { TzPropertyLike } from './properties/TzProperty';
+import TzPropertyArray from './properties/arrays/TzPropertyArray';
 import toString from './util/to-string';
 import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
 import UrlPropertyArray from './properties/arrays/UrlPropertyArray';
@@ -83,6 +85,7 @@ export interface VcardConfig {
     sound?: SoundPropertyLike;
     source?: SourcePropertyLike;
     title?: TitlePropertyLike;
+    tz?: TzPropertyLike;
     url?: UrlPropertyLike;
     version?: VersionProperty;
 }
@@ -146,6 +149,8 @@ export default class Vcard {
 
     title: TitlePropertyArray;
 
+    tz: TzPropertyArray;
+
     url: UrlPropertyArray;
 
     version: VersionPropertyLike;
@@ -180,6 +185,7 @@ export default class Vcard {
             sound,
             source,
             title,
+            tz,
             url,
             version
         } = config;
@@ -204,6 +210,7 @@ export default class Vcard {
         this.sound = new SoundPropertyArray();
         this.source = new SourcePropertyArray();
         this.title = new TitlePropertyArray();
+        this.tz = new TzPropertyArray();
         this.url = new UrlPropertyArray();
         adr && this.adr.push(adr);
         caluri && this.caluri.push(caluri);
@@ -226,6 +233,7 @@ export default class Vcard {
         sound && this.sound.push(sound);
         source && this.source.push(source);
         title && this.title.push(title);
+        tz && this.tz.push(tz);
         url && this.url.push(url);
         this.anniversary = anniversary ? AnniversaryProperty.factory(anniversary) : new NullProperty();
         this.bday = bday ? BdayProperty.factory(bday) : new NullProperty();
@@ -268,6 +276,7 @@ export default class Vcard {
             ...this.sound.map(toString),
             ...this.source.map(toString),
             ...this.title.map(toString),
+            ...this.tz.map(toString),
             ...this.url.map(toString),
             'END:VCARD'
         ];
@@ -358,6 +367,9 @@ export default class Vcard {
 
         if (!this.title.every(title => title instanceof TitleProperty))
             throw new TypeError('One or more TITLE properties are invalid');
+
+        if (!this.tz.every(tz => tz instanceof TzProperty))
+            throw new TypeError('One or more TZ properties are invalid');
 
         if (!this.url.every(url => url instanceof UrlProperty))
             throw new TypeError('One or more URL properties are invalid');

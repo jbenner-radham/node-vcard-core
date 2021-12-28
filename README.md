@@ -79,7 +79,7 @@ To-Do
   - [x] `SOURCE`
   - [ ] `TEL`
   - [x] `TITLE`
-  - [ ] `TZ`
+  - [x] `TZ`
   - [ ] `UID`
   - [x] `URL`
   - [x] `VERSION`

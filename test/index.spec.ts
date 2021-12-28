@@ -441,6 +441,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a TZ property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Captain Awesome';
+                const tz = 'Raleigh/North America';
+                const vcard = new Vcard({ fn, tz });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `TZ:${tz}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a URL property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Captain Awesome';
