@@ -17,9 +17,8 @@ describe('OrgProperty', () => {
             expect(org.toString()).to.be.a('string');
         });
 
-        /** @todo Un-skip this once property value escaping is implemented! */
-        it.skip('returns the proper string format', () => {
-            const escapedvalue = 'ABC\, Inc.;North American Division;Marketing';
+        it('returns the proper string format', () => {
+            const escapedvalue = 'ABC\\, Inc.;North American Division;Marketing';
             const org = new OrgProperty('ABC, Inc.;North American Division;Marketing');
 
             expect(org.toString()).to.equal(`ORG:${escapedvalue}`);

@@ -43,7 +43,12 @@ export default class OrgProperty extends Property {
     }
 
     toString() {
-        return `ORG:${this.valueOf()}`;
+        const value = this
+            .components()
+            .map(component => this.escape(component))
+            .join(this.COMPONENT_SEPARATOR);
+
+        return `ORG:${value}`;
     }
 
     valueOf(): string {

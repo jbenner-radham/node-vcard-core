@@ -92,7 +92,7 @@ To-Do
   - [x] `NOTE`
     - [ ] Value Escaping
   - [x] `ORG`
-    - [ ] Value Escaping
+    - [x] Value Escaping
   - [x] `PHOTO`
     - [ ] Value Escaping
   - [x] `PRODID`
