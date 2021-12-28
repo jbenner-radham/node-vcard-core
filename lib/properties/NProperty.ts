@@ -15,7 +15,7 @@ const VALUE: unique symbol = Symbol.for('value');
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
  */
-export default class NProperty implements Property {
+export default class NProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
     parameters?: NParameters;
@@ -53,12 +53,9 @@ export default class NProperty implements Property {
     }
 
     constructor(value: string) {
+        super();
         this.validate(value);
         this[VALUE] = value;
-    }
-
-    components(): string[] {
-        return this.valueOf().split(';');
     }
 
     toString() {

@@ -5,7 +5,7 @@ import Property from './Property';
  * implementation of the null object pattern to be implemented in the absence of
  * an actual vCard property object.
  */
-export default class NullProperty implements Property {
+export default class NullProperty extends Property {
     toString() {
         return '';
     }

@@ -16,7 +16,7 @@ const VALUE: unique symbol = Symbol.for('value');
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.1
  */
-export default class FnProperty implements Property {
+export default class FnProperty extends Property {
     static readonly CARDINALITY: Cardinality = '1*'; // One or more instances per vCard MUST be present.
 
     parameters?: FnParameters;
@@ -24,6 +24,7 @@ export default class FnProperty implements Property {
     [VALUE]: string;
 
     constructor(value: string) {
+        super();
         this[VALUE] = value;
     }
 

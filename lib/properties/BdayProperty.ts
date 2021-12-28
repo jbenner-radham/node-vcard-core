@@ -32,12 +32,13 @@ const VALUE: unique symbol = Symbol.for('value');
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
  */
-export default class BdayProperty implements Property {
+export default class BdayProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
     [VALUE]: string;
 
     constructor(value: string) {
+        super();
         this[VALUE] = value;
     }
 

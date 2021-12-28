@@ -11,7 +11,7 @@ const VALUE: unique symbol = Symbol.for('value');
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.7
  */
-export default class GenderProperty implements Property {
+export default class GenderProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
     [VALUE]: string;
@@ -29,11 +29,8 @@ export default class GenderProperty implements Property {
     }
 
     constructor(value: string) {
+        super();
         this[VALUE] = value;
-    }
-
-    components(): string[] {
-        return this.valueOf().split(';');
     }
 
     toString() {

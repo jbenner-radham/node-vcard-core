@@ -20,7 +20,7 @@ const VALUE: unique symbol = Symbol.for('value');
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1
  */
-export default class AdrProperty implements Property {
+export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
     parameters?: AdrParameters;
@@ -70,12 +70,9 @@ export default class AdrProperty implements Property {
     }
 
     constructor(value: string) {
+        super();
         this.validate(value);
         this[VALUE] = value;
-    }
-
-    components(): string[] {
-        return this.valueOf().split(';');
     }
 
     toString() {

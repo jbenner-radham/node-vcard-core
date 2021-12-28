@@ -20,12 +20,13 @@ const VALUE: unique symbol = Symbol.for('value');
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-
  */
-export default class {{{capitalize property}}}Property implements Property {
+export default class {{{capitalize property}}}Property extends Property {
     static readonly CARDINALITY: Cardinality = '{{{cardinality}}}'; // {{{cardinalityDescription}}}
 
     [VALUE]: string;
 
     constructor(value: string) {
+        super();
         this[VALUE] = value;
     }
 

@@ -28,12 +28,13 @@ const VALUE: unique symbol = Symbol.for('value');
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.2
  */
-export default class CaladruriProperty implements Property {
+export default class CaladruriProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
     [VALUE]: string;
 
     constructor(value: string) {
+        super();
         this[VALUE] = value;
     }
 

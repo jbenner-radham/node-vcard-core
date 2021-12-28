@@ -28,12 +28,13 @@ const VALUE: unique symbol = Symbol.for('value');
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
  */
-export default class EmailProperty implements Property {
+export default class EmailProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
     [VALUE]: string;
 
     constructor(value: string) {
+        super();
         this[VALUE] = value;
     }
 

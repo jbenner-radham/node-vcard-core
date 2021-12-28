@@ -11,12 +11,13 @@ const VALUE: unique symbol = Symbol.for('value');
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.4
  * @see https://datatracker.ietf.org/doc/html/rfc6473
  */
-export default class KindProperty implements Property {
+export default class KindProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
     [VALUE]: string;
 
     constructor(value: Kind) {
+        super();
         this[VALUE] = value;
     }
 
