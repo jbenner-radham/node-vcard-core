@@ -1,3 +1,5 @@
+import escapePropertyValue from '../util/escape-property-value';
+
 export default abstract class Property {
     abstract toString(): string;
     abstract valueOf(): unknown;
@@ -7,14 +9,6 @@ export default abstract class Property {
     }
 
     escape(value: string): string {
-        /**
-         * PROTIP: The order of this chain is very important!
-         * @see https://datatracker.ietf.org/doc/html/rfc6350#section-3.4
-         */
-        return value
-            .replaceAll('\\', '\\\\')
-            .replaceAll(',', '\\,')
-            .replaceAll(';', '\\;')
-            .replaceAll('\n', '\\n');
+        return escapePropertyValue(value);
     }
 };
