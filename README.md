@@ -71,7 +71,7 @@ To-Do
   - [x] `NOTE`
   - [x] `ORG`
   - [x] `PHOTO`
-  - [ ] `PRODID`
+  - [x] `PRODID`
   - [ ] `RELATED`
   - [ ] `REV`
   - [x] `ROLE`

@@ -39,6 +39,7 @@ import OrgProperty, { OrgPropertyLike } from './properties/OrgProperty';
 import OrgPropertyArray from './properties/arrays/OrgPropertyArray';
 import PhotoProperty, { PhotoPropertyLike } from './properties/PhotoProperty';
 import PhotoPropertyArray from './properties/arrays/PhotoPropertyArray';
+import ProdidProperty, { ProdidPropertyLike } from './properties/ProdidProperty';
 import RoleProperty, { RolePropertyLike } from './properties/RoleProperty';
 import RolePropertyArray from './properties/arrays/RolePropertyArray';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
@@ -71,6 +72,7 @@ export interface VcardConfig {
     note?: NotePropertyLike;
     org?: OrgPropertyLike;
     photo?: PhotoPropertyLike;
+    prodid?: ProdidPropertyLike;
     role?: RolePropertyLike;
     title?: TitlePropertyLike;
     url?: UrlPropertyLike;
@@ -124,6 +126,8 @@ export default class Vcard {
 
     photo: PhotoPropertyArray;
 
+    prodid: ProdidPropertyLike | NullProperty;
+
     role: RolePropertyArray;
 
     title: TitlePropertyArray;
@@ -156,6 +160,7 @@ export default class Vcard {
             note,
             org,
             photo,
+            prodid,
             role,
             title,
             url,
@@ -206,6 +211,7 @@ export default class Vcard {
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
         this.n = n ? NProperty.factory(n) : new NullProperty();
+        this.prodid = prodid ? ProdidProperty.factory(prodid) : new NullProperty();
         this.version = version ? VersionProperty.factory(version) : new VersionProperty();
     }
 
@@ -234,6 +240,7 @@ export default class Vcard {
             ...this.note.map(toString),
             ...this.org.map(toString),
             ...this.photo.map(toString),
+            this.prodid.toString(),
             ...this.role.map(toString),
             ...this.title.map(toString),
             ...this.url.map(toString),
@@ -308,6 +315,9 @@ export default class Vcard {
 
         if (!this.photo.every(photo => photo instanceof PhotoProperty))
             throw new TypeError('One or more PHOTO properties are invalid');
+
+        if (!(this.prodid instanceof ProdidProperty))
+            throw new TypeError('The PRODID property is invalid');
 
         if (!this.role.every(role => role instanceof RoleProperty))
             throw new TypeError('One or more ROLE properties are invalid');
