@@ -52,6 +52,7 @@ import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
 import TzProperty, { TzPropertyLike } from './properties/TzProperty';
 import TzPropertyArray from './properties/arrays/TzPropertyArray';
 import toString from './util/to-string';
+import UidProperty, { UidPropertyLike } from './properties/UidProperty';
 import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
 import UrlPropertyArray from './properties/arrays/UrlPropertyArray';
 import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty';
@@ -86,6 +87,7 @@ export interface VcardConfig {
     source?: SourcePropertyLike;
     title?: TitlePropertyLike;
     tz?: TzPropertyLike;
+    uid?: UidPropertyLike;
     url?: UrlPropertyLike;
     version?: VersionProperty;
 }
@@ -151,6 +153,8 @@ export default class Vcard {
 
     tz: TzPropertyArray;
 
+    uid: UidPropertyLike | NullProperty;
+
     url: UrlPropertyArray;
 
     version: VersionPropertyLike;
@@ -186,6 +190,7 @@ export default class Vcard {
             source,
             title,
             tz,
+            uid,
             url,
             version
         } = config;
@@ -242,6 +247,7 @@ export default class Vcard {
         this.n = n ? NProperty.factory(n) : new NullProperty();
         this.prodid = prodid ? ProdidProperty.factory(prodid) : new NullProperty();
         this.rev = rev ? RevProperty.factory(rev) : new NullProperty();
+        this.uid = uid ? UidProperty.factory(uid) : new NullProperty();
         this.version = version ? VersionProperty.factory(version) : new VersionProperty();
     }
 
@@ -277,6 +283,7 @@ export default class Vcard {
             ...this.source.map(toString),
             ...this.title.map(toString),
             ...this.tz.map(toString),
+            this.uid.toString(),
             ...this.url.map(toString),
             'END:VCARD'
         ];
@@ -370,6 +377,9 @@ export default class Vcard {
 
         if (!this.tz.every(tz => tz instanceof TzProperty))
             throw new TypeError('One or more TZ properties are invalid');
+
+        if (!(this.uid instanceof UidProperty))
+            throw new TypeError('The UID property is invalid');
 
         if (!this.url.every(url => url instanceof UrlProperty))
             throw new TypeError('One or more URL properties are invalid');

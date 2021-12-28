@@ -80,7 +80,7 @@ To-Do
   - [ ] `TEL`
   - [x] `TITLE`
   - [x] `TZ`
-  - [ ] `UID`
+  - [x] `UID`
   - [x] `URL`
   - [x] `VERSION`
   - [ ] `XML`
