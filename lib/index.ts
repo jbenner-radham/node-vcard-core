@@ -43,6 +43,8 @@ import ProdidProperty, { ProdidPropertyLike } from './properties/ProdidProperty'
 import RevProperty, { RevPropertyLike } from './properties/RevProperty';
 import RoleProperty, { RolePropertyLike } from './properties/RoleProperty';
 import RolePropertyArray from './properties/arrays/RolePropertyArray';
+import SoundProperty, { SoundPropertyLike } from './properties/SoundProperty';
+import SoundPropertyArray from './properties/arrays/SoundPropertyArray';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
 import toString from './util/to-string';
@@ -76,6 +78,7 @@ export interface VcardConfig {
     prodid?: ProdidPropertyLike;
     rev?: RevPropertyLike;
     role?: RolePropertyLike;
+    sound?: SoundPropertyLike;
     title?: TitlePropertyLike;
     url?: UrlPropertyLike;
     version?: VersionProperty;
@@ -134,6 +137,8 @@ export default class Vcard {
 
     role: RolePropertyArray;
 
+    sound: SoundPropertyArray;
+
     title: TitlePropertyArray;
 
     url: UrlPropertyArray;
@@ -167,6 +172,7 @@ export default class Vcard {
             prodid,
             rev,
             role,
+            sound,
             title,
             url,
             version
@@ -189,6 +195,7 @@ export default class Vcard {
         this.org = new OrgPropertyArray();
         this.photo = new PhotoPropertyArray();
         this.role = new RolePropertyArray();
+        this.sound = new SoundPropertyArray();
         this.title = new TitlePropertyArray();
         this.url = new UrlPropertyArray();
         adr && this.adr.push(adr);
@@ -209,6 +216,7 @@ export default class Vcard {
         org && this.org.push(org);
         photo && this.photo.push(photo);
         role && this.role.push(role);
+        sound && this.sound.push(sound);
         title && this.title.push(title);
         url && this.url.push(url);
         this.anniversary = anniversary ? AnniversaryProperty.factory(anniversary) : new NullProperty();
@@ -249,6 +257,7 @@ export default class Vcard {
             this.prodid.toString(),
             this.rev.toString(),
             ...this.role.map(toString),
+            ...this.sound.map(toString),
             ...this.title.map(toString),
             ...this.url.map(toString),
             'END:VCARD'
@@ -331,6 +340,9 @@ export default class Vcard {
 
         if (!this.role.every(role => role instanceof RoleProperty))
             throw new TypeError('One or more ROLE properties are invalid');
+
+        if (!this.sound.every(sound => sound instanceof SoundProperty))
+            throw new TypeError('One or more SOUND properties are invalid');
 
         if (!this.title.every(title => title instanceof TitleProperty))
             throw new TypeError('One or more TITLE properties are invalid');

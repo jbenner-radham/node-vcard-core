@@ -387,6 +387,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a SOUND property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const sound = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+                const vcard = new Vcard({ fn, sound });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `SOUND:${sound}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a TITLE property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Captain Awesome';
