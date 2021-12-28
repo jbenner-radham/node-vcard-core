@@ -69,7 +69,7 @@ To-Do
   - [x] `N`
   - [x] `NICKNAME`
   - [x] `NOTE`
-  - [ ] `ORG`
+  - [x] `ORG`
   - [x] `PHOTO`
   - [ ] `PRODID`
   - [ ] `RELATED`
