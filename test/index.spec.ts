@@ -389,7 +389,7 @@ describe('Vcard', () => {
 
         describe('when passed a minimal vCard with a SOUND property', () => {
             it('returns the proper string format', () => {
-                const fn = 'J. Doe';
+                const fn = 'John Q. Public';
                 const sound = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
                 const vcard = new Vcard({ fn, sound });
                 const actual = vcard.toString();
