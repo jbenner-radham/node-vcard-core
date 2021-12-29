@@ -1,8 +1,22 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface CaladruriParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+    altid?: number | string;
+}
+
+export interface CaladruriPropertyConfig {
+    value: string;
+    parameters?: CaladruriParameters;
+}
+
 /** @todo Add URL type support? */
-export type CaladruriPropertyLike = CaladruriProperty | string;
+export type CaladruriPropertyLike = CaladruriProperty | CaladruriPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -31,15 +45,37 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class CaladruriProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    parameters: CaladruriParameters;
+
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: CaladruriPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as CaladruriPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a CaladruriPropertyConfig or string type`);
     }
 
     toString() {
-        return `CALADRURI:${this.valueOf()}`;
+        const value = this.hasParameters
+            ? this.getValueWithParameters()
+            : this.getValue();
+
+        return `CALADRURI${value}`;
     }
 
     valueOf(): string {

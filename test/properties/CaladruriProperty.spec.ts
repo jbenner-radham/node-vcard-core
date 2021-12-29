@@ -23,6 +23,17 @@ describe('CaladruriProperty', () => {
 
             expect(caladruri.toString()).to.equal(`CALADRURI:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { type: 'home' as const };
+            const value = 'http://example.com/calendar/jdoe';
+            const config = { parameters, value };
+            const caladruri = new CaladruriProperty(config);
+            const actual = caladruri.toString();
+            const expected = 'CALADRURI;TYPE=home:http://example.com/calendar/jdoe';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

@@ -67,12 +67,12 @@ To-Do
   - [x] `BEGIN`
     - [x] No Parameters
   - [x] `CALADRURI`
-    - [ ] Value Escaping
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `MEDIATYPE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] Value Escaping
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `MEDIATYPE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `CALURI`
     - [ ] Value Escaping
     - [ ] `PID` Parameter
