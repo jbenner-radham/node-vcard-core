@@ -23,6 +23,17 @@ describe('BdayProperty', () => {
 
             expect(bday.toString()).to.equal(`BDAY:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { calscale: 'gregorian' as const };
+            const value = '19960415';
+            const config = { parameters, value };
+            const bday = new BdayProperty(config);
+            const actual = bday.toString();
+            const expected = 'BDAY;CALSCALE=gregorian:19960415';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
