@@ -23,6 +23,17 @@ describe('AnniversaryProperty', () => {
 
             expect(anniversary.toString()).to.equal(`ANNIVERSARY:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { calscale: 'gregorian' as const };
+            const value = '19960415';
+            const config = { parameters, value };
+            const anniversary = new AnniversaryProperty(config);
+            const actual = anniversary.toString();
+            const expected = 'ANNIVERSARY;CALSCALE=gregorian:19960415';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
