@@ -62,7 +62,8 @@ To-Do
   - [x] `BDAY`
     - [x] Value Escaping
     - [x] `ALTID` Parameter
-    - [x] `CALSCALE` Parameter
+    - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
+    - [x] `LANGUAGE` Parameter _(for `text` type only)_
   - [x] `BEGIN`
     - [x] No Parameters
   - [x] `CALADRURI`
