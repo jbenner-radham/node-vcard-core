@@ -93,6 +93,10 @@ To-Do
     - [ ] Value Escaping
   - [x] `ORG`
     - [x] Value Escaping
+    - [x] `SORT-AS` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `PID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `PHOTO`
     - [ ] Value Escaping
   - [x] `PRODID`

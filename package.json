@@ -34,7 +34,9 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "core-js": "^3.19.2"
+    "core-js": "^3.19.2",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.kebabcase": "^4.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -43,6 +45,8 @@
     "@babel/preset-typescript": "^7.16.0",
     "@babel/register": "^7.16.0",
     "@types/chai": "^4.2.22",
+    "@types/lodash.isplainobject": "^4.0.6",
+    "@types/lodash.kebabcase": "^4.1.6",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.11",
     "@typescript-eslint/eslint-plugin": "^5.5.0",

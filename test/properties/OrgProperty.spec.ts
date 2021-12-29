@@ -18,10 +18,21 @@ describe('OrgProperty', () => {
         });
 
         it('returns the proper string format', () => {
-            const escapedvalue = 'ABC\\, Inc.;North American Division;Marketing';
+            const escapedValue = 'ABC\\, Inc.;North American Division;Marketing';
             const org = new OrgProperty('ABC, Inc.;North American Division;Marketing');
 
-            expect(org.toString()).to.equal(`ORG:${escapedvalue}`);
+            expect(org.toString()).to.equal(`ORG:${escapedValue}`);
+        });
+
+        it('correctly returns parameters', () => {
+            const parameters = { sortAs: 'ABC', type: 'work' };
+            const value = 'ABC, Inc.;North American Division;Marketing';
+            const config = { parameters, value };
+            const org = new OrgProperty(config);
+            const actual = org.toString();
+            const expected = 'ORG;SORT-AS=ABC;TYPE=work:ABC\\, Inc.;North American Division;Marketing';
+
+            expect(actual).to.equal(expected);
         });
     });
 

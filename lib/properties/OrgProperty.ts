@@ -1,7 +1,23 @@
+import isPlainObject from 'lodash.isplainobject';
+import kebabCase from 'lodash.kebabcase';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type OrgPropertyLike = OrgProperty | string;
+export interface OrgParameters {
+    sortAs?: string;
+    language?: string;
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    altid?: number | string;
+    type?: 'home' | 'work' | string;
+}
+
+export interface OrgPropertyConfig {
+    value: string;
+    parameters?: OrgParameters;
+}
+
+export type OrgPropertyLike = OrgProperty | OrgPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -35,20 +51,60 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class OrgProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    parameters: OrgParameters;
+
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: OrgPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as OrgPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a OrgPropertyConfig or string type`);
     }
 
-    toString() {
+    #getValue(): string {
         const value = this
             .components()
             .map(component => this.escape(component))
             .join(this.COMPONENT_SEPARATOR);
 
-        return `ORG:${value}`;
+        return `:${value}`;
+    }
+
+    #getValueWithParameters(): string {
+        const getKeyValueString = ([key, value]: [string, any]) =>
+            [kebabCase(key).toUpperCase(), Array.isArray(value) ? value.join(',') : value].join('=');
+        const parameters = Object.entries(this.parameters)
+            .map(getKeyValueString)
+            .join(this.COMPONENT_SEPARATOR);
+        const value = this.components()
+            .map(component => this.escape(component))
+            .join(this.COMPONENT_SEPARATOR);
+
+        return `;${parameters}:${value}`;
+    }
+
+    toString() {
+        const hasParameters = Object.keys(this.parameters).length >= 1;
+        const value = hasParameters
+            ? this.#getValueWithParameters()
+            : this.#getValue();
+
+        return `ORG${value}`;
     }
 
     valueOf(): string {
