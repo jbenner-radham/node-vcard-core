@@ -3,14 +3,14 @@ import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
 
 export interface AdrParameters {
-    altid?: string;
-    geo?: string;
     label?: string;
     language?: string;
+    geo?: string;
+    tz?: string;
+    altid?: string;
     pid?: string;
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
     type?: 'home' | 'work';
-    tz?: string;
 }
 
 export type AdrPropertyLike = AdrProperty | string;

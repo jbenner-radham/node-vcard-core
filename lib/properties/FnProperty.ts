@@ -2,11 +2,11 @@ import { Cardinality } from '../types';
 import Property from './Property';
 
 export interface FnParameters {
-    altid?: string;
+    type?: 'home' | 'work';
     language?: string;
+    altid?: string;
     pid?: string;
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work';
 }
 
 export type FnPropertyLike = FnProperty | string;
