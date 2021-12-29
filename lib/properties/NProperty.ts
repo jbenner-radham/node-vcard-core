@@ -18,7 +18,7 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class NProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
-    parameters?: NParameters;
+    parameters: NParameters;
 
     [VALUE]: string;
 
@@ -55,6 +55,7 @@ export default class NProperty extends Property {
     constructor(value: string) {
         super();
         this.validate(value);
+        this.parameters = {};
         this[VALUE] = value;
     }
 

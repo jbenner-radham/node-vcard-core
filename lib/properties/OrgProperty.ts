@@ -1,5 +1,4 @@
 import isPlainObject from 'lodash.isplainobject';
-import kebabCase from 'lodash.kebabcase';
 import { Cardinality } from '../types';
 import Property from './Property';
 
@@ -76,33 +75,10 @@ export default class OrgProperty extends Property {
         throw new TypeError(`The value "${config}" is not a OrgPropertyConfig or string type`);
     }
 
-    #getValue(): string {
-        const value = this
-            .components()
-            .map(component => this.escape(component))
-            .join(this.COMPONENT_SEPARATOR);
-
-        return `:${value}`;
-    }
-
-    #getValueWithParameters(): string {
-        const getKeyValueString = ([key, value]: [string, any]) =>
-            [kebabCase(key).toUpperCase(), Array.isArray(value) ? value.join(',') : value].join('=');
-        const parameters = Object.entries(this.parameters)
-            .map(getKeyValueString)
-            .join(this.COMPONENT_SEPARATOR);
-        const value = this.components()
-            .map(component => this.escape(component))
-            .join(this.COMPONENT_SEPARATOR);
-
-        return `;${parameters}:${value}`;
-    }
-
     toString() {
-        const hasParameters = Object.keys(this.parameters).length >= 1;
-        const value = hasParameters
-            ? this.#getValueWithParameters()
-            : this.#getValue();
+        const value = this.hasParameters
+            ? this.getValueWithParameters()
+            : this.getValue();
 
         return `ORG${value}`;
     }

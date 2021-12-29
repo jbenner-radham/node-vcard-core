@@ -23,7 +23,7 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
-    parameters?: AdrParameters;
+    parameters: AdrParameters;
 
     [VALUE]: string;
 
@@ -72,6 +72,7 @@ export default class AdrProperty extends Property {
     constructor(value: string) {
         super();
         this.validate(value);
+        this.parameters = {};
         this[VALUE] = value;
     }
 

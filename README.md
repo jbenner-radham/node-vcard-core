@@ -103,12 +103,12 @@ To-Do
     - [ ] `TYPE` Parameter
     - [ ] `ALTID` Parameter
   - [x] `FN`
-    - [ ] Value Escaping
-    - [ ] `TYPE` Parameter
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
+    - [x] Value Escaping
+    - [x] `TYPE` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
   - [x] `GENDER`
     - [ ] Value Escaping
     - [x] No Parameters
