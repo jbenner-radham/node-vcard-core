@@ -23,6 +23,17 @@ describe('CaluriProperty', () => {
 
             expect(caluri.toString()).to.equal(`CALURI:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { mediatype: 'text/calendar' };
+            const value = 'ftp://ftp.example.com/calA.ics';
+            const config = { parameters, value };
+            const caluri = new CaluriProperty(config);
+            const actual = caluri.toString();
+            const expected = 'CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

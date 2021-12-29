@@ -1,8 +1,22 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface CaluriParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+    altid?: number | string;
+}
+
+export interface CaluriPropertyConfig {
+    value: string;
+    parameters?: CaluriParameters;
+}
+
 /** @todo Add URL type support. */
-export type CaluriPropertyLike = CaluriProperty | string;
+export type CaluriPropertyLike = CaluriProperty | CaluriPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -33,15 +47,37 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class CaluriProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    parameters: CaluriParameters;
+
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: CaluriPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as CaluriPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a CaluriPropertyConfig or string type`);
     }
 
     toString() {
-        return `CALURI:${this.valueOf()}`;
+        const value = this.hasParameters
+            ? this.getValueWithParameters()
+            : this.getValue();
+
+        return `CALURI${value}`;
     }
 
     valueOf(): string {
