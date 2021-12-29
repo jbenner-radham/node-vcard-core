@@ -1,3 +1,4 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
@@ -13,7 +14,12 @@ export interface AdrParameters {
     type?: 'home' | 'work';
 }
 
-export type AdrPropertyLike = AdrProperty | string;
+export interface AdrPropertyConfig {
+    value: string;
+    parameters?: AdrParameters;
+}
+
+export type AdrPropertyLike = AdrProperty | AdrPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -88,6 +94,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1
+ * @todo Enforce pref-param limitations in validation!
  */
 export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
@@ -138,15 +145,35 @@ export default class AdrProperty extends Property {
         return countryName;
     }
 
-    constructor(value: string) {
+    constructor(config: AdrPropertyConfig | string) {
         super();
-        this.validate(value);
-        this.parameters = {};
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as AdrPropertyConfig;
+            this.validate(value);
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.validate(config);
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a AdrPropertyConfig or string type`);
     }
 
     toString() {
-        return `ADR:${this.valueOf()}`;
+        const value = this.hasParameters
+            ? this.getValueWithParameters()
+            : this.getValue();
+
+        return `ADR${value}`;
     }
 
     valueOf(): string {

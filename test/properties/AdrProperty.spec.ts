@@ -146,4 +146,34 @@ describe('AdrProperty', () => {
             expect(adr.components()).to.deep.equal(components);
         });
     });
+
+    describe('#toString()', () => {
+        it('is a method', () => {
+            expect(AdrProperty.prototype.toString).to.be.a('function');
+        });
+
+        it('returns a string', () => {
+            const adr = new AdrProperty(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
+
+            expect(adr.toString()).to.be.a('string');
+        });
+
+        it('returns the proper string format', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+            const adr = new AdrProperty(value);
+
+            expect(adr.toString()).to.equal(`ADR:${value}`);
+        });
+
+        it('correctly returns parameters', () => {
+            const parameters = { geo: '"geo:12.3457,78.910"', type: 'home' as const };
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+            const config = { parameters, value };
+            const adr = new AdrProperty(config);
+            const actual = adr.toString();
+            const expected = 'ADR;GEO="geo:12.3457,78.910";TYPE=home:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+
+            expect(actual).to.equal(expected);
+        });
+    });
 });

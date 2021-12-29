@@ -46,15 +46,15 @@ To-Do
 -----
 - [ ] Properties
   - [x] `ADR`
-    - [ ] Value Escaping
-    - [ ] `LABEL` Parameter
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `GEO` Parameter
-    - [ ] `TZ` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
+    - [x] Value Escaping
+    - [x] `LABEL` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `GEO` Parameter
+    - [x] `TZ` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
   - [x] `ANNIVERSARY`
     - [x] Value Escaping
     - [x] `ALTID` Parameter
