@@ -47,30 +47,68 @@ To-Do
 - [ ] Properties
   - [x] `ADR`
     - [ ] Value Escaping
+    - [ ] `LABEL` Parameter
+    - [ ] `LANGUAGE` Parameter
+    - [ ] `GEO` Parameter
+    - [ ] `TZ` Parameter
+    - [ ] `ALTID` Parameter
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `TYPE` Parameter
   - [x] `ANNIVERSARY`
     - [ ] Value Escaping
+    - [ ] `ALTID` Parameter
+    - [ ] `CALSCALE` Parameter
   - [x] `BDAY`
     - [ ] Value Escaping
+    - [ ] `ALTID` Parameter
+    - [ ] `CALSCALE` Parameter
   - [x] `BEGIN`
-    - [ ] Value Escaping
   - [x] `CALADRURI`
     - [ ] Value Escaping
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `TYPE` Parameter
+    - [ ] `MEDIATYPE` Parameter
+    - [ ] `ALTID` Parameter
   - [x] `CALURI`
     - [ ] Value Escaping
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `TYPE` Parameter
+    - [ ] `MEDIATYPE` Parameter
+    - [ ] `ALTID` Parameter
   - [x] `CATEGORIES`
     - [ ] Value Escaping
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `TYPE` Parameter
+    - [ ] `ALTID` Parameter
   - [ ] `CLIENTPIDMAP`
     - [ ] Value Escaping
   - [x] `EMAIL`
     - [ ] Value Escaping
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `TYPE` Parameter
+    - [ ] `ALTID` Parameter
   - [x] `END`
-    - [ ] Value Escaping
   - [x] `FBURL`
     - [ ] Value Escaping
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `TYPE` Parameter
+    - [ ] `ALTID` Parameter
   - [x] `FN`
     - [ ] Value Escaping
+    - [ ] `TYPE` Parameter
+    - [ ] `LANGUAGE` Parameter
+    - [ ] `ALTID` Parameter
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
   - [x] `GENDER`
     - [ ] Value Escaping
+    - [x] No Parameters
   - [x] `GEO`
     - [ ] Value Escaping
   - [x] `IMPP`
@@ -122,7 +160,6 @@ To-Do
   - [x] `URL`
     - [ ] Value Escaping
   - [x] `VERSION`
-    - [ ] Value Escaping
   - [ ] `XML`
     - [ ] Value Escaping
 - [ ] Parameters
