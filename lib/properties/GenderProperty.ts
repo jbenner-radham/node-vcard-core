@@ -9,6 +9,35 @@ export type GenderPropertyLike = GenderProperty | string;
 const VALUE: unique symbol = Symbol.for('value');
 
 /**
+ * > Purpose:  To specify the components of the sex and gender identity of
+ * >   the object the vCard represents.
+ * >
+ * > Value type:  A single structured value with two components. Each
+ * >   component has a single text value.
+ * >
+ * > Special notes:  The components correspond, in sequence, to the sex
+ * >   (biological), and gender identity.  Each component is optional.
+ * >
+ * >   Sex component:  A single letter.  M stands for "male", F stands
+ * >     for "female", O stands for "other", N stands for "none or not
+ * >     applicable", U stands for "unknown".
+ * >
+ * >   Gender identity component:  Free-form text.
+ * >
+ * > ABNF:
+ * >   GENDER-param = "VALUE=text" / any-param
+ * >   GENDER-value = sex [";" text]
+ * >
+ * >   sex = "" / "M" / "F" / "O" / "N" / "U"
+ * >
+ * > Examples:
+ * >   GENDER:M
+ * >   GENDER:F
+ * >   GENDER:M;Fellow
+ * >   GENDER:F;grrrl
+ * >   GENDER:O;intersex
+ * >   GENDER:;it's complicated
+ *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.7
  */
 export default class GenderProperty extends Property {
