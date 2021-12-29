@@ -7,6 +7,21 @@ export type UrlPropertyLike = UrlProperty | string;
 const VALUE: unique symbol = Symbol.for('value');
 
 /**
+ * > Purpose:  To specify a uniform resource locator associated with the
+ * >   object to which the vCard refers.  Examples for individuals
+ * >   include personal web sites, blogs, and social networking site
+ * >   identifiers.
+ * >
+ * > Value type:  A single uri value.
+ * >
+ * > ABNF:
+ * >   URL-param = "VALUE=uri" / pid-param / pref-param / type-param
+ * >             / mediatype-param / altid-param / any-param
+ * >   URL-value = URI
+ * >
+ * > Example:
+ * >   URL:http://example.org/restaurant.french/~chezchic.html
+ *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.8
  */
 export default class UrlProperty extends Property {
