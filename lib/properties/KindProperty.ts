@@ -1,9 +1,14 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface KindPropertyConfig {
+    value: string;
+}
+
 export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
 
-export type KindPropertyLike = KindProperty | Kind;
+export type KindPropertyLike = KindProperty | KindPropertyConfig | Kind;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -135,13 +140,27 @@ export default class KindProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: Kind) {
+    constructor(config: KindPropertyConfig | Kind) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value } = config as KindPropertyConfig;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a KindPropertyConfig or Kind type`);
     }
 
     toString() {
-        return `KIND:${this.valueOf()}`;
+        return `KIND:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {

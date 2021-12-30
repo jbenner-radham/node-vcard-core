@@ -86,7 +86,7 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
-    - [ ] Implement `Array` Argument Constructor Support
+    - [ ] Implement Constructor `Array` Argument Support
   - [ ] `CLIENTPIDMAP`
     - [ ] Value Escaping
     - [x] No Parameters
@@ -136,7 +136,7 @@ To-Do
     - [ ] `PREF` Parameter _(for `text` type only)_
     - [ ] `TYPE` Parameter _(for `text` type only)_
   - [x] `KIND`
-    - [ ] Value Escaping
+    - [x] Value Escaping
     - [x] No Parameters
   - [x] `LANG`
     - [ ] Value Escaping
