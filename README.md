@@ -99,11 +99,11 @@ To-Do
   - [x] `END`
     - [x] No Parameters
   - [x] `FBURL`
-    - [ ] Value Escaping
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] Value Escaping
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `FN`
     - [x] Value Escaping
     - [x] `TYPE` Parameter

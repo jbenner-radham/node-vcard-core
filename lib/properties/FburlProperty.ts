@@ -1,8 +1,22 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface FburlParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+    altid?: number | string;
+}
+
+export interface FburlPropertyConfig {
+    value: string;
+    parameters?: FburlParameters;
+}
+
 /** @todo Add URL type support? */
-export type FburlPropertyLike = FburlProperty | string;
+export type FburlPropertyLike = FburlProperty | FburlPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -36,13 +50,33 @@ export default class FburlProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: FburlPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as FburlPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a FburlPropertyConfig or string type`);
     }
 
     toString() {
-        return `FBURL:${this.valueOf()}`;
+        const value = this.hasParameters
+            ? this.getValueWithParameters()
+            : this.getValue();
+
+        return `FBURL${value}`;
     }
 
     valueOf(): string {
