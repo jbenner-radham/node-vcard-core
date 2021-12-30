@@ -23,6 +23,17 @@ describe('ImppProperty', () => {
 
             expect(impp.toString()).to.equal(`IMPP:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1 };
+            const value = 'xmpp:alice@example.com';
+            const config = { parameters, value };
+            const impp = new ImppProperty(config);
+            const actual = impp.toString();
+            const expected = 'IMPP;PREF=1:xmpp:alice@example.com';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

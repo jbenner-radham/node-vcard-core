@@ -122,12 +122,12 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `IMPP`
-    - [ ] Value Escaping
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `MEDIATYPE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] No Value Escaping
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `MEDIATYPE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `KEY`
     - [ ] Value Escaping
     - [ ] `MEDIATYPE` Parameter _(for `URI` type only)_

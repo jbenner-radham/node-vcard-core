@@ -28,7 +28,16 @@ export default abstract class Property {
             .map(getKeyValueString)
             .join(this.COMPONENT_SEPARATOR);
 
-        return (parameters.length === 0) ? '' : `;${parameters}`;
+        return (parameters.length === 0) ? '' : `${this.COMPONENT_SEPARATOR}${parameters}`;
+    }
+
+    getEscapedValueString(): string {
+        const value = this
+            .components()
+            .map(escapePropertyValue)
+            .join(this.COMPONENT_SEPARATOR);
+
+        return value;
     }
 
     getValue(): string {

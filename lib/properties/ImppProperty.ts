@@ -1,7 +1,21 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type ImppPropertyLike = ImppProperty | string;
+export interface ImppParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+    altid?: number | string;
+}
+
+export interface ImppPropertyConfig {
+    value: string;
+    parameters?: ImppParameters;
+}
+
+export type ImppPropertyLike = ImppProperty | ImppPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -36,13 +50,29 @@ export default class ImppProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: ImppPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as ImppPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a ImppPropertyConfig or string type`);
     }
 
     toString() {
-        return `IMPP:${this.valueOf()}`;
+        return `IMPP${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
