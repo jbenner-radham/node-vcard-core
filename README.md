@@ -112,7 +112,7 @@ To-Do
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
   - [x] `GENDER`
-    - [ ] Value Escaping
+    - [x] Value Escaping
     - [x] No Parameters
   - [x] `GEO`
     - [ ] Value Escaping

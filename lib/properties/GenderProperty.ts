@@ -63,7 +63,7 @@ export default class GenderProperty extends Property {
     }
 
     toString() {
-        return `GENDER:${this.valueOf()}`;
+        return `GENDER${this.getValue()}`;
     }
 
     valueOf(): string {
