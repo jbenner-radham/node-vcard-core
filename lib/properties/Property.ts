@@ -7,14 +7,17 @@ export default abstract class Property {
 
     readonly COMPONENT_SEPARATOR = ';';
 
-    parameters: unknown;
+    parameters?: unknown;
 
     get hasParameters(): boolean {
-        return Object.keys(this.parameters as Record<string, any>).length >= 1;
+        return (
+            typeof this.parameters !== 'undefined' &&
+            Object.keys(this.parameters as Record<string, any>).length >= 1
+        );
     }
 
     components(): string[] {
-        return ((this.valueOf() as number | string).toString()).split(';');
+        return ((this.valueOf() as number | string).toString()).split(this.COMPONENT_SEPARATOR);
     }
 
     getValue(): string {
@@ -27,8 +30,9 @@ export default abstract class Property {
     }
 
     getValueWithParameters(): string {
-        const getKeyValueString = ([key, value]: [string, any]) =>
-            [kebabCase(key).toUpperCase(), Array.isArray(value) ? value.join(',') : value].join('=');
+        const formatKey = (key: string): string => kebabCase(key).toUpperCase();
+        const joinIfArray = (value: any): any => Array.isArray(value) ? value.join(',') : value;
+        const getKeyValueString = ([key, value]: [string, any]) => [formatKey(key), joinIfArray(value)].join('=');
         const parameters = Object.entries(this.parameters as Record<string, any>)
             .map(getKeyValueString)
             .join(this.COMPONENT_SEPARATOR);
