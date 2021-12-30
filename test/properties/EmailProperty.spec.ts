@@ -23,6 +23,17 @@ describe('EmailProperty', () => {
 
             expect(email.toString()).to.equal(`EMAIL:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { type: 'work' as const };
+            const value = 'jqpublic@xyz.example.com';
+            const config = { parameters, value };
+            const email = new EmailProperty(config);
+            const actual = email.toString();
+            const expected = 'EMAIL;TYPE=work:jqpublic@xyz.example.com';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

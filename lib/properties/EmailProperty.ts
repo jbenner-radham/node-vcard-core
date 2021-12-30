@@ -1,7 +1,20 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type EmailPropertyLike = EmailProperty | string;
+export interface EmailParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    altid?: number | string;
+}
+
+export interface EmailPropertyConfig {
+    value: string;
+    parameters?: EmailParameters;
+}
+
+export type EmailPropertyLike = EmailProperty | EmailPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -33,13 +46,33 @@ export default class EmailProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: EmailPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as EmailPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a OrgPropertyConfig or string type`);
     }
 
     toString() {
-        return `EMAIL:${this.valueOf()}`;
+        const value = this.hasParameters
+            ? this.getValueWithParameters()
+            : this.getValue();
+
+        return `EMAIL${value}`;
     }
 
     valueOf(): string {

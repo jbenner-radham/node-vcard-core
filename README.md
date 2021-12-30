@@ -91,11 +91,11 @@ To-Do
     - [ ] Value Escaping
     - [x] No Parameters
   - [x] `EMAIL`
-    - [ ] Value Escaping
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] Value Escaping
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `END`
     - [x] No Parameters
   - [x] `FBURL`
