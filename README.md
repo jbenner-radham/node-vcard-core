@@ -81,11 +81,12 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `CATEGORIES`
-    - [ ] Value Escaping
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] Value Escaping
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `ALTID` Parameter
+    - [ ] Implement `Array` Argument Constructor Support
   - [ ] `CLIENTPIDMAP`
     - [ ] Value Escaping
     - [x] No Parameters

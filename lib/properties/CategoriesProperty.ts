@@ -1,8 +1,21 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface CategoriesParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    altid?: number | string;
+}
+
+export interface CategoriesPropertyConfig {
+    value: string;
+    parameters?: CategoriesParameters;
+}
+
 /** @todo Add string[] type support. */
-export type CategoriesPropertyLike = CategoriesProperty | string;
+export type CategoriesPropertyLike = CategoriesProperty | CategoriesPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -29,13 +42,33 @@ export default class CategoriesProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: CategoriesPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as CategoriesPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a CategoriesPropertyConfig or string type`);
     }
 
     toString() {
-        return `CATEGORIES:${this.valueOf()}`;
+        const value = this.hasParameters
+            ? this.getValueWithParameters()
+            : this.getValue();
+
+        return `CATEGORIES${value}`;
     }
 
     valueOf(): string {
