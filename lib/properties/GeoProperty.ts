@@ -1,7 +1,21 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type GeoPropertyLike = GeoProperty | string;
+export interface GeoParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+    altid?: number | string;
+}
+
+export interface GeoPropertyConfig {
+    value: string;
+    parameters?: GeoParameters;
+}
+
+export type GeoPropertyLike = GeoProperty | GeoPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -29,13 +43,29 @@ export default class GeoProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: GeoPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as GeoPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a GeoPropertyConfig or string type`);
     }
 
     toString() {
-        return `GEO:${this.valueOf()}`;
+        return `GEO${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {

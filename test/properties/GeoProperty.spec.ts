@@ -23,6 +23,17 @@ describe('GeoProperty', () => {
 
             expect(geo.toString()).to.equal(`GEO:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { type: 'work' as const };
+            const value = 'geo:37.386013,-122.082932';
+            const config = { parameters, value };
+            const geo = new GeoProperty(config);
+            const actual = geo.toString();
+            const expected = 'GEO;TYPE=work:geo:37.386013,-122.082932';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

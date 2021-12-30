@@ -20,6 +20,17 @@ export default abstract class Property {
         return ((this.valueOf() as number | string).toString()).split(this.COMPONENT_SEPARATOR);
     }
 
+    getParametersString(): string {
+        const formatKey = (key: string): string => kebabCase(key).toUpperCase();
+        const joinIfArray = (value: any): any => Array.isArray(value) ? value.join(',') : value;
+        const getKeyValueString = ([key, value]: [string, any]) => [formatKey(key), joinIfArray(value)].join('=');
+        const parameters = Object.entries(this.parameters as Record<string, any> ?? {})
+            .map(getKeyValueString)
+            .join(this.COMPONENT_SEPARATOR);
+
+        return (parameters.length === 0) ? '' : `;${parameters}`;
+    }
+
     getValue(): string {
         const value = this
             .components()
