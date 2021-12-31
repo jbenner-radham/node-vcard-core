@@ -1,7 +1,20 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type LangPropertyLike = LangProperty | string;
+export interface LangParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    altid?: number | string;
+    type?: 'home' | 'work' | string;
+}
+
+export interface LangPropertyConfig {
+    value: string;
+    parameters?: LangParameters;
+}
+
+export type LangPropertyLike = LangProperty | LangPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -28,13 +41,30 @@ export default class LangProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: LangPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as LangPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a LangPropertyConfig or string type`);
     }
 
     toString() {
-        return `LANG:${this.valueOf()}`;
+        return `LANG${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {

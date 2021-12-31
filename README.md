@@ -139,11 +139,11 @@ To-Do
     - [x] Value Escaping
     - [x] No Parameters
   - [x] `LANG`
-    - [ ] Value Escaping
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `TYPE` Parameter
+    - [x] No Value Escaping
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `LOGO`
     - [ ] Value Escaping
     - [ ] `LANGUAGE` Parameter

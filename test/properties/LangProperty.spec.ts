@@ -23,6 +23,17 @@ describe('LangProperty', () => {
 
             expect(lang.toString()).to.equal(`LANG:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1, type: 'work' as const };
+            const value = 'en';
+            const config = { parameters, value };
+            const impp = new LangProperty(config);
+            const actual = impp.toString();
+            const expected = 'LANG;PREF=1;TYPE=work:en';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
