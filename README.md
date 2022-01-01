@@ -159,7 +159,10 @@ To-Do
     - [x] `ALTID` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `N`
-    - [ ] Value Escaping
+    - [x] Value Escaping
+    - [x] `SORT-AS` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `NICKNAME`
     - [ ] Value Escaping
   - [x] `NOTE`

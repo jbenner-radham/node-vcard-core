@@ -86,5 +86,23 @@ describe('NProperty', () => {
 
             expect(n.toString()).to.be.a('string');
         });
+
+        it('returns the proper string format', () => {
+            const value = 'Public;John;Quinlan;Mr.;Esq.';
+            const n = new NProperty(value);
+
+            expect(n.toString()).to.equal(`N:${value}`);
+        });
+
+        it('correctly returns parameters', () => {
+            const parameters = { sortAs: 'John' };
+            const value = 'Public;John;Quinlan;Mr.;Esq.';
+            const config = { parameters, value };
+            const n = new NProperty(config);
+            const actual = n.toString();
+            const expected = 'N;SORT-AS=John:Public;John;Quinlan;Mr.;Esq.';
+
+            expect(actual).to.equal(expected);
+        });
     });
 });

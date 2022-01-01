@@ -1,14 +1,20 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
 
 export interface NParameters {
-    altid?: string;
-    language?: string;
     sortAs?: string;
+    language?: string;
+    altid?: number | string;
 }
 
-export type NPropertyLike = NProperty | string;
+export interface NPropertyConfig {
+    value: string;
+    parameters?: NParameters;
+}
+
+export type NPropertyLike = NProperty | NPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -81,15 +87,30 @@ export default class NProperty extends Property {
         return honorificSuffix;
     }
 
-    constructor(value: string) {
+    constructor(config: NPropertyConfig | string) {
         super();
-        this.validate(value);
-        this.parameters = {};
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as NPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this.validate(config);
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a NPropertyConfig or string type`);
     }
 
     toString() {
-        return `N:${this.valueOf()}`;
+        return `N${this.getParametersString()}:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {
