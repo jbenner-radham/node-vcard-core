@@ -1,7 +1,20 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type MemberPropertyLike = MemberProperty | string;
+export interface MemberParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    altid?: number | string;
+    mediatype?: string;
+}
+
+export interface MemberPropertyConfig {
+    value: string;
+    parameters?: MemberParameters;
+}
+
+export type MemberPropertyLike = MemberProperty | MemberPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -9,7 +22,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Purpose:  To include a member in the group this vCard represents.
  * >
  * > Value type:  A single URI. It MAY refer to something other than a
- * >   vCard object.  For example, an email distribution list could
+ * >   vCard object. For example, an email distribution list could
  * >   employ the "mailto" URI scheme [RFC6068] for efficiency.
  * >
  * > Special notes:  This property MUST NOT be present unless the value of
@@ -56,13 +69,29 @@ export default class MemberProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: MemberPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as MemberPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a MemberPropertyConfig or string type`);
     }
 
     toString() {
-        return `MEMBER:${this.valueOf()}`;
+        return `MEMBER${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {

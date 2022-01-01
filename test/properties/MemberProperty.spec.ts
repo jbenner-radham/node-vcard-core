@@ -23,6 +23,17 @@ describe('MemberProperty', () => {
 
             expect(member.toString()).to.equal(`MEMBER:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1, type: 'work' as const };
+            const value = 'mailto:subscriber1@example.com';
+            const config = { parameters, value };
+            const member = new MemberProperty(config);
+            const actual = member.toString();
+            const expected = 'MEMBER;PREF=1;TYPE=work:mailto:subscriber1@example.com';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
