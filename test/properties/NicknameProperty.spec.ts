@@ -12,16 +12,16 @@ describe('NicknameProperty', () => {
         });
 
         it('returns a string', () => {
-            const title = new NicknameProperty('Llama');
+            const nickname = new NicknameProperty('Llama');
 
-            expect(title.toString()).to.be.a('string');
+            expect(nickname.toString()).to.be.a('string');
         });
 
         it('returns the proper string format', () => {
             const value = 'Llama';
-            const title = new NicknameProperty(value);
+            const nickname = new NicknameProperty(value);
 
-            expect(title.toString()).to.equal(`NICKNAME:${value}`);
+            expect(nickname.toString()).to.equal(`NICKNAME:${value}`);
         });
 
         it('correctly returns parameters', () => {
@@ -42,16 +42,16 @@ describe('NicknameProperty', () => {
         });
 
         it('returns a string', () => {
-            const title = new NicknameProperty('Green');
+            const nickname = new NicknameProperty('Green');
 
-            expect(title.valueOf()).to.be.a('string');
+            expect(nickname.valueOf()).to.be.a('string');
         });
 
         it('returns the same value passed to it', () => {
             const value = 'Green';
-            const title = new NicknameProperty(value);
+            const nickname = new NicknameProperty(value);
 
-            expect(title.valueOf()).to.equal(value);
+            expect(nickname.valueOf()).to.equal(value);
         });
     });
 });
