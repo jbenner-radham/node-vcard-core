@@ -28,8 +28,8 @@ describe('LangProperty', () => {
             const parameters = { pref: 1, type: 'work' as const };
             const value = 'en';
             const config = { parameters, value };
-            const impp = new LangProperty(config);
-            const actual = impp.toString();
+            const lang = new LangProperty(config);
+            const actual = lang.toString();
             const expected = 'LANG;PREF=1;TYPE=work:en';
 
             expect(actual).to.equal(expected);
