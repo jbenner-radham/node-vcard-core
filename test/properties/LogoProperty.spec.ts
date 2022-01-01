@@ -23,6 +23,17 @@ describe('LogoProperty', () => {
 
             expect(logo.toString()).to.equal(`LOGO:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1, type: 'work' as const };
+            const value = 'en';
+            const config = { parameters, value };
+            const logo = new LogoProperty(config);
+            const actual = logo.toString();
+            const expected = 'LOGO;PREF=1;TYPE=work:en';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

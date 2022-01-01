@@ -145,13 +145,13 @@ To-Do
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `LOGO`
-    - [ ] Value Escaping
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `MEDIATYPE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] No Value Escaping
+    - [x] `LANGUAGE` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `MEDIATYPE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `MEMBER`
     - [ ] Value Escaping
     - [ ] `PID` Parameter
