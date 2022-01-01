@@ -171,7 +171,12 @@ To-Do
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
   - [x] `NOTE`
-    - [ ] Value Escaping
+    - [x] Value Escaping
+    - [x] `LANGUAGE` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `ORG`
     - [x] Value Escaping
     - [x] `SORT-AS` Parameter

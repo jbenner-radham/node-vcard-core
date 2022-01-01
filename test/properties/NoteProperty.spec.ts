@@ -12,16 +12,27 @@ describe('NoteProperty', () => {
         });
 
         it('returns a string', () => {
-            const email = new NoteProperty('This is a note...');
+            const note = new NoteProperty('This is a note...');
 
-            expect(email.toString()).to.be.a('string');
+            expect(note.toString()).to.be.a('string');
         });
 
         it('returns the proper string format', () => {
             const value = 'This is a note...';
-            const email = new NoteProperty(value);
+            const note = new NoteProperty(value);
 
-            expect(email.toString()).to.equal(`NOTE:${value}`);
+            expect(note.toString()).to.equal(`NOTE:${value}`);
+        });
+
+        it('correctly returns parameters', () => {
+            const parameters = { language: 'en' };
+            const value = 'This is a note...';
+            const config = { parameters, value };
+            const note = new NoteProperty(config);
+            const actual = note.toString();
+            const expected = 'NOTE;LANGUAGE=en:This is a note...';
+
+            expect(actual).to.equal(expected);
         });
     });
 
@@ -31,16 +42,16 @@ describe('NoteProperty', () => {
         });
 
         it('returns a string', () => {
-            const email = new NoteProperty('Notes notes notes!');
+            const note = new NoteProperty('Notes notes notes!');
 
-            expect(email.valueOf()).to.be.a('string');
+            expect(note.valueOf()).to.be.a('string');
         });
 
         it('returns the same value passed to it', () => {
             const value = 'Notes notes notes!';
-            const email = new NoteProperty(value);
+            const note = new NoteProperty(value);
 
-            expect(email.valueOf()).to.equal(value);
+            expect(note.valueOf()).to.equal(value);
         });
     });
 });

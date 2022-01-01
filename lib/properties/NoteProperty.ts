@@ -1,7 +1,21 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type NotePropertyLike = NoteProperty | string;
+export interface NoteParameters {
+    language?: string;
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    altid?: number | string;
+}
+
+export interface NotePropertyConfig {
+    value: string;
+    parameters?: NoteParameters;
+}
+
+export type NotePropertyLike = NoteProperty | NotePropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -28,13 +42,29 @@ export default class NoteProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: NotePropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as NotePropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a NotePropertyConfig or string type`);
     }
 
     toString() {
-        return `NOTE:${this.valueOf()}`;
+        return `NOTE${this.getParametersString()}:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {
