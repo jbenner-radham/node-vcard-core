@@ -1,7 +1,21 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type NicknamePropertyLike = NicknameProperty | string;
+export interface NicknameParameters {
+    type?: 'home' | 'work' | string;
+    language?: string;
+    altid?: number | string;
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+}
+
+export interface NicknamePropertyConfig {
+    value: string;
+    parameters?: NicknameParameters;
+}
+
+export type NicknamePropertyLike = NicknameProperty | NicknamePropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -31,13 +45,29 @@ export default class NicknameProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: NicknamePropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as NicknamePropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a NicknamePropertyConfig or string type`);
     }
 
     toString() {
-        return `NICKNAME:${this.valueOf()}`;
+        return `NICKNAME${this.getParametersString()}:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {

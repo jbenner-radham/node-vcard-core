@@ -164,7 +164,12 @@ To-Do
     - [x] `LANGUAGE` Parameter
     - [x] `ALTID` Parameter
   - [x] `NICKNAME`
-    - [ ] Value Escaping
+    - [x] Value Escaping
+    - [x] `TYPE` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
   - [x] `NOTE`
     - [ ] Value Escaping
   - [x] `ORG`

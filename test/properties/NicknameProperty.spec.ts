@@ -23,6 +23,17 @@ describe('NicknameProperty', () => {
 
             expect(title.toString()).to.equal(`NICKNAME:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { type: 'work' as const };
+            const value = 'Boss';
+            const config = { parameters, value };
+            const nickname = new NicknameProperty(config);
+            const actual = nickname.toString();
+            const expected = 'NICKNAME;TYPE=work:Boss';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
