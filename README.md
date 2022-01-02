@@ -202,7 +202,7 @@ To-Do
     - [ ] `ALTID` Parameter
     - [ ] `TYPE` Parameter
   - [x] `REV`
-    - [ ] Value Escaping
+    - [x] No Value Escaping
     - [x] No Parameters
   - [x] `ROLE`
     - [ ] Value Escaping
