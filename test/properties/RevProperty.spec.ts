@@ -23,6 +23,16 @@ describe('RevProperty', () => {
 
             expect(rev.toString()).to.equal(`REV:${value}`);
         });
+
+        it('accepts an object argument to the constructor', () => {
+            const value = '19951031T222710Z';
+            const config = { value };
+            const rev = new RevProperty(config);
+            const actual = rev.toString();
+            const expected = 'REV:19951031T222710Z';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

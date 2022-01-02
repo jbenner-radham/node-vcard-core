@@ -1,8 +1,18 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface RevParameters {
+    [key: string]: never;
+}
+
+export interface RevPropertyConfig {
+    value: string;
+    parameters?: RevParameters;
+}
+
 /** @todo Add Date type support. */
-export type RevPropertyLike = RevProperty | string;
+export type RevPropertyLike = RevProperty | RevPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -28,9 +38,23 @@ export default class RevProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: RevPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value } = config as RevPropertyConfig;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a RevPropertyConfig or string type`);
     }
 
     toString() {
