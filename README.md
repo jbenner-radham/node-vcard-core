@@ -129,7 +129,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `KEY`
-    - [ ] Value Escaping
+    - [ ] Value Escaping _(for `text` type only)_
     - [ ] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [ ] `ALTID` Parameter _(for `text` type only)_
     - [ ] `PID` Parameter _(for `text` type only)_
@@ -184,10 +184,12 @@ To-Do
     - [x] `PID` Parameter
     - [x] `TYPE` Parameter
   - [x] `PHOTO`
-    - [ ] Value Escaping
-    - [ ] `SORT-AS` Parameter
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] No Value Escaping
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `MEDIATYPE` Parameter
+    - [x] `PREF` Parameter
+    - [x] `PID` Parameter
   - [x] `PRODID`
     - [ ] Value Escaping
     - [x] No Parameters

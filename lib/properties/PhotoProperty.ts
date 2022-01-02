@@ -1,14 +1,28 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface PhotoParameters {
+    altid?: number | string;
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pid?: number | number[];
+}
+
+export interface PhotoPropertyConfig {
+    value: string;
+    parameters?: PhotoParameters;
+}
+
 /** @todo Add URL type support. */
-export type PhotoPropertyLike = PhotoProperty | string;
+export type PhotoPropertyLike = PhotoProperty | PhotoPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
 /**
- * > Purpose:  To specify an image or photograph information that annotates some aspect of the
- * >   object the vCard represents.
+ * > Purpose:  To specify an image or photograph information that
+ * >   annotates some aspect of the object the vCard represents.
  * >
  * > Value type:  A single URI.
  * >
@@ -31,14 +45,30 @@ export default class PhotoProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: PhotoPropertyConfig | string) {
         super();
-        this.validate(value);
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as PhotoPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this.validate(config);
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a PhotoPropertyConfig or string type`);
     }
 
     toString() {
-        return `PHOTO:${this.valueOf()}`;
+        return `PHOTO${this.getParametersString()}:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {

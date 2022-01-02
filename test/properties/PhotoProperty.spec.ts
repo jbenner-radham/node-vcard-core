@@ -23,6 +23,17 @@ describe('PhotoProperty', () => {
 
             expect(photo.toString()).to.equal(`PHOTO:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { type: 'home' as const };
+            const value = 'http://www.example.com/pub/photos/jqpublic.gif';
+            const config = { parameters, value };
+            const photo = new PhotoProperty(config);
+            const actual = photo.toString();
+            const expected = 'PHOTO;TYPE=home:http://www.example.com/pub/photos/jqpublic.gif';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
