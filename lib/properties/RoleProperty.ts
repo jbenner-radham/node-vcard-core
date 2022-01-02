@@ -1,20 +1,35 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type RolePropertyLike = RoleProperty | string;
+export interface RoleParameters {
+    language?: string;
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    altid?: number | string;
+}
+
+export interface RolePropertyConfig {
+    value: string;
+    parameters?: RoleParameters;
+}
+
+export type RolePropertyLike = RoleProperty | RolePropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
 /**
- * > Purpose:  To specify the function or part played in a particular situation by the object the
- * >   vCard represents.
+ * > Purpose:  To specify the function or part played in a particular
+ * >   situation by the object the vCard represents.
  * >
  * > Value type:  A single text value.
  * >
- * > Special notes:  This property is based on the X.520 Business Category explanatory attribute
- * >   [CCITT.X520.1988]. This property is included as an organizational type to avoid confusion
- * >   with the semantics of the TITLE property and incorrect usage of that property when the
- * >   semantics of this property is intended.
+ * > Special notes:  This property is based on the X.520 Business Category
+ * >   explanatory attribute [CCITT.X520.1988]. This property is
+ * >   included as an organizational type to avoid confusion with the
+ * >   semantics of the TITLE property and incorrect usage of that
+ * >   property when the semantics of this property is intended.
  * >
  * > ABNF:
  * >   ROLE-param = "VALUE=text" / language-param / pid-param / pref-param
@@ -31,13 +46,29 @@ export default class RoleProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: RolePropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as RolePropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a RolePropertyConfig or string type`);
     }
 
     toString() {
-        return `ROLE:${this.valueOf()}`;
+        return `ROLE${this.getParametersString()}:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {

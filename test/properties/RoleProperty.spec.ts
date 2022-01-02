@@ -23,6 +23,17 @@ describe('RoleProperty', () => {
 
             expect(role.toString()).to.equal(`ROLE:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { language: 'en' };
+            const value = 'Project Leader';
+            const config = { parameters, value };
+            const role = new RoleProperty(config);
+            const actual = role.toString();
+            const expected = 'ROLE;LANGUAGE=en:Project Leader';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

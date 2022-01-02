@@ -205,12 +205,12 @@ To-Do
     - [x] No Value Escaping
     - [x] No Parameters
   - [x] `ROLE`
-    - [ ] Value Escaping
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `ALTID` Parameter
+    - [x] Value Escaping
+    - [x] `LANGUAGE` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `SOUND`
     - [ ] Value Escaping
     - [ ] `LANGUAGE` Parameter
