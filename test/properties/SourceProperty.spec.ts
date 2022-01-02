@@ -23,6 +23,17 @@ describe('SourceProperty', () => {
 
             expect(source.toString()).to.equal(`SOURCE:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1 };
+            const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
+            const config = { parameters, value };
+            const source = new SourceProperty(config);
+            const actual = source.toString();
+            const expected = 'SOURCE;PREF=1:ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

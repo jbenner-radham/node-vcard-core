@@ -220,11 +220,11 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `SOURCE`
-    - [ ] Value Escaping
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `MEDIATYPE` Parameter
+    - [x] No Value Escaping
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `MEDIATYPE` Parameter
   - [ ] `TEL`
     - [ ] Value Escaping
     - [ ] `MEDIATYPE` Parameter _(for `URI` type only)_

@@ -1,8 +1,22 @@
+import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface SourceParameters {
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    altid?: number | string;
+    mediatype?: string;
+}
+
+export interface SourcePropertyConfig {
+    value: string;
+    parameters?: SourceParameters;
+}
+
 /** Add URL type support? */
-export type SourcePropertyLike = SourceProperty | string;
+export type SourcePropertyLike = SourceProperty | SourcePropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -40,13 +54,29 @@ export default class SourceProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: SourcePropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as SourcePropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a SourcePropertyConfig or string type`);
     }
 
     toString() {
-        return `SOURCE:${this.valueOf()}`;
+        return `SOURCE${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
@@ -56,7 +86,7 @@ export default class SourceProperty extends Property {
     static factory(value: SourcePropertyLike): SourceProperty {
         if (value instanceof SourceProperty) return value;
 
-        if (typeof value === 'string') return new SourceProperty(value);
+        if (isPlainObject(value) || isString(value)) return new SourceProperty(value);
 
         throw new TypeError(`The value "${value}" is not a SourcePropertyLike type`);
     }
