@@ -233,12 +233,12 @@ To-Do
     - [ ] `PREF` Parameter
     - [ ] `ALTID` Parameter
   - [x] `TITLE`
-    - [ ] Value Escaping
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `TYPE` Parameter
+    - [x] Value Escaping
+    - [x] `LANGUAGE` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `TZ`
     - [ ] Value Escaping
     - [ ] `ALTID` Parameter

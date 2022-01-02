@@ -23,6 +23,17 @@ describe('TitleProperty', () => {
 
             expect(title.toString()).to.equal(`TITLE:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1 };
+            const value = 'Research Scientist';
+            const config = { parameters, value };
+            const title = new TitleProperty(config);
+            const actual = title.toString();
+            const expected = 'TITLE;PREF=1:Research Scientist';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
