@@ -1,7 +1,22 @@
+import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type TzPropertyLike = TzProperty | string;
+export interface TzParameters {
+    altid?: number | string;
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+}
+
+export interface TzPropertyConfig {
+    value: string;
+    parameters?: TzParameters;
+}
+
+export type TzPropertyLike = TzProperty | TzPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -48,13 +63,29 @@ export default class TzProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: TzPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as TzPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a TzPropertyConfig or string type`);
     }
 
     toString() {
-        return `TZ:${this.valueOf()}`;
+        return `TZ${this.getParametersString()}:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {
@@ -64,7 +95,7 @@ export default class TzProperty extends Property {
     static factory(value: TzPropertyLike): TzProperty {
         if (value instanceof TzProperty) return value;
 
-        if (typeof value === 'string') return new TzProperty(value);
+        if (isPlainObject(value) || isString(value)) return new TzProperty(value);
 
         throw new TypeError(`The value "${value}" is not a TzPropertyLike type`);
     }

@@ -240,12 +240,12 @@ To-Do
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `TZ`
-    - [ ] Value Escaping
-    - [ ] `ALTID` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `TYPE` Parameter
-    - [ ] `MEDIATYPE` Parameter
+    - [x] Value Escaping _(for `text` type only)_
+    - [x] `ALTID` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
+    - [x] `MEDIATYPE` Parameter
   - [x] `UID`
     - [ ] Value Escaping
     - [x] No Parameters

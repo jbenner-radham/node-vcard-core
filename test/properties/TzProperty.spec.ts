@@ -23,6 +23,17 @@ describe('TzProperty', () => {
 
             expect(tz.toString()).to.equal(`TZ:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1 };
+            const value = 'Raleigh/North America';
+            const config = { parameters, value };
+            const tz = new TzProperty(config);
+            const actual = tz.toString();
+            const expected = 'TZ;PREF=1:Raleigh/North America';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
