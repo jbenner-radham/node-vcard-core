@@ -2,8 +2,13 @@ import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface ProdidParameters {
+    [key: string]: never;
+}
+
 export interface ProdidPropertyConfig {
     value: string;
+    parameters?: ProdidParameters;
 }
 
 export type ProdidPropertyLike = ProdidProperty | ProdidPropertyConfig | string;
