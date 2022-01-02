@@ -23,6 +23,16 @@ describe('ProdidProperty', () => {
 
             expect(prodid.toString()).to.equal(`PRODID:${value}`);
         });
+
+        it('accepts an object argument to the constructor', () => {
+            const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
+            const config = { value };
+            const prodid = new ProdidProperty(config);
+            const actual = prodid.toString();
+            const expected = 'PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

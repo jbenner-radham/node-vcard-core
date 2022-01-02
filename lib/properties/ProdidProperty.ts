@@ -1,7 +1,12 @@
+import isPlainObject from 'lodash.isplainobject';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type ProdidPropertyLike = ProdidProperty | string;
+export interface ProdidPropertyConfig {
+    value: string;
+}
+
+export type ProdidPropertyLike = ProdidProperty | ProdidPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -30,9 +35,23 @@ export default class ProdidProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: ProdidPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value } = config as ProdidPropertyConfig;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a ProdidPropertyConfig or string type`);
     }
 
     toString() {
