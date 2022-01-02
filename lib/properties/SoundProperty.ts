@@ -1,8 +1,24 @@
+import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface SoundParameters {
+    language?: string;
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    type?: 'home' | 'work' | string;
+    mediatype?: string;
+    altid?: number | string;
+}
+
+export interface SoundPropertyConfig {
+    value: string;
+    parameters?: SoundParameters;
+}
+
 /** @todo Add URL type support. */
-export type SoundPropertyLike = SoundProperty | string;
+export type SoundPropertyLike = SoundProperty | SoundPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -35,13 +51,29 @@ export default class SoundProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: SoundPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as SoundPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a SoundPropertyConfig or string type`);
     }
 
     toString() {
-        return `SOUND:${this.valueOf()}`;
+        return `SOUND${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
@@ -51,7 +83,7 @@ export default class SoundProperty extends Property {
     static factory(value: SoundPropertyLike): SoundProperty {
         if (value instanceof SoundProperty) return value;
 
-        if (typeof value === 'string') return new SoundProperty(value);
+        if (isPlainObject(value) || isString(value)) return new SoundProperty(value);
 
         throw new TypeError(`The value "${value}" is not a SoundPropertyLike type`);
     }

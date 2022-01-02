@@ -23,6 +23,17 @@ describe('SoundProperty', () => {
 
             expect(sound.toString()).to.equal(`SOUND:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { type: 'home' as const };
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const config = { parameters, value };
+            const sound = new SoundProperty(config);
+            const actual = sound.toString();
+            const expected = 'SOUND;TYPE=home:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
