@@ -194,7 +194,7 @@ To-Do
     - [x] Value Escaping
     - [x] No Parameters
   - [ ] `RELATED`
-    - [ ] Value Escaping
+    - [ ] Value Escaping _(for `text` type only)_
     - [ ] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [ ] `LANGUAGE` Parameter _(for `text` type only)_
     - [ ] `PID` Parameter
