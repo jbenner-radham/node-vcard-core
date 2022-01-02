@@ -191,7 +191,7 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `PID` Parameter
   - [x] `PRODID`
-    - [ ] Value Escaping
+    - [x] Value Escaping
     - [x] No Parameters
   - [ ] `RELATED`
     - [ ] Value Escaping

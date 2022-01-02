@@ -36,7 +36,7 @@ export default class ProdidProperty extends Property {
     }
 
     toString() {
-        return `PRODID:${this.valueOf()}`;
+        return `PRODID:${this.getEscapedValueString()}`;
     }
 
     valueOf(): string {
