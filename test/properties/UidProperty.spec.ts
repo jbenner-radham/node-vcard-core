@@ -23,6 +23,16 @@ describe('UidProperty', () => {
 
             expect(uid.toString()).to.equal(`UID:${value}`);
         });
+
+        it('accepts an object argument to the constructor', () => {
+            const value = 'urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
+            const config = { value };
+            const uid = new UidProperty(config);
+            const actual = uid.toString();
+            const expected = 'UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

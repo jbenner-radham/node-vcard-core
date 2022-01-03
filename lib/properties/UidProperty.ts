@@ -1,7 +1,18 @@
+import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type UidPropertyLike = UidProperty | string;
+export interface UidParameters {
+    [key: string]: never;
+}
+
+export interface UidPropertyConfig {
+    value: string;
+    parameters?: UidParameters;
+}
+
+export type UidPropertyLike = UidProperty | UidPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -40,9 +51,25 @@ export default class UidProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: UidPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as UidPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a UidPropertyConfig or string type`);
     }
 
     toString() {
@@ -56,7 +83,7 @@ export default class UidProperty extends Property {
     static factory(value: UidPropertyLike): UidProperty {
         if (value instanceof UidProperty) return value;
 
-        if (typeof value === 'string') return new UidProperty(value);
+        if (isPlainObject(value) || isString(value)) return new UidProperty(value);
 
         throw new TypeError(`The value "${value}" is not a UidPropertyLike type`);
     }

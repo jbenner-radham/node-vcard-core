@@ -247,7 +247,7 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `UID`
-    - [ ] Value Escaping
+    - [x] No Value Escaping
     - [x] No Parameters
   - [x] `URL`
     - [ ] Value Escaping
