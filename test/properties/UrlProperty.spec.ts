@@ -23,6 +23,17 @@ describe('UrlProperty', () => {
 
             expect(url.toString()).to.equal(`URL:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { type: 'work' as const };
+            const value = 'http://example.org/restaurant.french/~chezchic.html';
+            const config = { parameters, value };
+            const url = new UrlProperty(config);
+            const actual = url.toString();
+            const expected = `URL;TYPE=work:${value}`;
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
