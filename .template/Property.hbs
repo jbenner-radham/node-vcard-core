@@ -1,7 +1,29 @@
+import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
-export type {{{capitalize property}}}PropertyLike = {{{capitalize property}}}Property | string;
+export interface {{{capitalize property}}}Parameters {
+    [key: string]: never;
+    altid?: number | string;
+    calscale?: 'gregorian'; // For `date-and-or-time` type only!
+    geo?: string;
+    label?: string;
+    language?: string;
+    mediatype?: string;
+    pid?: number | number[];
+    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    sortAs?: string;
+    type?: 'home' | 'work';
+    tz?: string;
+}
+
+export interface {{{capitalize property}}}PropertyConfig {
+    value: string;
+    parameters?: {{{capitalize property}}}Parameters;
+}
+
+export type {{{capitalize property}}}PropertyLike = {{{capitalize property}}}Property | {{{capitalize property}}}PropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -25,13 +47,29 @@ export default class {{{capitalize property}}}Property extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string) {
+    constructor(config: {{{capitalize property}}}PropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as {{{capitalize property}}}PropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (typeof config === 'string') {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a {{{capitalize property}}}PropertyConfig or string type`);
     }
 
     toString() {
-        return `{{{upperCase property}}}:${this.valueOf()}`;
+        return `{{{upperCase property}}}${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
@@ -41,7 +79,7 @@ export default class {{{capitalize property}}}Property extends Property {
     static factory(value: {{{capitalize property}}}PropertyLike): {{{capitalize property}}}Property {
         if (value instanceof {{{capitalize property}}}Property) return value;
 
-        if (typeof value === 'string') return new {{{capitalize property}}}Property(value);
+        if (isPlainObject(value) || isString(value)) return new {{{capitalize property}}}Property(value);
 
         throw new TypeError(`The value "${value}" is not a {{{capitalize property}}}PropertyLike type`);
     }
