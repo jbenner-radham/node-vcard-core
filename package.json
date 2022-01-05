@@ -27,6 +27,7 @@
     "lint": "eslint lib test",
     "lint:fix": "eslint --fix  lib test",
     "make:property": "node ./scripts/make-property.cjs",
+    "print:property": "node ./scripts/print-property.cjs",
     "prepare": "husky install",
     "sort:pkg": "sort-package-json",
     "test": "mocha test/**",
