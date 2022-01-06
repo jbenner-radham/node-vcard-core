@@ -131,11 +131,11 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `KEY`
     - [ ] Value Escaping _(for `text` type only)_
-    - [ ] `MEDIATYPE` Parameter _(for `URI` type only)_
-    - [ ] `ALTID` Parameter _(for `text` type only)_
-    - [ ] `PID` Parameter _(for `text` type only)_
-    - [ ] `PREF` Parameter _(for `text` type only)_
-    - [ ] `TYPE` Parameter _(for `text` type only)_
+    - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
+    - [x] `ALTID` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `TYPE` Parameter
   - [x] `KIND`
     - [x] Value Escaping
     - [x] No Parameters

@@ -23,6 +23,17 @@ describe('KeyProperty', () => {
 
             expect(key.toString()).to.equal(`KEY:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { mediatype: 'application/pgp-keys' };
+            const value = 'ftp://example.com/keys/jdoe';
+            const config = { parameters, value };
+            const key = new KeyProperty(config);
+            const actual = key.toString();
+            const expected = `KEY;MEDIATYPE=application/pgp-keys:${value}`;
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
