@@ -87,9 +87,10 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
     - [ ] Implement Constructor `Array` Argument Support
-  - [ ] `CLIENTPIDMAP`
-    - [ ] Value Escaping
+  - [x] `CLIENTPIDMAP`
+    - [x] No Value Escaping
     - [x] No Parameters
+    - [ ] Implement Constructor `Array` Argument Support
   - [x] `EMAIL`
     - [x] Value Escaping
     - [x] `PID` Parameter

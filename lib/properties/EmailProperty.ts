@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
@@ -82,7 +83,7 @@ export default class EmailProperty extends Property {
     static factory(value: EmailPropertyLike): EmailProperty {
         if (value instanceof EmailProperty) return value;
 
-        if (typeof value === 'string') return new EmailProperty(value);
+        if (isPlainObject(value) || isString(value)) return new EmailProperty(value);
 
         throw new TypeError(`The value "${value}" is not a EmailPropertyLike type`);
     }

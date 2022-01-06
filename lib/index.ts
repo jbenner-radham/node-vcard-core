@@ -8,6 +8,8 @@ import CaluriProperty, { CaluriPropertyLike } from './properties/CaluriProperty'
 import CaluriPropertyArray from './properties/arrays/CaluriPropertyArray';
 import CategoriesProperty, { CategoriesPropertyLike } from './properties/CategoriesProperty';
 import CategoriesPropertyArray from './properties/arrays/CategoriesPropertyArray';
+import ClientpidmapProperty, { ClientpidmapPropertyLike } from './properties/ClientpidmapProperty';
+import ClientpidmapPropertyArray from './properties/arrays/ClientpidmapPropertyArray';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FburlProperty, { FburlPropertyLike } from './properties/FburlProperty';
@@ -64,6 +66,7 @@ export interface VcardConfig {
     caluri?: CaluriPropertyLike;
     caladruri?: CaladruriPropertyLike;
     categories?: CategoriesPropertyLike;
+    clientpidmap?: ClientpidmapPropertyLike;
     email?: EmailPropertyLike;
     fburl?: FburlPropertyLike;
     fn: FnPropertyLike;
@@ -106,6 +109,8 @@ export default class Vcard {
     caladruri: CaladruriPropertyArray;
 
     categories: CategoriesPropertyArray;
+
+    clientpidmap: ClientpidmapPropertyArray;
 
     email: EmailPropertyArray;
 
@@ -167,6 +172,7 @@ export default class Vcard {
             caluri,
             caladruri,
             categories,
+            clientpidmap,
             email,
             fburl,
             fn,
@@ -198,6 +204,7 @@ export default class Vcard {
         this.caluri = new CaluriPropertyArray();
         this.caladruri = new CaladruriPropertyArray();
         this.categories = new CategoriesPropertyArray();
+        this.clientpidmap = new ClientpidmapPropertyArray();
         this.email = new EmailPropertyArray();
         this.fburl = new FburlPropertyArray();
         this.fn = new FnPropertyArray();
@@ -221,6 +228,7 @@ export default class Vcard {
         caluri && this.caluri.push(caluri);
         caladruri && this.caladruri.push(caladruri);
         categories && this.categories.push(categories);
+        clientpidmap && this.clientpidmap.push(clientpidmap);
         email && this.email.push(email);
         fburl && this.fburl.push(fburl);
         fn && this.fn.push(fn);
@@ -261,6 +269,7 @@ export default class Vcard {
             ...this.caluri.map(toString),
             ...this.caladruri.map(toString),
             ...this.categories.map(toString),
+            ...this.clientpidmap.map(toString),
             ...this.email.map(toString),
             ...this.fburl.map(toString),
             ...this.fn.map(toString),
@@ -318,6 +327,9 @@ export default class Vcard {
 
         if (!this.categories.every(categories => categories instanceof CategoriesProperty))
             throw new TypeError('The CATEGORIES property is invalid');
+
+        if (!this.clientpidmap.every(clientpidmap => clientpidmap instanceof ClientpidmapProperty))
+            throw new TypeError('One or more CLIENTPIDMAP properties are invalid');
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');

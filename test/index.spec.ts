@@ -116,6 +116,26 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a CLIENTPIDMAP property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const email = { parameters: { pid: [4.1, 5.2] }, value: 'jdoe@example.com' };
+                const clientpidmap = '2;urn:uuid:d89c9c7a-2e1b-4832-82de-7e992d95faa5';
+                const vcard = new Vcard({ clientpidmap, email, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `CLIENTPIDMAP:${clientpidmap}`,
+                    `EMAIL;PID=4.1,5.2:${email.value}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a BDAY property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';
