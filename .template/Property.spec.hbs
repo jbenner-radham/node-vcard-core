@@ -23,6 +23,17 @@ describe('{{{capitalize property}}}Property', () => {
 
             expect({{{lowerCase property}}}.toString()).to.equal(`{{{upperCase property}}}:${value}`);
         });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1 };
+            const value = '...';
+            const config = { parameters, value };
+            const {{{lowerCase property}}} = new {{{capitalize property}}}Property(config);
+            const actual = {{{lowerCase property}}}.toString();
+            const expected = `{{{upperCase property}}};PREF=1:${value}`;
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {
