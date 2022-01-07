@@ -226,13 +226,13 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `MEDIATYPE` Parameter
-  - [ ] `TEL`
-    - [ ] Value Escaping
-    - [ ] `MEDIATYPE` Parameter _(for `URI` type only)_
-    - [ ] `TYPE` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
+  - [x] `TEL`
+    - [x] Value Escaping _(for `text` type only)_
+    - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
+    - [x] `TYPE` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
   - [x] `TITLE`
     - [x] Value Escaping
     - [x] `LANGUAGE` Parameter

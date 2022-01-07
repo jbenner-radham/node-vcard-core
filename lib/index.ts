@@ -49,6 +49,8 @@ import SoundProperty, { SoundPropertyLike } from './properties/SoundProperty';
 import SoundPropertyArray from './properties/arrays/SoundPropertyArray';
 import SourceProperty, { SourcePropertyLike } from './properties/SourceProperty';
 import SourcePropertyArray from './properties/arrays/SourcePropertyArray';
+import TelProperty, { TelPropertyLike } from './properties/TelProperty';
+import TelPropertyArray from './properties/arrays/TelPropertyArray';
 import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray';
 import TzProperty, { TzPropertyLike } from './properties/TzProperty';
@@ -88,6 +90,7 @@ export interface VcardConfig {
     role?: RolePropertyLike;
     sound?: SoundPropertyLike;
     source?: SourcePropertyLike;
+    tel?: TelPropertyLike;
     title?: TitlePropertyLike;
     tz?: TzPropertyLike;
     uid?: UidPropertyLike;
@@ -154,6 +157,8 @@ export default class Vcard {
 
     source: SourcePropertyArray;
 
+    tel: TelPropertyArray;
+
     title: TitlePropertyArray;
 
     tz: TzPropertyArray;
@@ -194,6 +199,7 @@ export default class Vcard {
             role,
             sound,
             source,
+            tel,
             title,
             tz,
             uid,
@@ -221,6 +227,7 @@ export default class Vcard {
         this.role = new RolePropertyArray();
         this.sound = new SoundPropertyArray();
         this.source = new SourcePropertyArray();
+        this.tel = new TelPropertyArray();
         this.title = new TitlePropertyArray();
         this.tz = new TzPropertyArray();
         this.url = new UrlPropertyArray();
@@ -245,6 +252,7 @@ export default class Vcard {
         role && this.role.push(role);
         sound && this.sound.push(sound);
         source && this.source.push(source);
+        tel && this.tel.push(tel);
         title && this.title.push(title);
         tz && this.tz.push(tz);
         url && this.url.push(url);
@@ -291,6 +299,7 @@ export default class Vcard {
             ...this.role.map(toString),
             ...this.sound.map(toString),
             ...this.source.map(toString),
+            ...this.tel.map(toString),
             ...this.title.map(toString),
             ...this.tz.map(toString),
             this.uid.toString(),
@@ -384,6 +393,9 @@ export default class Vcard {
 
         if (!this.source.every(source => source instanceof SourceProperty))
             throw new TypeError('One or more SOURCE properties are invalid');
+
+        if (!this.tel.every(tel => tel instanceof TelProperty))
+            throw new TypeError('One or more TEL properties are invalid');
 
         if (!this.title.every(title => title instanceof TitleProperty))
             throw new TypeError('One or more TITLE properties are invalid');

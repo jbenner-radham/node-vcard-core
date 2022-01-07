@@ -462,6 +462,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a TEL property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const tel = '+1-555-555-5555';
+                const vcard = new Vcard({ fn, tel });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `TEL:${tel}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a TITLE property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Captain Awesome';
