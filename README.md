@@ -46,6 +46,7 @@ To-Do
 -----
 - [ ] Properties
   - [x] `ADR`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `LABEL` Parameter
     - [x] `LANGUAGE` Parameter
@@ -56,10 +57,12 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
   - [x] `ANNIVERSARY`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `ALTID` Parameter
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
   - [x] `BDAY`
+    - [ ] Line Folding
     - [ ] Value Escaping _(for `text` type only)_
     - [x] `ALTID` Parameter
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
@@ -67,6 +70,7 @@ To-Do
   - [x] `BEGIN`
     - [x] No Parameters
   - [x] `CALADRURI`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -74,6 +78,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `CALURI`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -81,6 +86,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `CATEGORIES`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -88,10 +94,12 @@ To-Do
     - [x] `ALTID` Parameter
     - [ ] Implement Constructor `Array` Argument Support
   - [x] `CLIENTPIDMAP`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] No Parameters
     - [ ] Implement Constructor `Array` Argument Support
   - [x] `EMAIL`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -100,12 +108,14 @@ To-Do
   - [x] `END`
     - [x] No Parameters
   - [x] `FBURL`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `FN`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `TYPE` Parameter
     - [x] `LANGUAGE` Parameter
@@ -113,10 +123,12 @@ To-Do
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
   - [x] `GENDER`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] No Parameters
     - [ ] Implement Constructor `Array` Argument Support
   - [x] `GEO`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -124,6 +136,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `IMPP`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -131,6 +144,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `KEY`
+    - [ ] Line Folding
     - [ ] Value Escaping _(for `text` type only)_
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `ALTID` Parameter
@@ -141,12 +155,14 @@ To-Do
     - [x] Value Escaping
     - [x] No Parameters
   - [x] `LANG`
+    - [ ] Line Folding?
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `LOGO`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -155,17 +171,20 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `MEMBER`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `N`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `SORT-AS` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `ALTID` Parameter
   - [x] `NICKNAME`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `TYPE` Parameter
     - [x] `LANGUAGE` Parameter
@@ -173,6 +192,7 @@ To-Do
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
   - [x] `NOTE`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -180,12 +200,14 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `ORG`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `SORT-AS` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
     - [x] `TYPE` Parameter
   - [x] `PHOTO`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
@@ -193,9 +215,11 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `PID` Parameter
   - [x] `PRODID`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] No Parameters
   - [x] `RELATED`
+    - [ ] Line Folding
     - [ ] Value Escaping _(for `text` type only)_
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
@@ -204,9 +228,11 @@ To-Do
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `REV`
+    - [ ] Line Folding?
     - [x] No Value Escaping
     - [x] No Parameters
   - [x] `ROLE`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -214,6 +240,7 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `SOUND`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -222,12 +249,14 @@ To-Do
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `SOURCE`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `TEL`
+    - [ ] Line Folding
     - [x] Value Escaping _(for `text` type only)_
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `TYPE` Parameter
@@ -235,6 +264,7 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
   - [x] `TITLE`
+    - [ ] Line Folding
     - [x] Value Escaping
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -242,6 +272,7 @@ To-Do
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `TZ`
+    - [ ] Line Folding
     - [x] Value Escaping _(for `text` type only)_
     - [x] `ALTID` Parameter
     - [x] `PID` Parameter
@@ -249,9 +280,11 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `UID`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] No Parameters
   - [x] `URL`
+    - [ ] Line Folding
     - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
