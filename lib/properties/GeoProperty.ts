@@ -1,11 +1,12 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface GeoParameters {
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work' | string;
+    type?: Type;
     mediatype?: string;
     altid?: number | string;
 }
@@ -54,7 +55,7 @@ export default class GeoProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -75,7 +76,7 @@ export default class GeoProperty extends Property {
     static factory(value: GeoPropertyLike): GeoProperty {
         if (value instanceof GeoProperty) return value;
 
-        if (typeof value === 'string') return new GeoProperty(value);
+        if (isPlainObject(value) || isString(value)) return new GeoProperty(value);
 
         throw new TypeError(`The value "${value}" is not a GeoPropertyLike type`);
     }

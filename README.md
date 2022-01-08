@@ -56,25 +56,25 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
   - [x] `ANNIVERSARY`
-    - [x] Value Escaping
+    - [x] No Value Escaping
     - [x] `ALTID` Parameter
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
   - [x] `BDAY`
-    - [x] Value Escaping
+    - [ ] Value Escaping _(for `text` type only)_
     - [x] `ALTID` Parameter
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
   - [x] `BEGIN`
     - [x] No Parameters
   - [x] `CALADRURI`
-    - [x] Value Escaping
+    - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `CALURI`
-    - [x] Value Escaping
+    - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
@@ -100,7 +100,7 @@ To-Do
   - [x] `END`
     - [x] No Parameters
   - [x] `FBURL`
-    - [x] Value Escaping
+    - [x] No Value Escaping
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
@@ -115,6 +115,7 @@ To-Do
   - [x] `GENDER`
     - [x] Value Escaping
     - [x] No Parameters
+    - [ ] Implement Constructor `Array` Argument Support
   - [x] `GEO`
     - [x] No Value Escaping
     - [x] `PID` Parameter
@@ -194,7 +195,7 @@ To-Do
   - [x] `PRODID`
     - [x] Value Escaping
     - [x] No Parameters
-  - [ ] `RELATED`
+  - [x] `RELATED`
     - [ ] Value Escaping _(for `text` type only)_
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
@@ -262,18 +263,6 @@ To-Do
   - [ ] `XML`
     - [ ] Value Escaping
     - [ ] `ALTID` Parameter
-- [ ] Parameters
-  - [ ] `ALTID`
-  - [ ] `CALSCALE`
-  - [ ] `GEO`
-  - [ ] `LANGUAGE`
-  - [ ] `MEDIATYPE`
-  - [ ] `PID`
-  - [ ] `PREF`
-  - [ ] `SORT-AS`
-  - [ ] `TYPE`
-  - [ ] `TZ`
-  - [ ] `VALUE`
 
 Reference
 ---------

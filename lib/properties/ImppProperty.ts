@@ -1,11 +1,12 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface ImppParameters {
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work' | string;
+    type?: Type;
     mediatype?: string;
     altid?: number | string;
 }
@@ -61,7 +62,7 @@ export default class ImppProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -82,7 +83,7 @@ export default class ImppProperty extends Property {
     static factory(value: ImppPropertyLike): ImppProperty {
         if (value instanceof ImppProperty) return value;
 
-        if (typeof value === 'string') return new ImppProperty(value);
+        if (isPlainObject(value) || isString(value)) return new ImppProperty(value);
 
         throw new TypeError(`The value "${value}" is not a ImppPropertyLike type`);
     }

@@ -1,12 +1,13 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface RoleParameters {
     language?: string;
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work' | string;
+    type?: Type;
     altid?: number | string;
 }
 
@@ -57,7 +58,7 @@ export default class RoleProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -78,7 +79,7 @@ export default class RoleProperty extends Property {
     static factory(value: RolePropertyLike): RoleProperty {
         if (value instanceof RoleProperty) return value;
 
-        if (typeof value === 'string') return new RoleProperty(value);
+        if (isPlainObject(value) || isString(value)) return new RoleProperty(value);
 
         throw new TypeError(`The value "${value}" is not a RolePropertyLike type`);
     }

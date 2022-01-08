@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
@@ -157,7 +158,7 @@ export default class AdrProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.validate(config);
             this.parameters = {};
             this[VALUE] = config;
@@ -190,7 +191,7 @@ export default class AdrProperty extends Property {
     static factory(value: AdrPropertyLike): AdrProperty {
         if (value instanceof AdrProperty) return value;
 
-        if (typeof value === 'string') return new AdrProperty(value);
+        if (isPlainObject(value) || isString(value)) return new AdrProperty(value);
 
         throw new TypeError(`The value "${value}" is not a AdrPropertyLike type`);
     }

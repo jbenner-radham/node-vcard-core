@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
@@ -65,7 +66,7 @@ export default class BdayProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -76,11 +77,7 @@ export default class BdayProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
-
-        return `BDAY${value}`;
+        return `BDAY${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
@@ -90,7 +87,7 @@ export default class BdayProperty extends Property {
     static factory(value: BdayPropertyLike): BdayProperty {
         if (value instanceof BdayProperty) return value;
 
-        if (typeof value === 'string') return new BdayProperty(value);
+        if (isPlainObject(value) || isString(value)) return new BdayProperty(value);
 
         throw new TypeError(`The value "${value}" is not a BdayPropertyLike type`);
     }

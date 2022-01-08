@@ -1,12 +1,13 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface LangParameters {
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
     altid?: number | string;
-    type?: 'home' | 'work' | string;
+    type?: Type;
 }
 
 export interface LangPropertyConfig {
@@ -53,7 +54,7 @@ export default class LangProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -74,7 +75,7 @@ export default class LangProperty extends Property {
     static factory(value: LangPropertyLike): LangProperty {
         if (value instanceof LangProperty) return value;
 
-        if (typeof value === 'string') return new LangProperty(value);
+        if (isPlainObject(value) || isString(value)) return new LangProperty(value);
 
         throw new TypeError(`The value "${value}" is not a LangPropertyLike type`);
     }

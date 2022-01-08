@@ -1,11 +1,12 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface CaladruriParameters {
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work' | string;
+    type?: Type;
     mediatype?: string;
     altid?: number | string;
 }
@@ -60,7 +61,7 @@ export default class CaladruriProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -71,11 +72,7 @@ export default class CaladruriProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
-
-        return `CALADRURI${value}`;
+        return `CALADRURI${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
@@ -85,7 +82,7 @@ export default class CaladruriProperty extends Property {
     static factory(value: CaladruriPropertyLike): CaladruriProperty {
         if (value instanceof CaladruriProperty) return value;
 
-        if (typeof value === 'string') return new CaladruriProperty(value);
+        if (isPlainObject(value) || isString(value)) return new CaladruriProperty(value);
 
         throw new TypeError(`The value "${value}" is not a CaladruriPropertyLike type`);
     }

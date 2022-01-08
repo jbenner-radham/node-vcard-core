@@ -32,12 +32,10 @@ export default abstract class Property {
     }
 
     getEscapedValueString(): string {
-        const value = this
+        return this
             .components()
             .map(escapePropertyValue)
             .join(this.COMPONENT_SEPARATOR);
-
-        return value;
     }
 
     getValue(): string {
