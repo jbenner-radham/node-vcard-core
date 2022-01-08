@@ -42,6 +42,8 @@ import OrgPropertyArray from './properties/arrays/OrgPropertyArray';
 import PhotoProperty, { PhotoPropertyLike } from './properties/PhotoProperty';
 import PhotoPropertyArray from './properties/arrays/PhotoPropertyArray';
 import ProdidProperty, { ProdidPropertyLike } from './properties/ProdidProperty';
+import RelatedProperty, { RelatedPropertyLike } from './properties/RelatedProperty';
+import RelatedPropertyArray from './properties/arrays/RelatedPropertyArray';
 import RevProperty, { RevPropertyLike } from './properties/RevProperty';
 import RoleProperty, { RolePropertyLike } from './properties/RoleProperty';
 import RolePropertyArray from './properties/arrays/RolePropertyArray';
@@ -86,6 +88,7 @@ export interface VcardConfig {
     org?: OrgPropertyLike;
     photo?: PhotoPropertyLike;
     prodid?: ProdidPropertyLike;
+    related?: RelatedPropertyLike;
     rev?: RevPropertyLike;
     role?: RolePropertyLike;
     sound?: SoundPropertyLike;
@@ -149,6 +152,8 @@ export default class Vcard {
 
     prodid: ProdidPropertyLike | NullProperty;
 
+    related: RelatedPropertyArray;
+
     rev: RevPropertyLike | NullProperty;
 
     role: RolePropertyArray;
@@ -195,6 +200,7 @@ export default class Vcard {
             org,
             photo,
             prodid,
+            related,
             rev,
             role,
             sound,
@@ -224,6 +230,7 @@ export default class Vcard {
         this.note = new NotePropertyArray();
         this.org = new OrgPropertyArray();
         this.photo = new PhotoPropertyArray();
+        this.related = new RelatedPropertyArray();
         this.role = new RolePropertyArray();
         this.sound = new SoundPropertyArray();
         this.source = new SourcePropertyArray();
@@ -249,6 +256,7 @@ export default class Vcard {
         note && this.note.push(note);
         org && this.org.push(org);
         photo && this.photo.push(photo);
+        related && this.related.push(related);
         role && this.role.push(role);
         sound && this.sound.push(sound);
         source && this.source.push(source);
@@ -295,6 +303,7 @@ export default class Vcard {
             ...this.org.map(toString),
             ...this.photo.map(toString),
             this.prodid.toString(),
+            ...this.related.map(toString),
             this.rev.toString(),
             ...this.role.map(toString),
             ...this.sound.map(toString),
@@ -381,6 +390,9 @@ export default class Vcard {
 
         if (!(this.prodid instanceof ProdidProperty))
             throw new TypeError('The PRODID property is invalid');
+
+        if (!this.related.every(related => related instanceof RelatedProperty))
+            throw new TypeError('One or more RELATED properties are invalid');
 
         if (!(this.rev instanceof RevProperty))
             throw new TypeError('The REV property is invalid');

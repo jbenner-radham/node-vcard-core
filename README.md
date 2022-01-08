@@ -196,12 +196,12 @@ To-Do
     - [x] No Parameters
   - [ ] `RELATED`
     - [ ] Value Escaping _(for `text` type only)_
-    - [ ] `MEDIATYPE` Parameter _(for `URI` type only)_
-    - [ ] `LANGUAGE` Parameter _(for `text` type only)_
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `TYPE` Parameter
+    - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
+    - [x] `LANGUAGE` Parameter _(for `text` type only)_
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `REV`
     - [x] No Value Escaping
     - [x] No Parameters

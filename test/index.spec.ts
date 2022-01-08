@@ -390,6 +390,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a RELATED property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const related = 'urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
+                const vcard = new Vcard({ fn, related });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `RELATED:${related}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a REV property', () => {
             it('returns the proper string format', () => {
                 const fn = 'J. Doe';
