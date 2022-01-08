@@ -1,11 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
 import isString from '../util/is-string';
-import { Cardinality } from '../types';
+import { Calscale, Cardinality } from '../types';
 import Property from './Property';
 
 export interface AnniversaryParameters {
     altid?: number | string;
-    calscale?: 'gregorian'; // For `date-and-or-time` type only!
+    calscale?: Calscale; // For `date-and-or-time` type only!
 }
 
 export interface AnniversaryPropertyConfig {
