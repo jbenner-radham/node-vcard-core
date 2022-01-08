@@ -338,13 +338,13 @@ export default class Vcard {
             throw new TypeError('The BDAY property is invalid');
 
         if (!this.caluri.every(caluri => caluri instanceof CaluriProperty))
-            throw new TypeError('The CALURI property is invalid');
+            throw new TypeError('One or more CALURI properties are invalid');
 
         if (!this.caladruri.every(caladruri => caladruri instanceof CaladruriProperty))
-            throw new TypeError('The CALADRURI property is invalid');
+            throw new TypeError('One or more CALADRURI properties are invalid');
 
         if (!this.categories.every(categories => categories instanceof CategoriesProperty))
-            throw new TypeError('The CATEGORIES property is invalid');
+            throw new TypeError('One or more CATEGORIES properties are invalid');
 
         if (!this.clientpidmap.every(clientpidmap => clientpidmap instanceof ClientpidmapProperty))
             throw new TypeError('One or more CLIENTPIDMAP properties are invalid');
