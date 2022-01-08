@@ -1,9 +1,10 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface NicknameParameters {
-    type?: 'home' | 'work' | string;
+    type?: Type;
     language?: string;
     altid?: number | string;
     pid?: number | number[];
@@ -56,7 +57,7 @@ export default class NicknameProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -77,7 +78,7 @@ export default class NicknameProperty extends Property {
     static factory(value: NicknamePropertyLike): NicknameProperty {
         if (value instanceof NicknameProperty) return value;
 
-        if (typeof value === 'string') return new NicknameProperty(value);
+        if (isPlainObject(value) || isString(value)) return new NicknameProperty(value);
 
         throw new TypeError(`The value "${value}" is not a NicknamePropertyLike type`);
     }

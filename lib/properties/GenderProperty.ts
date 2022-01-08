@@ -1,10 +1,21 @@
+import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
 
 export type Sex = '' | 'F' | 'M' | 'N' | 'O' | 'U';
 
-export type GenderPropertyLike = GenderProperty | string;
+export interface GenderParameters {
+    [key: string]: never;
+}
+
+export interface GenderPropertyConfig {
+    value: string;
+    parameters?: GenderParameters;
+}
+
+export type GenderPropertyLike = GenderProperty | GenderPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -57,9 +68,25 @@ export default class GenderProperty extends Property {
         return genderIdentity;
     }
 
-    constructor(value: string) {
+    constructor(config: GenderPropertyConfig | string) {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as GenderPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (isString(config)) {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a GenderPropertyConfig or string type`);
     }
 
     toString() {
@@ -86,7 +113,7 @@ export default class GenderProperty extends Property {
     static factory(value: GenderPropertyLike): GenderProperty {
         if (value instanceof GenderProperty) return value;
 
-        if (typeof value === 'string') return new GenderProperty(value);
+        if (isPlainObject(value) || isString(value)) return new GenderProperty(value);
 
         throw new TypeError(`The value "${value}" is not a GenderPropertyLike type`);
     }

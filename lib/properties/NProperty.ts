@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
@@ -98,7 +99,7 @@ export default class NProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this.validate(config);
             this[VALUE] = config;
@@ -127,7 +128,7 @@ export default class NProperty extends Property {
     static factory(value: NPropertyLike): NProperty {
         if (value instanceof NProperty) return value;
 
-        if (typeof value === 'string') return new NProperty(value);
+        if (isPlainObject(value) || isString(value)) return new NProperty(value);
 
         throw new TypeError(`The value "${value}" is not a NPropertyLike type`);
     }

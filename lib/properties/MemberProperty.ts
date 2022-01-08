@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
@@ -80,7 +81,7 @@ export default class MemberProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -101,7 +102,7 @@ export default class MemberProperty extends Property {
     static factory(value: MemberPropertyLike): MemberProperty {
         if (value instanceof MemberProperty) return value;
 
-        if (typeof value === 'string') return new MemberProperty(value);
+        if (isPlainObject(value) || isString(value)) return new MemberProperty(value);
 
         throw new TypeError(`The value "${value}" is not a MemberPropertyLike type`);
     }

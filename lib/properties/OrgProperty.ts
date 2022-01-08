@@ -1,5 +1,6 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface OrgParameters {
@@ -8,7 +9,7 @@ export interface OrgParameters {
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
     altid?: number | string;
-    type?: 'home' | 'work' | string;
+    type?: Type;
 }
 
 export interface OrgPropertyConfig {
@@ -65,7 +66,7 @@ export default class OrgProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -90,7 +91,7 @@ export default class OrgProperty extends Property {
     static factory(value: OrgPropertyLike): OrgProperty {
         if (value instanceof OrgProperty) return value;
 
-        if (typeof value === 'string') return new OrgProperty(value);
+        if (isPlainObject(value) || isString(value)) return new OrgProperty(value);
 
         throw new TypeError(`The value "${value}" is not a OrgPropertyLike type`);
     }

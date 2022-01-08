@@ -1,9 +1,15 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
+export interface KindParameters {
+    [key: string]: never;
+}
+
 export interface KindPropertyConfig {
     value: string;
+    parameters?: KindParameters;
 }
 
 export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
@@ -150,7 +156,7 @@ export default class KindProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this[VALUE] = config;
 
             return;
@@ -170,7 +176,7 @@ export default class KindProperty extends Property {
     static factory(value: KindPropertyLike): KindProperty {
         if (value instanceof KindProperty) return value;
 
-        if (typeof value === 'string') return new KindProperty(value);
+        if (isPlainObject(value) || isString(value)) return new KindProperty(value);
 
         throw new TypeError(`The value "${value}" is not a KindPropertyLike type`);
     }

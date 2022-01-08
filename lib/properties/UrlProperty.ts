@@ -1,12 +1,12 @@
 import isPlainObject from 'lodash.isplainobject';
 import isString from '../util/is-string';
-import { Cardinality } from '../types';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface UrlParameters {
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work' | string;
+    type?: Type;
     mediatype?: string;
     altid?: number | string;
 }
@@ -56,7 +56,7 @@ export default class UrlProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this.validate(config);
             this[VALUE] = config;

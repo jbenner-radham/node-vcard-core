@@ -62,7 +62,7 @@ export default class UidProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 

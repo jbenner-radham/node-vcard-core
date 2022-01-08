@@ -1,6 +1,6 @@
 import isPlainObject from 'lodash.isplainobject';
 import isString from '../util/is-string';
-import { Cardinality } from '../types';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface KeyParameters {
@@ -8,7 +8,7 @@ export interface KeyParameters {
     altid?: number | string;
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work';
+    type?: Type;
 }
 
 export interface KeyPropertyConfig {

@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
@@ -48,7 +49,7 @@ export default class RevProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this[VALUE] = config;
 
             return;
@@ -68,7 +69,7 @@ export default class RevProperty extends Property {
     static factory(value: RevPropertyLike): RevProperty {
         if (value instanceof RevProperty) return value;
 
-        if (typeof value === 'string') return new RevProperty(value);
+        if (isPlainObject(value) || isString(value)) return new RevProperty(value);
 
         throw new TypeError(`The value "${value}" is not a RevPropertyLike type`);
     }

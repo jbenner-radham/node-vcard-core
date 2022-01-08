@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface PhotoParameters {
     altid?: number | string;
-    type?: 'home' | 'work' | string;
+    type?: Type;
     mediatype?: string;
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
     pid?: number | number[];
@@ -56,7 +57,7 @@ export default class PhotoProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this.validate(config);
             this[VALUE] = config;
@@ -68,7 +69,7 @@ export default class PhotoProperty extends Property {
     }
 
     toString() {
-        return `PHOTO${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return `PHOTO${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
@@ -86,7 +87,7 @@ export default class PhotoProperty extends Property {
     static factory(value: PhotoPropertyLike): PhotoProperty {
         if (value instanceof PhotoProperty) return value;
 
-        if (typeof value === 'string') return new PhotoProperty(value);
+        if (isPlainObject(value) || isString(value)) return new PhotoProperty(value);
 
         throw new TypeError(`The value "${value}" is not a PhotoPropertyLike type`);
     }

@@ -1,9 +1,10 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import isString from '../util/is-string';
+import { Cardinality, Type } from '../types';
 import Property from './Property';
 
 export interface FnParameters {
-    type?: 'home' | 'work';
+    type?: Type;
     language?: string;
     altid?: string;
     pid?: string;
@@ -57,7 +58,7 @@ export default class FnProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -82,7 +83,7 @@ export default class FnProperty extends Property {
     static factory(value: FnPropertyLike): FnProperty {
         if (value instanceof FnProperty) return value;
 
-        if (typeof value === 'string') return new FnProperty(value);
+        if (isPlainObject(value) || isString(value)) return new FnProperty(value);
 
         throw new TypeError(`The value "${value}" is not a FnPropertyLike type`);
     }

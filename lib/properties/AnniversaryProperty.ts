@@ -1,4 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
+import isString from '../util/is-string';
 import { Cardinality } from '../types';
 import Property from './Property';
 
@@ -55,7 +56,7 @@ export default class AnniversaryProperty extends Property {
             return;
         }
 
-        if (typeof config === 'string') {
+        if (isString(config)) {
             this.parameters = {};
             this[VALUE] = config;
 
@@ -66,11 +67,7 @@ export default class AnniversaryProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
-
-        return `ANNIVERSARY${value}`;
+        return `ANNIVERSARY${this.getParametersString()}:${this.valueOf()}`;
     }
 
     valueOf(): string {
@@ -80,7 +77,7 @@ export default class AnniversaryProperty extends Property {
     static factory(value: AnniversaryPropertyLike): AnniversaryProperty {
         if (value instanceof AnniversaryProperty) return value;
 
-        if (typeof value === 'string') return new AnniversaryProperty(value);
+        if (isPlainObject(value) || isString(value)) return new AnniversaryProperty(value);
 
         throw new TypeError(`The value "${value}" is not a AnniversaryPropertyLike type`);
     }
