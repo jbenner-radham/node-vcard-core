@@ -262,18 +262,6 @@ To-Do
   - [ ] `XML`
     - [ ] Value Escaping
     - [ ] `ALTID` Parameter
-- [ ] Parameters
-  - [ ] `ALTID`
-  - [ ] `CALSCALE`
-  - [ ] `GEO`
-  - [ ] `LANGUAGE`
-  - [ ] `MEDIATYPE`
-  - [ ] `PID`
-  - [ ] `PREF`
-  - [ ] `SORT-AS`
-  - [ ] `TYPE`
-  - [ ] `TZ`
-  - [ ] `VALUE`
 
 Reference
 ---------
