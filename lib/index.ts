@@ -104,6 +104,10 @@ export interface VcardConfig {
 export default class Vcard {
     static readonly EOL: string = '\r\n';
 
+    static readonly FOLD_CONTINUATION_CHAR = ' ';
+
+    static readonly MAX_OCTETS_PER_LINE: number = 75;
+
     adr: AdrPropertyArray;
 
     anniversary: AnniversaryPropertyLike | NullProperty;
