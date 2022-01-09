@@ -35,38 +35,47 @@ import Vcard from '..';
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-3.2
  */
 export default function foldLine(value: string): string {
+    // NOTE: We use spread syntax in this function instead of `String#split()` because the former is Unicode safe.
+
     const byteLength = (value: string): number => {
         return typeof Blob !== 'undefined'
-            ? new Blob([value]).size
-            : Buffer.byteLength(value);
+            ? new Blob([value]).size    // Browser implementation
+            : Buffer.byteLength(value); // Node.js implementation
     };
 
+    if (byteLength(value) <= Vcard.MAX_OCTETS_PER_LINE) return value;
+
     const getIndexedLine = (value: string): [number, string] => {
-        let currentByteLength, index;
+        const chars = [...value];
+        let index = 0;
         let line = '';
 
         for (
-            currentByteLength = 0, index = 0;
-            currentByteLength < Vcard.MAX_OCTETS_PER_LINE && index < value.length;
+            let currentByteLength = 0;
+            currentByteLength < Vcard.MAX_OCTETS_PER_LINE && index < chars.length;
             index++
         ) {
-            const char = value[index];
+            const char = chars[index];
             currentByteLength += byteLength(char);
-            line += char;
+
+            if (currentByteLength <= Vcard.MAX_OCTETS_PER_LINE) {
+                line += char;
+            } else {
+                index--;
+            }
         }
 
         return [index, line];
     };
 
-    if (byteLength(value) <= Vcard.MAX_OCTETS_PER_LINE) return value;
-
+    const chars = [...value];
     const lines = [];
-    let valueIndex = 0;
+    let charIndex = 0;
 
-    while (valueIndex < value.length) {
-        const substring = value.substring(valueIndex, value.length);
-        const [index, line] = getIndexedLine(substring);
-        valueIndex += index;
+    while (charIndex < chars.length) {
+        const substring = chars.slice(charIndex).join('');
+        const [lineIndex, line] = getIndexedLine(substring);
+        charIndex += lineIndex;
         lines.push(line);
     }
 

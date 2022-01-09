@@ -22,4 +22,12 @@ describe('foldLine', () => {
 
         expect(foldLine(value)).to.equal(expected);
     });
+
+    it('does not split a 4 octet character', () => {
+        const value = `NOTE:${'n'.repeat(67)}🤓`;
+        const expected = [`NOTE:${'n'.repeat(67)}`, '🤓']
+            .join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
+
+        expect(foldLine(value)).to.equal(expected);
+    });
 });
