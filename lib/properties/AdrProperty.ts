@@ -1,8 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
-import { Cardinality } from '../types';
-import Property from './Property';
+import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
+import isString from '../util/is-string';
+import Property from './Property';
 
 export interface AdrParameters {
     label?: string;
@@ -12,7 +13,7 @@ export interface AdrParameters {
     altid?: string;
     pid?: string;
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
-    type?: 'home' | 'work';
+    type?: Type;
 }
 
 export interface AdrPropertyConfig {
@@ -174,7 +175,7 @@ export default class AdrProperty extends Property {
             ? this.getValueWithParameters()
             : this.getValue();
 
-        return `ADR${value}`;
+        return foldLine(`ADR${value}`);
     }
 
     valueOf(): string {

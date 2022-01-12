@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Calscale, Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface AnniversaryParameters {
@@ -67,7 +68,7 @@ export default class AnniversaryProperty extends Property {
     }
 
     toString() {
-        return `ANNIVERSARY${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`ANNIVERSARY${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

@@ -1,8 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
-import Property from './Property';
+import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
+import Property from './Property';
+import isString from '../util/is-string';
 
 export interface NParameters {
     sortAs?: string;
@@ -111,7 +112,7 @@ export default class NProperty extends Property {
     }
 
     toString() {
-        return `N${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return foldLine(`N${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

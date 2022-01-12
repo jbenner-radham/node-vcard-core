@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Calscale, Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface BdayParameters {
@@ -77,7 +78,7 @@ export default class BdayProperty extends Property {
     }
 
     toString() {
-        return `BDAY${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`BDAY${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

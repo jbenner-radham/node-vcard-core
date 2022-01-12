@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface KindParameters {
@@ -166,7 +167,7 @@ export default class KindProperty extends Property {
     }
 
     toString() {
-        return `KIND:${this.getEscapedValueString()}`;
+        return foldLine(`KIND:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface TitleParameters {
@@ -65,7 +66,7 @@ export default class TitleProperty extends Property {
     }
 
     toString() {
-        return `TITLE${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return foldLine(`TITLE${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

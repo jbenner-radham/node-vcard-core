@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface ClientpidmapParameters {
@@ -77,7 +78,7 @@ export default class ClientpidmapProperty extends Property {
     }
 
     toString() {
-        return `CLIENTPIDMAP:${this.valueOf()}`;
+        return foldLine(`CLIENTPIDMAP:${this.valueOf()}`);
     }
 
     valueOf(): string {

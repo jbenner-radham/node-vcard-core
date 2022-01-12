@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export type RelatedType = 'acquaintance'
@@ -119,7 +120,7 @@ export default class RelatedProperty extends Property {
     }
 
     toString() {
-        return `RELATED${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`RELATED${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

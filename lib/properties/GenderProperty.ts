@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
 
@@ -90,7 +91,7 @@ export default class GenderProperty extends Property {
     }
 
     toString() {
-        return `GENDER${this.getValue()}`;
+        return foldLine(`GENDER${this.getValue()}`);
     }
 
     valueOf(): string {

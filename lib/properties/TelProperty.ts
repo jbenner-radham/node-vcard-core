@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' | 'voice';
@@ -118,7 +119,7 @@ export default class TelProperty extends Property {
     }
 
     toString() {
-        return `TEL${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return foldLine(`TEL${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface TzParameters {
@@ -85,7 +86,7 @@ export default class TzProperty extends Property {
     }
 
     toString() {
-        return `TZ${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return foldLine(`TZ${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

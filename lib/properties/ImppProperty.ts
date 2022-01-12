@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface ImppParameters {
@@ -73,7 +74,7 @@ export default class ImppProperty extends Property {
     }
 
     toString() {
-        return `IMPP${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`IMPP${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

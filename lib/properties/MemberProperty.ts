@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface MemberParameters {
@@ -92,7 +93,7 @@ export default class MemberProperty extends Property {
     }
 
     toString() {
-        return `MEMBER${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`MEMBER${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

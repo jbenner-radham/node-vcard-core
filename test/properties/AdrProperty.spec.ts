@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import AdrProperty from '../../lib/properties/AdrProperty';
+import Vcard from '../../lib';
 
 describe('AdrProperty', () => {
     it('is a function class', () => {
@@ -171,7 +172,10 @@ describe('AdrProperty', () => {
             const config = { parameters, value };
             const adr = new AdrProperty(config);
             const actual = adr.toString();
-            const expected = 'ADR;GEO="geo:12.3457,78.910";TYPE=home:;;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+            const expected = [
+                'ADR;GEO="geo:12.3457,78.910";TYPE=home:;;123 Main Street;Any Town;CA;91921-',
+                '1234;U.S.A.'
+            ].join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
 
             expect(actual).to.equal(expected);
         });
