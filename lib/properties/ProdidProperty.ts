@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface ProdidParameters {
@@ -61,7 +62,7 @@ export default class ProdidProperty extends Property {
     }
 
     toString() {
-        return `PRODID:${this.getEscapedValueString()}`;
+        return foldLine(`PRODID:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

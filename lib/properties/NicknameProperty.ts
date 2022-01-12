@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface NicknameParameters {
@@ -68,7 +69,7 @@ export default class NicknameProperty extends Property {
     }
 
     toString() {
-        return `NICKNAME${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return foldLine(`NICKNAME${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

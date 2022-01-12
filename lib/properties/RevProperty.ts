@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface RevParameters {
@@ -59,7 +60,7 @@ export default class RevProperty extends Property {
     }
 
     toString() {
-        return `REV:${this.valueOf()}`;
+        return foldLine(`REV:${this.valueOf()}`);
     }
 
     valueOf(): string {

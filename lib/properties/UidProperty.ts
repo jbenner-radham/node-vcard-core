@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface UidParameters {
@@ -73,7 +74,7 @@ export default class UidProperty extends Property {
     }
 
     toString() {
-        return `UID:${this.valueOf()}`;
+        return foldLine(`UID:${this.valueOf()}`);
     }
 
     valueOf(): string {

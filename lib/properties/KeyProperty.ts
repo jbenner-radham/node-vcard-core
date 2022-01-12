@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface KeyParameters {
@@ -79,7 +80,7 @@ export default class KeyProperty extends Property {
     }
 
     toString() {
-        return `KEY${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`KEY${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

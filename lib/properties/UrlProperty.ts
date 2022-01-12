@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface UrlParameters {
@@ -68,7 +69,7 @@ export default class UrlProperty extends Property {
     }
 
     toString() {
-        return `URL${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`URL${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

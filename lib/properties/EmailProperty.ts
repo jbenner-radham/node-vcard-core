@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface EmailParameters {
@@ -78,7 +79,7 @@ export default class EmailProperty extends Property {
             ? this.getValueWithParameters()
             : this.getValue();
 
-        return `EMAIL${value}`;
+        return foldLine(`EMAIL${value}`);
     }
 
     valueOf(): string {

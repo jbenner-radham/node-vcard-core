@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface NoteParameters {
@@ -67,7 +68,7 @@ export default class NoteProperty extends Property {
     }
 
     toString() {
-        return `NOTE${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return foldLine(`NOTE${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

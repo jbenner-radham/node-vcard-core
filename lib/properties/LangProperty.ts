@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface LangParameters {
@@ -65,7 +66,7 @@ export default class LangProperty extends Property {
     }
 
     toString() {
-        return `LANG${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`LANG${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

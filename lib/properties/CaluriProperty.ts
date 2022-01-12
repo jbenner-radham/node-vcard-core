@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface CaluriParameters {
@@ -74,7 +75,7 @@ export default class CaluriProperty extends Property {
     }
 
     toString() {
-        return `CALURI${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`CALURI${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

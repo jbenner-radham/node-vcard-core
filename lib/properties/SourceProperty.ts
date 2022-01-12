@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface SourceParameters {
@@ -76,7 +77,7 @@ export default class SourceProperty extends Property {
     }
 
     toString() {
-        return `SOURCE${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`SOURCE${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

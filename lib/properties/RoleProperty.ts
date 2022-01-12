@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface RoleParameters {
@@ -69,7 +70,7 @@ export default class RoleProperty extends Property {
     }
 
     toString() {
-        return `ROLE${this.getParametersString()}:${this.getEscapedValueString()}`;
+        return foldLine(`ROLE${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

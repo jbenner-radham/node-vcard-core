@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
-import isString from '../util/is-string';
 import { Cardinality, Type } from '../types';
+import foldLine from '../util/fold-line';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface PhotoParameters {
@@ -69,7 +70,7 @@ export default class PhotoProperty extends Property {
     }
 
     toString() {
-        return `PHOTO${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`PHOTO${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {
