@@ -28,10 +28,17 @@ describe('RevProperty', () => {
             const value = '19951031T222710Z';
             const config = { value };
             const rev = new RevProperty(config);
-            const actual = rev.toString();
-            const expected = 'REV:19951031T222710Z';
 
-            expect(actual).to.equal(expected);
+            expect(rev.toString()).to.equal(`REV:${value}`);
+        });
+
+        it('accepts a "timestamp" value parameter', () => {
+            const parameters = { value: 'timestamp' as const };
+            const value = '19951031T222710Z';
+            const config = { parameters, value };
+            const rev = new RevProperty(config);
+
+            expect(rev.toString()).to.equal(`REV;VALUE=timestamp:${value}`);
         });
     });
 

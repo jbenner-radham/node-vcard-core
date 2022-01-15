@@ -104,5 +104,14 @@ describe('NProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'Public;John;Quinlan;Mr.;Esq.';
+            const config = { parameters, value };
+            const n = new NProperty(config);
+
+            expect(n.toString()).to.equal(`N;VALUE=text:${value}`);
+        });
     });
 });

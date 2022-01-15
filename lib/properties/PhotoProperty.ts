@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface PhotoParameters {
+    value?: 'uri';
     altid?: number | string;
     type?: Type;
     mediatype?: string;
@@ -45,25 +46,40 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class PhotoProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
+
+    parameters: PhotoParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: PhotoPropertyConfig) {
+        const { value, parameters = {} } = config;
+
+        this.validate(value);
+
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this.validate(value);
+
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: PhotoPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as PhotoPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as PhotoPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this.validate(config);
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a PhotoPropertyConfig or string type`);

@@ -1,11 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface RevParameters {
-    [key: string]: never;
+    value?: 'timestamp';
 }
 
 export interface RevPropertyConfig {
@@ -38,29 +38,45 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class RevProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'timestamp';
+
+    parameters: RevParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: RevPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: RevPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value } = config as RevPropertyConfig;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as RevPropertyConfig);
         }
 
         if (isString(config)) {
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a RevPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`REV:${this.valueOf()}`);
+        const parameters = this.getParametersString();
+        const value = this.valueOf();
+
+        return foldLine(`REV${parameters}:${value}`);
     }
 
     valueOf(): string {

@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Calscale, Cardinality } from '../types';
+import { Calscale, Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface BdayParameters {
+    value?: 'date-and-or-time' | 'text';
     altid?: number | string;
     calscale?: Calscale; // For `date-and-or-time` type only!
     language?: string; // For `text` type only!
@@ -52,33 +53,49 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class BdayProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
-    parameters: BdayParameters;
+    static readonly DEFAULT_VALUE_TYPE: Value = 'date-and-or-time';
+
+    parameters: BdayParameters = {};
 
     [VALUE]: string;
+
+    #objectConstructor(config: BdayPropertyConfig) {
+        const { value, parameters = {} } = config;
+
+        BdayProperty.validateParameters(parameters);
+
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: BdayPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as BdayPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as BdayPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a BdayPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`BDAY${this.getParametersString()}:${this.valueOf()}`);
+        const value = this.parameters.value !== 'text'
+            ? this.valueOf()
+            : this.getEscapedValueString();
+
+        return foldLine(`BDAY${this.getParametersString()}:${value}`);
     }
 
     valueOf(): string {
@@ -91,5 +108,24 @@ export default class BdayProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new BdayProperty(value);
 
         throw new TypeError(`The value "${value}" is not a BdayPropertyLike type`);
+    }
+
+    static validateParameters(parameters: BdayParameters): void {
+        if (parameters.calscale && parameters.value && parameters.value?.toLowerCase() !== 'date-and-or-time') {
+            throw new TypeError(
+                'The CALSCALE parameter is only valid for "date-and-or-time" value types. ' +
+                    `The value type of "${parameters.value}" was provided`
+            );
+        }
+
+        if (
+            parameters.language &&
+            (typeof parameters.value === 'undefined' || parameters.value?.toLowerCase() !== 'text')
+        ) {
+            throw new TypeError(
+                'The LANGUAGE parameter is only valid for "text" value types. ' +
+                    `The value type of "${parameters.value}" was provided`
+            );
+        }
     }
 }

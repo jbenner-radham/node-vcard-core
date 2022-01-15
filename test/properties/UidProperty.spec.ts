@@ -33,6 +33,24 @@ describe('UidProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
+            const config = { parameters, value };
+            const uid = new UidProperty(config);
+
+            expect(uid.toString()).to.equal(`UID;VALUE=uri:${value}`);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = '???'; // Need to find formal example to test.
+            const config = { parameters, value };
+            const uid = new UidProperty(config);
+
+            expect(uid.toString()).to.equal(`UID;VALUE=text:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

@@ -26,13 +26,22 @@ describe('LogoProperty', () => {
 
         it('correctly returns parameters', () => {
             const parameters = { pref: 1, type: 'work' as const };
-            const value = 'en';
+            const value = 'http://www.example.com/pub/logos/abccorp.jpg';
             const config = { parameters, value };
             const logo = new LogoProperty(config);
             const actual = logo.toString();
-            const expected = 'LOGO;PREF=1;TYPE=work:en';
+            const expected = `LOGO;PREF=1;TYPE=work:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://www.example.com/pub/logos/abccorp.jpg';
+            const config = { parameters, value };
+            const logo = new LogoProperty(config);
+
+            expect(logo.toString()).to.equal(`LOGO;VALUE=uri:${value}`);
         });
     });
 

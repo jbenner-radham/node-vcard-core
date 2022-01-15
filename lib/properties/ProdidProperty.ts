@@ -1,11 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface ProdidParameters {
-    [key: string]: never;
+    value?: 'text';
 }
 
 export interface ProdidPropertyConfig {
@@ -40,29 +40,45 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class ProdidProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: ProdidParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: ProdidPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: ProdidPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value } = config as ProdidPropertyConfig;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as ProdidPropertyConfig);
         }
 
         if (isString(config)) {
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a ProdidPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`PRODID:${this.getEscapedValueString()}`);
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`PRODID${parameters}:${value}`);
     }
 
     valueOf(): string {

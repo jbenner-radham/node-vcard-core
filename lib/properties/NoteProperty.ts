@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface NoteParameters {
+    value?: 'text';
     language?: string;
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
@@ -44,31 +45,45 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class NoteProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: NoteParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: NotePropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: NotePropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as NotePropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as NotePropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a NotePropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`NOTE${this.getParametersString()}:${this.getEscapedValueString()}`);
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`NOTE${parameters}:${value}`);
     }
 
     valueOf(): string {

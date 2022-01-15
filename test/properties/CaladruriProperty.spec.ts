@@ -30,9 +30,18 @@ describe('CaladruriProperty', () => {
             const config = { parameters, value };
             const caladruri = new CaladruriProperty(config);
             const actual = caladruri.toString();
-            const expected = 'CALADRURI;TYPE=home:http://example.com/calendar/jdoe';
+            const expected = `CALADRURI;TYPE=home:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://example.com/calendar/jdoe';
+            const config = { parameters, value };
+            const caladruri = new CaladruriProperty(config);
+
+            expect(caladruri.toString()).to.equal(`CALADRURI;VALUE=uri:${value}`);
         });
     });
 

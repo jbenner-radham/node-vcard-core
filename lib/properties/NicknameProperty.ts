@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface NicknameParameters {
+    value?: 'text';
     type?: Type;
     language?: string;
     altid?: number | string;
@@ -45,31 +46,45 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class NicknameProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: NicknameParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: NicknamePropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: NicknamePropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as NicknamePropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as NicknamePropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a NicknamePropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`NICKNAME${this.getParametersString()}:${this.getEscapedValueString()}`);
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`NICKNAME${parameters}:${value}`);
     }
 
     valueOf(): string {

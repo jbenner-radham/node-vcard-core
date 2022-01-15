@@ -34,6 +34,15 @@ describe('MemberProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'mailto:subscriber1@example.com';
+            const config = { parameters, value };
+            const member = new MemberProperty(config);
+
+            expect(member.toString()).to.equal(`MEMBER;VALUE=uri:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

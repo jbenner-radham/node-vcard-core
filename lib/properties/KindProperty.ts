@@ -1,11 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface KindParameters {
-    [key: string]: never;
+    value?: 'text';
 }
 
 export interface KindPropertyConfig {
@@ -145,29 +145,42 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class KindProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: KindParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: KindPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: Kind) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: KindPropertyConfig | Kind) {
         super();
 
         if (isPlainObject(config)) {
-            const { value } = config as KindPropertyConfig;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as KindPropertyConfig);
         }
 
         if (isString(config)) {
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config as Kind);
         }
 
         throw new TypeError(`The value "${config}" is not a KindPropertyConfig or Kind type`);
     }
 
     toString() {
-        return foldLine(`KIND:${this.getEscapedValueString()}`);
+        return foldLine(`KIND${this.getParametersString()}:${this.getEscapedValueString()}`);
     }
 
     valueOf(): string {

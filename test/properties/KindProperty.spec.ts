@@ -22,6 +22,15 @@ describe('KindProperty', () => {
 
             expect(kind.toString()).to.equal('KIND:individual');
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'application';
+            const config = { parameters, value };
+            const kind = new KindProperty(config);
+
+            expect(kind.toString()).to.equal(`KIND;VALUE=text:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

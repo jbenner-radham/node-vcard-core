@@ -30,9 +30,18 @@ describe('GeoProperty', () => {
             const config = { parameters, value };
             const geo = new GeoProperty(config);
             const actual = geo.toString();
-            const expected = 'GEO;TYPE=work:geo:37.386013,-122.082932';
+            const expected = `GEO;TYPE=work:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'geo:37.386013,-122.082932';
+            const config = { parameters, value };
+            const geo = new GeoProperty(config);
+
+            expect(geo.toString()).to.equal(`GEO;VALUE=uri:${value}`);
         });
     });
 

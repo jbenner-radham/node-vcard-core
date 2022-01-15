@@ -34,6 +34,15 @@ describe('CaluriProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://cal.example.com/calA';
+            const config = { parameters, value };
+            const caluri = new CaluriProperty(config);
+
+            expect(caluri.toString()).to.equal(`CALURI;VALUE=uri:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

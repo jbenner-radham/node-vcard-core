@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import RelatedProperty from '../../lib/properties/RelatedProperty';
+import Vcard from '../../lib';
 
 describe('RelatedProperty', () => {
     it('is a function class', () => {
@@ -12,7 +13,8 @@ describe('RelatedProperty', () => {
         });
 
         it('returns a string', () => {
-            const related = new RelatedProperty('http://example.com/directory/jdoe.vcf');
+            const value = 'http://example.com/directory/jdoe.vcf';
+            const related = new RelatedProperty(value);
 
             expect(related.toString()).to.be.a('string');
         });
@@ -33,6 +35,28 @@ describe('RelatedProperty', () => {
             const expected = `RELATED;TYPE=contact:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { type: 'contact' as const, value: 'uri' as const };
+            const value = 'http://example.com/directory/jdoe.vcf';
+            const config = { parameters, value };
+            const related = new RelatedProperty(config);
+
+            expect(related.toString()).to.equal(`RELATED;TYPE=contact;VALUE=uri:${value}`);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { type: 'co-worker' as const, value: 'text' as const };
+            const value = 'Please contact my assistant Jane Doe for any inquiries.';
+            const config = { parameters, value };
+            const related = new RelatedProperty(config);
+            const expected = [
+                'RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane Doe for ',
+                'any inquiries.'
+            ].join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
+
+            expect(related.toString()).to.equal(expected);
         });
     });
 

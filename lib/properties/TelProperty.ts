@@ -1,5 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
@@ -7,7 +7,8 @@ import Property from './Property';
 export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' | 'voice';
 
 export interface TelParameters {
-    mediatype?: string;
+    value?: 'text' | 'uri';
+    mediatype?: string; // For `URI` type only!
     type?: TelType;
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
@@ -95,31 +96,50 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class TelProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: TelParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: TelPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+
+        TelProperty.validateParameters(parameters);
+
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: TelPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as TelPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as TelPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a TelPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`TEL${this.getParametersString()}:${this.getEscapedValueString()}`);
+        const parameters = this.getParametersString();
+        const value = (this.parameters.value && this.parameters.value?.toLowerCase() !== 'text')
+            ? this.valueOf()
+            : this.getEscapedValueString();
+
+        return foldLine(`TEL${parameters}:${value}`);
     }
 
     valueOf(): string {
@@ -132,5 +152,14 @@ export default class TelProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new TelProperty(value);
 
         throw new TypeError(`The value "${value}" is not a TelPropertyLike type`);
+    }
+
+    static validateParameters(parameters: TelParameters): void {
+        if (parameters.mediatype && parameters.value && parameters.value?.toLowerCase() !== 'uri') {
+            throw new TypeError(
+                'The MEDIATYPE parameter is only valid for "uri" value types. ' +
+                    `The value type of "${parameters.value}" was provided`
+            );
+        }
     }
 }

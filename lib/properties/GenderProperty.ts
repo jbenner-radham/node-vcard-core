@@ -1,5 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
@@ -8,7 +8,7 @@ import getSemicolonCount from '../util/get-semicolon-count';
 export type Sex = '' | 'F' | 'M' | 'N' | 'O' | 'U';
 
 export interface GenderParameters {
-    [key: string]: never;
+    value?: 'text';
 }
 
 export interface GenderPropertyConfig {
@@ -55,6 +55,10 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class GenderProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: GenderParameters = {};
+
     [VALUE]: string;
 
     get sex(): Sex {
@@ -69,29 +73,36 @@ export default class GenderProperty extends Property {
         return genderIdentity;
     }
 
+    #objectConstructor(config: GenderPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
+
     constructor(config: GenderPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as GenderPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as GenderPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a GenderPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`GENDER${this.getValue()}`);
+        return foldLine(`GENDER${this.getParametersString()}${this.getValue()}`);
     }
 
     valueOf(): string {

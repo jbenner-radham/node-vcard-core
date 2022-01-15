@@ -12,7 +12,8 @@ describe('PhotoProperty', () => {
         });
 
         it('returns a string', () => {
-            const photo = new PhotoProperty('http://www.example.com/pub/photos/jqpublic.gif');
+            const value = 'http://www.example.com/pub/photos/jqpublic.gif';
+            const photo = new PhotoProperty(value);
 
             expect(photo.toString()).to.be.a('string');
         });
@@ -30,9 +31,18 @@ describe('PhotoProperty', () => {
             const config = { parameters, value };
             const photo = new PhotoProperty(config);
             const actual = photo.toString();
-            const expected = 'PHOTO;TYPE=home:http://www.example.com/pub/photos/jqpublic.gif';
+            const expected = `PHOTO;TYPE=home:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://www.example.com/pub/photos/jqpublic.gif';
+            const config = { parameters, value };
+            const photo = new PhotoProperty(config);
+
+            expect(photo.toString()).to.equal(`PHOTO;VALUE=uri:${value}`);
         });
     });
 

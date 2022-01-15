@@ -179,5 +179,14 @@ describe('AdrProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+            const config = { parameters, value };
+            const adr = new AdrProperty(config);
+
+            expect(adr.toString()).to.equal(`ADR;VALUE=text:${value}`);
+        });
     });
 });

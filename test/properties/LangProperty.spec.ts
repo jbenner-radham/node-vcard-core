@@ -34,6 +34,15 @@ describe('LangProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "language-tag" value parameter', () => {
+            const parameters = { value: 'language-tag' as const };
+            const value = 'en';
+            const config = { parameters, value };
+            const lang = new LangProperty(config);
+
+            expect(lang.toString()).to.equal(`LANG;VALUE=language-tag:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

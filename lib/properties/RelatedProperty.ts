@@ -1,5 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
@@ -26,6 +26,7 @@ export type RelatedType = 'acquaintance'
     | 'sweetheart';
 
 export interface RelatedParameters {
+    value?: 'uri' | 'text';
     mediatype?: string;
     language?: string;
     pid?: number | number[];
@@ -96,31 +97,50 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class RelatedProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
+
+    parameters: RelatedParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: RelatedPropertyConfig) {
+        const { value, parameters = {} } = config;
+
+        RelatedProperty.validateParameters(parameters);
+
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: RelatedPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as RelatedPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as RelatedPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a RelatedPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`RELATED${this.getParametersString()}:${this.valueOf()}`);
+        const parameters = this.getParametersString();
+        const value = this.parameters.value !== 'text'
+            ? this.valueOf()
+            : this.getEscapedValueString();
+
+        return foldLine(`RELATED${parameters}:${value}`);
     }
 
     valueOf(): string {
@@ -133,5 +153,21 @@ export default class RelatedProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new RelatedProperty(value);
 
         throw new TypeError(`The value "${value}" is not a RelatedPropertyLike type`);
+    }
+
+    static validateParameters(parameters: RelatedParameters): void {
+        if (parameters.mediatype && parameters.value && parameters.value?.toLowerCase() !== 'uri') {
+            throw new TypeError(
+                'The MEDIATYPE parameter is only valid for "uri" value types. ' +
+                    `The value type of "${parameters.value}" was provided`
+            );
+        }
+
+        if (parameters.language && (!parameters.value || parameters.value?.toLowerCase() !== 'text')) {
+            throw new TypeError(
+                'The LANGUAGE parameter is only valid for "text" value types. ' +
+                    `The value type of "${parameters.value}" was provided`
+            );
+        }
     }
 }

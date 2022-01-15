@@ -1,12 +1,13 @@
-import isString from '../util/is-string';
-import { Cardinality, Type } from '../types';
 import isPlainObject from 'lodash.isplainobject';
+import { Calscale, Cardinality, Type, Value } from '../types';
+import isString from '../util/is-string';
 import Property from './Property';
 
 export interface {{{capitalize property}}}Parameters {
     [key: string]: never;
+    value?: '';
     altid?: number | string;
-    calscale?: 'gregorian'; // For `date-and-or-time` type only!
+    calscale?: Calscale; // For `date-and-or-time` type only!
     geo?: string;
     label?: string;
     language?: string;
@@ -45,24 +46,35 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class {{{capitalize property}}}Property extends Property {
     static readonly CARDINALITY: Cardinality = '{{{cardinality}}}'; // {{{cardinalityDescription}}}
 
+    static readonly DEFAULT_VALUE_TYPE: Value = '';
+
+    parameters: {{{capitalize property}}}Parameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: {{{capitalize property}}}PropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: {{{capitalize property}}}PropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as {{{capitalize property}}}PropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as {{{capitalize property}}}PropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a {{{capitalize property}}}PropertyConfig or string type`);

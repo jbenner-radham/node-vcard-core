@@ -30,9 +30,18 @@ describe('SoundProperty', () => {
             const config = { parameters, value };
             const sound = new SoundProperty(config);
             const actual = sound.toString();
-            const expected = 'SOUND;TYPE=home:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const expected = `SOUND;TYPE=home:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const config = { parameters, value };
+            const sound = new SoundProperty(config);
+
+            expect(sound.toString()).to.equal(`SOUND;VALUE=uri:${value}`);
         });
     });
 
