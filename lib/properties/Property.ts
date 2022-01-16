@@ -7,7 +7,7 @@ export default abstract class Property {
 
     readonly COMPONENT_SEPARATOR = ';';
 
-    parameters?: unknown;
+    parameters: unknown;
 
     get hasParameters(): boolean {
         return (

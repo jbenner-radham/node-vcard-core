@@ -35,6 +35,15 @@ describe('FnProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'Mr. John Q. Public, Esq.';
+            const config = { parameters, value };
+            const fn = new FnProperty(config);
+
+            expect(fn.toString()).to.equal('FN;VALUE=text:Mr. John Q. Public\\, Esq.');
+        });
     });
 
     describe('#valueOf()', () => {

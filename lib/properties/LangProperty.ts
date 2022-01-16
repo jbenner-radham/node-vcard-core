@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface LangParameters {
+    value?: 'language-tag';
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
     altid?: number | string;
@@ -41,25 +42,36 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class LangProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'language-tag';
+
+    parameters: LangParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: LangPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: LangPropertyConfig | string) {
         super();
 
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as LangPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as LangPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a LangPropertyConfig or string type`);

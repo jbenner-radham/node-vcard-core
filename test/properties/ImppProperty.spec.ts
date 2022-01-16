@@ -30,9 +30,18 @@ describe('ImppProperty', () => {
             const config = { parameters, value };
             const impp = new ImppProperty(config);
             const actual = impp.toString();
-            const expected = 'IMPP;PREF=1:xmpp:alice@example.com';
+            const expected = `IMPP;PREF=1:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'xmpp:alice@example.com';
+            const config = { parameters, value };
+            const impp = new ImppProperty(config);
+
+            expect(impp.toString()).to.equal(`IMPP;VALUE=uri:${value}`);
         });
     });
 

@@ -34,6 +34,24 @@ describe('AnniversaryProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "date-and-or-time" value parameter', () => {
+            const parameters = { value: 'date-and-or-time' as const };
+            const value = '19960415';
+            const config = { parameters, value };
+            const anniversary = new AnniversaryProperty(config);
+
+            expect(anniversary.toString()).to.equal(`ANNIVERSARY;VALUE=date-and-or-time:${value}`);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'circa 2000';
+            const config = { parameters, value };
+            const anniversary = new AnniversaryProperty(config);
+
+            expect(anniversary.toString()).to.equal(`ANNIVERSARY;VALUE=text:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

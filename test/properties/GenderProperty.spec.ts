@@ -34,6 +34,15 @@ describe('GenderProperty', () => {
 
             expect(gender.toString()).to.equal('GENDER:O;intersex');
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'O;intersex';
+            const config = { parameters, value };
+            const gender = new GenderProperty(config);
+
+            expect(gender.toString()).to.equal('GENDER;VALUE=text:O;intersex');
+        });
     });
 
     describe('#valueOf()', () => {

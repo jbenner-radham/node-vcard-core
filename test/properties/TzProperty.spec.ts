@@ -34,6 +34,33 @@ describe('TzProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'Raleigh/North America';
+            const config = { parameters, value };
+            const tz = new TzProperty(config);
+
+            expect(tz.toString()).to.equal(`TZ;VALUE=text:${value}`);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://timezones.example.com/America/New_York'; // Find formal example to test.
+            const config = { parameters, value };
+            const tz = new TzProperty(config);
+
+            expect(tz.toString()).to.equal(`TZ;VALUE=uri:${value}`);
+        });
+
+        it('accepts a "utc-offset" value parameter', () => {
+            const parameters = { value: 'utc-offset' as const };
+            const value = '-0500';
+            const config = { parameters, value };
+            const tz = new TzProperty(config);
+
+            expect(tz.toString()).to.equal(`TZ;VALUE=utc-offset:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

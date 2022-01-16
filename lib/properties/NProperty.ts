@@ -1,11 +1,12 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
 import Property from './Property';
 import isString from '../util/is-string';
 
 export interface NParameters {
+    value?: 'text';
     sortAs?: string;
     language?: string;
     altid?: number | string;
@@ -55,7 +56,9 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class NProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
-    parameters: NParameters;
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: NParameters = {};
 
     [VALUE]: string;
 
@@ -89,23 +92,34 @@ export default class NProperty extends Property {
         return honorificSuffix;
     }
 
+    #objectConstructor(config: NPropertyConfig) {
+        const { value, parameters = {} } = config;
+
+        this.validate(value);
+
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this.validate(value);
+
+        this[VALUE] = value;
+
+        return this;
+    }
+
     constructor(config: NPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as NPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as NPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this.validate(config);
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a NPropertyConfig or string type`);

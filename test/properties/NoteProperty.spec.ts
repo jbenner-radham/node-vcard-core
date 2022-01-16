@@ -30,9 +30,18 @@ describe('NoteProperty', () => {
             const config = { parameters, value };
             const note = new NoteProperty(config);
             const actual = note.toString();
-            const expected = 'NOTE;LANGUAGE=en:This is a note...';
+            const expected = `NOTE;LANGUAGE=en:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'This is a note...';
+            const config = { parameters, value };
+            const note = new NoteProperty(config);
+
+            expect(note.toString()).to.equal(`NOTE;VALUE=text:${value}`);
         });
     });
 

@@ -30,9 +30,18 @@ describe('RoleProperty', () => {
             const config = { parameters, value };
             const role = new RoleProperty(config);
             const actual = role.toString();
-            const expected = 'ROLE;LANGUAGE=en:Project Leader';
+            const expected = `ROLE;LANGUAGE=en:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'Project Leader';
+            const config = { parameters, value };
+            const role = new RoleProperty(config);
+
+            expect(role.toString()).to.equal(`ROLE;VALUE=text:${value}`);
         });
     });
 

@@ -1,11 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface UidParameters {
-    [key: string]: never;
+    value?: 'uri' | 'text';
 }
 
 export interface UidPropertyConfig {
@@ -50,31 +50,47 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class UidProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
+
+    parameters: UidParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: UidPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: UidPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as UidPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as UidPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a UidPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`UID:${this.valueOf()}`);
+        const parameters = this.getParametersString();
+        const value = (this.parameters.value && this.parameters.value?.toLowerCase() !== 'text')
+            ? this.valueOf()
+            : this.getEscapedValueString();
+
+        return foldLine(`UID${parameters}:${value}`);
     }
 
     valueOf(): string {

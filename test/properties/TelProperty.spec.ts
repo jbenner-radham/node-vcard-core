@@ -34,6 +34,24 @@ describe('TelProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = '+1-555-555-5555';
+            const config = { parameters, value };
+            const tel = new TelProperty(config);
+
+            expect(tel.toString()).to.equal(`TEL;VALUE=text:${value}`);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'tel:+1-555-555-5555;ext=5555';
+            const config = { parameters, value };
+            const tel = new TelProperty(config);
+
+            expect(tel.toString()).to.equal(`TEL;VALUE=uri:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

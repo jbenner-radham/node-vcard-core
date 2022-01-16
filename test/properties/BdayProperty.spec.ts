@@ -34,6 +34,24 @@ describe('BdayProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "date-and-or-time" value parameter', () => {
+            const parameters = { value: 'date-and-or-time' as const };
+            const value = '19960415';
+            const config = { parameters, value };
+            const bday = new BdayProperty(config);
+
+            expect(bday.toString()).to.equal(`BDAY;VALUE=date-and-or-time:${value}`);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'circa 1800';
+            const config = { parameters, value };
+            const bday = new BdayProperty(config);
+
+            expect(bday.toString()).to.equal(`BDAY;VALUE=text:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

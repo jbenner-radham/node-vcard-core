@@ -1,11 +1,12 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface AdrParameters {
+    value?: 'text';
     label?: string;
     language?: string;
     geo?: string;
@@ -101,7 +102,9 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
-    parameters: AdrParameters;
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: AdrParameters = {};
 
     [VALUE]: string;
 
@@ -147,24 +150,31 @@ export default class AdrProperty extends Property {
         return countryName;
     }
 
+    #objectConstructor(config: AdrPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.validate(value);
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this.validate(value);
+        this[VALUE] = value;
+
+        return this;
+    }
+
     constructor(config: AdrPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as AdrPropertyConfig;
-            this.validate(value);
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as AdrPropertyConfig);
         }
 
         if (isString(config)) {
-            this.validate(config);
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a AdrPropertyConfig or string type`);

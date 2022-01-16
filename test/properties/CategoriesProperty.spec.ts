@@ -34,6 +34,15 @@ describe('CategoriesProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'http://cal.example.com/calA';
+            const config = { parameters, value };
+            const categories = new CategoriesProperty(config);
+
+            expect(categories.toString()).to.equal(`CATEGORIES;VALUE=text:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface FnParameters {
+    value?: 'text';
     type?: Type;
     language?: string;
     altid?: string;
@@ -44,26 +45,35 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class FnProperty extends Property {
     static readonly CARDINALITY: Cardinality = '1*'; // One or more instances per vCard MUST be present.
 
-    parameters: FnParameters;
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: FnParameters = {};
 
     [VALUE]: string;
+
+    #objectConstructor(config: FnPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: FnPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as FnPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as FnPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a FnPropertyConfig or string type`);

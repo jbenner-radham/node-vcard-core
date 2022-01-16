@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface OrgParameters {
+    value?: 'text';
     sortAs?: string;
     language?: string;
     pid?: number | number[];
@@ -52,26 +53,35 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class OrgProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
-    parameters: OrgParameters;
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: OrgParameters = {};
 
     [VALUE]: string;
+
+    #objectConstructor(config: OrgPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: OrgPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as OrgPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as OrgPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a OrgPropertyConfig or string type`);

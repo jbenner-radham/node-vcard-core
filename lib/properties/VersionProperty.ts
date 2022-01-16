@@ -1,7 +1,18 @@
-import { Cardinality } from '../types';
+import isPlainObject from 'lodash.isplainobject';
+import { Cardinality, Value } from '../types';
+import isString from '../util/is-string';
 import Property from './Property';
 
-export type VersionPropertyLike = VersionProperty | number;
+export interface VersionParameters {
+    value?: 'text';
+}
+
+export interface VersionPropertyConfig {
+    value: string;
+    parameters?: VersionParameters;
+}
+
+export type VersionPropertyLike = VersionProperty | VersionPropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -29,25 +40,43 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class VersionProperty extends Property {
     static readonly CARDINALITY: Cardinality = '1'; // Exactly one instance per vCard MUST be present.
 
-    [VALUE]: number;
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
-    constructor(value = 4) {
+    [VALUE]: string;
+
+    constructor(config: VersionPropertyConfig | string = '4.0') {
         super();
-        this[VALUE] = value;
+
+        if (isPlainObject(config)) {
+            const { value, parameters = {} } = config as VersionPropertyConfig;
+            this.parameters = parameters;
+            this[VALUE] = value;
+
+            return;
+        }
+
+        if (isString(config)) {
+            this.parameters = {};
+            this[VALUE] = config;
+
+            return;
+        }
+
+        throw new TypeError(`The value "${config}" is not a VersionPropertyConfig or string type`);
     }
 
     toString() {
-        return `VERSION:${this.valueOf().toFixed(1)}`;
+        return `VERSION:${this.valueOf()}`;
     }
 
-    valueOf(): number {
+    valueOf(): string {
         return this[VALUE];
     }
 
     static factory(value: VersionPropertyLike): VersionProperty {
         if (value instanceof VersionProperty) return value;
 
-        if (typeof value === 'string') return new VersionProperty(value);
+        if (isPlainObject(value) || isString(value)) return new VersionProperty(value);
 
         throw new TypeError(`The value "${value}" is not a VersionPropertyLike type`);
     }

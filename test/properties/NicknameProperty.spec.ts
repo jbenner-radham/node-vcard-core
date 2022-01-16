@@ -34,6 +34,15 @@ describe('NicknameProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = 'Boss';
+            const config = { parameters, value };
+            const nickname = new NicknameProperty(config);
+
+            expect(nickname.toString()).to.equal(`NICKNAME;VALUE=text:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

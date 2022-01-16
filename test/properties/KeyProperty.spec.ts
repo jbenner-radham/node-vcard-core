@@ -34,6 +34,24 @@ describe('KeyProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://www.example.com/keys/jdoe.cer';
+            const config = { parameters, value };
+            const key = new KeyProperty(config);
+
+            expect(key.toString()).to.equal(`KEY;VALUE=uri:${value}`);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = '???'; // Need to find proper text example to test.
+            const config = { parameters, value };
+            const key = new KeyProperty(config);
+
+            expect(key.toString()).to.equal(`KEY;VALUE=text:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

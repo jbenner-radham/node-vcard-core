@@ -29,9 +29,18 @@ describe('ProdidProperty', () => {
             const config = { value };
             const prodid = new ProdidProperty(config);
             const actual = prodid.toString();
-            const expected = 'PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN';
+            const expected = `PRODID:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "text" value parameter', () => {
+            const parameters = { value: 'text' as const };
+            const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
+            const config = { parameters, value };
+            const prodid = new ProdidProperty(config);
+
+            expect(prodid.toString()).to.equal(`PRODID;VALUE=text:${value}`);
         });
     });
 

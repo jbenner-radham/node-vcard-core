@@ -1,10 +1,11 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality, Type } from '../types';
+import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
 export interface KeyParameters {
+    value?: 'uri' | 'text';
     mediatype?: string; // For `URI` type only!
     altid?: number | string;
     pid?: number | number[];
@@ -56,31 +57,49 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class KeyProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
+
+    parameters: KeyParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: KeyPropertyConfig) {
+        const { value, parameters = {} } = config;
+
+        KeyProperty.validateParameters(parameters);
+
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: KeyPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as KeyPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as KeyPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a KeyPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`KEY${this.getParametersString()}:${this.valueOf()}`);
+        const value = this.parameters.value !== 'text'
+            ? this.valueOf()
+            : this.getEscapedValueString();
+
+        return foldLine(`KEY${this.getParametersString()}:${value}`);
     }
 
     valueOf(): string {
@@ -93,5 +112,14 @@ export default class KeyProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new KeyProperty(value);
 
         throw new TypeError(`The value "${value}" is not a KeyPropertyLike type`);
+    }
+
+    static validateParameters(parameters: KeyParameters): void {
+        if (parameters.mediatype && parameters.value && parameters.value?.toLowerCase() !== 'uri') {
+            throw new TypeError(
+                'The MEDIATYPE parameter is only valid for "uri" value types. ' +
+                    `The value type of "${parameters.value}" was provided`
+            );
+        }
     }
 }

@@ -1,5 +1,5 @@
 import isPlainObject from 'lodash.isplainobject';
-import { Cardinality } from '../types';
+import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
@@ -54,24 +54,35 @@ const VALUE: unique symbol = Symbol.for('value');
 export default class ClientpidmapProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
 
+    static readonly DEFAULT_VALUE_TYPE: Value = 'text';
+
+    parameters: ClientpidmapParameters = {};
+
     [VALUE]: string;
+
+    #objectConstructor(config: ClientpidmapPropertyConfig) {
+        const { value, parameters = {} } = config;
+        this.parameters = parameters;
+        this[VALUE] = value;
+
+        return this;
+    }
+
+    #stringConstructor(value: string) {
+        this[VALUE] = value;
+
+        return this;
+    }
 
     constructor(config: ClientpidmapPropertyConfig | string) {
         super();
 
         if (isPlainObject(config)) {
-            const { value, parameters = {} } = config as ClientpidmapPropertyConfig;
-            this.parameters = parameters;
-            this[VALUE] = value;
-
-            return;
+            return this.#objectConstructor(config as ClientpidmapPropertyConfig);
         }
 
         if (isString(config)) {
-            this.parameters = {};
-            this[VALUE] = config;
-
-            return;
+            return this.#stringConstructor(config);
         }
 
         throw new TypeError(`The value "${config}" is not a ClientpidmapPropertyConfig or string type`);

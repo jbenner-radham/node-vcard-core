@@ -34,6 +34,15 @@ describe('UrlProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://example.org/restaurant.french/~chezchic.html';
+            const config = { parameters, value };
+            const url = new UrlProperty(config);
+
+            expect(url.toString()).to.equal(`URL;VALUE=uri:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

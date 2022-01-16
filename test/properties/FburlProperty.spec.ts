@@ -30,9 +30,18 @@ describe('FburlProperty', () => {
             const config = { parameters, value };
             const fburl = new FburlProperty(config);
             const actual = fburl.toString();
-            const expected = 'FBURL;TYPE=work:http://www.example.com/busy/janedoe';
+            const expected = `FBURL;TYPE=work:${value}`;
 
             expect(actual).to.equal(expected);
+        });
+
+        it('accepts a "uri" value parameter', () => {
+            const parameters = { value: 'uri' as const };
+            const value = 'http://www.example.com/busy/janedoe';
+            const config = { parameters, value };
+            const fburl = new FburlProperty(config);
+
+            expect(fburl.toString()).to.equal(`FBURL;VALUE=uri:${value}`);
         });
     });
 
