@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface TitleParameters {
@@ -51,6 +53,9 @@ export default class TitleProperty extends Property {
 
     #objectConstructor(config: TitlePropertyConfig) {
         const { value, parameters = {} } = config;
+
+        TitleProperty.validateParameters(parameters);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -91,5 +96,11 @@ export default class TitleProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new TitleProperty(value);
 
         throw new TypeError(`The value "${value}" is not a TitlePropertyLike type`);
+    }
+
+    static validateParameters({ pref }: TitleParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

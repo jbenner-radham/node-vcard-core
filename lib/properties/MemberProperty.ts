@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface MemberParameters {
@@ -78,6 +80,9 @@ export default class MemberProperty extends Property {
 
     #objectConstructor(config: MemberPropertyConfig) {
         const { value, parameters = {} } = config;
+
+        MemberProperty.validateParameters(parameters);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -118,5 +123,11 @@ export default class MemberProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new MemberProperty(value);
 
         throw new TypeError(`The value "${value}" is not a MemberPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: MemberParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

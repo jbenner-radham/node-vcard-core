@@ -1,7 +1,13 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
+import {
+    getInvalidLanguageValueParameterMessage,
+    getInvalidMediatypeValueParameterMessage,
+    getInvalidPrefParameterMessage
+} from '../util/error-messages';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export type RelatedType = 'acquaintance'
@@ -155,19 +161,17 @@ export default class RelatedProperty extends Property {
         throw new TypeError(`The value "${value}" is not a RelatedPropertyLike type`);
     }
 
-    static validateParameters(parameters: RelatedParameters): void {
-        if (parameters.mediatype && parameters.value && parameters.value?.toLowerCase() !== 'uri') {
-            throw new TypeError(
-                'The MEDIATYPE parameter is only valid for "uri" value types. ' +
-                    `The value type of "${parameters.value}" was provided`
-            );
+    static validateParameters({ language, mediatype, pref, value }: RelatedParameters): void {
+        if (language && (!value || value?.toLowerCase() !== 'text')) {
+            throw new TypeError(getInvalidLanguageValueParameterMessage({ value }));
         }
 
-        if (parameters.language && (!parameters.value || parameters.value?.toLowerCase() !== 'text')) {
-            throw new TypeError(
-                'The LANGUAGE parameter is only valid for "text" value types. ' +
-                    `The value type of "${parameters.value}" was provided`
-            );
+        if (mediatype && value && value?.toLowerCase() !== 'uri') {
+            throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
+        }
+
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
         }
     }
 }

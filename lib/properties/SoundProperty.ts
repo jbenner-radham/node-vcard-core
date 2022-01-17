@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface SoundParameters {
@@ -59,6 +61,9 @@ export default class SoundProperty extends Property {
 
     #objectConstructor(config: SoundPropertyConfig) {
         const { value, parameters = {} } = config;
+
+        SoundProperty.validateParameters(parameters);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -99,5 +104,11 @@ export default class SoundProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new SoundProperty(value);
 
         throw new TypeError(`The value "${value}" is not a SoundPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: SoundParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

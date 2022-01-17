@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface CaladruriParameters {
@@ -56,6 +58,9 @@ export default class CaladruriProperty extends Property {
 
     #objectConstructor(config: CaladruriPropertyConfig) {
         const { value, parameters = {} } = config;
+
+        CaladruriProperty.validateParameters(parameters);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -96,5 +101,11 @@ export default class CaladruriProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new CaladruriProperty(value);
 
         throw new TypeError(`The value "${value}" is not a CaladruriPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: CaladruriParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

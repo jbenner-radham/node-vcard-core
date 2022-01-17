@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface NoteParameters {
@@ -53,6 +55,9 @@ export default class NoteProperty extends Property {
 
     #objectConstructor(config: NotePropertyConfig) {
         const { value, parameters = {} } = config;
+
+        NoteProperty.validateParameters(parameters);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -96,5 +101,11 @@ export default class NoteProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new NoteProperty(value);
 
         throw new TypeError(`The value "${value}" is not a NotePropertyLike type`);
+    }
+
+    static validateParameters({ pref }: NoteParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }
