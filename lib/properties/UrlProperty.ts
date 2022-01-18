@@ -55,6 +55,7 @@ export default class UrlProperty extends Property {
     #objectConstructor(config: UrlPropertyConfig) {
         const { value, parameters = {} } = config;
 
+        UrlProperty.validateParameters(parameters);
         this.validate(value);
 
         this.parameters = parameters;
