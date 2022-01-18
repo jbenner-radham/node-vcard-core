@@ -55,7 +55,7 @@ To-Do
     - [x] `TZ` Parameter
     - [x] `ALTID` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
   - [x] `ANNIVERSARY`
     - [x] Line Folding
@@ -77,7 +77,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
@@ -86,7 +86,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
@@ -95,7 +95,7 @@ To-Do
     - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
     - [ ] Implement Constructor `Array` Argument Support
@@ -110,7 +110,7 @@ To-Do
     - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `END`
@@ -120,7 +120,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `FN`
@@ -131,7 +131,7 @@ To-Do
     - [x] `LANGUAGE` Parameter
     - [x] `ALTID` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
   - [x] `GENDER`
     - [x] Line Folding
     - [ ] Value Escaping
@@ -142,7 +142,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
@@ -151,7 +151,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
@@ -162,7 +162,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `ALTID` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
   - [x] `KIND`
     - [x] Line Folding
@@ -173,7 +173,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `LOGO`
@@ -182,7 +182,7 @@ To-Do
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
@@ -191,7 +191,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `N`
@@ -209,14 +209,14 @@ To-Do
     - [x] `LANGUAGE` Parameter
     - [x] `ALTID` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
   - [x] `NOTE`
     - [x] Line Folding
     - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `ORG`
@@ -234,7 +234,7 @@ To-Do
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `PID` Parameter
   - [x] `PRODID`
     - [x] Line Folding
@@ -247,7 +247,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `REV`
@@ -260,7 +260,7 @@ To-Do
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `ALTID` Parameter
   - [x] `SOUND`
@@ -269,7 +269,7 @@ To-Do
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
@@ -278,7 +278,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `TEL`
@@ -288,7 +288,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `TYPE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
   - [x] `TITLE`
     - [x] Line Folding
@@ -296,7 +296,7 @@ To-Do
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `TZ`
@@ -305,7 +305,7 @@ To-Do
     - [x] `VALUE` Parameter
     - [x] `ALTID` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
   - [x] `UID`
@@ -317,7 +317,7 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(need to validate!!!)_
+    - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter

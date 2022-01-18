@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' | 'voice';
@@ -154,12 +156,13 @@ export default class TelProperty extends Property {
         throw new TypeError(`The value "${value}" is not a TelPropertyLike type`);
     }
 
-    static validateParameters(parameters: TelParameters): void {
-        if (parameters.mediatype && parameters.value && parameters.value?.toLowerCase() !== 'uri') {
-            throw new TypeError(
-                'The MEDIATYPE parameter is only valid for "uri" value types. ' +
-                    `The value type of "${parameters.value}" was provided`
-            );
+    static validateParameters({ mediatype, pref, value }: TelParameters): void {
+        if (mediatype && value && value?.toLowerCase() !== 'uri') {
+            throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
+        }
+
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
         }
     }
 }

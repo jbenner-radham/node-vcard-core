@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface CategoriesParameters {
@@ -51,6 +53,9 @@ export default class CategoriesProperty extends Property {
 
     #objectConstructor(config: CategoriesPropertyConfig) {
         const { value, parameters = {} } = config;
+
+        CategoriesProperty.validateParameters(parameters);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -95,5 +100,11 @@ export default class CategoriesProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new CategoriesProperty(value);
 
         throw new TypeError(`The value "${value}" is not a CategoriesPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: CategoriesParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

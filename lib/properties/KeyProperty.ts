@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
+import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface KeyParameters {
@@ -114,12 +116,13 @@ export default class KeyProperty extends Property {
         throw new TypeError(`The value "${value}" is not a KeyPropertyLike type`);
     }
 
-    static validateParameters(parameters: KeyParameters): void {
-        if (parameters.mediatype && parameters.value && parameters.value?.toLowerCase() !== 'uri') {
-            throw new TypeError(
-                'The MEDIATYPE parameter is only valid for "uri" value types. ' +
-                    `The value type of "${parameters.value}" was provided`
-            );
+    static validateParameters({ mediatype, pref, value }: KeyParameters): void {
+        if (mediatype && value && value?.toLowerCase() !== 'uri') {
+            throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
+        }
+
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
         }
     }
 }

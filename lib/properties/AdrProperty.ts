@@ -2,7 +2,9 @@ import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface AdrParameters {
@@ -97,7 +99,6 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1
- * @todo Enforce pref-param limitations in validation!
  */
 export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
@@ -152,7 +153,10 @@ export default class AdrProperty extends Property {
 
     #objectConstructor(config: AdrPropertyConfig) {
         const { value, parameters = {} } = config;
+
+        AdrProperty.validateParameters(parameters);
         this.validate(value);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -205,5 +209,11 @@ export default class AdrProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new AdrProperty(value);
 
         throw new TypeError(`The value "${value}" is not a AdrPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: AdrParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

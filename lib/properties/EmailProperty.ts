@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface EmailParameters {
@@ -104,5 +106,11 @@ export default class EmailProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new EmailProperty(value);
 
         throw new TypeError(`The value "${value}" is not a EmailPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: EmailParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

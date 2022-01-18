@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface PhotoParameters {
@@ -55,6 +57,7 @@ export default class PhotoProperty extends Property {
     #objectConstructor(config: PhotoPropertyConfig) {
         const { value, parameters = {} } = config;
 
+        PhotoProperty.validateParameters(parameters);
         this.validate(value);
 
         this.parameters = parameters;
@@ -107,5 +110,11 @@ export default class PhotoProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new PhotoProperty(value);
 
         throw new TypeError(`The value "${value}" is not a PhotoPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: PhotoParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }
