@@ -83,11 +83,10 @@ export default class CategoriesProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
 
-        return foldLine(`CATEGORIES${value}`);
+        return foldLine(`CATEGORIES${parameters}:${value}`);
     }
 
     valueOf(): string {

@@ -89,11 +89,10 @@ export default class EmailProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
 
-        return foldLine(`EMAIL${value}`);
+        return foldLine(`EMAIL${parameters}:${value}`);
     }
 
     valueOf(): string {

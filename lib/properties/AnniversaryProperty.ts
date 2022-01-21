@@ -83,11 +83,12 @@ export default class AnniversaryProperty extends Property {
     }
 
     toString() {
+        const parameters = this.getParametersString();
         const value = this.parameters.value !== 'text'
             ? this.valueOf()
             : this.getEscapedValueString();
 
-        return foldLine(`ANNIVERSARY${this.getParametersString()}:${value}`);
+        return foldLine(`ANNIVERSARY${parameters}:${value}`);
     }
 
     valueOf(): string {

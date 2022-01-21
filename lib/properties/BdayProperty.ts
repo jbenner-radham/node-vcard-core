@@ -91,11 +91,12 @@ export default class BdayProperty extends Property {
     }
 
     toString() {
+        const parameters = this.getParametersString();
         const value = this.parameters.value !== 'text'
             ? this.valueOf()
             : this.getEscapedValueString();
 
-        return foldLine(`BDAY${this.getParametersString()}:${value}`);
+        return foldLine(`BDAY${parameters}:${value}`);
     }
 
     valueOf(): string {

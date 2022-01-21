@@ -85,11 +85,10 @@ export default class FnProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
 
-        return foldLine(`FN${value}`);
+        return foldLine(`FN${parameters}:${value}`);
     }
 
     valueOf(): string {

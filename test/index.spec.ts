@@ -127,7 +127,7 @@ describe('Vcard', () => {
                     'BEGIN:VCARD',
                     'VERSION:4.0',
                     `CLIENTPIDMAP:${clientpidmap}`,
-                    `EMAIL;PID=4.1,5.2:${email.value}`,
+                    `EMAIL;PID="4.1,5.2":${email.value}`,
                     `FN:${fn}`,
                     'END:VCARD'
                 ].join(Vcard.EOL);
