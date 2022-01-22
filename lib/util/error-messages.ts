@@ -1,3 +1,8 @@
+export function getInvalidCalscaleValueParameterMessage({ value }: { value: any }): string {
+    return 'The CALSCALE parameter is only valid for "date-and-or-time" value types. ' +
+        `The value type of "${value}" was provided`;
+}
+
 export function getInvalidLanguageValueParameterMessage({ value }: { value: any }): string {
     return `The LANGUAGE parameter is only valid for "text" value types. The value type of "${value}" was provided`;
 }

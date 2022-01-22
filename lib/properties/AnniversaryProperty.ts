@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Calscale, Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import Property from './Property';
 
@@ -103,12 +104,9 @@ export default class AnniversaryProperty extends Property {
         throw new TypeError(`The value "${value}" is not a AnniversaryPropertyLike type`);
     }
 
-    static validateParameters(parameters: AnniversaryParameters): void {
-        if (parameters.calscale && parameters.value && parameters.value?.toLowerCase() !== 'date-and-or-time') {
-            throw new TypeError(
-                'The CALSCALE parameter is only valid for "date-and-or-time" value types. ' +
-                    `The value type of "${parameters.value}" was provided`
-            );
+    static validateParameters({ calscale, value }: AnniversaryParameters): void {
+        if (calscale && value && value?.toLowerCase() !== 'date-and-or-time') {
+            throw new TypeError(getInvalidCalscaleValueParameterMessage({ value }));
         }
     }
 }

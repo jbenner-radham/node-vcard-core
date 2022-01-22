@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Calscale, Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import Property from './Property';
 
@@ -47,8 +48,6 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   BDAY;VALUE=text:circa 1800
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
- * @todo Add enforcement of calscale-param for only date-and-or-time types!
- * @todo Add enforcement of language-param for only text types!
  */
 export default class BdayProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
@@ -111,21 +110,15 @@ export default class BdayProperty extends Property {
         throw new TypeError(`The value "${value}" is not a BdayPropertyLike type`);
     }
 
-    static validateParameters(parameters: BdayParameters): void {
-        if (parameters.calscale && parameters.value && parameters.value?.toLowerCase() !== 'date-and-or-time') {
-            throw new TypeError(
-                'The CALSCALE parameter is only valid for "date-and-or-time" value types. ' +
-                    `The value type of "${parameters.value}" was provided`
-            );
+    static validateParameters({ calscale, language, value }: BdayParameters): void {
+        if (calscale && value && value?.toLowerCase() !== 'date-and-or-time') {
+            throw new TypeError(getInvalidCalscaleValueParameterMessage({ value }));
         }
 
-        if (
-            parameters.language &&
-            (typeof parameters.value === 'undefined' || parameters.value?.toLowerCase() !== 'text')
-        ) {
+        if (language && (!value || value?.toLowerCase() !== 'text')) {
             throw new TypeError(
                 'The LANGUAGE parameter is only valid for "text" value types. ' +
-                    `The value type of "${parameters.value}" was provided`
+                    `The value type of "${value}" was provided`
             );
         }
     }
