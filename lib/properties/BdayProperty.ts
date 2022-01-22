@@ -1,7 +1,10 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Calscale, Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
-import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages';
+import {
+    getInvalidCalscaleValueParameterMessage,
+    getInvalidLanguageValueParameterMessage
+} from '../util/error-messages';
 import isString from '../util/is-string';
 import Property from './Property';
 
@@ -116,10 +119,7 @@ export default class BdayProperty extends Property {
         }
 
         if (language && (!value || value?.toLowerCase() !== 'text')) {
-            throw new TypeError(
-                'The LANGUAGE parameter is only valid for "text" value types. ' +
-                    `The value type of "${value}" was provided`
-            );
+            throw new TypeError(getInvalidLanguageValueParameterMessage({ value }));
         }
     }
 }
