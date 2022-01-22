@@ -1,7 +1,9 @@
 import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
 export interface OrgParameters {
@@ -61,6 +63,9 @@ export default class OrgProperty extends Property {
 
     #objectConstructor(config: OrgPropertyConfig) {
         const { value, parameters = {} } = config;
+
+        OrgProperty.validateParameters(parameters);
+
         this.parameters = parameters;
         this[VALUE] = value;
 
@@ -104,5 +109,11 @@ export default class OrgProperty extends Property {
         if (isPlainObject(value) || isString(value)) return new OrgProperty(value);
 
         throw new TypeError(`The value "${value}" is not a OrgPropertyLike type`);
+    }
+
+    static validateParameters({ pref }: OrgParameters): void {
+        if (pref && !isValidPrefParameter(pref)) {
+            throw new TypeError(getInvalidPrefParameterMessage({ pref }));
+        }
     }
 }

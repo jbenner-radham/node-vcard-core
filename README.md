@@ -226,7 +226,7 @@ To-Do
     - [x] `SORT-AS` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
-    - [x] `PREF` Parameter _(needs validated!!!)_
+    - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `PHOTO`
