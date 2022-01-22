@@ -167,7 +167,7 @@ describe('AdrProperty', () => {
         });
 
         it('correctly returns parameters', () => {
-            const parameters = { geo: '"geo:12.3457,78.910"', type: 'home' as const };
+            const parameters = { geo: 'geo:12.3457,78.910', type: 'home' as const };
             const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
             const config = { parameters, value };
             const adr = new AdrProperty(config);

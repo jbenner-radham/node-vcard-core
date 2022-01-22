@@ -226,6 +226,8 @@ To-Do
     - [x] `SORT-AS` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
+    - [x] `PREF` Parameter _(needs validated!!!)_
+    - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
   - [x] `PHOTO`
     - [x] Line Folding
@@ -351,6 +353,23 @@ noted that some value types support encoding multiple values in a
 single content line by separating the values with a comma ",".  This
 approach has been taken for several of the content types defined
 below (date, time, integer, float).
+
+### Property Parameters
+A property can have attributes associated with it.  These "property
+parameters" contain meta-information about the property or the
+property value.  In some cases, the property parameter can be multi-
+valued in which case the property parameter value elements are
+separated by a COMMA (U+002C).
+
+Property parameter value elements that contain the COLON (U+003A),
+SEMICOLON (U+003B), or COMMA (U+002C) character separators MUST be
+specified as quoted-string text values.  Property parameter values
+MUST NOT contain the DQUOTE (U+0022) character.  The DQUOTE character
+is used as a delimiter for parameter values that contain restricted
+characters or URI text.
+
+Applications MUST ignore x-param and iana-param values they don't
+recognize.
 
 ### Property Value Escaping
 Some properties may contain one or more values delimited by a COMMA

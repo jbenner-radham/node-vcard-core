@@ -88,11 +88,10 @@ export default class OrgProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
 
-        return foldLine(`ORG${value}`);
+        return foldLine(`ORG${parameters}:${value}`);
     }
 
     valueOf(): string {

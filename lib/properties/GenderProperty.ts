@@ -102,7 +102,10 @@ export default class GenderProperty extends Property {
     }
 
     toString() {
-        return foldLine(`GENDER${this.getParametersString()}${this.getValue()}`);
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`GENDER${parameters}:${value}`);
     }
 
     valueOf(): string {

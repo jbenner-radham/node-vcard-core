@@ -185,11 +185,10 @@ export default class AdrProperty extends Property {
     }
 
     toString() {
-        const value = this.hasParameters
-            ? this.getValueWithParameters()
-            : this.getValue();
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
 
-        return foldLine(`ADR${value}`);
+        return foldLine(`ADR${parameters}:${value}`);
     }
 
     valueOf(): string {

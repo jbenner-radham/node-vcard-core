@@ -1,5 +1,6 @@
 import kebabCase from 'lodash.kebabcase';
 import escapePropertyValue from '../util/escape-property-value';
+import isString from '../util/is-string';
 
 export default abstract class Property {
     abstract toString(): string;
@@ -23,7 +24,9 @@ export default abstract class Property {
     getParametersString(): string {
         const formatKey = (key: string): string => kebabCase(key).toUpperCase();
         const joinIfArray = (value: any): any => Array.isArray(value) ? value.join(',') : value;
-        const getKeyValueString = ([key, value]: [string, any]) => [formatKey(key), joinIfArray(value)].join('=');
+        const maybeQuote = (value: any): any => isString(value) && value.includes(',') ? `"${value}"` : value;
+        const getKeyValueString = ([key, value]: [string, any]) =>
+            `${formatKey(key)}=${maybeQuote(joinIfArray(value))}`;
         const parameters = Object.entries(this.parameters as Record<string, any> ?? {})
             .map(getKeyValueString)
             .join(this.COMPONENT_SEPARATOR);
@@ -36,28 +39,5 @@ export default abstract class Property {
             .components()
             .map(escapePropertyValue)
             .join(this.COMPONENT_SEPARATOR);
-    }
-
-    getValue(): string {
-        const value = this
-            .components()
-            .map(escapePropertyValue)
-            .join(this.COMPONENT_SEPARATOR);
-
-        return `:${value}`;
-    }
-
-    getValueWithParameters(): string {
-        const formatKey = (key: string): string => kebabCase(key).toUpperCase();
-        const joinIfArray = (value: any): any => Array.isArray(value) ? value.join(',') : value;
-        const getKeyValueString = ([key, value]: [string, any]) => [formatKey(key), joinIfArray(value)].join('=');
-        const parameters = Object.entries(this.parameters as Record<string, any>)
-            .map(getKeyValueString)
-            .join(this.COMPONENT_SEPARATOR);
-        const value = this.components()
-            .map(escapePropertyValue)
-            .join(this.COMPONENT_SEPARATOR);
-
-        return `;${parameters}:${value}`;
     }
 };

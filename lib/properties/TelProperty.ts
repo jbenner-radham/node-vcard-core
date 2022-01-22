@@ -5,13 +5,14 @@ import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessag
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
+import { Type } from '../types';
 
 export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' | 'voice';
 
 export interface TelParameters {
     value?: 'text' | 'uri';
     mediatype?: string; // For `URI` type only!
-    type?: TelType;
+    type?: (Type | TelType) | (Type | TelType)[];
     pid?: number | number[];
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
     altid?: number | string;

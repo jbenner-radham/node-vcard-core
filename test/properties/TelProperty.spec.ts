@@ -44,6 +44,16 @@ describe('TelProperty', () => {
             expect(tel.toString()).to.equal(`TEL;VALUE=text:${value}`);
         });
 
+        it('accepts a multi-value "type" parameter', () => {
+            const type = ['home' as const, 'voice' as const];
+            const parameters = { pref: 1, type, value: 'uri' as const };
+            const value = 'tel:+1-555-555-5555;ext=5555';
+            const config = { parameters, value };
+            const tel = new TelProperty(config);
+
+            expect(tel.toString()).to.equal(`TEL;PREF=1;TYPE="home,voice";VALUE=uri:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'tel:+1-555-555-5555;ext=5555';
