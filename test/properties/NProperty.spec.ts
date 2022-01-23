@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import NProperty from '../../lib/properties/NProperty';
+import NProperty, { NPropertyConfig } from '../../lib/properties/NProperty';
 
 describe('NProperty', () => {
     it('is a function class', () => {
@@ -97,8 +97,7 @@ describe('NProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { sortAs: 'John' };
             const value = 'Public;John;Quinlan;Mr.;Esq.';
-            const config = { parameters, value };
-            const n = new NProperty(config);
+            const n = new NProperty(value, parameters);
             const actual = n.toString();
             const expected = 'N;SORT-AS=John:Public;John;Quinlan;Mr.;Esq.';
 
@@ -108,10 +107,60 @@ describe('NProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Public;John;Quinlan;Mr.;Esq.';
-            const config = { parameters, value };
-            const n = new NProperty(config);
+            const n = new NProperty(value, parameters);
 
             expect(n.toString()).to.equal(`N;VALUE=text:${value}`);
+        });
+    });
+
+    describe('#valueOf()', () => {
+        it('is a method', () => {
+            expect(NProperty.prototype.valueOf).to.be.a('function');
+        });
+
+        it('returns a string', () => {
+            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+
+            expect(n.valueOf()).to.be.a('string');
+        });
+
+        it('returns the same value passed to it', () => {
+            const value = 'Public;John;Quinlan;Mr.;Esq.';
+            const n = new NProperty(value);
+
+            expect(n.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(NProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `NProperty`', () => {
+            const n = NProperty.factory('Public;John;Quinlan;Mr.;Esq.');
+
+            expect(n instanceof NProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+
+            expect(NProperty.factory(n)).to.equal(n);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const n = NProperty.factory('Public;John;Quinlan;Mr.;Esq.');
+
+            expect(n instanceof NProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'Public;John;Quinlan;Mr.;Esq.';
+            const config: NPropertyConfig = [value, { value: 'text' }];
+            const n = NProperty.factory(config);
+
+            expect(n instanceof NProperty).to.equal(true);
         });
     });
 });

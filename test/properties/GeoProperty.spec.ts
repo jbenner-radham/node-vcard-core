@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import GeoProperty from '../../lib/properties/GeoProperty';
+import GeoProperty, { GeoPropertyConfig } from '../../lib/properties/GeoProperty';
 
 describe('GeoProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('GeoProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'work' as const };
             const value = 'geo:37.386013,-122.082932';
-            const config = { parameters, value };
-            const geo = new GeoProperty(config);
+            const geo = new GeoProperty(value, parameters);
             const actual = geo.toString();
             const expected = `GEO;TYPE=work:${value}`;
 
@@ -38,8 +37,7 @@ describe('GeoProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'geo:37.386013,-122.082932';
-            const config = { parameters, value };
-            const geo = new GeoProperty(config);
+            const geo = new GeoProperty(value, parameters);
 
             expect(geo.toString()).to.equal(`GEO;VALUE=uri:${value}`);
         });
@@ -61,6 +59,38 @@ describe('GeoProperty', () => {
             const geo = new GeoProperty(value);
 
             expect(geo.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(GeoProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `GeoProperty`', () => {
+            const geo = GeoProperty.factory('geo:37.386013,-122.082932');
+
+            expect(geo instanceof GeoProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const geo = new GeoProperty('geo:37.386013,-122.082932');
+
+            expect(GeoProperty.factory(geo) instanceof GeoProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const geo = GeoProperty.factory('geo:37.386013,-122.082932');
+
+            expect(geo instanceof GeoProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'geo:37.386013,-122.082932';
+            const config: GeoPropertyConfig = [value, { value: 'uri' }];
+            const geo = GeoProperty.factory(config);
+
+            expect(geo instanceof GeoProperty).to.equal(true);
         });
     });
 });

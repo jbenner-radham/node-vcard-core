@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import FnProperty from '../../lib/properties/FnProperty';
+import FnProperty, { FnPropertyConfig } from '../../lib/properties/FnProperty';
 
 describe('FnProperty', () => {
     it('is a function class', () => {
@@ -28,8 +28,7 @@ describe('FnProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { language: 'en', type: 'home' as const };
             const value = 'Mr. John Q. Public, Esq.';
-            const config = { parameters, value };
-            const fn = new FnProperty(config);
+            const fn = new FnProperty(value, parameters);
             const actual = fn.toString();
             const expected = 'FN;LANGUAGE=en;TYPE=home:Mr. John Q. Public\\, Esq.';
 
@@ -39,8 +38,7 @@ describe('FnProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Mr. John Q. Public, Esq.';
-            const config = { parameters, value };
-            const fn = new FnProperty(config);
+            const fn = new FnProperty(value, parameters);
 
             expect(fn.toString()).to.equal('FN;VALUE=text:Mr. John Q. Public\\, Esq.');
         });
@@ -62,6 +60,38 @@ describe('FnProperty', () => {
             const fn = new FnProperty(value);
 
             expect(fn.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(FnProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `FnProperty`', () => {
+            const fn = FnProperty.factory('Mr. John Q. Public, Esq.');
+
+            expect(fn instanceof FnProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const fn = new FnProperty('Mr. John Q. Public, Esq.');
+
+            expect(FnProperty.factory(fn) instanceof FnProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const fn = FnProperty.factory('Mr. John Q. Public, Esq.');
+
+            expect(fn instanceof FnProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'Mr. John Q. Public, Esq.';
+            const config: FnPropertyConfig = [value, { type: 'work' }];
+            const fn = FnProperty.factory(config);
+
+            expect(fn instanceof FnProperty).to.equal(true);
         });
     });
 });

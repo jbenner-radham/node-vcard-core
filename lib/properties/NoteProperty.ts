@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface NoteParameters {
     altid?: number | string;
 }
 
-export interface NotePropertyConfig {
-    value: string;
-    parameters?: NoteParameters;
-}
+export type NotePropertyConfig = [value: string, parameters?: NoteParameters];
 
 export type NotePropertyLike = NoteProperty | NotePropertyConfig | string;
 
@@ -53,35 +49,16 @@ export default class NoteProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: NotePropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: NoteParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         NoteProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: NotePropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as NotePropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a NotePropertyConfig or string type`);
     }
 
     toString() {
@@ -98,7 +75,9 @@ export default class NoteProperty extends Property {
     static factory(value: NotePropertyLike): NoteProperty {
         if (value instanceof NoteProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new NoteProperty(value);
+        if (Array.isArray(value)) return new NoteProperty(...value);
+
+        if (isString(value)) return new NoteProperty(value);
 
         throw new TypeError(`The value "${value}" is not a NotePropertyLike type`);
     }

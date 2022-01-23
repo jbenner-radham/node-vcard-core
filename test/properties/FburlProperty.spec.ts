@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import FburlProperty from '../../lib/properties/FburlProperty';
+import FburlProperty, { FburlPropertyConfig } from '../../lib/properties/FburlProperty';
 
 describe('FburlProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('FburlProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'work' as const };
             const value = 'http://www.example.com/busy/janedoe';
-            const config = { parameters, value };
-            const fburl = new FburlProperty(config);
+            const fburl = new FburlProperty(value, parameters);
             const actual = fburl.toString();
             const expected = `FBURL;TYPE=work:${value}`;
 
@@ -38,8 +37,7 @@ describe('FburlProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://www.example.com/busy/janedoe';
-            const config = { parameters, value };
-            const fburl = new FburlProperty(config);
+            const fburl = new FburlProperty(value, parameters);
 
             expect(fburl.toString()).to.equal(`FBURL;VALUE=uri:${value}`);
         });
@@ -61,6 +59,38 @@ describe('FburlProperty', () => {
             const fburl = new FburlProperty(value);
 
             expect(fburl.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(FburlProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `FburlProperty`', () => {
+            const fburl = FburlProperty.factory('http://www.example.com/busy/janedoe');
+
+            expect(fburl instanceof FburlProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const fburl = new FburlProperty('http://www.example.com/busy/janedoe');
+
+            expect(FburlProperty.factory(fburl) instanceof FburlProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const fburl = FburlProperty.factory('http://www.example.com/busy/janedoe');
+
+            expect(fburl instanceof FburlProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'http://www.example.com/busy/janedoe';
+            const config: FburlPropertyConfig = [value, { type: 'work' }];
+            const fburl = FburlProperty.factory(config);
+
+            expect(fburl instanceof FburlProperty).to.equal(true);
         });
     });
 });

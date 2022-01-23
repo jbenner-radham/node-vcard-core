@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
@@ -11,10 +10,7 @@ export interface GenderParameters {
     value?: 'text';
 }
 
-export interface GenderPropertyConfig {
-    value: string;
-    parameters?: GenderParameters;
-}
+export type GenderPropertyConfig = [value: string, parameters?: GenderParameters];
 
 export type GenderPropertyLike = GenderProperty | GenderPropertyConfig | string;
 
@@ -73,32 +69,14 @@ export default class GenderProperty extends Property {
         return genderIdentity;
     }
 
-    #objectConstructor(config: GenderPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: GenderPropertyConfig | string) {
+    constructor(value: string, parameters: GenderParameters = {}) {
         super();
 
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as GenderPropertyConfig);
-        }
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a GenderPropertyConfig or string type`);
+        this.parameters = parameters;
+        this[VALUE] = value;
     }
 
     toString() {
@@ -128,7 +106,9 @@ export default class GenderProperty extends Property {
     static factory(value: GenderPropertyLike): GenderProperty {
         if (value instanceof GenderProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new GenderProperty(value);
+        if (Array.isArray(value)) return new GenderProperty(...value);
+
+        if (isString(value)) return new GenderProperty(value);
 
         throw new TypeError(`The value "${value}" is not a GenderPropertyLike type`);
     }

@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
@@ -19,10 +18,7 @@ export interface AdrParameters {
     type?: Type;
 }
 
-export interface AdrPropertyConfig {
-    value: string;
-    parameters?: AdrParameters;
-}
+export type AdrPropertyConfig = [value: string, parameters?: AdrParameters];
 
 export type AdrPropertyLike = AdrProperty | AdrPropertyConfig | string;
 
@@ -151,37 +147,17 @@ export default class AdrProperty extends Property {
         return countryName;
     }
 
-    #objectConstructor(config: AdrPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: AdrParameters = {}) {
+        super();
 
-        AdrProperty.validateParameters(parameters);
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
+
         this.validate(value);
+        AdrProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this.validate(value);
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: AdrPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as AdrPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a AdrPropertyConfig or string type`);
     }
 
     toString() {
@@ -191,10 +167,6 @@ export default class AdrProperty extends Property {
         return foldLine(`ADR${parameters}:${value}`);
     }
 
-    valueOf(): string {
-        return this[VALUE];
-    }
-
     validate(value: string): void {
         const semicolonCount = getSemicolonCount(value);
 
@@ -202,10 +174,16 @@ export default class AdrProperty extends Property {
             throw new TypeError(`The value "${value}" is not a valid ADR format`);
     }
 
+    valueOf(): string {
+        return this[VALUE];
+    }
+
     static factory(value: AdrPropertyLike): AdrProperty {
         if (value instanceof AdrProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new AdrProperty(value);
+        if (Array.isArray(value)) return new AdrProperty(...value);
+
+        if (isString(value)) return new AdrProperty(value);
 
         throw new TypeError(`The value "${value}" is not a AdrPropertyLike type`);
     }

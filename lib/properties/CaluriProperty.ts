@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface CaluriParameters {
     altid?: number | string;
 }
 
-export interface CaluriPropertyConfig {
-    value: string;
-    parameters?: CaluriParameters;
-}
+export type CaluriPropertyConfig = [value: string, parameters?: CaluriParameters];
 
 /** @todo Add URL type support. */
 export type CaluriPropertyLike = CaluriProperty | CaluriPropertyConfig | string;
@@ -58,35 +54,16 @@ export default class CaluriProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: CaluriPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: CaluriParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         CaluriProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: CaluriPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as CaluriPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a CaluriPropertyConfig or string type`);
     }
 
     toString() {
@@ -100,7 +77,9 @@ export default class CaluriProperty extends Property {
     static factory(value: CaluriPropertyLike): CaluriProperty {
         if (value instanceof CaluriProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new CaluriProperty(value);
+        if (Array.isArray(value)) return new CaluriProperty(...value);
+
+        if (isString(value)) return new CaluriProperty(value);
 
         throw new TypeError(`The value "${value}" is not a CaluriPropertyLike type`);
     }

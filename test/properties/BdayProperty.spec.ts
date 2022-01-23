@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import BdayProperty from '../../lib/properties/BdayProperty';
+import BdayProperty, { BdayPropertyConfig } from '../../lib/properties/BdayProperty';
 
 describe('BdayProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('BdayProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { calscale: 'gregorian' as const };
             const value = '19960415';
-            const config = { parameters, value };
-            const bday = new BdayProperty(config);
+            const bday = new BdayProperty(value, parameters);
             const actual = bday.toString();
             const expected = 'BDAY;CALSCALE=gregorian:19960415';
 
@@ -38,8 +37,7 @@ describe('BdayProperty', () => {
         it('accepts a "date-and-or-time" value parameter', () => {
             const parameters = { value: 'date-and-or-time' as const };
             const value = '19960415';
-            const config = { parameters, value };
-            const bday = new BdayProperty(config);
+            const bday = new BdayProperty(value, parameters);
 
             expect(bday.toString()).to.equal(`BDAY;VALUE=date-and-or-time:${value}`);
         });
@@ -47,8 +45,7 @@ describe('BdayProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'circa 1800';
-            const config = { parameters, value };
-            const bday = new BdayProperty(config);
+            const bday = new BdayProperty(value, parameters);
 
             expect(bday.toString()).to.equal(`BDAY;VALUE=text:${value}`);
         });
@@ -70,6 +67,37 @@ describe('BdayProperty', () => {
             const bday = new BdayProperty(value);
 
             expect(bday.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(BdayProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `BdayProperty`', () => {
+            const bday = BdayProperty.factory('--0415');
+
+            expect(bday instanceof BdayProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const bday = new BdayProperty('--0415');
+
+            expect(BdayProperty.factory(bday)).to.equal(bday);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const bday = BdayProperty.factory('--0415');
+
+            expect(bday instanceof BdayProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const config: BdayPropertyConfig = ['--0415', { value: 'date-and-or-time' }];
+            const bday = BdayProperty.factory(config);
+
+            expect(bday instanceof BdayProperty).to.equal(true);
         });
     });
 });

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import KindProperty from '../../lib/properties/KindProperty';
+import KindProperty, { KindPropertyConfig } from '../../lib/properties/KindProperty';
 
 describe('KindProperty', () => {
     it('is a function class', () => {
@@ -26,8 +26,7 @@ describe('KindProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'application';
-            const config = { parameters, value };
-            const kind = new KindProperty(config);
+            const kind = new KindProperty(value, parameters);
 
             expect(kind.toString()).to.equal(`KIND;VALUE=text:${value}`);
         });
@@ -49,6 +48,38 @@ describe('KindProperty', () => {
             const kind = new KindProperty(value);
 
             expect(kind.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(KindProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `KindProperty`', () => {
+            const kind = KindProperty.factory('application');
+
+            expect(kind instanceof KindProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const kind = new KindProperty('application');
+
+            expect(KindProperty.factory(kind) instanceof KindProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const kind = KindProperty.factory('application');
+
+            expect(kind instanceof KindProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'application';
+            const config: KindPropertyConfig = [value, { value: 'text' }];
+            const kind = KindProperty.factory(config);
+
+            expect(kind instanceof KindProperty).to.equal(true);
         });
     });
 });

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import RevProperty from '../../lib/properties/RevProperty';
+import RevProperty, { RevPropertyConfig } from '../../lib/properties/RevProperty';
 
 describe('RevProperty', () => {
     it('is a function class', () => {
@@ -26,8 +26,7 @@ describe('RevProperty', () => {
 
         it('accepts an object argument to the constructor', () => {
             const value = '19951031T222710Z';
-            const config = { value };
-            const rev = new RevProperty(config);
+            const rev = new RevProperty(value);
 
             expect(rev.toString()).to.equal(`REV:${value}`);
         });
@@ -35,8 +34,7 @@ describe('RevProperty', () => {
         it('accepts a "timestamp" value parameter', () => {
             const parameters = { value: 'timestamp' as const };
             const value = '19951031T222710Z';
-            const config = { parameters, value };
-            const rev = new RevProperty(config);
+            const rev = new RevProperty(value, parameters);
 
             expect(rev.toString()).to.equal(`REV;VALUE=timestamp:${value}`);
         });
@@ -58,6 +56,38 @@ describe('RevProperty', () => {
             const rev = new RevProperty(value);
 
             expect(rev.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(RevProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `RevProperty`', () => {
+            const rev = RevProperty.factory('19951031T222710Z');
+
+            expect(rev instanceof RevProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const rev = new RevProperty('19951031T222710Z');
+
+            expect(RevProperty.factory(rev)).to.equal(rev);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const rev = RevProperty.factory('19951031T222710Z');
+
+            expect(rev instanceof RevProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = '19951031T222710Z';
+            const config: RevPropertyConfig = [value, { value: 'timestamp' }];
+            const rev = RevProperty.factory(config);
+
+            expect(rev instanceof RevProperty).to.equal(true);
         });
     });
 });

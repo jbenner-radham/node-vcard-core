@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ProdidProperty from '../../lib/properties/ProdidProperty';
+import ProdidProperty, { ProdidPropertyConfig } from '../../lib/properties/ProdidProperty';
 
 describe('ProdidProperty', () => {
     it('is a function class', () => {
@@ -26,8 +26,7 @@ describe('ProdidProperty', () => {
 
         it('accepts an object argument to the constructor', () => {
             const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
-            const config = { value };
-            const prodid = new ProdidProperty(config);
+            const prodid = new ProdidProperty(value);
             const actual = prodid.toString();
             const expected = `PRODID:${value}`;
 
@@ -37,8 +36,7 @@ describe('ProdidProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
-            const config = { parameters, value };
-            const prodid = new ProdidProperty(config);
+            const prodid = new ProdidProperty(value, parameters);
 
             expect(prodid.toString()).to.equal(`PRODID;VALUE=text:${value}`);
         });
@@ -60,6 +58,38 @@ describe('ProdidProperty', () => {
             const prodid = new ProdidProperty(value);
 
             expect(prodid.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(ProdidProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `ProdidProperty`', () => {
+            const prodid = ProdidProperty.factory('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
+
+            expect(prodid instanceof ProdidProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const prodid = new ProdidProperty('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
+
+            expect(ProdidProperty.factory(prodid)).to.equal(prodid);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const prodid = ProdidProperty.factory('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
+
+            expect(prodid instanceof ProdidProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
+            const config: ProdidPropertyConfig = [value, { value: 'text' }];
+            const prodid = ProdidProperty.factory(config);
+
+            expect(prodid instanceof ProdidProperty).to.equal(true);
         });
     });
 });

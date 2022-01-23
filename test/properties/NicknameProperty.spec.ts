@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import NicknameProperty from '../../lib/properties/NicknameProperty';
+import NicknameProperty, { NicknamePropertyConfig } from '../../lib/properties/NicknameProperty';
 
 describe('NicknameProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('NicknameProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'work' as const };
             const value = 'Boss';
-            const config = { parameters, value };
-            const nickname = new NicknameProperty(config);
+            const nickname = new NicknameProperty(value, parameters);
             const actual = nickname.toString();
             const expected = 'NICKNAME;TYPE=work:Boss';
 
@@ -38,8 +37,7 @@ describe('NicknameProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Boss';
-            const config = { parameters, value };
-            const nickname = new NicknameProperty(config);
+            const nickname = new NicknameProperty(value, parameters);
 
             expect(nickname.toString()).to.equal(`NICKNAME;VALUE=text:${value}`);
         });
@@ -61,6 +59,38 @@ describe('NicknameProperty', () => {
             const nickname = new NicknameProperty(value);
 
             expect(nickname.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(NicknameProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `NicknameProperty`', () => {
+            const nickname = NicknameProperty.factory('Boss');
+
+            expect(nickname instanceof NicknameProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const nickname = new NicknameProperty('Boss');
+
+            expect(NicknameProperty.factory(nickname)).to.equal(nickname);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const nickname = NicknameProperty.factory('Boss');
+
+            expect(nickname instanceof NicknameProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'Boss';
+            const config: NicknamePropertyConfig = [value, { type: 'work' }];
+            const nickname = NicknameProperty.factory(config);
+
+            expect(nickname instanceof NicknameProperty).to.equal(true);
         });
     });
 });

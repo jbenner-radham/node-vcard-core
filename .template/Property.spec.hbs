@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import {{{capitalize property}}}Property from '../../lib/properties/{{{capitalize property}}}Property';
+import {{{capitalize property}}}Property, { {{{capitalize property}}}PropertyConfig }  from '../../lib/properties/{{{capitalize property}}}Property';
 
 describe('{{{capitalize property}}}Property', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('{{{capitalize property}}}Property', () => {
         it('correctly returns parameters', () => {
             const parameters = { pref: 1 };
             const value = '...';
-            const config = { parameters, value };
-            const {{{lowerCase property}}} = new {{{capitalize property}}}Property(config);
+            const {{{lowerCase property}}} = new {{{capitalize property}}}Property(value, parameters);
             const actual = {{{lowerCase property}}}.toString();
             const expected = `{{{upperCase property}}};PREF=1:${value}`;
 
@@ -52,6 +51,38 @@ describe('{{{capitalize property}}}Property', () => {
             const {{{lowerCase property}}} = new {{{capitalize property}}}Property(value);
 
             expect({{{lowerCase property}}}.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect({{{capitalize property}}}Property.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `{{{capitalize property}}}Property`', () => {
+            const {{{lowerCase property}}} = {{{capitalize property}}}Property.factory('...');
+
+            expect({{{lowerCase property}}} instanceof {{{capitalize property}}}Property).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const {{{lowerCase property}}} = new {{{capitalize property}}}Property('...');
+
+            expect({{{capitalize property}}}Property.factory({{{lowerCase property}}})).to.equal({{{lowerCase property}}});
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const {{{lowerCase property}}} = {{{capitalize property}}}Property.factory('...');
+
+            expect({{{lowerCase property}}} instanceof {{{capitalize property}}}Property).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = '...';
+            const config: {{{capitalize property}}}PropertyConfig = [value, { type: 'home' }];
+            const {{{lowerCase property}}} = {{{capitalize property}}}Property.factory(config);
+
+            expect({{{lowerCase property}}} instanceof {{{capitalize property}}}Property).to.equal(true);
         });
     });
 });

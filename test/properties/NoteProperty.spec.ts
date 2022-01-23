@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import NoteProperty from '../../lib/properties/NoteProperty';
+import NoteProperty, { NotePropertyConfig } from '../../lib/properties/NoteProperty';
 
 describe('NoteProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('NoteProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { language: 'en' };
             const value = 'This is a note...';
-            const config = { parameters, value };
-            const note = new NoteProperty(config);
+            const note = new NoteProperty(value, parameters);
             const actual = note.toString();
             const expected = `NOTE;LANGUAGE=en:${value}`;
 
@@ -38,8 +37,7 @@ describe('NoteProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'This is a note...';
-            const config = { parameters, value };
-            const note = new NoteProperty(config);
+            const note = new NoteProperty(value, parameters);
 
             expect(note.toString()).to.equal(`NOTE;VALUE=text:${value}`);
         });
@@ -61,6 +59,38 @@ describe('NoteProperty', () => {
             const note = new NoteProperty(value);
 
             expect(note.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(NoteProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `NoteProperty`', () => {
+            const note = NoteProperty.factory('This is a note...');
+
+            expect(note instanceof NoteProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const note = new NoteProperty('This is a note...');
+
+            expect(NoteProperty.factory(note)).to.equal(note);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const note = NoteProperty.factory('This is a note...');
+
+            expect(note instanceof NoteProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'This is a note...';
+            const config: NotePropertyConfig = [value, { type: 'home' }];
+            const note = NoteProperty.factory(config);
+
+            expect(note instanceof NoteProperty).to.equal(true);
         });
     });
 });

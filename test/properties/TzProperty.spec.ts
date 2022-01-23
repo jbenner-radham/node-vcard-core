@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import TzProperty from '../../lib/properties/TzProperty';
+import TzProperty, { TzPropertyConfig } from '../../lib/properties/TzProperty';
 
 describe('TzProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('TzProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { pref: 1 };
             const value = 'Raleigh/North America';
-            const config = { parameters, value };
-            const tz = new TzProperty(config);
+            const tz = new TzProperty(value, parameters);
             const actual = tz.toString();
             const expected = 'TZ;PREF=1:Raleigh/North America';
 
@@ -38,17 +37,15 @@ describe('TzProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Raleigh/North America';
-            const config = { parameters, value };
-            const tz = new TzProperty(config);
+            const tz = new TzProperty(value, parameters);
 
             expect(tz.toString()).to.equal(`TZ;VALUE=text:${value}`);
         });
 
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
-            const value = 'http://timezones.example.com/America/New_York'; // Find formal example to test.
-            const config = { parameters, value };
-            const tz = new TzProperty(config);
+            const value = 'http://timezones.example.com/America/New_York'; // TODO: Find formal example to test!
+            const tz = new TzProperty(value, parameters);
 
             expect(tz.toString()).to.equal(`TZ;VALUE=uri:${value}`);
         });
@@ -56,8 +53,7 @@ describe('TzProperty', () => {
         it('accepts a "utc-offset" value parameter', () => {
             const parameters = { value: 'utc-offset' as const };
             const value = '-0500';
-            const config = { parameters, value };
-            const tz = new TzProperty(config);
+            const tz = new TzProperty(value, parameters);
 
             expect(tz.toString()).to.equal(`TZ;VALUE=utc-offset:${value}`);
         });
@@ -79,6 +75,38 @@ describe('TzProperty', () => {
             const tz = new TzProperty(value);
 
             expect(tz.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(TzProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `TzProperty`', () => {
+            const tz = TzProperty.factory('Raleigh/North America');
+
+            expect(tz instanceof TzProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const tz = new TzProperty('Raleigh/North America');
+
+            expect(TzProperty.factory(tz)).to.equal(tz);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const tz = TzProperty.factory('Raleigh/North America');
+
+            expect(tz instanceof TzProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'Raleigh/North America';
+            const config: TzPropertyConfig = [value, { type: 'home' }];
+            const tz = TzProperty.factory(config);
+
+            expect(tz instanceof TzProperty).to.equal(true);
         });
     });
 });

@@ -1,19 +1,15 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
+export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
+
 export interface KindParameters {
     value?: 'text';
 }
 
-export interface KindPropertyConfig {
-    value: string;
-    parameters?: KindParameters;
-}
-
-export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
+export type KindPropertyConfig = [value: Kind, parameters?: KindParameters];
 
 export type KindPropertyLike = KindProperty | KindPropertyConfig | Kind;
 
@@ -151,36 +147,21 @@ export default class KindProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: KindPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: Kind) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: KindPropertyConfig | Kind) {
+    constructor(value: Kind, parameters: KindParameters = {}) {
         super();
 
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as KindPropertyConfig);
-        }
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
-        if (isString(config)) {
-            return this.#stringConstructor(config as Kind);
-        }
-
-        throw new TypeError(`The value "${config}" is not a KindPropertyConfig or Kind type`);
+        this.parameters = parameters;
+        this[VALUE] = value;
     }
 
     toString() {
-        return foldLine(`KIND${this.getParametersString()}:${this.getEscapedValueString()}`);
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`KIND${parameters}:${value}`);
     }
 
     valueOf(): string {
@@ -190,7 +171,9 @@ export default class KindProperty extends Property {
     static factory(value: KindPropertyLike): KindProperty {
         if (value instanceof KindProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new KindProperty(value);
+        if (Array.isArray(value)) return new KindProperty(...value);
+
+        if (isString(value)) return new KindProperty(value);
 
         throw new TypeError(`The value "${value}" is not a KindPropertyLike type`);
     }

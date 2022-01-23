@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface FburlParameters {
     altid?: number | string;
 }
 
-export interface FburlPropertyConfig {
-    value: string;
-    parameters?: FburlParameters;
-}
+export type FburlPropertyConfig = [value: string, parameters?: FburlParameters];
 
 /** @todo Add URL type support? */
 export type FburlPropertyLike = FburlProperty | FburlPropertyConfig | string;
@@ -59,35 +55,16 @@ export default class FburlProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: FburlPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: FburlParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         FburlProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: FburlPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as FburlPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a FburlPropertyConfig or string type`);
     }
 
     toString() {
@@ -101,7 +78,9 @@ export default class FburlProperty extends Property {
     static factory(value: FburlPropertyLike): FburlProperty {
         if (value instanceof FburlProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new FburlProperty(value);
+        if (Array.isArray(value)) return new FburlProperty(...value);
+
+        if (isString(value)) return new FburlProperty(value);
 
         throw new TypeError(`The value "${value}" is not a FburlPropertyLike type`);
     }

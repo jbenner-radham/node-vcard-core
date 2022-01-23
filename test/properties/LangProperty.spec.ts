@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import LangProperty from '../../lib/properties/LangProperty';
+import LangProperty, { LangPropertyConfig } from '../../lib/properties/LangProperty';
 
 describe('LangProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('LangProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { pref: 1, type: 'work' as const };
             const value = 'en';
-            const config = { parameters, value };
-            const lang = new LangProperty(config);
+            const lang = new LangProperty(value, parameters);
             const actual = lang.toString();
             const expected = 'LANG;PREF=1;TYPE=work:en';
 
@@ -38,8 +37,7 @@ describe('LangProperty', () => {
         it('accepts a "language-tag" value parameter', () => {
             const parameters = { value: 'language-tag' as const };
             const value = 'en';
-            const config = { parameters, value };
-            const lang = new LangProperty(config);
+            const lang = new LangProperty(value, parameters);
 
             expect(lang.toString()).to.equal(`LANG;VALUE=language-tag:${value}`);
         });
@@ -61,6 +59,38 @@ describe('LangProperty', () => {
             const lang = new LangProperty(value);
 
             expect(lang.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(LangProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `LangProperty`', () => {
+            const lang = LangProperty.factory('en');
+
+            expect(lang instanceof LangProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const lang = new LangProperty('en');
+
+            expect(LangProperty.factory(lang)).to.equal(lang);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const lang = LangProperty.factory('en');
+
+            expect(lang instanceof LangProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'en';
+            const config: LangPropertyConfig = [value, { type: 'home' }];
+            const lang = LangProperty.factory(config);
+
+            expect(lang instanceof LangProperty).to.equal(true);
         });
     });
 });

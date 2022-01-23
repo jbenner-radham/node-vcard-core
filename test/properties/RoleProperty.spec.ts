@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import RoleProperty from '../../lib/properties/RoleProperty';
+import RoleProperty, { RolePropertyConfig } from '../../lib/properties/RoleProperty';
 
 describe('RoleProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('RoleProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { language: 'en' };
             const value = 'Project Leader';
-            const config = { parameters, value };
-            const role = new RoleProperty(config);
+            const role = new RoleProperty(value, parameters);
             const actual = role.toString();
             const expected = `ROLE;LANGUAGE=en:${value}`;
 
@@ -38,8 +37,7 @@ describe('RoleProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Project Leader';
-            const config = { parameters, value };
-            const role = new RoleProperty(config);
+            const role = new RoleProperty(value, parameters);
 
             expect(role.toString()).to.equal(`ROLE;VALUE=text:${value}`);
         });
@@ -61,6 +59,38 @@ describe('RoleProperty', () => {
             const role = new RoleProperty(value);
 
             expect(role.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(RoleProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `RoleProperty`', () => {
+            const role = RoleProperty.factory('Project Leader');
+
+            expect(role instanceof RoleProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const role = new RoleProperty('Project Leader');
+
+            expect(RoleProperty.factory(role)).to.equal(role);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const role = RoleProperty.factory('Project Leader');
+
+            expect(role instanceof RoleProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'Project Leader';
+            const config: RolePropertyConfig = [value, { type: 'work' }];
+            const role = RoleProperty.factory(config);
+
+            expect(role instanceof RoleProperty).to.equal(true);
         });
     });
 });

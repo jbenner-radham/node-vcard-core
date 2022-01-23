@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -14,10 +13,7 @@ export interface SourceParameters {
     mediatype?: string;
 }
 
-export interface SourcePropertyConfig {
-    value: string;
-    parameters?: SourceParameters;
-}
+export type SourcePropertyConfig = [value: string, parameters?: SourceParameters];
 
 /** Add URL type support? */
 export type SourcePropertyLike = SourceProperty | SourcePropertyConfig | string;
@@ -62,35 +58,16 @@ export default class SourceProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: SourcePropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: SourceParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         SourceProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: SourcePropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as SourcePropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a SourcePropertyConfig or string type`);
     }
 
     toString() {
@@ -104,7 +81,9 @@ export default class SourceProperty extends Property {
     static factory(value: SourcePropertyLike): SourceProperty {
         if (value instanceof SourceProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new SourceProperty(value);
+        if (Array.isArray(value)) return new SourceProperty(...value);
+
+        if (isString(value)) return new SourceProperty(value);
 
         throw new TypeError(`The value "${value}" is not a SourcePropertyLike type`);
     }

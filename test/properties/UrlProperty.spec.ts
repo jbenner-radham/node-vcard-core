@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import UrlProperty from '../../lib/properties/UrlProperty';
+import UrlProperty, { UrlPropertyConfig } from '../../lib/properties/UrlProperty';
 
 describe('UrlProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('UrlProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'work' as const };
             const value = 'http://example.org/restaurant.french/~chezchic.html';
-            const config = { parameters, value };
-            const url = new UrlProperty(config);
+            const url = new UrlProperty(value, parameters);
             const actual = url.toString();
             const expected = `URL;TYPE=work:${value}`;
 
@@ -38,8 +37,7 @@ describe('UrlProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://example.org/restaurant.french/~chezchic.html';
-            const config = { parameters, value };
-            const url = new UrlProperty(config);
+            const url = new UrlProperty(value, parameters);
 
             expect(url.toString()).to.equal(`URL;VALUE=uri:${value}`);
         });
@@ -88,6 +86,38 @@ describe('UrlProperty', () => {
             const url = new UrlProperty('example.com');
 
             expect(() => url.validate('example.com')).to.throw();
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(UrlProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `UrlProperty`', () => {
+            const url = UrlProperty.factory('http://www.example.com/');
+
+            expect(url instanceof UrlProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const url = new UrlProperty('http://www.example.com/');
+
+            expect(UrlProperty.factory(url)).to.equal(url);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const url = UrlProperty.factory('http://www.example.com/');
+
+            expect(url instanceof UrlProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'http://www.example.com/';
+            const config: UrlPropertyConfig = [value, { type: 'home' }];
+            const url = UrlProperty.factory(config);
+
+            expect(url instanceof UrlProperty).to.equal(true);
         });
     });
 });

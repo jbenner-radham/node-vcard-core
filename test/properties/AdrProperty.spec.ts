@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import AdrProperty from '../../lib/properties/AdrProperty';
+import AdrProperty, { AdrPropertyConfig } from '../../lib/properties/AdrProperty';
 import Vcard from '../../lib';
 
 describe('AdrProperty', () => {
@@ -169,8 +169,7 @@ describe('AdrProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { geo: 'geo:12.3457,78.910', type: 'home' as const };
             const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
-            const config = { parameters, value };
-            const adr = new AdrProperty(config);
+            const adr = new AdrProperty(value, parameters);
             const actual = adr.toString();
             const expected = [
                 'ADR;GEO="geo:12.3457,78.910";TYPE=home:;;123 Main Street;Any Town;CA;91921-',
@@ -183,10 +182,41 @@ describe('AdrProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
-            const config = { parameters, value };
-            const adr = new AdrProperty(config);
+            const adr = new AdrProperty(value, parameters);
 
             expect(adr.toString()).to.equal(`ADR;VALUE=text:${value}`);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(AdrProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `AdrProperty`', () => {
+            const adr = AdrProperty.factory(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
+
+            expect(adr instanceof AdrProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const adr = new AdrProperty(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
+
+            expect(AdrProperty.factory(adr)).to.equal(adr);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const adr = AdrProperty.factory(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
+
+            expect(adr instanceof AdrProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+            const config: AdrPropertyConfig = [value, { type: 'home' }];
+            const adr = AdrProperty.factory(config);
+
+            expect(adr instanceof AdrProperty).to.equal(true);
         });
     });
 });

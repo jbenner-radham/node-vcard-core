@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface NicknameParameters {
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
 }
 
-export interface NicknamePropertyConfig {
-    value: string;
-    parameters?: NicknameParameters;
-}
+export type NicknamePropertyConfig = [value: string, parameters?: NicknameParameters];
 
 export type NicknamePropertyLike = NicknameProperty | NicknamePropertyConfig | string;
 
@@ -54,35 +50,16 @@ export default class NicknameProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: NicknamePropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: NicknameParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         NicknameProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: NicknamePropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as NicknamePropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a NicknamePropertyConfig or string type`);
     }
 
     toString() {
@@ -99,7 +76,9 @@ export default class NicknameProperty extends Property {
     static factory(value: NicknamePropertyLike): NicknameProperty {
         if (value instanceof NicknameProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new NicknameProperty(value);
+        if (Array.isArray(value)) return new NicknameProperty(...value);
+
+        if (isString(value)) return new NicknameProperty(value);
 
         throw new TypeError(`The value "${value}" is not a NicknamePropertyLike type`);
     }

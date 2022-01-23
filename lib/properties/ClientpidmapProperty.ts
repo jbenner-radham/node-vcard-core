@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
@@ -8,10 +7,7 @@ export interface ClientpidmapParameters {
     [key: string]: never;
 }
 
-export interface ClientpidmapPropertyConfig {
-    value: string;
-    parameters?: ClientpidmapParameters;
-}
+export type ClientpidmapPropertyConfig = [value: string, parameters?: ClientpidmapParameters];
 
 export type ClientpidmapPropertyLike = ClientpidmapProperty | ClientpidmapPropertyConfig | string;
 
@@ -60,32 +56,14 @@ export default class ClientpidmapProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: ClientpidmapPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: ClientpidmapPropertyConfig | string) {
+    constructor(value: string, parameters: ClientpidmapParameters = {}) {
         super();
 
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as ClientpidmapPropertyConfig);
-        }
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a ClientpidmapPropertyConfig or string type`);
+        this.parameters = parameters;
+        this[VALUE] = value;
     }
 
     toString() {
@@ -99,7 +77,9 @@ export default class ClientpidmapProperty extends Property {
     static factory(value: ClientpidmapPropertyLike): ClientpidmapProperty {
         if (value instanceof ClientpidmapProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new ClientpidmapProperty(value);
+        if (Array.isArray(value)) return new ClientpidmapProperty(...value);
+
+        if (isString(value)) return new ClientpidmapProperty(value);
 
         throw new TypeError(`The value "${value}" is not a ClientpidmapPropertyLike type`);
     }

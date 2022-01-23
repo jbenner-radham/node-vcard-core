@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import CaluriProperty from '../../lib/properties/CaluriProperty';
+import CaluriProperty, { CaluriPropertyConfig } from '../../lib/properties/CaluriProperty';
 
 describe('CaluriProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('CaluriProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { mediatype: 'text/calendar' };
             const value = 'ftp://ftp.example.com/calA.ics';
-            const config = { parameters, value };
-            const caluri = new CaluriProperty(config);
+            const caluri = new CaluriProperty(value, parameters);
             const actual = caluri.toString();
             const expected = 'CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics';
 
@@ -38,8 +37,7 @@ describe('CaluriProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://cal.example.com/calA';
-            const config = { parameters, value };
-            const caluri = new CaluriProperty(config);
+            const caluri = new CaluriProperty(value, parameters);
 
             expect(caluri.toString()).to.equal(`CALURI;VALUE=uri:${value}`);
         });
@@ -61,6 +59,38 @@ describe('CaluriProperty', () => {
             const caluri = new CaluriProperty(value);
 
             expect(caluri.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(CaluriProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `CaluriProperty`', () => {
+            const caluri = CaluriProperty.factory('http://cal.example.com/calA');
+
+            expect(caluri instanceof CaluriProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const caluri = new CaluriProperty('http://cal.example.com/calA');
+
+            expect(CaluriProperty.factory(caluri) instanceof CaluriProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const caluri = CaluriProperty.factory('http://cal.example.com/calA');
+
+            expect(caluri instanceof CaluriProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'http://cal.example.com/calA';
+            const config: CaluriPropertyConfig = [value, { type: 'home' }];
+            const caluri = CaluriProperty.factory(config);
+
+            expect(caluri instanceof CaluriProperty).to.equal(true);
         });
     });
 });

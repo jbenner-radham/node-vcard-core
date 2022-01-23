@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
@@ -8,10 +7,7 @@ export interface UidParameters {
     value?: 'uri' | 'text';
 }
 
-export interface UidPropertyConfig {
-    value: string;
-    parameters?: UidParameters;
-}
+export type UidPropertyConfig = [value: string, parameters?: UidParameters];
 
 export type UidPropertyLike = UidProperty | UidPropertyConfig | string;
 
@@ -56,32 +52,14 @@ export default class UidProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: UidPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: UidPropertyConfig | string) {
+    constructor(value: string, parameters: UidParameters = {}) {
         super();
 
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as UidPropertyConfig);
-        }
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a UidPropertyConfig or string type`);
+        this.parameters = parameters;
+        this[VALUE] = value;
     }
 
     toString() {
@@ -100,7 +78,9 @@ export default class UidProperty extends Property {
     static factory(value: UidPropertyLike): UidProperty {
         if (value instanceof UidProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new UidProperty(value);
+        if (Array.isArray(value)) return new UidProperty(...value);
+
+        if (isString(value)) return new UidProperty(value);
 
         throw new TypeError(`The value "${value}" is not a UidPropertyLike type`);
     }

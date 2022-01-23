@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import RelatedProperty from '../../lib/properties/RelatedProperty';
+import RelatedProperty, { RelatedPropertyConfig } from '../../lib/properties/RelatedProperty';
 import Vcard from '../../lib';
 
 describe('RelatedProperty', () => {
@@ -29,8 +29,7 @@ describe('RelatedProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'contact' as const };
             const value = 'http://example.com/directory/jdoe.vcf';
-            const config = { parameters, value };
-            const related = new RelatedProperty(config);
+            const related = new RelatedProperty(value, parameters);
             const actual = related.toString();
             const expected = `RELATED;TYPE=contact:${value}`;
 
@@ -40,8 +39,7 @@ describe('RelatedProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { type: 'contact' as const, value: 'uri' as const };
             const value = 'http://example.com/directory/jdoe.vcf';
-            const config = { parameters, value };
-            const related = new RelatedProperty(config);
+            const related = new RelatedProperty(value, parameters);
 
             expect(related.toString()).to.equal(`RELATED;TYPE=contact;VALUE=uri:${value}`);
         });
@@ -49,8 +47,7 @@ describe('RelatedProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { type: 'co-worker' as const, value: 'text' as const };
             const value = 'Please contact my assistant Jane Doe for any inquiries.';
-            const config = { parameters, value };
-            const related = new RelatedProperty(config);
+            const related = new RelatedProperty(value, parameters);
             const expected = [
                 'RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane Doe for ',
                 'any inquiries.'
@@ -76,6 +73,38 @@ describe('RelatedProperty', () => {
             const related = new RelatedProperty(value);
 
             expect(related.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(RelatedProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `RelatedProperty`', () => {
+            const related = RelatedProperty.factory('http://example.com/directory/jdoe.vcf');
+
+            expect(related instanceof RelatedProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const related = new RelatedProperty('http://example.com/directory/jdoe.vcf');
+
+            expect(RelatedProperty.factory(related)).to.equal(related);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const related = RelatedProperty.factory('http://example.com/directory/jdoe.vcf');
+
+            expect(related instanceof RelatedProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'http://example.com/directory/jdoe.vcf';
+            const config: RelatedPropertyConfig = [value, { type: 'contact' }];
+            const related = RelatedProperty.factory(config);
+
+            expect(related instanceof RelatedProperty).to.equal(true);
         });
     });
 });

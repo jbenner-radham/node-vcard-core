@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Calscale, Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages';
@@ -11,10 +10,7 @@ export interface AnniversaryParameters {
     calscale?: Calscale; // For `date-and-or-time` type only!
 }
 
-export interface AnniversaryPropertyConfig {
-    value: string;
-    parameters?: AnniversaryParameters;
-}
+export type AnniversaryPropertyConfig = [value: string, parameters?: AnniversaryParameters];
 
 /** @todo Add Date type support. */
 export type AnniversaryPropertyLike = AnniversaryProperty | AnniversaryPropertyConfig | string;
@@ -52,35 +48,16 @@ export default class AnniversaryProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: AnniversaryPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: AnniversaryParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         AnniversaryProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: AnniversaryPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as AnniversaryPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a AnniversaryPropertyConfig or string type`);
     }
 
     toString() {
@@ -99,7 +76,9 @@ export default class AnniversaryProperty extends Property {
     static factory(value: AnniversaryPropertyLike): AnniversaryProperty {
         if (value instanceof AnniversaryProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new AnniversaryProperty(value);
+        if (Array.isArray(value)) return new AnniversaryProperty(...value);
+
+        if (isString(value)) return new AnniversaryProperty(value);
 
         throw new TypeError(`The value "${value}" is not a AnniversaryPropertyLike type`);
     }

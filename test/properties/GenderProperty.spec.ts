@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import GenderProperty from '../../lib/properties/GenderProperty';
+import GenderProperty, { GenderPropertyConfig } from '../../lib/properties/GenderProperty';
 
 describe('GenderProperty', () => {
     it('is a function class', () => {
@@ -38,8 +38,7 @@ describe('GenderProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'O;intersex';
-            const config = { parameters, value };
-            const gender = new GenderProperty(config);
+            const gender = new GenderProperty(value, parameters);
 
             expect(gender.toString()).to.equal('GENDER;VALUE=text:O;intersex');
         });
@@ -61,6 +60,38 @@ describe('GenderProperty', () => {
             const gender = new GenderProperty(value);
 
             expect(gender.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(GenderProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `GenderProperty`', () => {
+            const gender = GenderProperty.factory('M;Fellow');
+
+            expect(gender instanceof GenderProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const gender = new GenderProperty('M;Fellow');
+
+            expect(GenderProperty.factory(gender) instanceof GenderProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const gender = GenderProperty.factory('M;Fellow');
+
+            expect(gender instanceof GenderProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'M;Fellow';
+            const config: GenderPropertyConfig = [value, { value: 'text' }];
+            const gender = GenderProperty.factory(config);
+
+            expect(gender instanceof GenderProperty).to.equal(true);
         });
     });
 });

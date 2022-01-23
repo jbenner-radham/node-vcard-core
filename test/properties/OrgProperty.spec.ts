@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import OrgProperty from '../../lib/properties/OrgProperty';
+import OrgProperty, { OrgPropertyConfig } from '../../lib/properties/OrgProperty';
 
 describe('OrgProperty', () => {
     it('is a function class', () => {
@@ -28,8 +28,7 @@ describe('OrgProperty', () => {
             const parameters = { sortAs: 'ABC', type: 'work' as const };
             const value = 'ABC, Inc.;North American Division;Marketing';
             const escapedValue = 'ABC\\, Inc.;North American Division;Marketing';
-            const config = { parameters, value };
-            const org = new OrgProperty(config);
+            const org = new OrgProperty(value, parameters);
             const actual = org.toString();
             const expected = `ORG;SORT-AS=ABC;TYPE=work:${escapedValue}`;
 
@@ -40,8 +39,7 @@ describe('OrgProperty', () => {
             const parameters = { value: 'text' as const };
             const value = 'ABC, Inc.;North American Division;Marketing';
             const escapedValue = 'ABC\\, Inc.;North American Division;Marketing';
-            const config = { parameters, value };
-            const org = new OrgProperty(config);
+            const org = new OrgProperty(value, parameters);
 
             expect(org.toString()).to.equal(`ORG;VALUE=text:${escapedValue}`);
         });
@@ -63,6 +61,38 @@ describe('OrgProperty', () => {
             const org = new OrgProperty(value);
 
             expect(org.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(OrgProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `OrgProperty`', () => {
+            const org = OrgProperty.factory('ABC, Inc.;North American Division;Marketing');
+
+            expect(org instanceof OrgProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const org = new OrgProperty('ABC, Inc.;North American Division;Marketing');
+
+            expect(OrgProperty.factory(org)).to.equal(org);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const org = OrgProperty.factory('ABC, Inc.;North American Division;Marketing');
+
+            expect(org instanceof OrgProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'ABC, Inc.;North American Division;Marketing';
+            const config: OrgPropertyConfig = [value, { type: 'work' }];
+            const org = OrgProperty.factory(config);
+
+            expect(org instanceof OrgProperty).to.equal(true);
         });
     });
 });
