@@ -1,5 +1,6 @@
 const pkg = require('./package.json');
-const versionMatcher = /^\^(\d\.\d+)/;
+
+const versionMatcher = /^\^(?<majorMinorVersion>\d+\.\d+)/;
 const [, corejsVersion] = versionMatcher.exec(pkg.dependencies['core-js']);
 
 module.exports = {
