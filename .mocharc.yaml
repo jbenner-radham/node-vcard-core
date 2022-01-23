@@ -1,5 +1,4 @@
 ---
 extension: ts
-require:
-  - 'core-js'
-  - '@babel/register'
+require: test/babel-register.cjs
+spec: test/**
