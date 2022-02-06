@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import MemberProperty from '../../lib/properties/MemberProperty';
+import MemberProperty, { MemberPropertyConfig } from '../../lib/properties/MemberProperty';
 
 describe('MemberProperty', () => {
     it('is a function class', () => {
@@ -25,12 +25,11 @@ describe('MemberProperty', () => {
         });
 
         it('correctly returns parameters', () => {
-            const parameters = { pref: 1, type: 'work' as const };
+            const parameters = { pref: 1 };
             const value = 'mailto:subscriber1@example.com';
-            const config = { parameters, value };
-            const member = new MemberProperty(config);
+            const member = new MemberProperty(value, parameters);
             const actual = member.toString();
-            const expected = 'MEMBER;PREF=1;TYPE=work:mailto:subscriber1@example.com';
+            const expected = 'MEMBER;PREF=1:mailto:subscriber1@example.com';
 
             expect(actual).to.equal(expected);
         });
@@ -38,8 +37,7 @@ describe('MemberProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'mailto:subscriber1@example.com';
-            const config = { parameters, value };
-            const member = new MemberProperty(config);
+            const member = new MemberProperty(value, parameters);
 
             expect(member.toString()).to.equal(`MEMBER;VALUE=uri:${value}`);
         });
@@ -61,6 +59,38 @@ describe('MemberProperty', () => {
             const member = new MemberProperty(value);
 
             expect(member.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(MemberProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `MemberProperty`', () => {
+            const member = MemberProperty.factory('mailto:subscriber1@example.com');
+
+            expect(member instanceof MemberProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const member = new MemberProperty('mailto:subscriber1@example.com');
+
+            expect(MemberProperty.factory(member)).to.equal(member);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const member = MemberProperty.factory('mailto:subscriber1@example.com');
+
+            expect(member instanceof MemberProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'mailto:subscriber1@example.com';
+            const config: MemberPropertyConfig = [value, { value: 'uri' }];
+            const member = MemberProperty.factory(config);
+
+            expect(member instanceof MemberProperty).to.equal(true);
         });
     });
 });

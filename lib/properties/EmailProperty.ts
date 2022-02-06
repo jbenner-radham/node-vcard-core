@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -14,10 +13,7 @@ export interface EmailParameters {
     altid?: number | string;
 }
 
-export interface EmailPropertyConfig {
-    value: string;
-    parameters?: EmailParameters;
-}
+export type EmailPropertyConfig = [value: string, parameters?: EmailParameters];
 
 export type EmailPropertyLike = EmailProperty | EmailPropertyConfig | string;
 
@@ -44,9 +40,8 @@ const VALUE: unique symbol = Symbol.for('value');
  * >               / altid-param / any-param
  * >   EMAIL-value = text
  * >
- * > Example _(sic)_:
+ * > Example:
  * >   EMAIL;TYPE=work:jqpublic@xyz.example.com
- * >
  * >   EMAIL;PREF=1:jane_doe@example.com
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
@@ -60,32 +55,16 @@ export default class EmailProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: EmailPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: EmailPropertyConfig | string) {
+    constructor(value: string, parameters: EmailParameters = {}) {
         super();
 
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as EmailPropertyConfig);
-        }
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
+        EmailProperty.validateParameters(parameters);
 
-        throw new TypeError(`The value "${config}" is not a OrgPropertyConfig or string type`);
+        this.parameters = parameters;
+        this[VALUE] = value;
     }
 
     toString() {
@@ -102,7 +81,9 @@ export default class EmailProperty extends Property {
     static factory(value: EmailPropertyLike): EmailProperty {
         if (value instanceof EmailProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new EmailProperty(value);
+        if (Array.isArray(value)) return new EmailProperty(...value);
+
+        if (isString(value)) return new EmailProperty(value);
 
         throw new TypeError(`The value "${value}" is not a EmailPropertyLike type`);
     }

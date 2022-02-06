@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import SoundProperty from '../../lib/properties/SoundProperty';
+import SoundProperty, { SoundPropertyConfig } from '../../lib/properties/SoundProperty';
 
 describe('SoundProperty', () => {
     it('is a function class', () => {
@@ -12,7 +12,8 @@ describe('SoundProperty', () => {
         });
 
         it('returns a string', () => {
-            const sound = new SoundProperty('CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com');
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const sound = new SoundProperty(value);
 
             expect(sound.toString()).to.be.a('string');
         });
@@ -27,8 +28,7 @@ describe('SoundProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'home' as const };
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
-            const config = { parameters, value };
-            const sound = new SoundProperty(config);
+            const sound = new SoundProperty(value, parameters);
             const actual = sound.toString();
             const expected = `SOUND;TYPE=home:${value}`;
 
@@ -38,8 +38,7 @@ describe('SoundProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
-            const config = { parameters, value };
-            const sound = new SoundProperty(config);
+            const sound = new SoundProperty(value, parameters);
 
             expect(sound.toString()).to.equal(`SOUND;VALUE=uri:${value}`);
         });
@@ -51,7 +50,8 @@ describe('SoundProperty', () => {
         });
 
         it('returns a string', () => {
-            const sound = new SoundProperty('CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com');
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const sound = new SoundProperty(value);
 
             expect(sound.valueOf()).to.be.a('string');
         });
@@ -61,6 +61,41 @@ describe('SoundProperty', () => {
             const sound = new SoundProperty(value);
 
             expect(sound.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(SoundProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `SoundProperty`', () => {
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const sound = SoundProperty.factory(value);
+
+            expect(sound instanceof SoundProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const sound = new SoundProperty(value);
+
+            expect(SoundProperty.factory(sound)).to.equal(sound);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const sound = SoundProperty.factory(value);
+
+            expect(sound instanceof SoundProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const config: SoundPropertyConfig = [value, { type: 'home' }];
+            const sound = SoundProperty.factory(config);
+
+            expect(sound instanceof SoundProperty).to.equal(true);
         });
     });
 });

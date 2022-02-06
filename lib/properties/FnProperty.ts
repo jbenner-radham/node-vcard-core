@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
@@ -15,10 +14,7 @@ export interface FnParameters {
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
 }
 
-export interface FnPropertyConfig {
-    value: string;
-    parameters?: FnParameters;
-}
+export type FnPropertyConfig = [value: string, parameters?: FnParameters];
 
 export type FnPropertyLike = FnProperty | FnPropertyConfig | string;
 
@@ -53,35 +49,16 @@ export default class FnProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: FnPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: FnParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         FnProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: FnPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as FnPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a FnPropertyConfig or string type`);
     }
 
     toString() {
@@ -98,7 +75,9 @@ export default class FnProperty extends Property {
     static factory(value: FnPropertyLike): FnProperty {
         if (value instanceof FnProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new FnProperty(value);
+        if (Array.isArray(value)) return new FnProperty(...value);
+
+        if (isString(value)) return new FnProperty(value);
 
         throw new TypeError(`The value "${value}" is not a FnPropertyLike type`);
     }

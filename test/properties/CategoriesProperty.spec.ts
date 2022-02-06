@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import CategoriesProperty from '../../lib/properties/CategoriesProperty';
+import CategoriesProperty, { CategoriesPropertyConfig } from '../../lib/properties/CategoriesProperty';
 
 describe('CategoriesProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('CategoriesProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'work' as const };
             const value = 'TRAVEL AGENT';
-            const config = { parameters, value };
-            const categories = new CategoriesProperty(config);
+            const categories = new CategoriesProperty(value, parameters);
             const actual = categories.toString();
             const expected = 'CATEGORIES;TYPE=work:TRAVEL AGENT';
 
@@ -38,8 +37,7 @@ describe('CategoriesProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'http://cal.example.com/calA';
-            const config = { parameters, value };
-            const categories = new CategoriesProperty(config);
+            const categories = new CategoriesProperty(value, parameters);
 
             expect(categories.toString()).to.equal(`CATEGORIES;VALUE=text:${value}`);
         });
@@ -62,6 +60,38 @@ describe('CategoriesProperty', () => {
             const categories = new CategoriesProperty(value);
 
             expect(categories.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(CategoriesProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `CategoriesProperty`', () => {
+            const categories = CategoriesProperty.factory('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
+
+            expect(categories instanceof CategoriesProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const categories = new CategoriesProperty('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
+
+            expect(CategoriesProperty.factory(categories) instanceof CategoriesProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const categories = CategoriesProperty.factory('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
+
+            expect(categories instanceof CategoriesProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
+            const config: CategoriesPropertyConfig = [value, { pref: 1 }];
+            const categories = CategoriesProperty.factory(config);
+
+            expect(categories instanceof CategoriesProperty).to.equal(true);
         });
     });
 });

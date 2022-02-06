@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -14,10 +13,7 @@ export interface MemberParameters {
     mediatype?: string;
 }
 
-export interface MemberPropertyConfig {
-    value: string;
-    parameters?: MemberParameters;
-}
+export type MemberPropertyConfig = [value: string, parameters?: MemberParameters];
 
 export type MemberPropertyLike = MemberProperty | MemberPropertyConfig | string;
 
@@ -78,35 +74,16 @@ export default class MemberProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: MemberPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: MemberParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         MemberProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: MemberPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as MemberPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a MemberPropertyConfig or string type`);
     }
 
     toString() {
@@ -120,7 +97,9 @@ export default class MemberProperty extends Property {
     static factory(value: MemberPropertyLike): MemberProperty {
         if (value instanceof MemberProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new MemberProperty(value);
+        if (Array.isArray(value)) return new MemberProperty(...value);
+
+        if (isString(value)) return new MemberProperty(value);
 
         throw new TypeError(`The value "${value}" is not a MemberPropertyLike type`);
     }

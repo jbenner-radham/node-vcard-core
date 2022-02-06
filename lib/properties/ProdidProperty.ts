@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
@@ -8,10 +7,7 @@ export interface ProdidParameters {
     value?: 'text';
 }
 
-export interface ProdidPropertyConfig {
-    value: string;
-    parameters?: ProdidParameters;
-}
+export type ProdidPropertyConfig = [value: string, parameters?: ProdidParameters];
 
 export type ProdidPropertyLike = ProdidProperty | ProdidPropertyConfig | string;
 
@@ -46,32 +42,14 @@ export default class ProdidProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: ProdidPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: ProdidPropertyConfig | string) {
+    constructor(value: string, parameters: ProdidParameters = {}) {
         super();
 
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as ProdidPropertyConfig);
-        }
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a ProdidPropertyConfig or string type`);
+        this.parameters = parameters;
+        this[VALUE] = value;
     }
 
     toString() {
@@ -88,7 +66,9 @@ export default class ProdidProperty extends Property {
     static factory(value: ProdidPropertyLike): ProdidProperty {
         if (value instanceof ProdidProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new ProdidProperty(value);
+        if (Array.isArray(value)) return new ProdidProperty(...value);
+
+        if (isString(value)) return new ProdidProperty(value);
 
         throw new TypeError(`The value "${value}" is not a ProdidPropertyLike type`);
     }

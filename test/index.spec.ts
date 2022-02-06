@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { EmailPropertyConfig } from '../lib/properties/EmailProperty';
 import Vcard from '../lib';
 
 describe('Vcard', () => {
@@ -119,7 +120,7 @@ describe('Vcard', () => {
         describe('when passed a minimal vCard with a CLIENTPIDMAP property', () => {
             it('returns the proper string format', () => {
                 const fn = 'J. Doe';
-                const email = { parameters: { pid: [4.1, 5.2] }, value: 'jdoe@example.com' };
+                const email: EmailPropertyConfig = ['jdoe@example.com', { pid: [4.1, 5.2] }];
                 const clientpidmap = '2;urn:uuid:d89c9c7a-2e1b-4832-82de-7e992d95faa5';
                 const vcard = new Vcard({ clientpidmap, email, fn });
                 const actual = vcard.toString();
@@ -127,7 +128,7 @@ describe('Vcard', () => {
                     'BEGIN:VCARD',
                     'VERSION:4.0',
                     `CLIENTPIDMAP:${clientpidmap}`,
-                    `EMAIL;PID="4.1,5.2":${email.value}`,
+                    `EMAIL;PID="4.1,5.2":${email.at(0)}`,
                     `FN:${fn}`,
                     'END:VCARD'
                 ].join(Vcard.EOL);

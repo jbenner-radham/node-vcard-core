@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
@@ -8,10 +7,7 @@ export interface RevParameters {
     value?: 'timestamp';
 }
 
-export interface RevPropertyConfig {
-    value: string;
-    parameters?: RevParameters;
-}
+export type RevPropertyConfig = [value: string, parameters?: RevParameters];
 
 /** @todo Add Date type support. */
 export type RevPropertyLike = RevProperty | RevPropertyConfig | string;
@@ -44,32 +40,14 @@ export default class RevProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: RevPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: RevPropertyConfig | string) {
+    constructor(value: string, parameters: RevParameters = {}) {
         super();
 
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as RevPropertyConfig);
-        }
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a RevPropertyConfig or string type`);
+        this.parameters = parameters;
+        this[VALUE] = value;
     }
 
     toString() {
@@ -86,7 +64,9 @@ export default class RevProperty extends Property {
     static factory(value: RevPropertyLike): RevProperty {
         if (value instanceof RevProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new RevProperty(value);
+        if (Array.isArray(value)) return new RevProperty(...value);
+
+        if (isString(value)) return new RevProperty(value);
 
         throw new TypeError(`The value "${value}" is not a RevPropertyLike type`);
     }

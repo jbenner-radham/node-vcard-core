@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface UrlParameters {
     altid?: number | string;
 }
 
-export interface UrlPropertyConfig {
-    value: string;
-    parameters?: UrlParameters;
-}
+export type UrlPropertyConfig = [value: string, parameters?: UrlParameters];
 
 /** @todo Add URL type support. */
 export type UrlPropertyLike = UrlProperty | UrlPropertyConfig | string;
@@ -52,38 +48,17 @@ export default class UrlProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: UrlPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: UrlParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         UrlProperty.validateParameters(parameters);
         this.validate(value);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this.validate(value);
-
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: UrlPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as UrlPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a UrlPropertyConfig or string type`);
     }
 
     toString() {
@@ -105,7 +80,9 @@ export default class UrlProperty extends Property {
     static factory(value: UrlPropertyLike): UrlProperty {
         if (value instanceof UrlProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new UrlProperty(value);
+        if (Array.isArray(value)) return new UrlProperty(...value);
+
+        if (isString(value)) return new UrlProperty(value);
 
         throw new TypeError(`The value "${value}" is not a UrlPropertyLike type`);
     }

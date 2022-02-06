@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface GeoParameters {
     altid?: number | string;
 }
 
-export interface GeoPropertyConfig {
-    value: string;
-    parameters?: GeoParameters;
-}
+export type GeoPropertyConfig = [value: string, parameters?: GeoParameters];
 
 export type GeoPropertyLike = GeoProperty | GeoPropertyConfig | string;
 
@@ -52,35 +48,16 @@ export default class GeoProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: GeoPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: GeoParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         GeoProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: GeoPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as GeoPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a GeoPropertyConfig or string type`);
     }
 
     toString() {
@@ -94,7 +71,9 @@ export default class GeoProperty extends Property {
     static factory(value: GeoPropertyLike): GeoProperty {
         if (value instanceof GeoProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new GeoProperty(value);
+        if (Array.isArray(value)) return new GeoProperty(...value);
+
+        if (isString(value)) return new GeoProperty(value);
 
         throw new TypeError(`The value "${value}" is not a GeoPropertyLike type`);
     }

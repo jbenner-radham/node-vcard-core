@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ImppProperty from '../../lib/properties/ImppProperty';
+import ImppProperty, { ImppPropertyConfig } from '../../lib/properties/ImppProperty';
 
 describe('ImppProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('ImppProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { pref: 1 };
             const value = 'xmpp:alice@example.com';
-            const config = { parameters, value };
-            const impp = new ImppProperty(config);
+            const impp = new ImppProperty(value, parameters);
             const actual = impp.toString();
             const expected = `IMPP;PREF=1:${value}`;
 
@@ -38,8 +37,7 @@ describe('ImppProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'xmpp:alice@example.com';
-            const config = { parameters, value };
-            const impp = new ImppProperty(config);
+            const impp = new ImppProperty(value, parameters);
 
             expect(impp.toString()).to.equal(`IMPP;VALUE=uri:${value}`);
         });
@@ -61,6 +59,38 @@ describe('ImppProperty', () => {
             const impp = new ImppProperty(value);
 
             expect(impp.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(ImppProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `ImppProperty`', () => {
+            const impp = ImppProperty.factory('xmpp:alice@example.com');
+
+            expect(impp instanceof ImppProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const impp = new ImppProperty('xmpp:alice@example.com');
+
+            expect(ImppProperty.factory(impp) instanceof ImppProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const impp = ImppProperty.factory('xmpp:alice@example.com');
+
+            expect(impp instanceof ImppProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'xmpp:alice@example.com';
+            const config: ImppPropertyConfig = [value, { value: 'uri' }];
+            const impp = ImppProperty.factory(config);
+
+            expect(impp instanceof ImppProperty).to.equal(true);
         });
     });
 });

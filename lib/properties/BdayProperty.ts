@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Calscale, Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import {
@@ -15,10 +14,7 @@ export interface BdayParameters {
     language?: string; // For `text` type only!
 }
 
-export interface BdayPropertyConfig {
-    value: string;
-    parameters?: BdayParameters;
-}
+export type BdayPropertyConfig = [value: string, parameters?: BdayParameters];
 
 /** @todo Add Date type support. */
 export type BdayPropertyLike = BdayProperty | BdayPropertyConfig | string;
@@ -61,35 +57,16 @@ export default class BdayProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: BdayPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: BdayParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         BdayProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: BdayPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as BdayPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a BdayPropertyConfig or string type`);
     }
 
     toString() {
@@ -108,7 +85,9 @@ export default class BdayProperty extends Property {
     static factory(value: BdayPropertyLike): BdayProperty {
         if (value instanceof BdayProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new BdayProperty(value);
+        if (Array.isArray(value)) return new BdayProperty(...value);
+
+        if (isString(value)) return new BdayProperty(value);
 
         throw new TypeError(`The value "${value}" is not a BdayPropertyLike type`);
     }

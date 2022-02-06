@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import CaladruriProperty from '../../lib/properties/CaladruriProperty';
+import CaladruriProperty, { CaladruriPropertyConfig } from '../../lib/properties/CaladruriProperty';
 
 describe('CaladruriProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('CaladruriProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { type: 'home' as const };
             const value = 'http://example.com/calendar/jdoe';
-            const config = { parameters, value };
-            const caladruri = new CaladruriProperty(config);
+            const caladruri = new CaladruriProperty(value, parameters);
             const actual = caladruri.toString();
             const expected = `CALADRURI;TYPE=home:${value}`;
 
@@ -38,8 +37,7 @@ describe('CaladruriProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://example.com/calendar/jdoe';
-            const config = { parameters, value };
-            const caladruri = new CaladruriProperty(config);
+            const caladruri = new CaladruriProperty(value, parameters);
 
             expect(caladruri.toString()).to.equal(`CALADRURI;VALUE=uri:${value}`);
         });
@@ -61,6 +59,38 @@ describe('CaladruriProperty', () => {
             const caladruri = new CaladruriProperty(value);
 
             expect(caladruri.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(CaladruriProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `CaladruriProperty`', () => {
+            const caladruri = CaladruriProperty.factory('http://example.com/calendar/jdoe');
+
+            expect(caladruri instanceof CaladruriProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const caladruri = new CaladruriProperty('http://example.com/calendar/jdoe');
+
+            expect(CaladruriProperty.factory(caladruri) instanceof CaladruriProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const caladruri = CaladruriProperty.factory('http://example.com/calendar/jdoe');
+
+            expect(caladruri instanceof CaladruriProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'http://example.com/calendar/jdoe';
+            const config: CaladruriPropertyConfig = [value, { type: 'home' }];
+            const caladruri = CaladruriProperty.factory(config);
+
+            expect(caladruri instanceof CaladruriProperty).to.equal(true);
         });
     });
 });

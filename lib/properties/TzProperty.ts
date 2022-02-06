@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface TzParameters {
     mediatype?: string;
 }
 
-export interface TzPropertyConfig {
-    value: string;
-    parameters?: TzParameters;
-}
+export type TzPropertyConfig = [value: string, parameters?: TzParameters];
 
 export type TzPropertyLike = TzProperty | TzPropertyConfig | string;
 
@@ -71,35 +67,16 @@ export default class TzProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: TzPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: TzParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         TzProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: TzPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as TzPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a TzPropertyConfig or string type`);
     }
 
     toString() {
@@ -118,7 +95,9 @@ export default class TzProperty extends Property {
     static factory(value: TzPropertyLike): TzProperty {
         if (value instanceof TzProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new TzProperty(value);
+        if (Array.isArray(value)) return new TzProperty(...value);
+
+        if (isString(value)) return new TzProperty(value);
 
         throw new TypeError(`The value "${value}" is not a TzPropertyLike type`);
     }

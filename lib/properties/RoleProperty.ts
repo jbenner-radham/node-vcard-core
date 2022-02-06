@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface RoleParameters {
     altid?: number | string;
 }
 
-export interface RolePropertyConfig {
-    value: string;
-    parameters?: RoleParameters;
-}
+export type RolePropertyConfig = [value: string, parameters?: RoleParameters];
 
 export type RolePropertyLike = RoleProperty | RolePropertyConfig | string;
 
@@ -55,35 +51,16 @@ export default class RoleProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: RolePropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: RoleParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         RoleProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: RolePropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as RolePropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a RolePropertyConfig or string type`);
     }
 
     toString() {
@@ -100,7 +77,9 @@ export default class RoleProperty extends Property {
     static factory(value: RolePropertyLike): RoleProperty {
         if (value instanceof RoleProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new RoleProperty(value);
+        if (Array.isArray(value)) return new RoleProperty(...value);
+
+        if (isString(value)) return new RoleProperty(value);
 
         throw new TypeError(`The value "${value}" is not a RolePropertyLike type`);
     }

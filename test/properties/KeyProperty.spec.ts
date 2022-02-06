@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import KeyProperty from '../../lib/properties/KeyProperty';
+import KeyProperty, { KeyPropertyConfig } from '../../lib/properties/KeyProperty';
 
 describe('KeyProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('KeyProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { mediatype: 'application/pgp-keys' };
             const value = 'ftp://example.com/keys/jdoe';
-            const config = { parameters, value };
-            const key = new KeyProperty(config);
+            const key = new KeyProperty(value, parameters);
             const actual = key.toString();
             const expected = `KEY;MEDIATYPE=application/pgp-keys:${value}`;
 
@@ -38,17 +37,15 @@ describe('KeyProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://www.example.com/keys/jdoe.cer';
-            const config = { parameters, value };
-            const key = new KeyProperty(config);
+            const key = new KeyProperty(value, parameters);
 
             expect(key.toString()).to.equal(`KEY;VALUE=uri:${value}`);
         });
 
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
-            const value = '???'; // Need to find proper text example to test.
-            const config = { parameters, value };
-            const key = new KeyProperty(config);
+            const value = '???'; /** @todo Need to find proper text example to test! */
+            const key = new KeyProperty(value, parameters);
 
             expect(key.toString()).to.equal(`KEY;VALUE=text:${value}`);
         });
@@ -70,6 +67,38 @@ describe('KeyProperty', () => {
             const key = new KeyProperty(value);
 
             expect(key.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(KeyProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `KeyProperty`', () => {
+            const key = KeyProperty.factory('http://www.example.com/keys/jdoe.cer');
+
+            expect(key instanceof KeyProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const key = new KeyProperty('http://www.example.com/keys/jdoe.cer');
+
+            expect(KeyProperty.factory(key) instanceof KeyProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const key = KeyProperty.factory('http://www.example.com/keys/jdoe.cer');
+
+            expect(key instanceof KeyProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'http://www.example.com/keys/jdoe.cer';
+            const config: KeyPropertyConfig = [value, { value: 'uri' }];
+            const key = KeyProperty.factory(config);
+
+            expect(key instanceof KeyProperty).to.equal(true);
         });
     });
 });

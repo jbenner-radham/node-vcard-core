@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -14,10 +13,7 @@ export interface LangParameters {
     type?: Type;
 }
 
-export interface LangPropertyConfig {
-    value: string;
-    parameters?: LangParameters;
-}
+export type LangPropertyConfig = [value: string, parameters?: LangParameters];
 
 export type LangPropertyLike = LangProperty | LangPropertyConfig | string;
 
@@ -50,36 +46,16 @@ export default class LangProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: LangPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: LangParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         LangProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: LangPropertyConfig | string) {
-        super();
-
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as LangPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a LangPropertyConfig or string type`);
     }
 
     toString() {
@@ -93,7 +69,9 @@ export default class LangProperty extends Property {
     static factory(value: LangPropertyLike): LangProperty {
         if (value instanceof LangProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new LangProperty(value);
+        if (Array.isArray(value)) return new LangProperty(...value);
+
+        if (isString(value)) return new LangProperty(value);
 
         throw new TypeError(`The value "${value}" is not a LangPropertyLike type`);
     }

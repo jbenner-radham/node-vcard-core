@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -15,10 +14,7 @@ export interface CaladruriParameters {
     altid?: number | string;
 }
 
-export interface CaladruriPropertyConfig {
-    value: string;
-    parameters?: CaladruriParameters;
-}
+export type CaladruriPropertyConfig = [value: string, parameters?: CaladruriParameters];
 
 /** @todo Add URL type support? */
 export type CaladruriPropertyLike = CaladruriProperty | CaladruriPropertyConfig | string;
@@ -56,35 +52,16 @@ export default class CaladruriProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: CaladruriPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: CaladruriParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         CaladruriProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: CaladruriPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as CaladruriPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a CaladruriPropertyConfig or string type`);
     }
 
     toString() {
@@ -98,7 +75,9 @@ export default class CaladruriProperty extends Property {
     static factory(value: CaladruriPropertyLike): CaladruriProperty {
         if (value instanceof CaladruriProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new CaladruriProperty(value);
+        if (Array.isArray(value)) return new CaladruriProperty(...value);
+
+        if (isString(value)) return new CaladruriProperty(value);
 
         throw new TypeError(`The value "${value}" is not a CaladruriPropertyLike type`);
     }

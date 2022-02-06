@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -14,10 +13,7 @@ export interface TitleParameters {
     mediatype?: string;
 }
 
-export interface TitlePropertyConfig {
-    value: string;
-    parameters?: TitleParameters;
-}
+export type TitlePropertyConfig = [value: string, parameters?: TitleParameters];
 
 export type TitlePropertyLike = TitleProperty | TitlePropertyConfig | string;
 
@@ -51,35 +47,16 @@ export default class TitleProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: TitlePropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: TitleParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         TitleProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: TitlePropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as TitlePropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a TitlePropertyConfig or string type`);
     }
 
     toString() {
@@ -93,7 +70,9 @@ export default class TitleProperty extends Property {
     static factory(value: TitlePropertyLike): TitleProperty {
         if (value instanceof TitleProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new TitleProperty(value);
+        if (Array.isArray(value)) return new TitleProperty(...value);
+
+        if (isString(value)) return new TitleProperty(value);
 
         throw new TypeError(`The value "${value}" is not a TitlePropertyLike type`);
     }

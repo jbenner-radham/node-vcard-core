@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import TitleProperty from '../../lib/properties/TitleProperty';
+import TitleProperty, { TitlePropertyConfig } from '../../lib/properties/TitleProperty';
 
 describe('TitleProperty', () => {
     it('is a function class', () => {
@@ -27,8 +27,7 @@ describe('TitleProperty', () => {
         it('correctly returns parameters', () => {
             const parameters = { pref: 1 };
             const value = 'Research Scientist';
-            const config = { parameters, value };
-            const title = new TitleProperty(config);
+            const title = new TitleProperty(value, parameters);
 
             expect(title.toString()).to.equal(`TITLE;PREF=1:${value}`);
         });
@@ -36,8 +35,7 @@ describe('TitleProperty', () => {
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Research Scientist';
-            const config = { parameters, value };
-            const title = new TitleProperty(config);
+            const title = new TitleProperty(value, parameters);
 
             expect(title.toString()).to.equal(`TITLE;VALUE=text:${value}`);
         });
@@ -59,6 +57,38 @@ describe('TitleProperty', () => {
             const title = new TitleProperty(value);
 
             expect(title.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(TitleProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `TitleProperty`', () => {
+            const title = TitleProperty.factory('Research Scientist');
+
+            expect(title instanceof TitleProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const title = new TitleProperty('Research Scientist');
+
+            expect(TitleProperty.factory(title)).to.equal(title);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const title = TitleProperty.factory('Research Scientist');
+
+            expect(title instanceof TitleProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'Research Scientist';
+            const config: TitlePropertyConfig = [value, { value: 'text' }];
+            const title = TitleProperty.factory(config);
+
+            expect(title instanceof TitleProperty).to.equal(true);
         });
     });
 });

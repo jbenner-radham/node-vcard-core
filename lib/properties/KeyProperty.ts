@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
@@ -15,10 +14,7 @@ export interface KeyParameters {
     type?: Type;
 }
 
-export interface KeyPropertyConfig {
-    value: string;
-    parameters?: KeyParameters;
-}
+export type KeyPropertyConfig = [value: string, parameters?: KeyParameters];
 
 /** @todo Add URL type support? */
 export type KeyPropertyLike = KeyProperty | KeyPropertyConfig | string;
@@ -65,35 +61,16 @@ export default class KeyProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: KeyPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: KeyParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         KeyProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: KeyPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as KeyPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a KeyPropertyConfig or string type`);
     }
 
     toString() {
@@ -111,7 +88,9 @@ export default class KeyProperty extends Property {
     static factory(value: KeyPropertyLike): KeyProperty {
         if (value instanceof KeyProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new KeyProperty(value);
+        if (Array.isArray(value)) return new KeyProperty(...value);
+
+        if (isString(value)) return new KeyProperty(value);
 
         throw new TypeError(`The value "${value}" is not a KeyPropertyLike type`);
     }

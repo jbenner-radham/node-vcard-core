@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
@@ -16,10 +15,7 @@ export interface LogoParameters {
     altid?: number | string;
 }
 
-export interface LogoPropertyConfig {
-    value: string;
-    parameters?: LogoParameters;
-}
+export type LogoPropertyConfig = [value: string, parameters?: LogoParameters];
 
 /** @todo Add URL type support. */
 export type LogoPropertyLike = LogoProperty | LogoPropertyConfig | string;
@@ -56,35 +52,16 @@ export default class LogoProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: LogoPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: LogoParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         LogoProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: LogoPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as LogoPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a LogoPropertyConfig or string type`);
     }
 
     toString() {
@@ -98,7 +75,9 @@ export default class LogoProperty extends Property {
     static factory(value: LogoPropertyLike): LogoProperty {
         if (value instanceof LogoProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new LogoProperty(value);
+        if (Array.isArray(value)) return new LogoProperty(...value);
+
+        if (isString(value)) return new LogoProperty(value);
 
         throw new TypeError(`The value "${value}" is not a LogoPropertyLike type`);
     }

@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import {
     getInvalidLanguageValueParameterMessage,
@@ -41,10 +40,7 @@ export interface RelatedParameters {
     type?: RelatedType;
 }
 
-export interface RelatedPropertyConfig {
-    value: string;
-    parameters?: RelatedParameters;
-}
+export type RelatedPropertyConfig = [value: string, parameters?: RelatedParameters];
 
 export type RelatedPropertyLike = RelatedProperty | RelatedPropertyConfig | string;
 
@@ -109,35 +105,16 @@ export default class RelatedProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: RelatedPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: RelatedParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         RelatedProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: RelatedPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as RelatedPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a RelatedPropertyConfig or string type`);
     }
 
     toString() {
@@ -156,7 +133,9 @@ export default class RelatedProperty extends Property {
     static factory(value: RelatedPropertyLike): RelatedProperty {
         if (value instanceof RelatedProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new RelatedProperty(value);
+        if (Array.isArray(value)) return new RelatedProperty(...value);
+
+        if (isString(value)) return new RelatedProperty(value);
 
         throw new TypeError(`The value "${value}" is not a RelatedPropertyLike type`);
     }

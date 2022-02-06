@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -14,10 +13,7 @@ export interface CategoriesParameters {
     altid?: number | string;
 }
 
-export interface CategoriesPropertyConfig {
-    value: string;
-    parameters?: CategoriesParameters;
-}
+export type CategoriesPropertyConfig = [value: string, parameters?: CategoriesParameters];
 
 /** @todo Add string[] type support. */
 export type CategoriesPropertyLike = CategoriesProperty | CategoriesPropertyConfig | string;
@@ -51,35 +47,16 @@ export default class CategoriesProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: CategoriesPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: CategoriesParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         CategoriesProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: CategoriesPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as CategoriesPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a CategoriesPropertyConfig or string type`);
     }
 
     toString() {
@@ -96,7 +73,9 @@ export default class CategoriesProperty extends Property {
     static factory(value: CategoriesPropertyLike): CategoriesProperty {
         if (value instanceof CategoriesProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new CategoriesProperty(value);
+        if (Array.isArray(value)) return new CategoriesProperty(...value);
+
+        if (isString(value)) return new CategoriesProperty(value);
 
         throw new TypeError(`The value "${value}" is not a CategoriesPropertyLike type`);
     }

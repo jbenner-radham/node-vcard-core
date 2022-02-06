@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
@@ -18,10 +17,7 @@ export interface TelParameters {
     altid?: number | string;
 }
 
-export interface TelPropertyConfig {
-    value: string;
-    parameters?: TelParameters;
-}
+export type TelPropertyConfig = [value: string, parameters?: TelParameters];
 
 export type TelPropertyLike = TelProperty | TelPropertyConfig | string;
 
@@ -105,35 +101,16 @@ export default class TelProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: TelPropertyConfig) {
-        const { value, parameters = {} } = config;
-        this.parameters = parameters;
+    constructor(value: string, parameters: TelParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         TelProperty.validateParameters(parameters);
 
+        this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: TelPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as TelPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a TelPropertyConfig or string type`);
     }
 
     toString() {
@@ -152,7 +129,9 @@ export default class TelProperty extends Property {
     static factory(value: TelPropertyLike): TelProperty {
         if (value instanceof TelProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new TelProperty(value);
+        if (Array.isArray(value)) return new TelProperty(...value);
+
+        if (isString(value)) return new TelProperty(value);
 
         throw new TypeError(`The value "${value}" is not a TelPropertyLike type`);
     }

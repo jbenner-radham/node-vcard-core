@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ClientpidmapProperty from '../../lib/properties/ClientpidmapProperty';
+import ClientpidmapProperty, { ClientpidmapPropertyConfig } from '../../lib/properties/ClientpidmapProperty';
 
 describe('ClientpidmapProperty', () => {
     it('is a function class', () => {
@@ -26,8 +26,7 @@ describe('ClientpidmapProperty', () => {
 
         it('accepts an object argument to the constructor', () => {
             const value = '1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b';
-            const config = { value };
-            const clientpidmap = new ClientpidmapProperty(config);
+            const clientpidmap = new ClientpidmapProperty(value);
             const actual = clientpidmap.toString();
             const expected = `CLIENTPIDMAP:${value}`;
 
@@ -51,6 +50,38 @@ describe('ClientpidmapProperty', () => {
             const clientpidmap = new ClientpidmapProperty(value);
 
             expect(clientpidmap.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect(ClientpidmapProperty.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `ClientpidmapProperty`', () => {
+            const clientpidmap = ClientpidmapProperty.factory('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
+
+            expect(clientpidmap instanceof ClientpidmapProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const clientpidmap = new ClientpidmapProperty('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
+
+            expect(ClientpidmapProperty.factory(clientpidmap) instanceof ClientpidmapProperty).to.equal(true);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const clientpidmap = ClientpidmapProperty.factory('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
+
+            expect(clientpidmap instanceof ClientpidmapProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = '1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b';
+            const config: ClientpidmapPropertyConfig = [value, {}];
+            const clientpidmap = ClientpidmapProperty.factory(config);
+
+            expect(clientpidmap instanceof ClientpidmapProperty).to.equal(true);
         });
     });
 });

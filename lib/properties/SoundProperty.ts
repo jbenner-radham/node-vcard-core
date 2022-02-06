@@ -1,7 +1,6 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
-import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
@@ -16,10 +15,7 @@ export interface SoundParameters {
     altid?: number | string;
 }
 
-export interface SoundPropertyConfig {
-    value: string;
-    parameters?: SoundParameters;
-}
+export type SoundPropertyConfig = [value: string, parameters?: SoundParameters];
 
 /** @todo Add URL type support. */
 export type SoundPropertyLike = SoundProperty | SoundPropertyConfig | string;
@@ -59,35 +55,16 @@ export default class SoundProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: SoundPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: SoundParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         SoundProperty.validateParameters(parameters);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: SoundPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as SoundPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a SoundPropertyConfig or string type`);
     }
 
     toString() {
@@ -101,7 +78,9 @@ export default class SoundProperty extends Property {
     static factory(value: SoundPropertyLike): SoundProperty {
         if (value instanceof SoundProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new SoundProperty(value);
+        if (Array.isArray(value)) return new SoundProperty(...value);
+
+        if (isString(value)) return new SoundProperty(value);
 
         throw new TypeError(`The value "${value}" is not a SoundPropertyLike type`);
     }

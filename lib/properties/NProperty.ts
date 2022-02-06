@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Value } from '../types';
 import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
@@ -12,10 +11,7 @@ export interface NParameters {
     altid?: number | string;
 }
 
-export interface NPropertyConfig {
-    value: string;
-    parameters?: NParameters;
-}
+export type NPropertyConfig = [value: string, parameters?: NParameters];
 
 export type NPropertyLike = NProperty | NPropertyConfig | string;
 
@@ -92,41 +88,23 @@ export default class NProperty extends Property {
         return honorificSuffix;
     }
 
-    #objectConstructor(config: NPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: NParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         this.validate(value);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this.validate(value);
-
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: NPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as NPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a NPropertyConfig or string type`);
     }
 
     toString() {
-        return foldLine(`N${this.getParametersString()}:${this.getEscapedValueString()}`);
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`N${parameters}:${value}`);
     }
 
     valueOf(): string {
@@ -143,7 +121,9 @@ export default class NProperty extends Property {
     static factory(value: NPropertyLike): NProperty {
         if (value instanceof NProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new NProperty(value);
+        if (Array.isArray(value)) return new NProperty(...value);
+
+        if (isString(value)) return new NProperty(value);
 
         throw new TypeError(`The value "${value}" is not a NPropertyLike type`);
     }

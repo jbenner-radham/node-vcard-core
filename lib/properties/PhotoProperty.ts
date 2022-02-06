@@ -1,7 +1,6 @@
-import isPlainObject from 'lodash.isplainobject';
 import { Cardinality, Type, Value } from '../types';
-import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import foldLine from '../util/fold-line';
+import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
@@ -15,10 +14,7 @@ export interface PhotoParameters {
     pid?: number | number[];
 }
 
-export interface PhotoPropertyConfig {
-    value: string;
-    parameters?: PhotoParameters;
-}
+export type PhotoPropertyConfig = [value: string, parameters?: PhotoParameters];
 
 /** @todo Add URL type support. */
 export type PhotoPropertyLike = PhotoProperty | PhotoPropertyConfig | string;
@@ -54,38 +50,17 @@ export default class PhotoProperty extends Property {
 
     [VALUE]: string;
 
-    #objectConstructor(config: PhotoPropertyConfig) {
-        const { value, parameters = {} } = config;
+    constructor(value: string, parameters: PhotoParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
 
         PhotoProperty.validateParameters(parameters);
         this.validate(value);
 
         this.parameters = parameters;
         this[VALUE] = value;
-
-        return this;
-    }
-
-    #stringConstructor(value: string) {
-        this.validate(value);
-
-        this[VALUE] = value;
-
-        return this;
-    }
-
-    constructor(config: PhotoPropertyConfig | string) {
-        super();
-
-        if (isPlainObject(config)) {
-            return this.#objectConstructor(config as PhotoPropertyConfig);
-        }
-
-        if (isString(config)) {
-            return this.#stringConstructor(config);
-        }
-
-        throw new TypeError(`The value "${config}" is not a PhotoPropertyConfig or string type`);
     }
 
     toString() {
@@ -107,7 +82,9 @@ export default class PhotoProperty extends Property {
     static factory(value: PhotoPropertyLike): PhotoProperty {
         if (value instanceof PhotoProperty) return value;
 
-        if (isPlainObject(value) || isString(value)) return new PhotoProperty(value);
+        if (Array.isArray(value)) return new PhotoProperty(...value);
+
+        if (isString(value)) return new PhotoProperty(value);
 
         throw new TypeError(`The value "${value}" is not a PhotoPropertyLike type`);
     }
