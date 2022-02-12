@@ -1,0 +1,88 @@
+import { expect } from 'chai';
+import {{{upperCamelCase property}}}Property, { {{{upperCamelCase property}}}PropertyConfig }  from '../../lib/properties/{{{upperCamelCase property}}}Property';
+
+describe('{{{upperCamelCase property}}}Property', () => {
+    it('is a function class', () => {
+        expect({{{upperCamelCase property}}}Property).to.be.a('function');
+    });
+
+    describe('#toString()', () => {
+        it('is a method', () => {
+            expect({{{upperCamelCase property}}}Property.prototype.toString).to.be.a('function');
+        });
+
+        it('returns a string', () => {
+            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property('...');
+
+            expect({{{camelCase property}}}.toString()).to.be.a('string');
+        });
+
+        it('returns the proper string format', () => {
+            const value = '...';
+            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property(value);
+
+            expect({{{camelCase property}}}.toString()).to.equal(`{{{upperCase property}}}:${value}`);
+        });
+
+        it('correctly returns parameters', () => {
+            const parameters = { pref: 1 };
+            const value = '...';
+            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property(value, parameters);
+            const actual = {{{camelCase property}}}.toString();
+            const expected = `{{{upperCase property}}};PREF=1:${value}`;
+
+            expect(actual).to.equal(expected);
+        });
+    });
+
+    describe('#valueOf()', () => {
+        it('is a method', () => {
+            expect({{{upperCamelCase property}}}Property.prototype.valueOf).to.be.a('function');
+        });
+
+        it('returns a string', () => {
+            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property('...');
+
+            expect({{{camelCase property}}}.valueOf()).to.be.a('string');
+        });
+
+        it('returns the same value passed to it', () => {
+            const value = '...';
+            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property(value);
+
+            expect({{{camelCase property}}}.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.factory()', () => {
+        it('is a static method', () => {
+            expect({{{upperCamelCase property}}}Property.factory).to.be.a('function');
+        });
+
+        it('returns an instance of `{{{upperCamelCase property}}}Property`', () => {
+            const {{{camelCase property}}} = {{{upperCamelCase property}}}Property.factory('...');
+
+            expect({{{camelCase property}}} instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property('...');
+
+            expect({{{upperCamelCase property}}}Property.factory({{{camelCase property}}})).to.equal({{{camelCase property}}});
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const {{{camelCase property}}} = {{{upperCamelCase property}}}Property.factory('...');
+
+            expect({{{camelCase property}}} instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = '...';
+            const config: {{{upperCamelCase property}}}PropertyConfig = [value, { type: 'home' }];
+            const {{{camelCase property}}} = {{{upperCamelCase property}}}Property.factory(config);
+
+            expect({{{camelCase property}}} instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+        });
+    });
+});

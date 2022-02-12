@@ -1,0 +1,9 @@
+import {{{upperCamelCase property}}}Property from '../{{{upperCamelCase property}}}Property';
+
+export default class {{{upperCamelCase property}}}PropertyArray extends Array {
+    push(...items: any[]): number {
+        items.forEach(item => super.push({{{upperCamelCase property}}}Property.factory(item)));
+
+        return this.length;
+    }
+}

@@ -1,0 +1,47 @@
+import { expect } from 'chai';
+import {{{upperCamelCase property}}}Property from '../../lib/properties/{{{upperCamelCase property}}}Property';
+import {{{upperCamelCase property}}}PropertyArray from '../../lib/properties/arrays/{{{upperCamelCase property}}}PropertyArray';
+
+describe('{{{upperCamelCase property}}}PropertyArray', () => {
+    it('is a function class', () => {
+        expect({{{upperCamelCase property}}}PropertyArray).to.be.a('function');
+    });
+
+    describe('#push()', () => {
+        it('is a method', () => {
+            expect({{{upperCamelCase property}}}PropertyArray.prototype.push).to.be.a('function');
+        });
+
+        it('returns a number', () => {
+            const value = '...';
+            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+
+            expect({{{camelCase property}}}Properties.push(value)).to.be.a('number');
+        });
+
+        it('returns the length of the array', () => {
+            const value = '...';
+            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+
+            expect({{{camelCase property}}}Properties.push(value)).to.equal(1);
+        });
+
+        it('creates an `{{{upperCamelCase property}}}Property` object in the array', () => {
+            const value = '...';
+            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+
+            {{{camelCase property}}}Properties.push(value);
+
+            expect({{{camelCase property}}}Properties.at(0) instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+        });
+
+        it('creates an `{{{upperCamelCase property}}}Property` object in the array with the proper value', () => {
+            const value = '...';
+            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+
+            {{{camelCase property}}}Properties.push(value);
+
+            expect({{{camelCase property}}}Properties.at(0).valueOf()).to.equal(value);
+        });
+    });
+});

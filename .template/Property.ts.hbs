@@ -1,8 +1,9 @@
 import { Calscale, Cardinality, Type, Value } from '../types';
+import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
-export interface {{{capitalize property}}}Parameters {
+export interface {{{upperCamelCase property}}}Parameters {
     [key: string]: never;
     value?: '';
     altid?: number | string;
@@ -18,9 +19,9 @@ export interface {{{capitalize property}}}Parameters {
     tz?: string;
 }
 
-export type {{{capitalize property}}}PropertyConfig = [value: string, parameters?: {{{capitalize property}}}Parameters];
+export type {{{upperCamelCase property}}}PropertyConfig = [value: string, parameters?: {{{upperCamelCase property}}}Parameters];
 
-export type {{{capitalize property}}}PropertyLike = {{{capitalize property}}}Property | {{{capitalize property}}}PropertyConfig | string;
+export type {{{upperCamelCase property}}}PropertyLike = {{{upperCamelCase property}}}Property | {{{upperCamelCase property}}}PropertyConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -39,16 +40,16 @@ const VALUE: unique symbol = Symbol.for('value');
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-
  */
-export default class {{{capitalize property}}}Property extends Property {
+export default class {{{upperCamelCase property}}}Property extends Property {
     static readonly CARDINALITY: Cardinality = '{{{cardinality}}}'; // {{{cardinalityDescription}}}
 
     static readonly DEFAULT_VALUE_TYPE: Value = '';
 
-    parameters: {{{capitalize property}}}Parameters = {};
+    parameters: {{{upperCamelCase property}}}Parameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: {{{capitalize property}}}Parameters = {}) {
+    constructor(value: string, parameters: {{{upperCamelCase property}}}Parameters = {}) {
         super();
 
         if (!isString(value))
@@ -59,20 +60,20 @@ export default class {{{capitalize property}}}Property extends Property {
     }
 
     toString() {
-        return `{{{upperCase property}}}${this.getParametersString()}:${this.valueOf()}`;
+        return foldLine(`{{{upperCase property}}}${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {
         return this[VALUE];
     }
 
-    static factory(value: {{{capitalize property}}}PropertyLike): {{{capitalize property}}}Property {
-        if (value instanceof {{{capitalize property}}}Property) return value;
+    static factory(value: {{{upperCamelCase property}}}PropertyLike): {{{upperCamelCase property}}}Property {
+        if (value instanceof {{{upperCamelCase property}}}Property) return value;
 
-        if (Array.isArray(value)) return new {{{capitalize property}}}Property(...value);
+        if (Array.isArray(value)) return new {{{upperCamelCase property}}}Property(...value);
 
-        if (isString(value)) return new {{{capitalize property}}}Property(value);
+        if (isString(value)) return new {{{upperCamelCase property}}}Property(value);
 
-        throw new TypeError(`The value "${value}" is not a {{{capitalize property}}}PropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a {{{upperCamelCase property}}}PropertyLike type`);
     }
 }
