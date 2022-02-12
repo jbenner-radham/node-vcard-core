@@ -72,6 +72,11 @@ To-Do
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
   - [x] `BEGIN`
     - [x] No Parameters
+  - [ ] `BIRTHPLACE` _(RFC6474)_
+    - [ ] Line Folding
+    - [ ] Value Escaping
+    - [ ] `VALUE` Parameter
+    - [ ] `LANGUAGE` Parameter
   - [x] `CALADRURI`
     - [x] Line Folding
     - [x] No Value Escaping
@@ -105,6 +110,22 @@ To-Do
     - [x] No Parameters
     - [x] No `VALUE` Parameter
     - [ ] Implement Constructor `Array` Argument Support
+  - [ ] `CONTACT-URI` _(RFC8605)_
+    - [ ] Line Folding
+    - [ ] No Value Escaping
+    - [ ] `VALUE` Parameter
+    - [ ] `PREF` Parameter
+  - [ ] `DEATHDATE` _(RFC6474)_
+    - [ ] Line Folding
+    - [ ] Value Escaping _(for `text` type only)_
+    - [ ] `VALUE` Parameter
+    - [ ] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
+    - [ ] `LANGUAGE` Parameter _(for `text` type only)_
+  - [ ] `DEATHPLACE` _(RFC6474)_
+    - [ ] Line Folding
+    - [ ] Value Escaping
+    - [ ] `VALUE` Parameter
+    - [ ] `LANGUAGE` Parameter
   - [x] `EMAIL`
     - [x] Line Folding
     - [x] Value Escaping
@@ -115,6 +136,15 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `END`
     - [x] No Parameters
+  - [ ] `EXPERTISE` _(RFC6715)_
+    - [ ] Line Folding
+    - [ ] Value Escaping
+    - [ ] `LEVEL` Parameter
+    - [ ] `INDEX` Parameter
+    - [ ] `LANGUAGE` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `ALTID` Parameter
+    - [ ] `TYPE` Parameter
   - [x] `FBURL`
     - [x] Line Folding
     - [x] No Value Escaping
@@ -146,6 +176,15 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
+  - [ ] `HOBBY` _(RFC6715)_
+    - [ ] Line Folding
+    - [ ] Value Escaping
+    - [ ] `LEVEL` Parameter
+    - [ ] `INDEX` Parameter
+    - [ ] `LANGUAGE` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `ALTID` Parameter
+    - [ ] `TYPE` Parameter
   - [x] `IMPP`
     - [x] Line Folding
     - [x] No Value Escaping
@@ -155,6 +194,15 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
+  - [ ] `INTEREST` _(RFC6715)_
+    - [ ] Line Folding
+    - [ ] Value Escaping
+    - [ ] `LEVEL` Parameter
+    - [ ] `INDEX` Parameter
+    - [ ] `LANGUAGE` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `ALTID` Parameter
+    - [ ] `TYPE` Parameter
   - [x] `KEY`
     - [x] Line Folding
     - [x] Value Escaping _(for `text` type only)_
@@ -229,6 +277,15 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
+  - [ ] `ORG-DIRECTORY` _(RFC6715)_
+    - [ ] Line Folding
+    - [ ] No Value Escaping
+    - [ ] `INDEX` Parameter
+    - [ ] `LANGUAGE` Parameter
+    - [ ] `PID` Parameter
+    - [ ] `PREF` Parameter
+    - [ ] `ALTID` Parameter
+    - [ ] `TYPE` Parameter
   - [x] `PHOTO`
     - [x] Line Folding
     - [x] No Value Escaping
@@ -402,10 +459,10 @@ In all other cases, escaping MUST NOT be used.
 ### Links
 - [vCard Format Specification](https://datatracker.ietf.org/doc/html/rfc6350)
 - [vCard KIND:application](https://datatracker.ietf.org/doc/html/rfc6473)
+- [vCard Format Extensions: Place of Birth, Place and Date of Death](https://datatracker.ietf.org/doc/html/rfc6474/)
+- [vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group](https://datatracker.ietf.org/doc/html/rfc6715/)
 - [Additional Data Related to an Emergency Call § vCard Parameter Value Registration](https://datatracker.ietf.org/doc/html/rfc7852/#section-11.7)
 - [vCard Format Extensions: ICANN Extensions for the Registration Data Access Protocol (RDAP)](https://datatracker.ietf.org/doc/html/rfc8605/)
-- [vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group](https://datatracker.ietf.org/doc/html/rfc6715/)
-- [vCard Format Extensions: Place of Birth, Place and Date of Death](https://datatracker.ietf.org/doc/html/rfc6474/)
 - [vCard Elements (IANA Protocol Registry)](http://www.iana.org/assignments/vcard-elements/vcard-elements.xhtml)
 
 License
