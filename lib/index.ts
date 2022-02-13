@@ -2,6 +2,7 @@ import AdrProperty, { AdrPropertyLike } from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
 import AnniversaryProperty, { AnniversaryPropertyLike } from './properties/AnniversaryProperty';
 import BdayProperty, { BdayPropertyLike } from './properties/BdayProperty';
+import BirthplaceProperty, { BirthplacePropertyLike } from './properties/BirthplaceProperty';
 import CaladruriProperty, { CaladruriPropertyLike } from './properties/CaladruriProperty';
 import CaladruriPropertyArray from './properties/arrays/CaladruriPropertyArray';
 import CaluriProperty, { CaluriPropertyLike } from './properties/CaluriProperty';
@@ -67,6 +68,7 @@ export interface VcardConfig {
     adr?: AdrPropertyLike;
     anniversary?: AnniversaryPropertyLike;
     bday?: BdayPropertyLike;
+    birthplace?: BirthplacePropertyLike;
     caluri?: CaluriPropertyLike;
     caladruri?: CaladruriPropertyLike;
     categories?: CategoriesPropertyLike;
@@ -113,6 +115,8 @@ export default class Vcard {
     anniversary: AnniversaryPropertyLike | NullProperty;
 
     bday: BdayPropertyLike | NullProperty;
+
+    birthplace: BirthplacePropertyLike | NullProperty;
 
     caluri: CaluriPropertyArray;
 
@@ -183,6 +187,7 @@ export default class Vcard {
             adr,
             anniversary,
             bday,
+            birthplace,
             caluri,
             caladruri,
             categories,
@@ -270,6 +275,7 @@ export default class Vcard {
         url && this.url.push(url);
         this.anniversary = anniversary ? AnniversaryProperty.factory(anniversary) : new NullProperty();
         this.bday = bday ? BdayProperty.factory(bday) : new NullProperty();
+        this.birthplace = birthplace ? BirthplaceProperty.factory(birthplace) : new NullProperty();
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
         this.n = n ? NProperty.factory(n) : new NullProperty();
@@ -286,6 +292,7 @@ export default class Vcard {
             ...this.adr.map(toString),
             this.anniversary.toString(),
             this.bday.toString(),
+            this.birthplace.toString(),
             ...this.caluri.map(toString),
             ...this.caladruri.map(toString),
             ...this.categories.map(toString),
@@ -340,6 +347,9 @@ export default class Vcard {
 
         if (!(this.bday instanceof BdayProperty))
             throw new TypeError('The BDAY property is invalid');
+
+        if (!(this.birthplace instanceof BirthplaceProperty))
+            throw new TypeError('The BIRTHPLACE property is invalid');
 
         if (!this.caluri.every(caluri => caluri instanceof CaluriProperty))
             throw new TypeError('One or more CALURI properties are invalid');

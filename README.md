@@ -72,11 +72,11 @@ To-Do
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
   - [x] `BEGIN`
     - [x] No Parameters
-  - [ ] `BIRTHPLACE` _(RFC6474)_
-    - [ ] Line Folding
-    - [ ] Value Escaping
-    - [ ] `VALUE` Parameter
-    - [ ] `LANGUAGE` Parameter
+  - [x] `BIRTHPLACE` _(RFC6474)_
+    - [x] Line Folding
+    - [x] Value Escaping _(for `text` type only)_
+    - [x] `VALUE` Parameter
+    - [x] `LANGUAGE` Parameter
   - [x] `CALADRURI`
     - [x] Line Folding
     - [x] No Value Escaping

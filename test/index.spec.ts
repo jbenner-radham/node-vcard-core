@@ -62,6 +62,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a BIRTHPLACE property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Example McExampleton';
+                const birthplace = `Babies'R'Us Hospital`;
+                const vcard = new Vcard({ birthplace, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `BIRTHPLACE:${birthplace}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a CALURI property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';
