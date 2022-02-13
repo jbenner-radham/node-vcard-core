@@ -110,11 +110,11 @@ To-Do
     - [x] No Parameters
     - [x] No `VALUE` Parameter
     - [ ] Implement Constructor `Array` Argument Support
-  - [ ] `CONTACT-URI` _(RFC8605)_
-    - [ ] Line Folding
-    - [ ] No Value Escaping
-    - [ ] `VALUE` Parameter
-    - [ ] `PREF` Parameter
+  - [x] `CONTACT-URI` _(RFC8605)_
+    - [x] Line Folding
+    - [x] No Value Escaping
+    - [x] `VALUE` Parameter
+    - [x] `PREF` Parameter
   - [ ] `DEATHDATE` _(RFC6474)_
     - [ ] Line Folding
     - [ ] Value Escaping _(for `text` type only)_

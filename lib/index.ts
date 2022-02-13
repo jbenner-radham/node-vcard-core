@@ -11,6 +11,8 @@ import CategoriesProperty, { CategoriesPropertyLike } from './properties/Categor
 import CategoriesPropertyArray from './properties/arrays/CategoriesPropertyArray';
 import ClientpidmapProperty, { ClientpidmapPropertyLike } from './properties/ClientpidmapProperty';
 import ClientpidmapPropertyArray from './properties/arrays/ClientpidmapPropertyArray';
+import ContactUriProperty, { ContactUriPropertyLike } from './properties/ContactUriProperty';
+import ContactUriPropertyArray from './properties/arrays/ContactUriPropertyArray';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FburlProperty, { FburlPropertyLike } from './properties/FburlProperty';
@@ -73,6 +75,7 @@ export interface VcardConfig {
     caladruri?: CaladruriPropertyLike;
     categories?: CategoriesPropertyLike;
     clientpidmap?: ClientpidmapPropertyLike;
+    contactUri?: ContactUriPropertyLike;
     email?: EmailPropertyLike;
     fburl?: FburlPropertyLike;
     fn: FnPropertyLike;
@@ -125,6 +128,8 @@ export default class Vcard {
     categories: CategoriesPropertyArray;
 
     clientpidmap: ClientpidmapPropertyArray;
+
+    contactUri: ContactUriPropertyArray;
 
     email: EmailPropertyArray;
 
@@ -192,6 +197,7 @@ export default class Vcard {
             caladruri,
             categories,
             clientpidmap,
+            contactUri,
             email,
             fburl,
             fn,
@@ -226,6 +232,7 @@ export default class Vcard {
         this.caladruri = new CaladruriPropertyArray();
         this.categories = new CategoriesPropertyArray();
         this.clientpidmap = new ClientpidmapPropertyArray();
+        this.contactUri = new ContactUriPropertyArray();
         this.email = new EmailPropertyArray();
         this.fburl = new FburlPropertyArray();
         this.fn = new FnPropertyArray();
@@ -252,6 +259,7 @@ export default class Vcard {
         caladruri && this.caladruri.push(caladruri);
         categories && this.categories.push(categories);
         clientpidmap && this.clientpidmap.push(clientpidmap);
+        contactUri && this.contactUri.push(contactUri);
         email && this.email.push(email);
         fburl && this.fburl.push(fburl);
         fn && this.fn.push(fn);
@@ -297,6 +305,7 @@ export default class Vcard {
             ...this.caladruri.map(toString),
             ...this.categories.map(toString),
             ...this.clientpidmap.map(toString),
+            ...this.contactUri.map(toString),
             ...this.email.map(toString),
             ...this.fburl.map(toString),
             ...this.fn.map(toString),
@@ -362,6 +371,9 @@ export default class Vcard {
 
         if (!this.clientpidmap.every(clientpidmap => clientpidmap instanceof ClientpidmapProperty))
             throw new TypeError('One or more CLIENTPIDMAP properties are invalid');
+
+        if (!this.contactUri.every(contactUri => contactUri instanceof ContactUriProperty))
+            throw new TypeError('One or more CONTACT-URI properties are invalid');
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');
