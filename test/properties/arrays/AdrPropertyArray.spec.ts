@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import AdrProperty from '../../lib/properties/AdrProperty';
-import AdrPropertyArray from '../../lib/properties/arrays/AdrPropertyArray';
+import AdrProperty from '../../../lib/properties/AdrProperty';
+import AdrPropertyArray from '../../../lib/properties/arrays/AdrPropertyArray';
 
 describe('AdrPropertyArray', () => {
     it('is a function class', () => {
