@@ -115,12 +115,13 @@ To-Do
     - [x] No Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PREF` Parameter
-  - [ ] `DEATHDATE` _(RFC6474)_
-    - [ ] Line Folding
-    - [ ] Value Escaping _(for `text` type only)_
-    - [ ] `VALUE` Parameter
-    - [ ] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
-    - [ ] `LANGUAGE` Parameter _(for `text` type only)_
+  - [x] `DEATHDATE` _(RFC6474)_
+    - [x] Line Folding
+    - [x] Value Escaping _(for `text` type only)_
+    - [x] `VALUE` Parameter
+    - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
+    - [x] `LANGUAGE` Parameter _(for `text` type only)_
+    - [x] `ALTID` Parameter
   - [ ] `DEATHPLACE` _(RFC6474)_
     - [ ] Line Folding
     - [ ] Value Escaping

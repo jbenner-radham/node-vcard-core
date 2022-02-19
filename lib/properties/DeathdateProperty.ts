@@ -1,0 +1,109 @@
+import { Calscale, Cardinality, Value } from '../types';
+import foldLine from '../util/fold-line';
+import {
+    getInvalidCalscaleValueParameterMessage,
+    getInvalidLanguageValueParameterMessage
+} from '../util/error-messages';
+import isString from '../util/is-string';
+import Property from './Property';
+
+export interface DeathdateParameters {
+    value?: 'date-and-or-time' | 'text';
+    altid?: number | string;
+    calscale?: Calscale; // For `date-and-or-time` type only!
+    language?: string; // For `text` type only!
+}
+
+export type DeathdatePropertyConfig = [value: string, parameters?: DeathdateParameters];
+
+export type DeathdatePropertyLike = DeathdateProperty | DeathdatePropertyConfig | string;
+
+const VALUE: unique symbol = Symbol.for('value');
+
+/**
+ * > Purpose:  To specify the date of death of the object the vCard
+ * >           represents.
+ * >
+ * > Value type:  The default is a single date-and-or-time value. It can
+ * >              also be reset to a single text value.
+ * >
+ * > Description:  The presence of a DEATHDATE property indicates that the
+ * >               subject of the vCard is known to be dead. The absence
+ * >               of this property makes no statement one way or the
+ * >               other.
+ * >
+ * > Format definition:
+ * >   DEATHDATE-param = DEATHDATE-param-date / DEATHDATE-param-text
+ * >   DEATHDATE-value = date-and-or-time / text
+ * >      ; Value type and VALUE parameter MUST match.
+ * >
+ * >   DEATHDATE-param-date = "VALUE=date-and-or-time" / calscale-param
+ * >      ; calscale-param can only be present when DEATHDATE-value is
+ * >      ; date-and-or-time and actually contains a date or date-time.
+ * >
+ * >   DEATHDATE-param-text = "VALUE=text" / language-param
+ * >
+ * >   DEATHDATE-param =/ altid-param / any-param
+ * >
+ * > Examples:
+ * >   DEATHDATE:19960415
+ * >   DEATHDATE:--0415
+ * >   DEATHDATE:19531015T231000Z
+ * >   DEATHDATE;VALUE=text:circa 1800
+ *
+ * @see https://datatracker.ietf.org/doc/html/rfc6474/#section-2.3
+ */
+export default class DeathdateProperty extends Property {
+    static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
+
+    static readonly DEFAULT_VALUE_TYPE: Value = 'date-and-or-time';
+
+    parameters: DeathdateParameters = {};
+
+    [VALUE]: string;
+
+    constructor(value: string, parameters: DeathdateParameters = {}) {
+        super();
+
+        if (!isString(value))
+            throw new TypeError(`The value "${value}" is not a string type`);
+
+        DeathdateProperty.validateParameters(parameters);
+
+        this.parameters = parameters;
+        this[VALUE] = value;
+    }
+
+    toString() {
+        const parameters = this.getParametersString();
+        const value = this.parameters.value !== 'text'
+            ? this.valueOf()
+            : this.getEscapedValueString();
+
+        return foldLine(`DEATHDATE${parameters}:${value}`);
+    }
+
+    valueOf(): string {
+        return this[VALUE];
+    }
+
+    static factory(value: DeathdatePropertyLike): DeathdateProperty {
+        if (value instanceof DeathdateProperty) return value;
+
+        if (Array.isArray(value)) return new DeathdateProperty(...value);
+
+        if (isString(value)) return new DeathdateProperty(value);
+
+        throw new TypeError(`The value "${value}" is not a DeathdatePropertyLike type`);
+    }
+
+    static validateParameters({ calscale, language, value }: DeathdateParameters): void {
+        if (calscale && value && value?.toLowerCase() !== 'date-and-or-time') {
+            throw new TypeError(getInvalidCalscaleValueParameterMessage({ value }));
+        }
+
+        if (language && (!value || value?.toLowerCase() !== 'text')) {
+            throw new TypeError(getInvalidLanguageValueParameterMessage({ value }));
+        }
+    }
+}
