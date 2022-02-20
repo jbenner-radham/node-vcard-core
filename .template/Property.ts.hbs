@@ -60,7 +60,10 @@ export default class {{{upperCamelCase property}}}Property extends Property {
     }
 
     toString() {
-        return foldLine(`{{{upperCase property}}}${this.getParametersString()}:${this.valueOf()}`);
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`{{{upperCase property}}}${parameters}:${value}`);
     }
 
     valueOf(): string {
