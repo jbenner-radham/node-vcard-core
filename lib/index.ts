@@ -17,6 +17,8 @@ import DeathdateProperty, { DeathdatePropertyLike } from './properties/Deathdate
 import DeathplaceProperty, { DeathplacePropertyLike } from './properties/DeathplaceProperty';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
+import ExpertiseProperty, { ExpertisePropertyLike } from './properties/ExpertiseProperty';
+import ExpertisePropertyArray from './properties/arrays/ExpertisePropertyArray';
 import FburlProperty, { FburlPropertyLike } from './properties/FburlProperty';
 import FburlPropertyArray from './properties/arrays/FburlPropertyArray';
 import FnProperty, { FnPropertyLike } from './properties/FnProperty';
@@ -81,6 +83,7 @@ export interface VcardConfig {
     deathdate?: DeathdatePropertyLike;
     deathplace?: DeathplacePropertyLike;
     email?: EmailPropertyLike;
+    expertise?: ExpertisePropertyLike;
     fburl?: FburlPropertyLike;
     fn: FnPropertyLike;
     gender?: GenderPropertyLike;
@@ -140,6 +143,8 @@ export default class Vcard {
     deathplace: DeathplacePropertyLike | NullProperty;
 
     email: EmailPropertyArray;
+
+    expertise: ExpertisePropertyArray;
 
     fburl: FburlPropertyArray;
 
@@ -209,6 +214,7 @@ export default class Vcard {
             deathdate,
             deathplace,
             email,
+            expertise,
             fburl,
             fn,
             gender,
@@ -244,6 +250,7 @@ export default class Vcard {
         this.clientpidmap = new ClientpidmapPropertyArray();
         this.contactUri = new ContactUriPropertyArray();
         this.email = new EmailPropertyArray();
+        this.expertise = new ExpertisePropertyArray();
         this.fburl = new FburlPropertyArray();
         this.fn = new FnPropertyArray();
         this.geo = new GeoPropertyArray();
@@ -271,6 +278,7 @@ export default class Vcard {
         clientpidmap && this.clientpidmap.push(clientpidmap);
         contactUri && this.contactUri.push(contactUri);
         email && this.email.push(email);
+        expertise && this.expertise.push(expertise);
         fburl && this.fburl.push(fburl);
         fn && this.fn.push(fn);
         geo && this.geo.push(geo);
@@ -321,6 +329,7 @@ export default class Vcard {
             this.deathdate.toString(),
             this.deathplace.toString(),
             ...this.email.map(toString),
+            ...this.expertise.map(toString),
             ...this.fburl.map(toString),
             ...this.fn.map(toString),
             this.gender.toString(),
@@ -397,6 +406,9 @@ export default class Vcard {
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');
+
+        if (!this.expertise.every(expertise => expertise instanceof ExpertiseProperty))
+            throw new TypeError('One or more EXPERTISE properties are invalid');
 
         if (!this.fburl.every(fburl => fburl instanceof FburlProperty))
             throw new TypeError('One or more FBURL properties are invalid');

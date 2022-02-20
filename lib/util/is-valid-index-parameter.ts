@@ -1,5 +1,4 @@
-export default function isValidPrefParameter(value: any): boolean {
-    // > Its value MUST be an integer between 1 and 100 that quantifies the
-    // > level of preference.
-    return (Number.isInteger(value) && value >= 1 && value <= 100);
+export default function isValidIndexParameter(value: any): boolean {
+    // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
+    return (Number.isInteger(value) && value >= 1);
 }

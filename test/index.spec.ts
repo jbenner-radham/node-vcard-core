@@ -246,6 +246,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a EXPERTISE property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Example McExampleton';
+                const expertise = 'video games';
+                const vcard = new Vcard({ expertise, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `EXPERTISE:${expertise}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a FBURL property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Jane Doe';

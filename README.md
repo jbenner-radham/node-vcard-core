@@ -138,15 +138,15 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `END`
     - [x] No Parameters
-  - [ ] `EXPERTISE` _(RFC6715)_
-    - [ ] Line Folding
-    - [ ] Value Escaping
-    - [ ] `LEVEL` Parameter
-    - [ ] `INDEX` Parameter
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `TYPE` Parameter
+  - [x] `EXPERTISE` _(RFC6715)_
+    - [x] Line Folding
+    - [x] Value Escaping
+    - [x] `LEVEL` Parameter
+    - [x] `INDEX` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `FBURL`
     - [x] Line Folding
     - [x] No Value Escaping
