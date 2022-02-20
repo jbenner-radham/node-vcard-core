@@ -1,5 +1,6 @@
 export type Calscale = 'gregorian';
 export type Cardinality = '1' | '*1' | '1*' | '*';
+export type HobbyOrInterestLevel = 'low' | 'medium' | 'high';
 export type Type = 'home' | 'work';
 export type Value = 'boolean'
     | 'date'
