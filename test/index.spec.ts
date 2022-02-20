@@ -300,6 +300,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a HOBBY property', () => {
+            it('returns the proper string format', () => {
+                const hobby = 'reading';
+                const fn = 'Jane Doe';
+                const vcard = new Vcard({ fn, hobby });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `HOBBY:${hobby}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a IMPP property', () => {
             it('returns the proper string format', () => {
                 const impp = 'xmpp:alice@example.com';

@@ -178,15 +178,15 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
-  - [ ] `HOBBY` _(RFC6715)_
-    - [ ] Line Folding
-    - [ ] Value Escaping
-    - [ ] `LEVEL` Parameter
-    - [ ] `INDEX` Parameter
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `TYPE` Parameter
+  - [x] `HOBBY` _(RFC6715)_
+    - [x] Line Folding
+    - [x] Value Escaping
+    - [x] `LEVEL` Parameter
+    - [x] `INDEX` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `IMPP`
     - [x] Line Folding
     - [x] No Value Escaping
