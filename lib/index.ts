@@ -14,6 +14,7 @@ import ClientpidmapPropertyArray from './properties/arrays/ClientpidmapPropertyA
 import ContactUriProperty, { ContactUriPropertyLike } from './properties/ContactUriProperty';
 import ContactUriPropertyArray from './properties/arrays/ContactUriPropertyArray';
 import DeathdateProperty, { DeathdatePropertyLike } from './properties/DeathdateProperty';
+import DeathplaceProperty, { DeathplacePropertyLike } from './properties/DeathplaceProperty';
 import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray';
 import FburlProperty, { FburlPropertyLike } from './properties/FburlProperty';
@@ -78,6 +79,7 @@ export interface VcardConfig {
     clientpidmap?: ClientpidmapPropertyLike;
     contactUri?: ContactUriPropertyLike;
     deathdate?: DeathdatePropertyLike;
+    deathplace?: DeathplacePropertyLike;
     email?: EmailPropertyLike;
     fburl?: FburlPropertyLike;
     fn: FnPropertyLike;
@@ -134,6 +136,8 @@ export default class Vcard {
     contactUri: ContactUriPropertyArray;
 
     deathdate: DeathdatePropertyLike | NullProperty;
+
+    deathplace: DeathplacePropertyLike | NullProperty;
 
     email: EmailPropertyArray;
 
@@ -203,6 +207,7 @@ export default class Vcard {
             clientpidmap,
             contactUri,
             deathdate,
+            deathplace,
             email,
             fburl,
             fn,
@@ -290,6 +295,7 @@ export default class Vcard {
         this.bday = bday ? BdayProperty.factory(bday) : new NullProperty();
         this.birthplace = birthplace ? BirthplaceProperty.factory(birthplace) : new NullProperty();
         this.deathdate = deathdate ? DeathdateProperty.factory(deathdate) : new NullProperty();
+        this.deathplace = deathplace ? DeathplaceProperty.factory(deathplace) : new NullProperty();
         this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
         this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
         this.n = n ? NProperty.factory(n) : new NullProperty();
@@ -313,6 +319,7 @@ export default class Vcard {
             ...this.clientpidmap.map(toString),
             ...this.contactUri.map(toString),
             this.deathdate.toString(),
+            this.deathplace.toString(),
             ...this.email.map(toString),
             ...this.fburl.map(toString),
             ...this.fn.map(toString),
@@ -384,6 +391,9 @@ export default class Vcard {
 
         if (!(this.deathdate instanceof DeathdateProperty))
             throw new TypeError('The DEATHDATE property is invalid');
+
+        if (!(this.deathplace instanceof DeathplaceProperty))
+            throw new TypeError('The DEATHPLACE property is invalid');
 
         if (!this.email.every(email => email instanceof EmailProperty))
             throw new TypeError('One or more EMAIL properties are invalid');

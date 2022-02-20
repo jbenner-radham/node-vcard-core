@@ -122,11 +122,12 @@ To-Do
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
     - [x] `ALTID` Parameter
-  - [ ] `DEATHPLACE` _(RFC6474)_
-    - [ ] Line Folding
-    - [ ] Value Escaping
-    - [ ] `VALUE` Parameter
-    - [ ] `LANGUAGE` Parameter
+  - [x] `DEATHPLACE` _(RFC6474)_
+    - [x] Line Folding
+    - [x] Value Escaping
+    - [x] `VALUE` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `ALTID` Parameter
   - [x] `EMAIL`
     - [x] Line Folding
     - [x] Value Escaping

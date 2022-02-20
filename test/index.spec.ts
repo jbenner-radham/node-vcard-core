@@ -209,6 +209,25 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a DEATHPLACE property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const deathplace = 'Aboard the Titanic, near Newfoundland';
+                const escapedDeathplace = 'Aboard the Titanic\\, near Newfoundland';
+                const vcard = new Vcard({ deathplace, fn });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `DEATHPLACE:${escapedDeathplace}`,
+                    `FN:${fn}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a EMAIL property', () => {
             it('returns the proper string format', () => {
                 const fn = 'Example McExampleton';
