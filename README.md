@@ -279,15 +279,15 @@ To-Do
     - [x] `PREF` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
-  - [ ] `ORG-DIRECTORY` _(RFC6715)_
-    - [ ] Line Folding
-    - [ ] No Value Escaping
-    - [ ] `INDEX` Parameter
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `PID` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `TYPE` Parameter
+  - [x] `ORG-DIRECTORY` _(RFC6715)_
+    - [x] Line Folding
+    - [x] No Value Escaping
+    - [x] `INDEX` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `PID` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `PHOTO`
     - [x] Line Folding
     - [x] No Value Escaping

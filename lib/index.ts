@@ -50,6 +50,8 @@ import NotePropertyArray from './properties/arrays/NotePropertyArray';
 import NullProperty from './properties/NullProperty';
 import OrgProperty, { OrgPropertyLike } from './properties/OrgProperty';
 import OrgPropertyArray from './properties/arrays/OrgPropertyArray';
+import OrgDirectoryProperty, { OrgDirectoryPropertyLike } from './properties/OrgDirectoryProperty';
+import OrgDirectoryPropertyArray from './properties/arrays/OrgDirectoryPropertyArray';
 import PhotoProperty, { PhotoPropertyLike } from './properties/PhotoProperty';
 import PhotoPropertyArray from './properties/arrays/PhotoPropertyArray';
 import ProdidProperty, { ProdidPropertyLike } from './properties/ProdidProperty';
@@ -104,6 +106,7 @@ export interface VcardConfig {
     nickname?: NicknamePropertyLike;
     note?: NotePropertyLike;
     org?: OrgPropertyLike;
+    orgDirectory?: OrgDirectoryPropertyLike;
     photo?: PhotoPropertyLike;
     prodid?: ProdidPropertyLike;
     related?: RelatedPropertyLike;
@@ -184,6 +187,8 @@ export default class Vcard {
 
     org: OrgPropertyArray;
 
+    orgDirectory: OrgDirectoryPropertyArray;
+
     photo: PhotoPropertyArray;
 
     prodid: ProdidPropertyLike | NullProperty;
@@ -241,6 +246,7 @@ export default class Vcard {
             nickname,
             note,
             org,
+            orgDirectory,
             photo,
             prodid,
             related,
@@ -276,6 +282,7 @@ export default class Vcard {
         this.nickname = new NicknamePropertyArray();
         this.note = new NotePropertyArray();
         this.org = new OrgPropertyArray();
+        this.orgDirectory = new OrgDirectoryPropertyArray();
         this.photo = new PhotoPropertyArray();
         this.related = new RelatedPropertyArray();
         this.role = new RolePropertyArray();
@@ -306,6 +313,7 @@ export default class Vcard {
         nickname && this.nickname.push(nickname);
         note && this.note.push(note);
         org && this.org.push(org);
+        orgDirectory && this.orgDirectory.push(orgDirectory);
         photo && this.photo.push(photo);
         related && this.related.push(related);
         role && this.role.push(role);
@@ -362,6 +370,7 @@ export default class Vcard {
             ...this.nickname.map(toString),
             ...this.note.map(toString),
             ...this.org.map(toString),
+            ...this.orgDirectory.map(toString),
             ...this.photo.map(toString),
             this.prodid.toString(),
             ...this.related.map(toString),
@@ -466,6 +475,9 @@ export default class Vcard {
 
         if (!this.org.every(org => org instanceof OrgProperty))
             throw new TypeError('One or more ORG properties are invalid');
+
+        if (!this.orgDirectory.every(orgDirectory => orgDirectory instanceof OrgDirectoryProperty))
+            throw new TypeError('One or more ORG-DIRECTORY properties are invalid');
 
         if (!this.photo.every(photo => photo instanceof PhotoProperty))
             throw new TypeError('One or more PHOTO properties are invalid');

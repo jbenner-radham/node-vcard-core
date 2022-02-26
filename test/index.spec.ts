@@ -482,6 +482,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a ORG-DIRECTORY property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'J. Doe';
+                const orgDirectory = 'http://directory.mycompany.example.com';
+                const vcard = new Vcard({ fn, orgDirectory });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `ORG-DIRECTORY:${orgDirectory}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a PHOTO property', () => {
             it('returns the proper string format', () => {
                 const fn = 'J. Q. Public';
