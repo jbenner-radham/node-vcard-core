@@ -336,6 +336,24 @@ describe('Vcard', () => {
             });
         });
 
+        describe('when passed a minimal vCard with a INTEREST property', () => {
+            it('returns the proper string format', () => {
+                const interest = `rock 'n' roll music`;
+                const fn = 'Alice Example';
+                const vcard = new Vcard({ fn, interest });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `INTEREST:${interest}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
         describe('when passed a minimal vCard with a KEY property', () => {
             it('returns the proper string format', () => {
                 const fn = 'J. Doe';

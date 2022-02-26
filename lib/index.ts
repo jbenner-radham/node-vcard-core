@@ -31,6 +31,8 @@ import HobbyPropertyArray from './properties/arrays/HobbyPropertyArray';
 import ImppProperty, { ImppPropertyLike } from './properties/ImppProperty';
 import ImppPropertyArray from './properties/arrays/ImppPropertyArray';
 import isNotEmptyString from './util/is-not-empty-string';
+import InterestProperty, { InterestPropertyLike } from './properties/InterestProperty';
+import InterestPropertyArray from './properties/arrays/InterestPropertyArray';
 import KeyProperty, { KeyPropertyLike } from './properties/KeyProperty';
 import KeyPropertyArray from './properties/arrays/KeyPropertyArray';
 import KindProperty, { KindPropertyLike } from './properties/KindProperty';
@@ -92,6 +94,7 @@ export interface VcardConfig {
     geo?: GeoPropertyLike;
     hobby?: HobbyPropertyLike;
     impp?: ImppPropertyLike;
+    interest?: InterestPropertyLike;
     key?: KeyPropertyLike;
     kind?: KindPropertyLike;
     lang?: LangPropertyLike;
@@ -161,6 +164,8 @@ export default class Vcard {
 
     impp: ImppPropertyArray;
 
+    interest: InterestPropertyArray;
+
     key: KeyPropertyArray;
 
     kind: KindPropertyLike | NullProperty;
@@ -226,6 +231,7 @@ export default class Vcard {
             geo,
             hobby,
             impp,
+            interest,
             key,
             kind,
             lang,
@@ -262,6 +268,7 @@ export default class Vcard {
         this.geo = new GeoPropertyArray();
         this.hobby = new HobbyPropertyArray();
         this.impp = new ImppPropertyArray();
+        this.interest = new InterestPropertyArray();
         this.key = new KeyPropertyArray();
         this.lang = new LangPropertyArray();
         this.logo = new LogoPropertyArray();
@@ -291,6 +298,7 @@ export default class Vcard {
         geo && this.geo.push(geo);
         hobby && this.hobby.push(hobby);
         impp && this.impp.push(impp);
+        interest && this.interest.push(interest);
         key && this.key.push(key);
         lang && this.lang.push(lang);
         logo && this.logo.push(logo);
@@ -344,6 +352,7 @@ export default class Vcard {
             ...this.geo.map(toString),
             ...this.hobby.map(toString),
             ...this.impp.map(toString),
+            ...this.interest.map(toString),
             ...this.key.map(toString),
             this.kind.toString(),
             ...this.lang.map(toString),
@@ -433,6 +442,9 @@ export default class Vcard {
 
         if (!this.impp.every(impp => impp instanceof ImppProperty))
             throw new TypeError('One or more IMPP properties are invalid');
+
+        if (!this.interest.every(interest => interest instanceof InterestProperty))
+            throw new TypeError('One or more INTEREST properties are invalid');
 
         if (!this.key.every(key => key instanceof KeyProperty))
             throw new TypeError('One or more KEY properties are invalid');

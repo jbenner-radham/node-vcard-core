@@ -196,15 +196,15 @@ To-Do
     - [x] `TYPE` Parameter
     - [x] `MEDIATYPE` Parameter
     - [x] `ALTID` Parameter
-  - [ ] `INTEREST` _(RFC6715)_
-    - [ ] Line Folding
-    - [ ] Value Escaping
-    - [ ] `LEVEL` Parameter
-    - [ ] `INDEX` Parameter
-    - [ ] `LANGUAGE` Parameter
-    - [ ] `PREF` Parameter
-    - [ ] `ALTID` Parameter
-    - [ ] `TYPE` Parameter
+  - [x] `INTEREST` _(RFC6715)_
+    - [x] Line Folding
+    - [x] Value Escaping
+    - [x] `LEVEL` Parameter
+    - [x] `INDEX` Parameter
+    - [x] `LANGUAGE` Parameter
+    - [x] `PREF` Parameter
+    - [x] `ALTID` Parameter
+    - [x] `TYPE` Parameter
   - [x] `KEY`
     - [x] Line Folding
     - [x] Value Escaping _(for `text` type only)_
