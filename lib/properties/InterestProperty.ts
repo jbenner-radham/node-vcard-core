@@ -44,7 +44,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    * "Tennis" might be an interest if one enjoys watching matches
  * >      but doesn't play.
  * >
- * > ABNF:
+ * > Format definition:
  * >   INTEREST-param = LEVEL-param / INDEX-param / language-param /
  * >                    pref-param / altid-param / type-param /
  * >                    any-param
