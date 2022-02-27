@@ -1,4 +1,4 @@
 ---
 extension: ts
 require: test/babel-register.cjs
-spec: test/**
+spec: test/**/*.spec.ts
