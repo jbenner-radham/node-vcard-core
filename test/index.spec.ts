@@ -715,5 +715,27 @@ describe('Vcard', () => {
                 expect(actual).to.equal(expected);
             });
         });
+
+        describe('when passed a minimal vCard with a XML property', () => {
+            it('returns the proper string format', () => {
+                const fn = 'Captain Awesome';
+                const xml = '<a xmlns="http://www.w3.org/1999/xhtml" href="http://www.example.com">My web page!</a>';
+                const foldedXml = [
+                    '<a xmlns="http://www.w3.org/1999/xhtml" href="http://www.example.com">M',
+                    ' y web page!</a>'
+                ].join(Vcard.EOL);
+                const vcard = new Vcard({ fn, xml });
+                const actual = vcard.toString();
+                const expected = [
+                    'BEGIN:VCARD',
+                    'VERSION:4.0',
+                    `FN:${fn}`,
+                    `XML:${foldedXml}`,
+                    'END:VCARD'
+                ].join(Vcard.EOL);
+
+                expect(actual).to.equal(expected);
+            });
+        });
     });
 });

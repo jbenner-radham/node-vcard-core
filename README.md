@@ -384,11 +384,11 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `VERSION`
     - [x] No Parameters
-  - [ ] `XML`
-    - [ ] Line Folding
-    - [ ] Value Escaping
-    - [ ] `VALUE` Parameter
-    - [ ] `ALTID` Parameter
+  - [x] `XML`
+    - [x] Line Folding
+    - [x] Value Escaping
+    - [x] `VALUE` Parameter
+    - [x] `ALTID` Parameter
 
 Reference
 ---------

@@ -75,6 +75,8 @@ import UidProperty, { UidPropertyLike } from './properties/UidProperty';
 import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty';
 import UrlPropertyArray from './properties/arrays/UrlPropertyArray';
 import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty';
+import XmlProperty, { XmlPropertyLike } from './properties/XmlProperty';
+import XmlPropertyArray from './properties/arrays/XmlPropertyArray';
 
 export interface VcardConfig {
     adr?: AdrPropertyLike;
@@ -120,6 +122,7 @@ export interface VcardConfig {
     uid?: UidPropertyLike;
     url?: UrlPropertyLike;
     version?: VersionProperty;
+    xml?: XmlPropertyLike;
 }
 
 export default class Vcard {
@@ -215,6 +218,8 @@ export default class Vcard {
 
     version: VersionPropertyLike;
 
+    xml: XmlPropertyArray;
+
     constructor(config: VcardConfig) {
         const {
             adr,
@@ -259,7 +264,8 @@ export default class Vcard {
             tz,
             uid,
             url,
-            version
+            version,
+            xml
         } = config;
         this.adr = new AdrPropertyArray();
         this.caluri = new CaluriPropertyArray();
@@ -292,6 +298,7 @@ export default class Vcard {
         this.title = new TitlePropertyArray();
         this.tz = new TzPropertyArray();
         this.url = new UrlPropertyArray();
+        this.xml = new XmlPropertyArray();
         adr && this.adr.push(adr);
         caluri && this.caluri.push(caluri);
         caladruri && this.caladruri.push(caladruri);
@@ -323,6 +330,7 @@ export default class Vcard {
         title && this.title.push(title);
         tz && this.tz.push(tz);
         url && this.url.push(url);
+        xml && this.xml.push(xml);
         this.anniversary = anniversary ? AnniversaryProperty.factory(anniversary) : new NullProperty();
         this.bday = bday ? BdayProperty.factory(bday) : new NullProperty();
         this.birthplace = birthplace ? BirthplaceProperty.factory(birthplace) : new NullProperty();
@@ -383,6 +391,7 @@ export default class Vcard {
             ...this.tz.map(toString),
             this.uid.toString(),
             ...this.url.map(toString),
+            ...this.xml.map(toString),
             'END:VCARD'
         ];
 
@@ -514,5 +523,8 @@ export default class Vcard {
 
         if (!this.url.every(url => url instanceof UrlProperty))
             throw new TypeError('One or more URL properties are invalid');
+
+        if (!this.xml.every(xml => xml instanceof XmlProperty))
+            throw new TypeError('One or more XML properties are invalid');
     }
 }
