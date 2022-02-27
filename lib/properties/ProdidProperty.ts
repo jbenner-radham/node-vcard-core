@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
@@ -50,13 +49,6 @@ export default class ProdidProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.getEscapedValueString();
-
-        return foldLine(`PRODID${parameters}:${value}`);
     }
 
     valueOf(): string {

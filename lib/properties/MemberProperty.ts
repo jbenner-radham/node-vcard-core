@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
@@ -84,10 +83,6 @@ export default class MemberProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        return foldLine(`MEMBER${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

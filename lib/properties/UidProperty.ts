@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
@@ -60,15 +59,6 @@ export default class UidProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = (this.parameters.value && this.parameters.value?.toLowerCase() !== 'text')
-            ? this.valueOf()
-            : this.getEscapedValueString();
-
-        return foldLine(`UID${parameters}:${value}`);
     }
 
     valueOf(): string {

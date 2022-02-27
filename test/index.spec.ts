@@ -292,7 +292,7 @@ describe('Vcard', () => {
                     'BEGIN:VCARD',
                     'VERSION:4.0',
                     `FN:${fn}`,
-                    `GEO:${geo}`,
+                    `GEO:geo:37.386013\\,-122.082932`,
                     'END:VCARD'
                 ].join(Vcard.EOL);
 
@@ -618,7 +618,7 @@ describe('Vcard', () => {
                     'BEGIN:VCARD',
                     'VERSION:4.0',
                     `FN:${fn}`,
-                    `SOURCE:${source}`,
+                    'SOURCE:ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20c=US',
                     'END:VCARD'
                 ].join(Vcard.EOL);
 

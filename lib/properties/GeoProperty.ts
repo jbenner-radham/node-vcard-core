@@ -1,5 +1,4 @@
 import { Cardinality, Type, Value } from '../types';
-import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
@@ -35,7 +34,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   GEO-value = URI
  * >
  * > Example:
- * >   GEO:geo:37.386013,-122.082932
+ * >   GEO:geo:37.386013\,-122.082932
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.5.2
  */
@@ -58,10 +57,6 @@ export default class GeoProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        return foldLine(`GEO${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

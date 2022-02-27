@@ -1,5 +1,4 @@
 import { Cardinality, Type, Value } from '../types';
-import foldLine from '../util/fold-line';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidIndexParameter from '../util/is-valid-index-parameter';
@@ -74,13 +73,6 @@ export default class OrgDirectoryProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.getEscapedValueString();
-
-        return foldLine(`ORG-DIRECTORY${parameters}:${value}`);
     }
 
     valueOf(): string {

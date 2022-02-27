@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
 import Property from './Property';
 import isString from '../util/is-string';
@@ -98,13 +97,6 @@ export default class NProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.getEscapedValueString();
-
-        return foldLine(`N${parameters}:${value}`);
     }
 
     valueOf(): string {

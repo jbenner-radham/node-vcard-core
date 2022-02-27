@@ -1,5 +1,4 @@
 import { Calscale, Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import Property from './Property';
@@ -58,15 +57,6 @@ export default class AnniversaryProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.parameters.value !== 'text'
-            ? this.valueOf()
-            : this.getEscapedValueString();
-
-        return foldLine(`ANNIVERSARY${parameters}:${value}`);
     }
 
     valueOf(): string {

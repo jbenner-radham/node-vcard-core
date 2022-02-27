@@ -1,5 +1,4 @@
 import { Cardinality, Type, Value } from '../types';
-import foldLine from '../util/fold-line';
 import getSemicolonCount from '../util/get-semicolon-count';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
@@ -158,13 +157,6 @@ export default class AdrProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.getEscapedValueString();
-
-        return foldLine(`ADR${parameters}:${value}`);
     }
 
     validate(value: string): void {

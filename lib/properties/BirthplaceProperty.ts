@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 
@@ -52,15 +51,6 @@ export default class BirthplaceProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.parameters.value?.toLowerCase() === 'uri'
-            ? this.valueOf()
-            : this.getEscapedValueString();
-
-        return foldLine(`BIRTHPLACE${parameters}:${value}`);
     }
 
     valueOf(): string {

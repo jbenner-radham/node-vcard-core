@@ -1,6 +1,5 @@
 import { Cardinality, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
-import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
@@ -59,13 +58,6 @@ export default class FnProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.getEscapedValueString();
-
-        return foldLine(`FN${parameters}:${value}`);
     }
 
     valueOf(): string {

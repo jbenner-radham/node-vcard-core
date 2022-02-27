@@ -1,9 +1,9 @@
-import kebabCase from 'lodash.kebabcase';
 import escapePropertyValue from '../util/escape-property-value';
+import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
+import kebabCase from 'lodash.kebabcase';
 
 export default abstract class Property {
-    abstract toString(): string;
     abstract valueOf(): unknown;
 
     readonly COMPONENT_SEPARATOR = ';';
@@ -39,5 +39,13 @@ export default abstract class Property {
             .components()
             .map(escapePropertyValue)
             .join(this.COMPONENT_SEPARATOR);
+    }
+
+    toString(): string {
+        const name = kebabCase(this.constructor.name.replace(/Property$/, '')).toUpperCase();
+        const parameters = this.getParametersString();
+        const value = this.getEscapedValueString();
+
+        return foldLine(`${name}${parameters}:${value}`);
     }
 };
