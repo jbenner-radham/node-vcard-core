@@ -59,13 +59,13 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `ANNIVERSARY`
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `ALTID` Parameter
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
   - [x] `BDAY`
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `ALTID` Parameter
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
@@ -74,12 +74,12 @@ To-Do
     - [x] No Parameters
   - [x] `BIRTHPLACE` _(RFC6474)_
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
   - [x] `CALADRURI`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -88,7 +88,7 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `CALURI`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -106,18 +106,18 @@ To-Do
     - [ ] Implement Constructor `Array` Argument Support
   - [x] `CLIENTPIDMAP`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] No Parameters
     - [x] No `VALUE` Parameter
     - [ ] Implement Constructor `Array` Argument Support
   - [x] `CONTACT-URI` _(RFC8605)_
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PREF` Parameter
   - [x] `DEATHDATE` _(RFC6474)_
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
@@ -149,7 +149,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `FBURL`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -166,12 +166,12 @@ To-Do
     - [x] `PREF` Parameter
   - [x] `GENDER`
     - [x] Line Folding
-    - [ ] Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [ ] Implement Constructor `Array` Argument Support
   - [x] `GEO`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -189,7 +189,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `IMPP`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -207,7 +207,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `KEY`
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `ALTID` Parameter
@@ -220,7 +220,7 @@ To-Do
     - [x] `VALUE` Parameter
   - [x] `LANG`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -228,7 +228,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `LOGO`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -238,7 +238,7 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `MEMBER`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -281,7 +281,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `ORG-DIRECTORY` _(RFC6715)_
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `INDEX` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -290,7 +290,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `PHOTO`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `ALTID` Parameter
     - [x] `TYPE` Parameter
@@ -303,7 +303,7 @@ To-Do
     - [x] `VALUE` Parameter
   - [x] `RELATED`
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
@@ -313,7 +313,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `REV`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
   - [x] `ROLE`
     - [x] Line Folding
@@ -326,7 +326,7 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `SOUND`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `PID` Parameter
@@ -336,7 +336,7 @@ To-Do
     - [x] `ALTID` Parameter
   - [x] `SOURCE`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
@@ -344,7 +344,7 @@ To-Do
     - [x] `MEDIATYPE` Parameter
   - [x] `TEL`
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `MEDIATYPE` Parameter _(for `URI` type only)_
     - [x] `TYPE` Parameter
@@ -362,7 +362,7 @@ To-Do
     - [x] `TYPE` Parameter
   - [x] `TZ`
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `ALTID` Parameter
     - [x] `PID` Parameter
@@ -371,11 +371,11 @@ To-Do
     - [x] `MEDIATYPE` Parameter
   - [x] `UID`
     - [x] Line Folding
-    - [x] Value Escaping _(for `text` type only)_
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
   - [x] `URL`
     - [x] Line Folding
-    - [x] No Value Escaping
+    - [x] Value Escaping
     - [x] `VALUE` Parameter
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
