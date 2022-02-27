@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
@@ -111,15 +110,6 @@ export default class TelProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = (this.parameters.value && this.parameters.value?.toLowerCase() !== 'text')
-            ? this.valueOf()
-            : this.getEscapedValueString();
-
-        return foldLine(`TEL${parameters}:${value}`);
     }
 
     valueOf(): string {

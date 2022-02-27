@@ -20,9 +20,10 @@ describe('SourceProperty', () => {
 
         it('returns the proper string format', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
+            const escapedValue = 'ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20c=US';
             const source = new SourceProperty(value);
 
-            expect(source.toString()).to.equal(`SOURCE:${value}`);
+            expect(source.toString()).to.equal(`SOURCE:${escapedValue}`);
         });
 
         it('correctly returns parameters', () => {
@@ -30,7 +31,10 @@ describe('SourceProperty', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
             const source = new SourceProperty(value, parameters);
             const actual = source.toString();
-            const expected = `SOURCE;PREF=1:${value}`;
+            const expected = [
+                'SOURCE;PREF=1:ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20c=U',
+                'S'
+            ].join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
 
             expect(actual).to.equal(expected);
         });
@@ -40,8 +44,8 @@ describe('SourceProperty', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
             const source = new SourceProperty(value, parameters);
             const expected = [
-                'SOURCE;VALUE=uri:ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=',
-                'US'
+                'SOURCE;VALUE=uri:ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20',
+                'c=US'
             ].join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
 
             expect(source.toString()).to.equal(expected);

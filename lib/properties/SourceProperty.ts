@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
@@ -42,7 +41,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   SOURCE-value = URI
  * >
  * > Examples:
- * >   SOURCE:ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US
+ * >   SOURCE:ldap://ldap.example.com/cn=Babs%20Jensen\,%20o=Babsco\,%20c=US
  * >
  * >   SOURCE:http://directory.example.com/addressbooks/jdoe/
  * >    Jean%20Dupont.vcf
@@ -68,10 +67,6 @@ export default class SourceProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        return foldLine(`SOURCE${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

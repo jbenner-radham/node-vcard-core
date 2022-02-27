@@ -65,10 +65,6 @@ export default class VersionProperty extends Property {
         throw new TypeError(`The value "${config}" is not a VersionPropertyConfig or string type`);
     }
 
-    toString() {
-        return `VERSION:${this.valueOf()}`;
-    }
-
     valueOf(): string {
         return this[VALUE];
     }

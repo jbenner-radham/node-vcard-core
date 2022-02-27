@@ -1,5 +1,4 @@
 import { Calscale, Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import {
     getInvalidCalscaleValueParameterMessage,
     getInvalidLanguageValueParameterMessage
@@ -72,15 +71,6 @@ export default class DeathdateProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.parameters.value !== 'text'
-            ? this.valueOf()
-            : this.getEscapedValueString();
-
-        return foldLine(`DEATHDATE${parameters}:${value}`);
     }
 
     valueOf(): string {

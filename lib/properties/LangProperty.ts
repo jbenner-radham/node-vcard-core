@@ -1,5 +1,4 @@
 import { Cardinality, Type, Value } from '../types';
-import foldLine from '../util/fold-line';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
@@ -56,10 +55,6 @@ export default class LangProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        return foldLine(`LANG${this.getParametersString()}:${this.valueOf()}`);
     }
 
     valueOf(): string {

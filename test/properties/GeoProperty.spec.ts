@@ -19,17 +19,19 @@ describe('GeoProperty', () => {
 
         it('returns the proper string format', () => {
             const value = 'geo:37.386013,-122.082932';
+            const escapedValue = 'geo:37.386013\\,-122.082932';
             const geo = new GeoProperty(value);
 
-            expect(geo.toString()).to.equal(`GEO:${value}`);
+            expect(geo.toString()).to.equal(`GEO:${escapedValue}`);
         });
 
         it('correctly returns parameters', () => {
             const parameters = { type: 'work' as const };
             const value = 'geo:37.386013,-122.082932';
+            const escapedValue = 'geo:37.386013\\,-122.082932';
             const geo = new GeoProperty(value, parameters);
             const actual = geo.toString();
-            const expected = `GEO;TYPE=work:${value}`;
+            const expected = `GEO;TYPE=work:${escapedValue}`;
 
             expect(actual).to.equal(expected);
         });
@@ -37,9 +39,10 @@ describe('GeoProperty', () => {
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'geo:37.386013,-122.082932';
+            const escapedValue = 'geo:37.386013\\,-122.082932';
             const geo = new GeoProperty(value, parameters);
 
-            expect(geo.toString()).to.equal(`GEO;VALUE=uri:${value}`);
+            expect(geo.toString()).to.equal(`GEO;VALUE=uri:${escapedValue}`);
         });
     });
 

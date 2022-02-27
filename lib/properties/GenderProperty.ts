@@ -1,5 +1,4 @@
 import { Cardinality, Value } from '../types';
-import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import Property from './Property';
 import getSemicolonCount from '../util/get-semicolon-count';
@@ -77,13 +76,6 @@ export default class GenderProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const parameters = this.getParametersString();
-        const value = this.getEscapedValueString();
-
-        return foldLine(`GENDER${parameters}:${value}`);
     }
 
     valueOf(): string {

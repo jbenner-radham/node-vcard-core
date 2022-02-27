@@ -1,6 +1,5 @@
 import { Cardinality, Type, Value } from '../types';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
-import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
@@ -71,14 +70,6 @@ export default class KeyProperty extends Property {
 
         this.parameters = parameters;
         this[VALUE] = value;
-    }
-
-    toString() {
-        const value = this.parameters.value !== 'text'
-            ? this.valueOf()
-            : this.getEscapedValueString();
-
-        return foldLine(`KEY${this.getParametersString()}:${value}`);
     }
 
     valueOf(): string {
