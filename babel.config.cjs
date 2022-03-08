@@ -1,14 +1,9 @@
-const pkg = require('./package.json');
-
-const versionMatcher = /^\^(?<majorMinorVersion>\d+\.\d+)/;
-const [, corejsVersion] = versionMatcher.exec(pkg.dependencies['core-js']);
-
 module.exports = {
     presets: [
         [
             '@babel/preset-env',
             {
-                corejs: { version: corejsVersion },
+                corejs: { version: 3.19 },
                 targets: 'defaults',
                 useBuiltIns: 'usage'
             }

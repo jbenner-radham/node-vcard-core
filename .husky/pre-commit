@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run typecheck
-npm run lint
-npm test
+npx lerna run typecheck
+npx lerna run test
+npx lint-staged

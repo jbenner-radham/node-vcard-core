@@ -1,7 +1,5 @@
 const _ = require('lodash');
-const fs = require('fs');
 const Handlebars = require('handlebars');
-const path = require('path');
 const renderTemplate = require('./render-template.cjs');
 
 if (process.argv.length < 3) {
