@@ -12,6 +12,11 @@ insert_final_newline = true
 max_line_length = 120
 trim_trailing_whitespace = true
 
+# vCards must use CRLF EOLs:
+# https://datatracker.ietf.org/doc/html/rfc6350#section-3.2
+[*.{vcard,vcf}]
+end_of_line = crlf
+
 [*.{ya,y}ml]
 indent_size = 2
 indent_style = space
