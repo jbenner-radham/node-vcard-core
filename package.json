@@ -19,6 +19,7 @@
   "scripts": {
     "build": "lerna run build",
     "clean": "lerna run clean",
+    "postinstall": "lerna bootstrap",
     "prepare": "husky install",
     "test": "lerna run test"
   },
