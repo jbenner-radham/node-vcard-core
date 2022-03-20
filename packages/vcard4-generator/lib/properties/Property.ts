@@ -18,7 +18,7 @@ export default abstract class Property {
     }
 
     components(): string[] {
-        return ((this.valueOf() as number | string).toString()).split(this.COMPONENT_SEPARATOR);
+        return (this.valueOf() as number | string).toString().split(this.COMPONENT_SEPARATOR);
     }
 
     getParametersString(): string {
