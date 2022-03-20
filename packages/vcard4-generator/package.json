@@ -10,7 +10,7 @@
     "vcard4",
     "vcf"
   ],
-  "homepage": "https://github.com/jbenner-radham/node-vcard-core#readme",
+  "homepage": "https://github.com/jbenner-radham/node-vcard-core/tree/main/packages/vcard4-generator#readme",
   "bugs": {
     "url": "https://github.com/jbenner-radham/node-vcard-core/issues"
   },
