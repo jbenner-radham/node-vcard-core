@@ -1,3 +1,4 @@
+import encodeParameterValue from '../util/encode-parameter-value';
 import escapePropertyValue from '../util/escape-property-value';
 import foldLine from '../util/fold-line';
 import isString from '../util/is-string';
@@ -25,9 +26,9 @@ export default abstract class Property {
         const formatKey = (key: string): string => kebabCase(key).toUpperCase();
         const joinIfArray = (value: any): any => Array.isArray(value) ? value.join(',') : value;
         const maybeQuote = (value: any): any => isString(value) && value.includes(',') ? `"${value}"` : value;
-        const getKeyValueString = ([key, value]: [string, any]) =>
-            `${formatKey(key)}=${maybeQuote(joinIfArray(value))}`;
-        const parameters = Object.entries(this.parameters as Record<string, any> ?? {})
+        const getKeyValueString = ([key, value]: [string, number | number[] | string]) =>
+            `${formatKey(key)}=${encodeParameterValue(maybeQuote(joinIfArray(value)))}`;
+        const parameters = Object.entries(this.parameters as Record<string, number | number[] | string> ?? {})
             .map(getKeyValueString)
             .join(this.COMPONENT_SEPARATOR);
 
