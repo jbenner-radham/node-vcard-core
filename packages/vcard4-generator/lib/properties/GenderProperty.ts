@@ -1,7 +1,7 @@
 import { Cardinality, Value } from '../types';
 import isString from '../util/is-string';
 import Property from './Property';
-import getSemicolonCount from '../util/get-semicolon-count';
+import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count';
 
 export type Sex = '' | 'F' | 'M' | 'N' | 'O' | 'U';
 
@@ -83,7 +83,7 @@ export default class GenderProperty extends Property {
     }
 
     validate(value: string): void {
-        const semicolonCount = getSemicolonCount(value);
+        const semicolonCount = getUnescapedSemicolonCount(value);
 
         // If only a "sex" component is passed no semicolons will be present
         // which is valid syntax.

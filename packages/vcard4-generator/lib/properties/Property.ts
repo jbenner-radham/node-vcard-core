@@ -19,7 +19,10 @@ export default abstract class Property {
     }
 
     components(): string[] {
-        return (this.valueOf() as number | string).toString().split(this.COMPONENT_SEPARATOR);
+        /** @see https://datatracker.ietf.org/doc/html/rfc6350#section-3.4 */
+        const separatorMatcher = new RegExp(`(?<!\\\\)${this.COMPONENT_SEPARATOR}`);
+
+        return (this.valueOf() as number | string).toString().split(separatorMatcher);
     }
 
     getParametersString(): string {

@@ -1,5 +1,5 @@
 import { Cardinality, Type, Value } from '../types';
-import getSemicolonCount from '../util/get-semicolon-count';
+import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
@@ -160,7 +160,7 @@ export default class AdrProperty extends Property {
     }
 
     validate(value: string): void {
-        const semicolonCount = getSemicolonCount(value);
+        const semicolonCount = getUnescapedSemicolonCount(value);
 
         if (semicolonCount !== 6)
             throw new TypeError(`The value "${value}" is not a valid ADR format`);

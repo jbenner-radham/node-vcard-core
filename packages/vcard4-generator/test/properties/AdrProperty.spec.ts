@@ -53,6 +53,13 @@ describe('AdrProperty', () => {
 
             expect(adr.streetAddress).to.equal('1234 Acme Rd.');
         });
+
+        it('returns a street address component with an escaped semicolon', () => {
+            const value = ';;1234\\;5678 Acme Rd.;Sometown;OH;43204;United States of America';
+            const adr = new AdrProperty(value);
+
+            expect(adr.streetAddress).to.equal('1234\\;5678 Acme Rd.');
+        });
     });
 
     describe('#locality', () => {

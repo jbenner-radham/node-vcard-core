@@ -1,5 +1,5 @@
 import { Cardinality, Value } from '../types';
-import getSemicolonCount from '../util/get-semicolon-count';
+import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count';
 import Property from './Property';
 import isString from '../util/is-string';
 
@@ -104,7 +104,7 @@ export default class NProperty extends Property {
     }
 
     validate(value: string): void {
-        const semicolonCount = getSemicolonCount(value);
+        const semicolonCount = getUnescapedSemicolonCount(value);
 
         if (semicolonCount !== 4)
             throw new TypeError(`The value "${value}" is not a valid N format`);
