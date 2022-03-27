@@ -20,6 +20,8 @@ npx lerna --scope @vcard/vcard4-generator run build
 
 Testing
 -------
+From the monorepo root:
+
 ```sh
 npx lerna --scope @vcard/vcard4-generator run test
 ```
