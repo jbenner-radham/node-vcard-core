@@ -471,7 +471,7 @@ export default class Vcard {
             throw new TypeError('One or more LANG properties are invalid');
 
         if (!this.logo.every(logo => logo instanceof LogoProperty))
-            throw new TypeError('One or more Logo properties are invalid');
+            throw new TypeError('One or more LOGO properties are invalid');
 
         if (!this.member.every(member => member instanceof MemberProperty))
             throw new TypeError('One or more MEMBER properties are invalid');
