@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import AdrProperty, { AdrPropertyConfig } from '../../lib/properties/AdrProperty';
-import Vcard from '../../lib';
+import Vcard4Generator from '../../lib';
 
 describe('AdrProperty', () => {
     it('is a function class', () => {
@@ -181,7 +181,7 @@ describe('AdrProperty', () => {
             const expected = [
                 'ADR;GEO="geo:12.3457,78.910";TYPE=home:;;123 Main Street;Any Town;CA;91921-',
                 '1234;U.S.A.'
-            ].join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
+            ].join(`${Vcard4Generator.EOL}${Vcard4Generator.FOLD_CONTINUATION_CHAR}`);
 
             expect(actual).to.equal(expected);
         });

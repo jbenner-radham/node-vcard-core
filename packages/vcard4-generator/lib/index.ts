@@ -125,7 +125,7 @@ export interface VcardConfig {
     xml?: XmlPropertyLike;
 }
 
-export default class Vcard {
+export default class Vcard4Generator {
     static readonly EOL: string = '\r\n';
 
     static readonly FOLD_CONTINUATION_CHAR = ' ';
@@ -397,7 +397,7 @@ export default class Vcard {
 
         return properties
             .filter(isNotEmptyString)
-            .join(Vcard.EOL);
+            .join(Vcard4Generator.EOL);
     }
 
     validate(): void {

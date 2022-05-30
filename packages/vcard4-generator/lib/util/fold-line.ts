@@ -1,4 +1,4 @@
-import Vcard from '..';
+import Vcard4Generator from '..';
 
 /**
  * > Individual lines within vCard are delimited by the [RFC5322] line
@@ -39,11 +39,11 @@ export default function foldLine(value: string): string {
 
     const byteLength = (value: string): number => {
         return typeof Blob !== 'undefined'
-            ? new Blob([value]).size    // Browser implementation
+            ? new Blob([value]).size // Browser implementation
             : Buffer.byteLength(value); // Node.js implementation
     };
 
-    if (byteLength(value) <= Vcard.MAX_OCTETS_PER_LINE) return value;
+    if (byteLength(value) <= Vcard4Generator.MAX_OCTETS_PER_LINE) return value;
 
     const getIndexedLine = (value: string): [number, string] => {
         const chars = [...value];
@@ -52,13 +52,13 @@ export default function foldLine(value: string): string {
 
         for (
             let currentByteLength = 0;
-            currentByteLength < Vcard.MAX_OCTETS_PER_LINE && index < chars.length;
+            currentByteLength < Vcard4Generator.MAX_OCTETS_PER_LINE && index < chars.length;
             index++
         ) {
             const char = chars[index];
             currentByteLength += byteLength(char);
 
-            if (currentByteLength <= Vcard.MAX_OCTETS_PER_LINE) {
+            if (currentByteLength <= Vcard4Generator.MAX_OCTETS_PER_LINE) {
                 line += char;
             } else {
                 index--;
@@ -79,6 +79,6 @@ export default function foldLine(value: string): string {
         lines.push(line);
     }
 
-    return lines.join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
+    return lines.join(`${Vcard4Generator.EOL}${Vcard4Generator.FOLD_CONTINUATION_CHAR}`);
 }
 

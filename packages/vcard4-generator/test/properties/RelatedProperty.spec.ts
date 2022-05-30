@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import RelatedProperty, { RelatedPropertyConfig } from '../../lib/properties/RelatedProperty';
-import Vcard from '../../lib';
+import Vcard4Generator from '../../lib';
 
 describe('RelatedProperty', () => {
     it('is a function class', () => {
@@ -51,7 +51,7 @@ describe('RelatedProperty', () => {
             const expected = [
                 'RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane Doe for ',
                 'any inquiries.'
-            ].join(`${Vcard.EOL}${Vcard.FOLD_CONTINUATION_CHAR}`);
+            ].join(`${Vcard4Generator.EOL}${Vcard4Generator.FOLD_CONTINUATION_CHAR}`);
 
             expect(related.toString()).to.equal(expected);
         });
