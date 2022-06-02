@@ -3,9 +3,12 @@
   "version": "0.0.0",
   "description": "A vCard 4 generator library.",
   "keywords": [
+    "create",
     "creator",
+    "generate",
     "generator",
     "make",
+    "maker",
     "vcard",
     "vcard4",
     "vcf"
