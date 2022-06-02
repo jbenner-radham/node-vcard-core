@@ -78,7 +78,7 @@ import VersionProperty, { VersionPropertyLike } from './properties/VersionProper
 import XmlProperty, { XmlPropertyLike } from './properties/XmlProperty';
 import XmlPropertyArray from './properties/arrays/XmlPropertyArray';
 
-export interface VcardConfig {
+export interface Vcard4GeneratorConfig {
     adr?: AdrPropertyLike;
     anniversary?: AnniversaryPropertyLike;
     bday?: BdayPropertyLike;
@@ -220,7 +220,7 @@ export default class Vcard4Generator {
 
     xml: XmlPropertyArray;
 
-    constructor(config: VcardConfig) {
+    constructor(config: Vcard4GeneratorConfig) {
         const {
             adr,
             anniversary,
