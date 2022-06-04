@@ -13,6 +13,7 @@ jobs:
           - 14.x
           - 16.x
           - 17.x
+          - 18.x
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -28,4 +29,4 @@ jobs:
       - name: Type check
         run: npx lerna run typecheck
       - name: Test
-        run: npx lerna run test
+        run: npm test

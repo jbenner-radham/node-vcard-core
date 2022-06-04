@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx lerna run typecheck
-npx lerna run test
+npm test
 npx lint-staged
