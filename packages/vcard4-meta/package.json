@@ -1,6 +1,6 @@
 {
   "name": "@vcard/vcard4-meta",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "A vCard 4 module which provides data about the format.",
   "keywords": [
     "meta",
@@ -25,8 +25,7 @@
     "test": "test"
   },
   "files": [
-    "dist",
-    "!*.tsbuildinfo"
+    "dist"
   ],
   "scripts": {
     "prebuild": "npm run typecheck && npm run clean",
@@ -34,6 +33,7 @@
     "build:js": "babel --root-mode upward --out-dir dist lib --extensions '.ts' --ignore '**/*.d.ts'",
     "build:types": "tsc --project './tsconfig.d.json'",
     "clean": "rimraf ./dist",
+    "prepack": "rimraf ./dist/*.tsbuildinfo",
     "sort:pkg": "sort-package-json",
     "test": "echo \"Error: run tests from root\" && exit 1",
     "typecheck": "tsc"
