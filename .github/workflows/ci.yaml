@@ -28,4 +28,4 @@ jobs:
       - name: Type check
         run: npx lerna run typecheck
       - name: Test
-        run: npx lerna run test
+        run: npm test
