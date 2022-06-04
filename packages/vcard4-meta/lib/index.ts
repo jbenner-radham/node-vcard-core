@@ -1,0 +1,5 @@
+const EOL = '\r\n';
+const FOLD_CONTINUATION_CHAR = ' ';
+const MAX_OCTETS_PER_LINE = 75;
+
+export { EOL, FOLD_CONTINUATION_CHAR, MAX_OCTETS_PER_LINE };

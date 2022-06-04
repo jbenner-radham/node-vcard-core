@@ -21,7 +21,8 @@
     "clean": "lerna run clean",
     "postinstall": "lerna bootstrap",
     "prepare": "husky install",
-    "test": "lerna run test"
+    "test": "mocha",
+    "test:watch": "mocha --watch"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
