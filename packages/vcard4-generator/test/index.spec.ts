@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { EmailPropertyConfig } from '../lib/properties/EmailProperty';
 import Vcard4Generator from '../lib';
 
-describe('Vcard', () => {
+describe('Vcard4Generator', () => {
     it('is a function class', () => {
         expect(Vcard4Generator).to.be.a('function');
     });
