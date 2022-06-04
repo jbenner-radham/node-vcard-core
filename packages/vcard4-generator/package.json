@@ -1,6 +1,7 @@
 {
   "name": "@vcard/vcard4-generator",
   "version": "0.0.0",
+  "private": true,
   "description": "A vCard 4 generator library.",
   "keywords": [
     "create",
@@ -44,6 +45,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@vcard/vcard4-meta": "^1.0.0-rc.1",
     "core-js": "^3.19.2",
     "lodash.isplainobject": "^4.0.6",
     "lodash.kebabcase": "^4.1.1"
