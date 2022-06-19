@@ -21,6 +21,7 @@
     "clean": "lerna run clean",
     "postinstall": "lerna bootstrap",
     "prepare": "husky install",
+    "rm:tsbuildinfo": "rimraf tsconfig.tsbuildinfo && rimraf packages/*/tsconfig.d.tsbuildinfo",
     "test": "mocha",
     "test:watch": "mocha --watch"
   },
