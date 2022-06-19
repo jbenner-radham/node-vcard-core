@@ -19,7 +19,8 @@
   },
   "license": "MIT",
   "author": "James Benner <james.benner@gmail.com> (http://www.jamesbenner.com/)",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test"
