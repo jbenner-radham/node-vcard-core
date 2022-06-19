@@ -6,13 +6,13 @@
   "keywords": [
     "vcard"
   ],
-  "homepage": "https://github.com/jbenner-radham/node-vcard-core#readme",
+  "homepage": "https://github.com/jbenner-radham/vcardjs#readme",
   "bugs": {
-    "url": "https://github.com/jbenner-radham/node-vcard-core/issues"
+    "url": "https://github.com/jbenner-radham/vcardjs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jbenner-radham/node-vcard-core.git"
+    "url": "git+https://github.com/jbenner-radham/vcardjs.git"
   },
   "license": "MIT",
   "author": "James Benner <james.benner@gmail.com> (http://www.jamesbenner.com/)",

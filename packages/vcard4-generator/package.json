@@ -14,13 +14,13 @@
     "vcard4",
     "vcf"
   ],
-  "homepage": "https://github.com/jbenner-radham/node-vcard-core/tree/main/packages/vcard4-generator#readme",
+  "homepage": "https://github.com/jbenner-radham/vcardjs/tree/main/packages/vcard4-generator#readme",
   "bugs": {
-    "url": "https://github.com/jbenner-radham/node-vcard-core/issues"
+    "url": "https://github.com/jbenner-radham/vcardjs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jbenner-radham/node-vcard-core.git"
+    "url": "git+https://github.com/jbenner-radham/vcardjs.git"
   },
   "license": "MIT",
   "author": "James Benner <james.benner@gmail.com> (http://www.jamesbenner.com/)",
