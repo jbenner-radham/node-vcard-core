@@ -26,6 +26,8 @@ jobs:
         run: npx lerna bootstrap
       - name: Lint
         run: npx lerna run lint
+      - name: Build types
+        run: npx lerna run build:types
       - name: Type check
         run: npx lerna run typecheck
       - name: Test
