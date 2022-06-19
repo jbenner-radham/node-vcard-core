@@ -1,6 +1,6 @@
-vcardjs
-=======
-![CI Status](https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml/badge.svg)
+vcard.js
+========
+[![CI Status][BUILD BADGE]][BUILD PAGE]
 
 A suite for working with [vCards](https://en.wikipedia.org/wiki/VCard).
 
@@ -42,3 +42,6 @@ Reference
 License
 -------
 The MIT License (Expat). See the [license file](LICENSE) for details.
+
+[BUILD BADGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml/badge.svg
+[BUILD PAGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml

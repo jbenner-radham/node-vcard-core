@@ -1,6 +1,6 @@
 @vcard/vcard4-generator
 =======================
-![CI Status](https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml/badge.svg)
+[![CI Status][BUILD BADGE]][BUILD PAGE]
 
 A library for generating [v4 vCards](https://datatracker.ietf.org/doc/html/rfc6350)
 
@@ -477,3 +477,6 @@ In all other cases, escaping MUST NOT be used.
 License
 -------
 The MIT License (Expat). See the [license file](LICENSE) for details.
+
+[BUILD BADGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml/badge.svg
+[BUILD PAGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml
