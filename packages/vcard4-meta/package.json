@@ -1,6 +1,6 @@
 {
   "name": "@vcard/vcard4-meta",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "description": "A vCard 4 module which provides data about the format.",
   "keywords": [
     "meta",
