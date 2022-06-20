@@ -1,3 +1,4 @@
+import { EOL } from '@vcard/vcard4-meta';
 import AdrProperty, { AdrPropertyLike } from './properties/AdrProperty';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray';
 import AnniversaryProperty, { AnniversaryPropertyLike } from './properties/AnniversaryProperty';
@@ -126,12 +127,6 @@ export interface Vcard4GeneratorConfig {
 }
 
 export default class Vcard4Generator {
-    static readonly EOL: string = '\r\n';
-
-    static readonly FOLD_CONTINUATION_CHAR = ' ';
-
-    static readonly MAX_OCTETS_PER_LINE: number = 75;
-
     adr: AdrPropertyArray;
 
     anniversary: AnniversaryPropertyLike | NullProperty;
@@ -397,7 +392,7 @@ export default class Vcard4Generator {
 
         return properties
             .filter(isNotEmptyString)
-            .join(Vcard4Generator.EOL);
+            .join(EOL);
     }
 
     validate(): void {

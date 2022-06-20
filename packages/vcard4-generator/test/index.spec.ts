@@ -1,3 +1,4 @@
+import { EOL } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
 import { EmailPropertyConfig } from '../lib/properties/EmailProperty';
 import Vcard4Generator from '../lib';
@@ -21,7 +22,7 @@ describe('Vcard4Generator', () => {
                 'VERSION:4.0',
                 `FN:${fn}`,
                 'END:VCARD'
-            ].join(Vcard4Generator.EOL);
+            ].join(EOL);
 
             expect(actual).to.equal(expected);
         });
@@ -38,7 +39,7 @@ describe('Vcard4Generator', () => {
                     `ADR:${adr}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -56,7 +57,7 @@ describe('Vcard4Generator', () => {
                     `ANNIVERSARY:${anniversary}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -74,7 +75,7 @@ describe('Vcard4Generator', () => {
                     `BDAY:${bday}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -92,7 +93,7 @@ describe('Vcard4Generator', () => {
                     `BIRTHPLACE:${birthplace}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -110,7 +111,7 @@ describe('Vcard4Generator', () => {
                     `CALURI:${caluri}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -128,7 +129,7 @@ describe('Vcard4Generator', () => {
                     `CALADRURI:${caladruri}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -147,7 +148,7 @@ describe('Vcard4Generator', () => {
                     `CATEGORIES:${categories}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -167,7 +168,7 @@ describe('Vcard4Generator', () => {
                     `EMAIL;PID="4.1,5.2":${email.at(0)}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -185,7 +186,7 @@ describe('Vcard4Generator', () => {
                     `CONTACT-URI:${contactUri}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -203,7 +204,7 @@ describe('Vcard4Generator', () => {
                     `DEATHDATE:${deathdate}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -222,7 +223,7 @@ describe('Vcard4Generator', () => {
                     `DEATHPLACE:${escapedDeathplace}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -240,7 +241,7 @@ describe('Vcard4Generator', () => {
                     `EMAIL:${email}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -258,7 +259,7 @@ describe('Vcard4Generator', () => {
                     `EXPERTISE:${expertise}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -276,7 +277,7 @@ describe('Vcard4Generator', () => {
                     `FBURL:${fburl}`,
                     `FN:${fn}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -294,7 +295,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `GEO:geo:37.386013\\,-122.082932`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -312,7 +313,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `HOBBY:${hobby}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -330,7 +331,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `IMPP:${impp}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -348,7 +349,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `INTEREST:${interest}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -366,7 +367,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `KEY:${key}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -384,7 +385,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `LANG:${lang}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -402,7 +403,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `LOGO:${logo}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -422,7 +423,7 @@ describe('Vcard4Generator', () => {
                     `KIND:${kind}`,
                     `MEMBER:${member}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -440,7 +441,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `NICKNAME:${nickname}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -458,7 +459,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `NOTE:${note}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -476,7 +477,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `ORG:${org}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -494,7 +495,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `ORG-DIRECTORY:${orgDirectory}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -512,7 +513,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `PHOTO:${photo}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -530,7 +531,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `PRODID:${prodid}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -548,7 +549,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `RELATED:${related}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -566,7 +567,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `REV:${rev}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -584,7 +585,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `ROLE:${role}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -602,7 +603,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `SOUND:${sound}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -620,7 +621,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     'SOURCE:ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20c=US',
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -638,7 +639,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `TEL:${tel}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -656,7 +657,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `TITLE:${title}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -674,7 +675,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `TZ:${tz}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -692,7 +693,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `UID:${uid}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -710,7 +711,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `URL:${url}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });
@@ -723,7 +724,7 @@ describe('Vcard4Generator', () => {
                 const foldedXml = [
                     '<a xmlns="http://www.w3.org/1999/xhtml" href="http://www.example.com">M',
                     ' y web page!</a>'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
                 const vcard = new Vcard4Generator({ fn, xml });
                 const actual = vcard.toString();
                 const expected = [
@@ -732,7 +733,7 @@ describe('Vcard4Generator', () => {
                     `FN:${fn}`,
                     `XML:${foldedXml}`,
                     'END:VCARD'
-                ].join(Vcard4Generator.EOL);
+                ].join(EOL);
 
                 expect(actual).to.equal(expected);
             });

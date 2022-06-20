@@ -1,5 +1,5 @@
+import { EOL } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import Vcard4Generator from '../../lib';
 import XmlProperty, { XmlPropertyConfig }  from '../../lib/properties/XmlProperty';
 
 describe('XmlProperty', () => {
@@ -32,7 +32,7 @@ describe('XmlProperty', () => {
             const expected = [
                 'XML:<a xmlns="http://www.w3.org/1999/xhtml"\\n   href="http://www.example.co',
                 ' m">My web page!</a>'
-            ].join(Vcard4Generator.EOL);
+            ].join(EOL);
 
             expect(actual).to.equal(expected);
         });
@@ -48,7 +48,7 @@ describe('XmlProperty', () => {
             const expected = [
                 'XML;VALUE=text:<a xmlns="http://www.w3.org/1999/xhtml"\\n   href="http://www',
                 ' .example.com">My web page!</a>'
-            ].join(Vcard4Generator.EOL);
+            ].join(EOL);
 
             expect(actual).to.equal(expected);
         });

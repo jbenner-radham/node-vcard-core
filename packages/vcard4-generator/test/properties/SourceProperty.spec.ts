@@ -1,6 +1,6 @@
+import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
 import SourceProperty, { SourcePropertyConfig } from '../../lib/properties/SourceProperty';
-import Vcard4Generator from '../../lib';
 
 describe('SourceProperty', () => {
     it('is a function class', () => {
@@ -34,7 +34,7 @@ describe('SourceProperty', () => {
             const expected = [
                 'SOURCE;PREF=1:ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20c=U',
                 'S'
-            ].join(`${Vcard4Generator.EOL}${Vcard4Generator.FOLD_CONTINUATION_CHAR}`);
+            ].join(`${EOL}${FOLD_CONTINUATION_CHAR}`);
 
             expect(actual).to.equal(expected);
         });
@@ -46,7 +46,7 @@ describe('SourceProperty', () => {
             const expected = [
                 'SOURCE;VALUE=uri:ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20',
                 'c=US'
-            ].join(`${Vcard4Generator.EOL}${Vcard4Generator.FOLD_CONTINUATION_CHAR}`);
+            ].join(`${EOL}${FOLD_CONTINUATION_CHAR}`);
 
             expect(source.toString()).to.equal(expected);
         });
