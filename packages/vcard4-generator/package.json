@@ -33,7 +33,7 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "npm run typecheck && npm run clean",
+    "prebuild": "npm run clean",
     "build": "npm run build:js && npm run build:types",
     "build:js": "babel --root-mode upward --out-dir dist lib --extensions '.ts' --ignore '**/*.d.ts'",
     "build:types": "tsc --project './tsconfig.d.json'",
