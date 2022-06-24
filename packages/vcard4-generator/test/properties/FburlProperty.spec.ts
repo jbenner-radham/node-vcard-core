@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import FburlProperty, { FburlPropertyConfig } from '../../lib/properties/FburlProperty';
+import FburlProperty, { FburlPropertyRestParameter } from '../../lib/properties/FburlProperty';
 
 describe('FburlProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('FburlProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/busy/janedoe';
-            const config: FburlPropertyConfig = [value, { type: 'work' }];
+            const config: FburlPropertyRestParameter = [value, { type: 'work' }];
             const fburl = FburlProperty.factory(config);
 
             expect(fburl instanceof FburlProperty).to.equal(true);

@@ -13,9 +13,9 @@ export interface FnParameters {
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
 }
 
-export type FnPropertyConfig = [value: string, parameters?: FnParameters];
+export type FnPropertyRestParameter = [value: string, parameters?: FnParameters];
 
-export type FnPropertyLike = FnProperty | FnPropertyConfig | string;
+export type FnPropertyLike = FnProperty | FnPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

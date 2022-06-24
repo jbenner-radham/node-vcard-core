@@ -18,9 +18,9 @@ export interface {{{upperCamelCase property}}}Parameters {
     tz?: string;
 }
 
-export type {{{upperCamelCase property}}}PropertyConfig = [value: string, parameters?: {{{upperCamelCase property}}}Parameters];
+export type {{{upperCamelCase property}}}PropertyRestParameter = [value: string, parameters?: {{{upperCamelCase property}}}Parameters];
 
-export type {{{upperCamelCase property}}}PropertyLike = {{{upperCamelCase property}}}Property | {{{upperCamelCase property}}}PropertyConfig | string;
+export type {{{upperCamelCase property}}}PropertyLike = {{{upperCamelCase property}}}Property | {{{upperCamelCase property}}}PropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

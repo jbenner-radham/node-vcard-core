@@ -39,9 +39,9 @@ export interface RelatedParameters {
     type?: RelatedType;
 }
 
-export type RelatedPropertyConfig = [value: string, parameters?: RelatedParameters];
+export type RelatedPropertyRestParameter = [value: string, parameters?: RelatedParameters];
 
-export type RelatedPropertyLike = RelatedProperty | RelatedPropertyConfig | string;
+export type RelatedPropertyLike = RelatedProperty | RelatedPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

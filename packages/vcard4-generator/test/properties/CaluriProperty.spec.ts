@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import CaluriProperty, { CaluriPropertyConfig } from '../../lib/properties/CaluriProperty';
+import CaluriProperty, { CaluriPropertyRestParameter } from '../../lib/properties/CaluriProperty';
 
 describe('CaluriProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('CaluriProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://cal.example.com/calA';
-            const config: CaluriPropertyConfig = [value, { type: 'home' }];
+            const config: CaluriPropertyRestParameter = [value, { type: 'home' }];
             const caluri = CaluriProperty.factory(config);
 
             expect(caluri instanceof CaluriProperty).to.equal(true);

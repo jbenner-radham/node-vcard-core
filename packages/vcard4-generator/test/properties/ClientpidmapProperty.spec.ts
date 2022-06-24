@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ClientpidmapProperty, { ClientpidmapPropertyConfig } from '../../lib/properties/ClientpidmapProperty';
+import ClientpidmapProperty, { ClientpidmapPropertyRestParameter } from '../../lib/properties/ClientpidmapProperty';
 
 describe('ClientpidmapProperty', () => {
     it('is a function class', () => {
@@ -78,7 +78,7 @@ describe('ClientpidmapProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = '1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b';
-            const config: ClientpidmapPropertyConfig = [value, {}];
+            const config: ClientpidmapPropertyRestParameter = [value, {}];
             const clientpidmap = ClientpidmapProperty.factory(config);
 
             expect(clientpidmap instanceof ClientpidmapProperty).to.equal(true);

@@ -1,6 +1,6 @@
 import { EOL } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import XmlProperty, { XmlPropertyConfig }  from '../../lib/properties/XmlProperty';
+import XmlProperty, { XmlPropertyRestParameter }  from '../../lib/properties/XmlProperty';
 
 describe('XmlProperty', () => {
     it('is a function class', () => {
@@ -120,7 +120,7 @@ describe('XmlProperty', () => {
                 '<a xmlns="http://www.w3.org/1999/xhtml"',
                 '   href="http://www.example.com">My web page!</a>'
             ].join('\n');
-            const config: XmlPropertyConfig = [value, { value: 'text' }];
+            const config: XmlPropertyRestParameter = [value, { value: 'text' }];
             const xml = XmlProperty.factory(config);
 
             expect(xml instanceof XmlProperty).to.equal(true);

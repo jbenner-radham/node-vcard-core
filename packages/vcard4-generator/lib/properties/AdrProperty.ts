@@ -17,9 +17,9 @@ export interface AdrParameters {
     type?: Type;
 }
 
-export type AdrPropertyConfig = [value: string, parameters?: AdrParameters];
+export type AdrPropertyRestParameter = [value: string, parameters?: AdrParameters];
 
-export type AdrPropertyLike = AdrProperty | AdrPropertyConfig | string;
+export type AdrPropertyLike = AdrProperty | AdrPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

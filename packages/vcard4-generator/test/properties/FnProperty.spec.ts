@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import FnProperty, { FnPropertyConfig } from '../../lib/properties/FnProperty';
+import FnProperty, { FnPropertyRestParameter } from '../../lib/properties/FnProperty';
 
 describe('FnProperty', () => {
     it('is a function class', () => {
@@ -88,7 +88,7 @@ describe('FnProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'Mr. John Q. Public, Esq.';
-            const config: FnPropertyConfig = [value, { type: 'work' }];
+            const config: FnPropertyRestParameter = [value, { type: 'work' }];
             const fn = FnProperty.factory(config);
 
             expect(fn instanceof FnProperty).to.equal(true);

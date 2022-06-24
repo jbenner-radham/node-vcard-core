@@ -6,9 +6,9 @@ export interface ClientpidmapParameters {
     [key: string]: never;
 }
 
-export type ClientpidmapPropertyConfig = [value: string, parameters?: ClientpidmapParameters];
+export type ClientpidmapPropertyRestParameter = [value: string, parameters?: ClientpidmapParameters];
 
-export type ClientpidmapPropertyLike = ClientpidmapProperty | ClientpidmapPropertyConfig | string;
+export type ClientpidmapPropertyLike = ClientpidmapProperty | ClientpidmapPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

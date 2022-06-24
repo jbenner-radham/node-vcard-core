@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import AnniversaryProperty, { AnniversaryPropertyConfig } from '../../lib/properties/AnniversaryProperty';
+import AnniversaryProperty, { AnniversaryPropertyRestParameter } from '../../lib/properties/AnniversaryProperty';
 
 describe('AnniversaryProperty', () => {
     it('is a function class', () => {
@@ -94,7 +94,7 @@ describe('AnniversaryProperty', () => {
         });
 
         it('creates an instance from an array argument', () => {
-            const config: AnniversaryPropertyConfig = ['19960415', { calscale: 'gregorian' }];
+            const config: AnniversaryPropertyRestParameter = ['19960415', { calscale: 'gregorian' }];
             const anniversary = AnniversaryProperty.factory(config);
 
             expect(anniversary instanceof AnniversaryProperty).to.equal(true);

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ImppProperty, { ImppPropertyConfig } from '../../lib/properties/ImppProperty';
+import ImppProperty, { ImppPropertyRestParameter } from '../../lib/properties/ImppProperty';
 
 describe('ImppProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('ImppProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'xmpp:alice@example.com';
-            const config: ImppPropertyConfig = [value, { value: 'uri' }];
+            const config: ImppPropertyRestParameter = [value, { value: 'uri' }];
             const impp = ImppProperty.factory(config);
 
             expect(impp instanceof ImppProperty).to.equal(true);

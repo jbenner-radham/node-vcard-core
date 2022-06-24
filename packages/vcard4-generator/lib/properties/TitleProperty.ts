@@ -12,9 +12,9 @@ export interface TitleParameters {
     mediatype?: string;
 }
 
-export type TitlePropertyConfig = [value: string, parameters?: TitleParameters];
+export type TitlePropertyRestParameter = [value: string, parameters?: TitleParameters];
 
-export type TitlePropertyLike = TitleProperty | TitlePropertyConfig | string;
+export type TitlePropertyLike = TitleProperty | TitlePropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

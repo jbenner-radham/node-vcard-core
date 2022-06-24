@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import KeyProperty, { KeyPropertyConfig } from '../../lib/properties/KeyProperty';
+import KeyProperty, { KeyPropertyRestParameter } from '../../lib/properties/KeyProperty';
 
 describe('KeyProperty', () => {
     it('is a function class', () => {
@@ -95,7 +95,7 @@ describe('KeyProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/keys/jdoe.cer';
-            const config: KeyPropertyConfig = [value, { value: 'uri' }];
+            const config: KeyPropertyRestParameter = [value, { value: 'uri' }];
             const key = KeyProperty.factory(config);
 
             expect(key instanceof KeyProperty).to.equal(true);

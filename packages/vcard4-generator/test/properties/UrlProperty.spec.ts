@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import UrlProperty, { UrlPropertyConfig } from '../../lib/properties/UrlProperty';
+import UrlProperty, { UrlPropertyRestParameter } from '../../lib/properties/UrlProperty';
 
 describe('UrlProperty', () => {
     it('is a function class', () => {
@@ -114,7 +114,7 @@ describe('UrlProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/';
-            const config: UrlPropertyConfig = [value, { type: 'home' }];
+            const config: UrlPropertyRestParameter = [value, { type: 'home' }];
             const url = UrlProperty.factory(config);
 
             expect(url instanceof UrlProperty).to.equal(true);

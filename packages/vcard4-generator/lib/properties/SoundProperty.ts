@@ -14,10 +14,10 @@ export interface SoundParameters {
     altid?: number | string;
 }
 
-export type SoundPropertyConfig = [value: string, parameters?: SoundParameters];
+export type SoundPropertyRestParameter = [value: string, parameters?: SoundParameters];
 
 /** @todo Add URL type support. */
-export type SoundPropertyLike = SoundProperty | SoundPropertyConfig | string;
+export type SoundPropertyLike = SoundProperty | SoundPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

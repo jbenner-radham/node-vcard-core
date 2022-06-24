@@ -1,6 +1,6 @@
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import AdrProperty, { AdrPropertyConfig } from '../../lib/properties/AdrProperty';
+import AdrProperty, { AdrPropertyRestParameter } from '../../lib/properties/AdrProperty';
 
 describe('AdrProperty', () => {
     it('is a function class', () => {
@@ -220,7 +220,7 @@ describe('AdrProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
-            const config: AdrPropertyConfig = [value, { type: 'home' }];
+            const config: AdrPropertyRestParameter = [value, { type: 'home' }];
             const adr = AdrProperty.factory(config);
 
             expect(adr instanceof AdrProperty).to.equal(true);

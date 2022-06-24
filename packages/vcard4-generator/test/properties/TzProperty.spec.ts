@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import TzProperty, { TzPropertyConfig } from '../../lib/properties/TzProperty';
+import TzProperty, { TzPropertyRestParameter } from '../../lib/properties/TzProperty';
 
 describe('TzProperty', () => {
     it('is a function class', () => {
@@ -103,7 +103,7 @@ describe('TzProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'Raleigh/North America';
-            const config: TzPropertyConfig = [value, { type: 'home' }];
+            const config: TzPropertyRestParameter = [value, { type: 'home' }];
             const tz = TzProperty.factory(config);
 
             expect(tz instanceof TzProperty).to.equal(true);

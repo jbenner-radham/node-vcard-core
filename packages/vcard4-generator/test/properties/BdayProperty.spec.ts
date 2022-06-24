@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import BdayProperty, { BdayPropertyConfig } from '../../lib/properties/BdayProperty';
+import BdayProperty, { BdayPropertyRestParameter } from '../../lib/properties/BdayProperty';
 
 describe('BdayProperty', () => {
     it('is a function class', () => {
@@ -94,7 +94,7 @@ describe('BdayProperty', () => {
         });
 
         it('creates an instance from an array argument', () => {
-            const config: BdayPropertyConfig = ['--0415', { value: 'date-and-or-time' }];
+            const config: BdayPropertyRestParameter = ['--0415', { value: 'date-and-or-time' }];
             const bday = BdayProperty.factory(config);
 
             expect(bday instanceof BdayProperty).to.equal(true);

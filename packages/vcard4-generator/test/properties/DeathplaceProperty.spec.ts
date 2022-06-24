@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import DeathplaceProperty, { DeathplacePropertyConfig }  from '../../lib/properties/DeathplaceProperty';
+import DeathplaceProperty, { DeathplacePropertyRestParameter }  from '../../lib/properties/DeathplaceProperty';
 
 describe('DeathplaceProperty', () => {
     it('is a function class', () => {
@@ -89,7 +89,7 @@ describe('DeathplaceProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'geo:41.731944,-49.945833';
-            const config: DeathplacePropertyConfig = [value, { value: 'uri' }];
+            const config: DeathplacePropertyRestParameter = [value, { value: 'uri' }];
             const deathplace = DeathplaceProperty.factory(config);
 
             expect(deathplace instanceof DeathplaceProperty).to.equal(true);

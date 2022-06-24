@@ -12,10 +12,10 @@ export interface SourceParameters {
     mediatype?: string;
 }
 
-export type SourcePropertyConfig = [value: string, parameters?: SourceParameters];
+export type SourcePropertyRestParameter = [value: string, parameters?: SourceParameters];
 
 /** Add URL type support? */
-export type SourcePropertyLike = SourceProperty | SourcePropertyConfig | string;
+export type SourcePropertyLike = SourceProperty | SourcePropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

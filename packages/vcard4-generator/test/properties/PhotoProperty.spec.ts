@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import PhotoProperty, { PhotoPropertyConfig } from '../../lib/properties/PhotoProperty';
+import PhotoProperty, { PhotoPropertyRestParameter } from '../../lib/properties/PhotoProperty';
 
 describe('PhotoProperty', () => {
     it('is a function class', () => {
@@ -69,7 +69,7 @@ describe('PhotoProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/pub/photos/jqpublic.gif';
-            const config: PhotoPropertyConfig = [value, { type: 'home' }];
+            const config: PhotoPropertyRestParameter = [value, { type: 'home' }];
             const photo = PhotoProperty.factory(config);
 
             expect(photo instanceof PhotoProperty).to.equal(true);

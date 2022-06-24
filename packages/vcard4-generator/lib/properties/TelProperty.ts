@@ -16,9 +16,9 @@ export interface TelParameters {
     altid?: number | string;
 }
 
-export type TelPropertyConfig = [value: string, parameters?: TelParameters];
+export type TelPropertyRestParameter = [value: string, parameters?: TelParameters];
 
-export type TelPropertyLike = TelProperty | TelPropertyConfig | string;
+export type TelPropertyLike = TelProperty | TelPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

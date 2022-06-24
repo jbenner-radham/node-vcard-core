@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import GenderProperty, { GenderPropertyConfig } from '../../lib/properties/GenderProperty';
+import GenderProperty, { GenderPropertyRestParameter } from '../../lib/properties/GenderProperty';
 
 describe('GenderProperty', () => {
     it('is a function class', () => {
@@ -88,7 +88,7 @@ describe('GenderProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'M;Fellow';
-            const config: GenderPropertyConfig = [value, { value: 'text' }];
+            const config: GenderPropertyRestParameter = [value, { value: 'text' }];
             const gender = GenderProperty.factory(config);
 
             expect(gender instanceof GenderProperty).to.equal(true);

@@ -13,10 +13,10 @@ export interface CaladruriParameters {
     altid?: number | string;
 }
 
-export type CaladruriPropertyConfig = [value: string, parameters?: CaladruriParameters];
+export type CaladruriPropertyRestParameter = [value: string, parameters?: CaladruriParameters];
 
 /** @todo Add URL type support? */
-export type CaladruriPropertyLike = CaladruriProperty | CaladruriPropertyConfig | string;
+export type CaladruriPropertyLike = CaladruriProperty | CaladruriPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

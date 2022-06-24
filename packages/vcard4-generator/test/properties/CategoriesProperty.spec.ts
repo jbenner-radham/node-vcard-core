@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import CategoriesProperty, { CategoriesPropertyConfig } from '../../lib/properties/CategoriesProperty';
+import CategoriesProperty, { CategoriesPropertyRestParameter } from '../../lib/properties/CategoriesProperty';
 
 describe('CategoriesProperty', () => {
     it('is a function class', () => {
@@ -88,7 +88,7 @@ describe('CategoriesProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
-            const config: CategoriesPropertyConfig = [value, { pref: 1 }];
+            const config: CategoriesPropertyRestParameter = [value, { pref: 1 }];
             const categories = CategoriesProperty.factory(config);
 
             expect(categories instanceof CategoriesProperty).to.equal(true);

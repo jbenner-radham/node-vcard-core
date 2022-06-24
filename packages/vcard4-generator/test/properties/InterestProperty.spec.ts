@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import InterestProperty, { InterestPropertyConfig }  from '../../lib/properties/InterestProperty';
+import InterestProperty, { InterestPropertyRestParameter }  from '../../lib/properties/InterestProperty';
 
 describe('InterestProperty', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('InterestProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = `rock 'n' roll music`;
-            const config: InterestPropertyConfig = [value, { index: 2, level: 'high' }];
+            const config: InterestPropertyRestParameter = [value, { index: 2, level: 'high' }];
             const interest = InterestProperty.factory(config);
 
             expect(interest instanceof InterestProperty).to.equal(true);

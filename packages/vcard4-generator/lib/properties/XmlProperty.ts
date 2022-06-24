@@ -7,9 +7,9 @@ export interface XmlParameters {
     altid?: number | string;
 }
 
-export type XmlPropertyConfig = [value: string, parameters?: XmlParameters];
+export type XmlPropertyRestParameter = [value: string, parameters?: XmlParameters];
 
-export type XmlPropertyLike = XmlProperty | XmlPropertyConfig | string;
+export type XmlPropertyLike = XmlProperty | XmlPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

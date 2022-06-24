@@ -9,9 +9,9 @@ export interface GenderParameters {
     value?: 'text';
 }
 
-export type GenderPropertyConfig = [value: string, parameters?: GenderParameters];
+export type GenderPropertyRestParameter = [value: string, parameters?: GenderParameters];
 
-export type GenderPropertyLike = GenderProperty | GenderPropertyConfig | string;
+export type GenderPropertyLike = GenderProperty | GenderPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

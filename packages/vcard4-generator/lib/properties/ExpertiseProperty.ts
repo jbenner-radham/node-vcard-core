@@ -16,9 +16,9 @@ export interface ExpertiseParameters {
     type?: Type;
 }
 
-export type ExpertisePropertyConfig = [value: string, parameters?: ExpertiseParameters];
+export type ExpertisePropertyRestParameter = [value: string, parameters?: ExpertiseParameters];
 
-export type ExpertisePropertyLike = ExpertiseProperty | ExpertisePropertyConfig | string;
+export type ExpertisePropertyLike = ExpertiseProperty | ExpertisePropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

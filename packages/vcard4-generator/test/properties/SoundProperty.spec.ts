@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import SoundProperty, { SoundPropertyConfig } from '../../lib/properties/SoundProperty';
+import SoundProperty, { SoundPropertyRestParameter } from '../../lib/properties/SoundProperty';
 
 describe('SoundProperty', () => {
     it('is a function class', () => {
@@ -92,7 +92,7 @@ describe('SoundProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
-            const config: SoundPropertyConfig = [value, { type: 'home' }];
+            const config: SoundPropertyRestParameter = [value, { type: 'home' }];
             const sound = SoundProperty.factory(config);
 
             expect(sound instanceof SoundProperty).to.equal(true);

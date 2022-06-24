@@ -6,9 +6,9 @@ export interface ProdidParameters {
     value?: 'text';
 }
 
-export type ProdidPropertyConfig = [value: string, parameters?: ProdidParameters];
+export type ProdidPropertyRestParameter = [value: string, parameters?: ProdidParameters];
 
-export type ProdidPropertyLike = ProdidProperty | ProdidPropertyConfig | string;
+export type ProdidPropertyLike = ProdidProperty | ProdidPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

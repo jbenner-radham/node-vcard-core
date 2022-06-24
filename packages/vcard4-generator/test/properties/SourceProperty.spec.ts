@@ -1,6 +1,6 @@
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import SourceProperty, { SourcePropertyConfig } from '../../lib/properties/SourceProperty';
+import SourceProperty, { SourcePropertyRestParameter } from '../../lib/properties/SourceProperty';
 
 describe('SourceProperty', () => {
     it('is a function class', () => {
@@ -100,7 +100,7 @@ describe('SourceProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
-            const config: SourcePropertyConfig = [value, { value: 'uri' }];
+            const config: SourcePropertyRestParameter = [value, { value: 'uri' }];
             const source = SourceProperty.factory(config);
 
             expect(source instanceof SourceProperty).to.equal(true);

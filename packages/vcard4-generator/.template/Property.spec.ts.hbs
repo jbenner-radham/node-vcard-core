@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import {{{upperCamelCase property}}}Property, { {{{upperCamelCase property}}}PropertyConfig }  from '../../lib/properties/{{{upperCamelCase property}}}Property';
+import {{{upperCamelCase property}}}Property, { {{{upperCamelCase property}}}PropertyRestParameter }  from '../../lib/properties/{{{upperCamelCase property}}}Property';
 
 describe('{{{upperCamelCase property}}}Property', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('{{{upperCamelCase property}}}Property', () => {
 
         it('creates an instance from an array argument', () => {
             const value = '...';
-            const config: {{{upperCamelCase property}}}PropertyConfig = [value, { type: 'home' }];
+            const config: {{{upperCamelCase property}}}PropertyRestParameter = [value, { type: 'home' }];
             const {{{camelCase property}}} = {{{upperCamelCase property}}}Property.factory(config);
 
             expect({{{camelCase property}}} instanceof {{{upperCamelCase property}}}Property).to.equal(true);

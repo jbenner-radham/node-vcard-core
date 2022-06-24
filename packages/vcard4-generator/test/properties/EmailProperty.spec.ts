@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import EmailProperty, { EmailPropertyConfig } from '../../lib/properties/EmailProperty';
+import EmailProperty, { EmailPropertyRestParameter } from '../../lib/properties/EmailProperty';
 
 describe('EmailProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('EmailProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'jqpublic@xyz.example.com';
-            const config: EmailPropertyConfig = [value, { type: 'work' }];
+            const config: EmailPropertyRestParameter = [value, { type: 'work' }];
             const email = EmailProperty.factory(config);
 
             expect(email instanceof EmailProperty).to.equal(true);

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ProdidProperty, { ProdidPropertyConfig } from '../../lib/properties/ProdidProperty';
+import ProdidProperty, { ProdidPropertyRestParameter } from '../../lib/properties/ProdidProperty';
 
 describe('ProdidProperty', () => {
     it('is a function class', () => {
@@ -86,7 +86,7 @@ describe('ProdidProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
-            const config: ProdidPropertyConfig = [value, { value: 'text' }];
+            const config: ProdidPropertyRestParameter = [value, { value: 'text' }];
             const prodid = ProdidProperty.factory(config);
 
             expect(prodid instanceof ProdidProperty).to.equal(true);

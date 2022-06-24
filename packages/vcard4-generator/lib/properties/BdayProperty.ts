@@ -13,10 +13,10 @@ export interface BdayParameters {
     language?: string; // For `text` type only!
 }
 
-export type BdayPropertyConfig = [value: string, parameters?: BdayParameters];
+export type BdayPropertyRestParameter = [value: string, parameters?: BdayParameters];
 
 /** @todo Add Date type support. */
-export type BdayPropertyLike = BdayProperty | BdayPropertyConfig | string;
+export type BdayPropertyLike = BdayProperty | BdayPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

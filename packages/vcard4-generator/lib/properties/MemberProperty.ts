@@ -12,9 +12,9 @@ export interface MemberParameters {
     mediatype?: string;
 }
 
-export type MemberPropertyConfig = [value: string, parameters?: MemberParameters];
+export type MemberPropertyRestParameter = [value: string, parameters?: MemberParameters];
 
-export type MemberPropertyLike = MemberProperty | MemberPropertyConfig | string;
+export type MemberPropertyLike = MemberProperty | MemberPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

@@ -12,9 +12,9 @@ export interface LangParameters {
     type?: Type;
 }
 
-export type LangPropertyConfig = [value: string, parameters?: LangParameters];
+export type LangPropertyRestParameter = [value: string, parameters?: LangParameters];
 
-export type LangPropertyLike = LangProperty | LangPropertyConfig | string;
+export type LangPropertyLike = LangProperty | LangPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

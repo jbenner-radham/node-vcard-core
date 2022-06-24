@@ -6,10 +6,10 @@ export interface RevParameters {
     value?: 'timestamp';
 }
 
-export type RevPropertyConfig = [value: string, parameters?: RevParameters];
+export type RevPropertyRestParameter = [value: string, parameters?: RevParameters];
 
 /** @todo Add Date type support. */
-export type RevPropertyLike = RevProperty | RevPropertyConfig | string;
+export type RevPropertyLike = RevProperty | RevPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

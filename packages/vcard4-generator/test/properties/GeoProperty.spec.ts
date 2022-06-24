@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import GeoProperty, { GeoPropertyConfig } from '../../lib/properties/GeoProperty';
+import GeoProperty, { GeoPropertyRestParameter } from '../../lib/properties/GeoProperty';
 
 describe('GeoProperty', () => {
     it('is a function class', () => {
@@ -90,7 +90,7 @@ describe('GeoProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'geo:37.386013,-122.082932';
-            const config: GeoPropertyConfig = [value, { value: 'uri' }];
+            const config: GeoPropertyRestParameter = [value, { value: 'uri' }];
             const geo = GeoProperty.factory(config);
 
             expect(geo instanceof GeoProperty).to.equal(true);

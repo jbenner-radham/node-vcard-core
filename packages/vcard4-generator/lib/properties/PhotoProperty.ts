@@ -13,10 +13,10 @@ export interface PhotoParameters {
     pid?: number | number[];
 }
 
-export type PhotoPropertyConfig = [value: string, parameters?: PhotoParameters];
+export type PhotoPropertyRestParameter = [value: string, parameters?: PhotoParameters];
 
 /** @todo Add URL type support. */
-export type PhotoPropertyLike = PhotoProperty | PhotoPropertyConfig | string;
+export type PhotoPropertyLike = PhotoProperty | PhotoPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

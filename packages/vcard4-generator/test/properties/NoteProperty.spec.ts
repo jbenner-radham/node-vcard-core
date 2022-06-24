@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import NoteProperty, { NotePropertyConfig } from '../../lib/properties/NoteProperty';
+import NoteProperty, { NotePropertyRestParameter } from '../../lib/properties/NoteProperty';
 
 describe('NoteProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('NoteProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'This is a note...';
-            const config: NotePropertyConfig = [value, { type: 'home' }];
+            const config: NotePropertyRestParameter = [value, { type: 'home' }];
             const note = NoteProperty.factory(config);
 
             expect(note instanceof NoteProperty).to.equal(true);

@@ -13,9 +13,9 @@ export interface TzParameters {
     mediatype?: string;
 }
 
-export type TzPropertyConfig = [value: string, parameters?: TzParameters];
+export type TzPropertyRestParameter = [value: string, parameters?: TzParameters];
 
-export type TzPropertyLike = TzProperty | TzPropertyConfig | string;
+export type TzPropertyLike = TzProperty | TzPropertyRestParameter | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
