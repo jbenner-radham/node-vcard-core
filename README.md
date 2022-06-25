@@ -43,5 +43,5 @@ License
 -------
 The MIT License (Expat). See the [license file](LICENSE) for details.
 
-[BUILD BADGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml/badge.svg
-[BUILD PAGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml
+[BUILD BADGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml/badge.svg
+[BUILD PAGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml

@@ -8,36 +8,23 @@ Heads Up!
 ---------
 This is still very much a WIP project and is _**not**_ feature complete.
 
-vCard generation is _almost_ complete, after that work will begin on parsing.
-
-Building
---------
-From the monorepo root:
-
-```sh
-npx lerna --scope @vcard/vcard4-generator run build
-```
-
-Testing
+Install
 -------
-From the monorepo root:
-
-```sh
-npx lerna --scope @vcard/vcard4-generator run test
+```sh-session
+npm install @vcard/vcard4-generator
 ```
 
 Usage
 -----
 ```ts
-// NOTE: This module is not yet available from npm!
-import Vcard, { VcardConfig } from '@vcard/vcard4-generator';
+import Vcard4Generator, { Vcard4GeneratorConfig } from '@vcard/vcard4-generator';
 
-const config: VcardConfig = {
+const config: Vcard4GeneratorConfig = {
     fn: 'Captain Awesome',
     email: 'hello@example.com',
     url: 'http://www.example.com/'
 };
-const vcard = new Vcard(config);
+const vcard = new Vcard4Generator(config);
 
 vcard.toString();
 // >> BEGIN:VCARD
@@ -46,6 +33,22 @@ vcard.toString();
 // >> FN:Captain Awesome
 // >> URL:http://www.example.com/
 // >> END:VCARD
+```
+
+Building
+--------
+From the monorepo root:
+
+```sh-session
+npx lerna --scope @vcard/vcard4-generator run build
+```
+
+Testing
+-------
+From the monorepo root:
+
+```sh-session
+npm test
 ```
 
 To-Do
@@ -478,5 +481,5 @@ License
 -------
 The MIT License (Expat). See the [license file](LICENSE) for details.
 
-[BUILD BADGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml/badge.svg
-[BUILD PAGE]: https://github.com/jbenner-radham/node-vcard-core/actions/workflows/ci.yaml
+[BUILD BADGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml/badge.svg
+[BUILD PAGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml
