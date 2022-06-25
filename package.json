@@ -17,6 +17,7 @@
   "license": "MIT",
   "author": "James Benner <james.benner@gmail.com> (http://www.jamesbenner.com/)",
   "scripts": {
+    "prebuild": "npm run rm:tsbuildinfo",
     "build": "lerna run build",
     "clean": "lerna run clean",
     "postinstall": "lerna bootstrap",
