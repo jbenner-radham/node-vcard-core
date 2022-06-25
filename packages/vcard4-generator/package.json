@@ -1,6 +1,6 @@
 {
   "name": "@vcard/vcard4-generator",
-  "version": "0.0.0",
+  "version": "0.1.0-beta.1",
   "description": "A vCard 4 generator library.",
   "keywords": [
     "create",
