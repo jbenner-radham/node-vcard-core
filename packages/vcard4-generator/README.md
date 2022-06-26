@@ -33,6 +33,25 @@ vcard.toString();
 // >> FN:Captain Awesome
 // >> URL:http://www.example.com/
 // >> END:VCARD
+
+// Properties that can have multiple instances are represented by arrays.
+vcard.fn[0].toString();
+// >> FN:Captain Awesome
+
+vcard.fn[0].valueOf();
+// >> Captain Awesome
+
+// New property instances can simply be pushed to the corresponding property array.
+vcard.fn.push('Alex Awesome');
+
+vcard.toString();
+// >> BEGIN:VCARD
+// >> VERSION:4.0
+// >> EMAIL:hello@example.com
+// >> FN:Captain Awesome
+// >> FN:Alex Awesome
+// >> URL:http://www.example.com/
+// >> END:VCARD
 ```
 
 Building
