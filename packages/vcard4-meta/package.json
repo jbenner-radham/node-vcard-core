@@ -34,6 +34,8 @@
     "build:js": "babel --root-mode upward --out-dir dist lib --extensions '.ts' --ignore '**/*.d.ts'",
     "build:types": "tsc --project './tsconfig.d.json'",
     "clean": "rimraf ./dist",
+    "lint": "eslint lib test",
+    "lint:fix": "eslint --fix lib test",
     "prepack": "rimraf ./dist/*.tsbuildinfo",
     "sort:pkg": "sort-package-json",
     "test": "echo \"Error: run tests from root\" && exit 1",
