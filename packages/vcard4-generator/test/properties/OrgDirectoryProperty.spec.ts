@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import OrgDirectoryProperty, { OrgDirectoryPropertyRestConfig }  from '../../lib/properties/OrgDirectoryProperty';
+import OrgDirectoryProperty, { OrgDirectoryPropertyRestConfig } from '../../lib/properties/OrgDirectoryProperty';
 
 describe('OrgDirectoryProperty', () => {
     it('is a function class', () => {

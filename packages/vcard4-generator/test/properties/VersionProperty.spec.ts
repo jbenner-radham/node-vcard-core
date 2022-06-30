@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import VersionProperty, { VersionPropertyRestConfig }  from '../../lib/properties/VersionProperty';
+import VersionProperty, { VersionPropertyRestConfig } from '../../lib/properties/VersionProperty';
 
 describe('VersionProperty', () => {
     it('is a function class', () => {

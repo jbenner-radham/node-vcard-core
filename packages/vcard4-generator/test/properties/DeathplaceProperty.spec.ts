@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import DeathplaceProperty, { DeathplacePropertyRestConfig }  from '../../lib/properties/DeathplaceProperty';
+import DeathplaceProperty, { DeathplacePropertyRestConfig } from '../../lib/properties/DeathplaceProperty';
 
 describe('DeathplaceProperty', () => {
     it('is a function class', () => {

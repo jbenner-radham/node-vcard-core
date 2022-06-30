@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ContactUriProperty, { ContactUriPropertyRestConfig }  from '../../lib/properties/ContactUriProperty';
+import ContactUriProperty, { ContactUriPropertyRestConfig } from '../../lib/properties/ContactUriProperty';
 
 describe('ContactUriProperty', () => {
     it('is a function class', () => {

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import BirthplaceProperty, { BirthplacePropertyRestConfig }  from '../../lib/properties/BirthplaceProperty';
+import BirthplaceProperty, { BirthplacePropertyRestConfig } from '../../lib/properties/BirthplaceProperty';
 
 describe('BirthplaceProperty', () => {
     it('is a function class', () => {

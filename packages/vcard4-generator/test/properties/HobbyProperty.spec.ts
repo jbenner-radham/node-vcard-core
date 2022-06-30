@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import HobbyProperty, { HobbyPropertyRestConfig }  from '../../lib/properties/HobbyProperty';
+import HobbyProperty, { HobbyPropertyRestConfig } from '../../lib/properties/HobbyProperty';
 
 describe('HobbyProperty', () => {
     it('is a function class', () => {

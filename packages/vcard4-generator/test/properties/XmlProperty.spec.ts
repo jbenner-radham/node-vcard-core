@@ -1,6 +1,6 @@
 import { EOL } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import XmlProperty, { XmlPropertyRestConfig }  from '../../lib/properties/XmlProperty';
+import XmlProperty, { XmlPropertyRestConfig } from '../../lib/properties/XmlProperty';
 
 describe('XmlProperty', () => {
     it('is a function class', () => {

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import InterestProperty, { InterestPropertyRestConfig }  from '../../lib/properties/InterestProperty';
+import InterestProperty, { InterestPropertyRestConfig } from '../../lib/properties/InterestProperty';
 
 describe('InterestProperty', () => {
     it('is a function class', () => {
