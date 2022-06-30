@@ -16,9 +16,9 @@ export interface HobbyParameters {
     type?: Type;
 }
 
-export type HobbyPropertyRestParameter = [value: string, parameters?: HobbyParameters];
+export type HobbyPropertyRestConfig = [value: string, parameters?: HobbyParameters];
 
-export type HobbyPropertyLike = HobbyProperty | HobbyPropertyRestParameter | string;
+export type HobbyPropertyLike = HobbyProperty | HobbyPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

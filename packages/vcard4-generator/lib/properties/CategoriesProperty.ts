@@ -12,10 +12,10 @@ export interface CategoriesParameters {
     altid?: number | string;
 }
 
-export type CategoriesPropertyRestParameter = [value: string, parameters?: CategoriesParameters];
+export type CategoriesPropertyRestConfig = [value: string, parameters?: CategoriesParameters];
 
 /** @todo Add string[] type support. */
-export type CategoriesPropertyLike = CategoriesProperty | CategoriesPropertyRestParameter | string;
+export type CategoriesPropertyLike = CategoriesProperty | CategoriesPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

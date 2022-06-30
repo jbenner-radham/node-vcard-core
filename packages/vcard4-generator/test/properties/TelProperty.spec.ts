@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import TelProperty, { TelPropertyRestParameter } from '../../lib/properties/TelProperty';
+import TelProperty, { TelPropertyRestConfig } from '../../lib/properties/TelProperty';
 
 describe('TelProperty', () => {
     it('is a function class', () => {
@@ -104,7 +104,7 @@ describe('TelProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = '+1-555-555-5555';
-            const config: TelPropertyRestParameter = [value, { type: 'home' }];
+            const config: TelPropertyRestConfig = [value, { type: 'home' }];
             const tel = TelProperty.factory(config);
 
             expect(tel instanceof TelProperty).to.equal(true);

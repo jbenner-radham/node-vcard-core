@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import VersionProperty, { VersionPropertyRestParameter }  from '../../lib/properties/VersionProperty';
+import VersionProperty, { VersionPropertyRestConfig }  from '../../lib/properties/VersionProperty';
 
 describe('VersionProperty', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('VersionProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = '4.0';
-            const config: VersionPropertyRestParameter = [value, { value: 'text' }];
+            const config: VersionPropertyRestConfig = [value, { value: 'text' }];
             const version = VersionProperty.factory(config);
 
             expect(version instanceof VersionProperty).to.equal(true);

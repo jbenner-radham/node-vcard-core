@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import UidProperty, { UidPropertyRestParameter } from '../../lib/properties/UidProperty';
+import UidProperty, { UidPropertyRestConfig } from '../../lib/properties/UidProperty';
 
 describe('UidProperty', () => {
     it('is a function class', () => {
@@ -94,7 +94,7 @@ describe('UidProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
-            const config: UidPropertyRestParameter = [value, { value: 'uri' }];
+            const config: UidPropertyRestConfig = [value, { value: 'uri' }];
             const uid = UidProperty.factory(config);
 
             expect(uid instanceof UidProperty).to.equal(true);

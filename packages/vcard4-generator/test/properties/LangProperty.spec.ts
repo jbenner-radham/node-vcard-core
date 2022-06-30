@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import LangProperty, { LangPropertyRestParameter } from '../../lib/properties/LangProperty';
+import LangProperty, { LangPropertyRestConfig } from '../../lib/properties/LangProperty';
 
 describe('LangProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('LangProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'en';
-            const config: LangPropertyRestParameter = [value, { type: 'home' }];
+            const config: LangPropertyRestConfig = [value, { type: 'home' }];
             const lang = LangProperty.factory(config);
 
             expect(lang instanceof LangProperty).to.equal(true);

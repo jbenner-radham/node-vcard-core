@@ -14,10 +14,10 @@ export interface LogoParameters {
     altid?: number | string;
 }
 
-export type LogoPropertyRestParameter = [value: string, parameters?: LogoParameters];
+export type LogoPropertyRestConfig = [value: string, parameters?: LogoParameters];
 
 /** @todo Add URL type support. */
-export type LogoPropertyLike = LogoProperty | LogoPropertyRestParameter | string;
+export type LogoPropertyLike = LogoProperty | LogoPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

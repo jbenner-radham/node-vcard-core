@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import NProperty, { NPropertyRestParameter } from '../../lib/properties/NProperty';
+import NProperty, { NPropertyRestConfig } from '../../lib/properties/NProperty';
 
 describe('NProperty', () => {
     it('is a function class', () => {
@@ -157,7 +157,7 @@ describe('NProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'Public;John;Quinlan;Mr.;Esq.';
-            const config: NPropertyRestParameter = [value, { value: 'text' }];
+            const config: NPropertyRestConfig = [value, { value: 'text' }];
             const n = NProperty.factory(config);
 
             expect(n instanceof NProperty).to.equal(true);

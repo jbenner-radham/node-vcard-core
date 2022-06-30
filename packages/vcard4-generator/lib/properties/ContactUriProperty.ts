@@ -9,9 +9,9 @@ export interface ContactUriParameters {
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
 }
 
-export type ContactUriPropertyRestParameter = [value: string, parameters?: ContactUriParameters];
+export type ContactUriPropertyRestConfig = [value: string, parameters?: ContactUriParameters];
 
-export type ContactUriPropertyLike = ContactUriProperty | ContactUriPropertyRestParameter | string;
+export type ContactUriPropertyLike = ContactUriProperty | ContactUriPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

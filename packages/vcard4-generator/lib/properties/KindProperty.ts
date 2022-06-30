@@ -8,9 +8,9 @@ export interface KindParameters {
     value?: 'text';
 }
 
-export type KindPropertyRestParameter = [value: Kind, parameters?: KindParameters];
+export type KindPropertyRestConfig = [value: Kind, parameters?: KindParameters];
 
-export type KindPropertyLike = KindProperty | KindPropertyRestParameter | Kind;
+export type KindPropertyLike = KindProperty | KindPropertyRestConfig | Kind;
 
 const VALUE: unique symbol = Symbol.for('value');
 

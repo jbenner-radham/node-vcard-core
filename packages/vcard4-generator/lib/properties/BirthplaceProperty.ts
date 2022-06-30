@@ -8,9 +8,9 @@ export interface BirthplaceParameters {
     language?: string;
 }
 
-export type BirthplacePropertyRestParameter = [value: string, parameters?: BirthplaceParameters];
+export type BirthplacePropertyRestConfig = [value: string, parameters?: BirthplaceParameters];
 
-export type BirthplacePropertyLike = BirthplaceProperty | BirthplacePropertyRestParameter | string;
+export type BirthplacePropertyLike = BirthplaceProperty | BirthplacePropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

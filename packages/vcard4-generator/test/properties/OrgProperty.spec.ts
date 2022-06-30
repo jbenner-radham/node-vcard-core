@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import OrgProperty, { OrgPropertyRestParameter } from '../../lib/properties/OrgProperty';
+import OrgProperty, { OrgPropertyRestConfig } from '../../lib/properties/OrgProperty';
 
 describe('OrgProperty', () => {
     it('is a function class', () => {
@@ -89,7 +89,7 @@ describe('OrgProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'ABC, Inc.;North American Division;Marketing';
-            const config: OrgPropertyRestParameter = [value, { type: 'work' }];
+            const config: OrgPropertyRestConfig = [value, { type: 'work' }];
             const org = OrgProperty.factory(config);
 
             expect(org instanceof OrgProperty).to.equal(true);

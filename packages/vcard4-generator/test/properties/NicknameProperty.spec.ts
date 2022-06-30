@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import NicknameProperty, { NicknamePropertyRestParameter } from '../../lib/properties/NicknameProperty';
+import NicknameProperty, { NicknamePropertyRestConfig } from '../../lib/properties/NicknameProperty';
 
 describe('NicknameProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('NicknameProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'Boss';
-            const config: NicknamePropertyRestParameter = [value, { type: 'work' }];
+            const config: NicknamePropertyRestConfig = [value, { type: 'work' }];
             const nickname = NicknameProperty.factory(config);
 
             expect(nickname instanceof NicknameProperty).to.equal(true);

@@ -8,9 +8,9 @@ export interface DeathplaceParameters {
     language?: string;
 }
 
-export type DeathplacePropertyRestParameter = [value: string, parameters?: DeathplaceParameters];
+export type DeathplacePropertyRestConfig = [value: string, parameters?: DeathplaceParameters];
 
-export type DeathplacePropertyLike = DeathplaceProperty | DeathplacePropertyRestParameter | string;
+export type DeathplacePropertyLike = DeathplaceProperty | DeathplacePropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

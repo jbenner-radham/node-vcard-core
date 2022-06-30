@@ -10,9 +10,9 @@ export interface NParameters {
     altid?: number | string;
 }
 
-export type NPropertyRestParameter = [value: string, parameters?: NParameters];
+export type NPropertyRestConfig = [value: string, parameters?: NParameters];
 
-export type NPropertyLike = NProperty | NPropertyRestParameter | string;
+export type NPropertyLike = NProperty | NPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

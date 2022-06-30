@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import TitleProperty, { TitlePropertyRestParameter } from '../../lib/properties/TitleProperty';
+import TitleProperty, { TitlePropertyRestConfig } from '../../lib/properties/TitleProperty';
 
 describe('TitleProperty', () => {
     it('is a function class', () => {
@@ -85,7 +85,7 @@ describe('TitleProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'Research Scientist';
-            const config: TitlePropertyRestParameter = [value, { value: 'text' }];
+            const config: TitlePropertyRestConfig = [value, { value: 'text' }];
             const title = TitleProperty.factory(config);
 
             expect(title instanceof TitleProperty).to.equal(true);

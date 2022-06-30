@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import RoleProperty, { RolePropertyRestParameter } from '../../lib/properties/RoleProperty';
+import RoleProperty, { RolePropertyRestConfig } from '../../lib/properties/RoleProperty';
 
 describe('RoleProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('RoleProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'Project Leader';
-            const config: RolePropertyRestParameter = [value, { type: 'work' }];
+            const config: RolePropertyRestConfig = [value, { type: 'work' }];
             const role = RoleProperty.factory(config);
 
             expect(role instanceof RoleProperty).to.equal(true);

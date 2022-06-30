@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import DeathdateProperty, { DeathdatePropertyRestParameter }  from '../../lib/properties/DeathdateProperty';
+import DeathdateProperty, { DeathdatePropertyRestConfig }  from '../../lib/properties/DeathdateProperty';
 
 describe('DeathdateProperty', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('DeathdateProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'circa 1800';
-            const config: DeathdatePropertyRestParameter = [value, { value: 'text' }];
+            const config: DeathdatePropertyRestConfig = [value, { value: 'text' }];
             const deathdate = DeathdateProperty.factory(config);
 
             expect(deathdate instanceof DeathdateProperty).to.equal(true);

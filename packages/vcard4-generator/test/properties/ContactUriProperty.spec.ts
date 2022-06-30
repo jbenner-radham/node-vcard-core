@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ContactUriProperty, { ContactUriPropertyRestParameter }  from '../../lib/properties/ContactUriProperty';
+import ContactUriProperty, { ContactUriPropertyRestConfig }  from '../../lib/properties/ContactUriProperty';
 
 describe('ContactUriProperty', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('ContactUriProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'mailto:contact@example.com';
-            const config: ContactUriPropertyRestParameter = [value, { pref: 1 }];
+            const config: ContactUriPropertyRestConfig = [value, { pref: 1 }];
             const contactUri = ContactUriProperty.factory(config);
 
             expect(contactUri instanceof ContactUriProperty).to.equal(true);

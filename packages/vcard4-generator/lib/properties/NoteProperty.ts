@@ -13,9 +13,9 @@ export interface NoteParameters {
     altid?: number | string;
 }
 
-export type NotePropertyRestParameter = [value: string, parameters?: NoteParameters];
+export type NotePropertyRestConfig = [value: string, parameters?: NoteParameters];
 
-export type NotePropertyLike = NoteProperty | NotePropertyRestParameter | string;
+export type NotePropertyLike = NoteProperty | NotePropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

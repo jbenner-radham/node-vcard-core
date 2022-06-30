@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import BirthplaceProperty, { BirthplacePropertyRestParameter }  from '../../lib/properties/BirthplaceProperty';
+import BirthplaceProperty, { BirthplacePropertyRestConfig }  from '../../lib/properties/BirthplaceProperty';
 
 describe('BirthplaceProperty', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('BirthplaceProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'geo:46.769307,-71.283079';
-            const config: BirthplacePropertyRestParameter = [value, { value: 'uri' }];
+            const config: BirthplacePropertyRestConfig = [value, { value: 'uri' }];
             const birthplace = BirthplaceProperty.factory(config);
 
             expect(birthplace instanceof BirthplaceProperty).to.equal(true);

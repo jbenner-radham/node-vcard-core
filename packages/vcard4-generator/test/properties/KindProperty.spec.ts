@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import KindProperty, { KindPropertyRestParameter } from '../../lib/properties/KindProperty';
+import KindProperty, { KindPropertyRestConfig } from '../../lib/properties/KindProperty';
 
 describe('KindProperty', () => {
     it('is a function class', () => {
@@ -76,7 +76,7 @@ describe('KindProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'application';
-            const config: KindPropertyRestParameter = [value, { value: 'text' }];
+            const config: KindPropertyRestConfig = [value, { value: 'text' }];
             const kind = KindProperty.factory(config);
 
             expect(kind instanceof KindProperty).to.equal(true);

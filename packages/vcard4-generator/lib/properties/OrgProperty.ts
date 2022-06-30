@@ -14,9 +14,9 @@ export interface OrgParameters {
     type?: Type;
 }
 
-export type OrgPropertyRestParameter = [value: string, parameters?: OrgParameters];
+export type OrgPropertyRestConfig = [value: string, parameters?: OrgParameters];
 
-export type OrgPropertyLike = OrgProperty | OrgPropertyRestParameter | string;
+export type OrgPropertyLike = OrgProperty | OrgPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

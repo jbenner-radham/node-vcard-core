@@ -6,9 +6,9 @@ export interface UidParameters {
     value?: 'uri' | 'text';
 }
 
-export type UidPropertyRestParameter = [value: string, parameters?: UidParameters];
+export type UidPropertyRestConfig = [value: string, parameters?: UidParameters];
 
-export type UidPropertyLike = UidProperty | UidPropertyRestParameter | string;
+export type UidPropertyLike = UidProperty | UidPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

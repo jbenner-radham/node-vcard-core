@@ -13,9 +13,9 @@ export interface DeathdateParameters {
     language?: string; // For `text` type only!
 }
 
-export type DeathdatePropertyRestParameter = [value: string, parameters?: DeathdateParameters];
+export type DeathdatePropertyRestConfig = [value: string, parameters?: DeathdateParameters];
 
-export type DeathdatePropertyLike = DeathdateProperty | DeathdatePropertyRestParameter | string;
+export type DeathdatePropertyLike = DeathdateProperty | DeathdatePropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

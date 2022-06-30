@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import CaladruriProperty, { CaladruriPropertyRestParameter } from '../../lib/properties/CaladruriProperty';
+import CaladruriProperty, { CaladruriPropertyRestConfig } from '../../lib/properties/CaladruriProperty';
 
 describe('CaladruriProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('CaladruriProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://example.com/calendar/jdoe';
-            const config: CaladruriPropertyRestParameter = [value, { type: 'home' }];
+            const config: CaladruriPropertyRestConfig = [value, { type: 'home' }];
             const caladruri = CaladruriProperty.factory(config);
 
             expect(caladruri instanceof CaladruriProperty).to.equal(true);

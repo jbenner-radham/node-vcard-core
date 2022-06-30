@@ -13,10 +13,10 @@ export interface KeyParameters {
     type?: Type;
 }
 
-export type KeyPropertyRestParameter = [value: string, parameters?: KeyParameters];
+export type KeyPropertyRestConfig = [value: string, parameters?: KeyParameters];
 
 /** @todo Add URL type support? */
-export type KeyPropertyLike = KeyProperty | KeyPropertyRestParameter | string;
+export type KeyPropertyLike = KeyProperty | KeyPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

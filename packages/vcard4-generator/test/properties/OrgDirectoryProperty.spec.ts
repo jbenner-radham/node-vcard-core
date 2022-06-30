@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import OrgDirectoryProperty, { OrgDirectoryPropertyRestParameter }  from '../../lib/properties/OrgDirectoryProperty';
+import OrgDirectoryProperty, { OrgDirectoryPropertyRestConfig }  from '../../lib/properties/OrgDirectoryProperty';
 
 describe('OrgDirectoryProperty', () => {
     it('is a function class', () => {
@@ -82,7 +82,7 @@ describe('OrgDirectoryProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering';
-            const config: OrgDirectoryPropertyRestParameter = [value, { pref: 1 }];
+            const config: OrgDirectoryPropertyRestConfig = [value, { pref: 1 }];
             const orgDirectory = OrgDirectoryProperty.factory(config);
 
             expect(orgDirectory instanceof OrgDirectoryProperty).to.equal(true);

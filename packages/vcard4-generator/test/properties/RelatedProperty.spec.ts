@@ -1,6 +1,6 @@
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import RelatedProperty, { RelatedPropertyRestParameter } from '../../lib/properties/RelatedProperty';
+import RelatedProperty, { RelatedPropertyRestConfig } from '../../lib/properties/RelatedProperty';
 
 describe('RelatedProperty', () => {
     it('is a function class', () => {
@@ -101,7 +101,7 @@ describe('RelatedProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://example.com/directory/jdoe.vcf';
-            const config: RelatedPropertyRestParameter = [value, { type: 'contact' }];
+            const config: RelatedPropertyRestConfig = [value, { type: 'contact' }];
             const related = RelatedProperty.factory(config);
 
             expect(related instanceof RelatedProperty).to.equal(true);

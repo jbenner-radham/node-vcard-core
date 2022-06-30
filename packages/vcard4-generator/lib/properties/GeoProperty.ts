@@ -13,9 +13,9 @@ export interface GeoParameters {
     altid?: number | string;
 }
 
-export type GeoPropertyRestParameter = [value: string, parameters?: GeoParameters];
+export type GeoPropertyRestConfig = [value: string, parameters?: GeoParameters];
 
-export type GeoPropertyLike = GeoProperty | GeoPropertyRestParameter | string;
+export type GeoPropertyLike = GeoProperty | GeoPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

@@ -9,10 +9,10 @@ export interface AnniversaryParameters {
     calscale?: Calscale; // For `date-and-or-time` type only!
 }
 
-export type AnniversaryPropertyRestParameter = [value: string, parameters?: AnniversaryParameters];
+export type AnniversaryPropertyRestConfig = [value: string, parameters?: AnniversaryParameters];
 
 /** @todo Add Date type support. */
-export type AnniversaryPropertyLike = AnniversaryProperty | AnniversaryPropertyRestParameter | string;
+export type AnniversaryPropertyLike = AnniversaryProperty | AnniversaryPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

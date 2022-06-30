@@ -13,10 +13,10 @@ export interface CaluriParameters {
     altid?: number | string;
 }
 
-export type CaluriPropertyRestParameter = [value: string, parameters?: CaluriParameters];
+export type CaluriPropertyRestConfig = [value: string, parameters?: CaluriParameters];
 
 /** @todo Add URL type support. */
-export type CaluriPropertyLike = CaluriProperty | CaluriPropertyRestParameter | string;
+export type CaluriPropertyLike = CaluriProperty | CaluriPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

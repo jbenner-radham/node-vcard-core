@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import RevProperty, { RevPropertyRestParameter } from '../../lib/properties/RevProperty';
+import RevProperty, { RevPropertyRestConfig } from '../../lib/properties/RevProperty';
 
 describe('RevProperty', () => {
     it('is a function class', () => {
@@ -84,7 +84,7 @@ describe('RevProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = '19951031T222710Z';
-            const config: RevPropertyRestParameter = [value, { value: 'timestamp' }];
+            const config: RevPropertyRestConfig = [value, { value: 'timestamp' }];
             const rev = RevProperty.factory(config);
 
             expect(rev instanceof RevProperty).to.equal(true);

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ExpertiseProperty, { ExpertisePropertyRestParameter }  from '../../lib/properties/ExpertiseProperty';
+import ExpertiseProperty, { ExpertisePropertyRestConfig }  from '../../lib/properties/ExpertiseProperty';
 
 describe('ExpertiseProperty', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('ExpertiseProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'chinese literature';
-            const config: ExpertisePropertyRestParameter = [value, { index: 1, level: 'expert' }];
+            const config: ExpertisePropertyRestConfig = [value, { index: 1, level: 'expert' }];
             const expertise = ExpertiseProperty.factory(config);
 
             expect(expertise instanceof ExpertiseProperty).to.equal(true);

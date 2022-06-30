@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import MemberProperty, { MemberPropertyRestParameter } from '../../lib/properties/MemberProperty';
+import MemberProperty, { MemberPropertyRestConfig } from '../../lib/properties/MemberProperty';
 
 describe('MemberProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('MemberProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'mailto:subscriber1@example.com';
-            const config: MemberPropertyRestParameter = [value, { value: 'uri' }];
+            const config: MemberPropertyRestConfig = [value, { value: 'uri' }];
             const member = MemberProperty.factory(config);
 
             expect(member instanceof MemberProperty).to.equal(true);

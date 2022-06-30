@@ -13,9 +13,9 @@ export interface NicknameParameters {
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
 }
 
-export type NicknamePropertyRestParameter = [value: string, parameters?: NicknameParameters];
+export type NicknamePropertyRestConfig = [value: string, parameters?: NicknameParameters];
 
-export type NicknamePropertyLike = NicknameProperty | NicknamePropertyRestParameter | string;
+export type NicknamePropertyLike = NicknameProperty | NicknamePropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

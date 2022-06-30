@@ -6,9 +6,9 @@ export interface VersionParameters {
     value?: 'text';
 }
 
-export type  VersionPropertyRestParameter = [value: string, parameters?: VersionParameters];
+export type  VersionPropertyRestConfig = [value: string, parameters?: VersionParameters];
 
-export type VersionPropertyLike = VersionProperty | VersionPropertyRestParameter | string;
+export type VersionPropertyLike = VersionProperty | VersionPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

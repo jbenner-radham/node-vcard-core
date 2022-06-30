@@ -13,9 +13,9 @@ export interface RoleParameters {
     altid?: number | string;
 }
 
-export type RolePropertyRestParameter = [value: string, parameters?: RoleParameters];
+export type RolePropertyRestConfig = [value: string, parameters?: RoleParameters];
 
-export type RolePropertyLike = RoleProperty | RolePropertyRestParameter | string;
+export type RolePropertyLike = RoleProperty | RolePropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

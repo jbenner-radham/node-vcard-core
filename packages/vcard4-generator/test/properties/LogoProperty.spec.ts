@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import LogoProperty, { LogoPropertyRestParameter } from '../../lib/properties/LogoProperty';
+import LogoProperty, { LogoPropertyRestConfig } from '../../lib/properties/LogoProperty';
 
 describe('LogoProperty', () => {
     it('is a function class', () => {
@@ -87,7 +87,7 @@ describe('LogoProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/pub/logos/abccorp.jpg';
-            const config: LogoPropertyRestParameter = [value, { type: 'work' }];
+            const config: LogoPropertyRestConfig = [value, { type: 'work' }];
             const logo = LogoProperty.factory(config);
 
             expect(logo instanceof LogoProperty).to.equal(true);

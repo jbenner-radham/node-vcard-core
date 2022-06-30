@@ -13,9 +13,9 @@ export interface ImppParameters {
     altid?: number | string;
 }
 
-export type ImppPropertyRestParameter = [value: string, parameters?: ImppParameters];
+export type ImppPropertyRestConfig = [value: string, parameters?: ImppParameters];
 
-export type ImppPropertyLike = ImppProperty | ImppPropertyRestParameter | string;
+export type ImppPropertyLike = ImppProperty | ImppPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

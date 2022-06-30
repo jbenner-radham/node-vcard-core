@@ -12,9 +12,9 @@ export interface EmailParameters {
     altid?: number | string;
 }
 
-export type EmailPropertyRestParameter = [value: string, parameters?: EmailParameters];
+export type EmailPropertyRestConfig = [value: string, parameters?: EmailParameters];
 
-export type EmailPropertyLike = EmailProperty | EmailPropertyRestParameter | string;
+export type EmailPropertyLike = EmailProperty | EmailPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

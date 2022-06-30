@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import HobbyProperty, { HobbyPropertyRestParameter }  from '../../lib/properties/HobbyProperty';
+import HobbyProperty, { HobbyPropertyRestConfig }  from '../../lib/properties/HobbyProperty';
 
 describe('HobbyProperty', () => {
     it('is a function class', () => {
@@ -79,7 +79,7 @@ describe('HobbyProperty', () => {
 
         it('creates an instance from an array argument', () => {
             const value = 'sewing';
-            const config: HobbyPropertyRestParameter = [value, { index: 2, level: 'high' }];
+            const config: HobbyPropertyRestConfig = [value, { index: 2, level: 'high' }];
             const hobby = HobbyProperty.factory(config);
 
             expect(hobby instanceof HobbyProperty).to.equal(true);

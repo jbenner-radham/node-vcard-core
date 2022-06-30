@@ -14,9 +14,9 @@ export interface OrgDirectoryParameters {
     type?: Type;
 }
 
-export type OrgDirectoryPropertyRestParameter = [value: string, parameters?: OrgDirectoryParameters];
+export type OrgDirectoryPropertyRestConfig = [value: string, parameters?: OrgDirectoryParameters];
 
-export type OrgDirectoryPropertyLike = OrgDirectoryProperty | OrgDirectoryPropertyRestParameter | string;
+export type OrgDirectoryPropertyLike = OrgDirectoryProperty | OrgDirectoryPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

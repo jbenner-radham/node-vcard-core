@@ -13,10 +13,10 @@ export interface UrlParameters {
     altid?: number | string;
 }
 
-export type UrlPropertyRestParameter = [value: string, parameters?: UrlParameters];
+export type UrlPropertyRestConfig = [value: string, parameters?: UrlParameters];
 
 /** @todo Add URL type support. */
-export type UrlPropertyLike = UrlProperty | UrlPropertyRestParameter | string;
+export type UrlPropertyLike = UrlProperty | UrlPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

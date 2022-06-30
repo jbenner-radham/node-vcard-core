@@ -13,10 +13,10 @@ export interface FburlParameters {
     altid?: number | string;
 }
 
-export type FburlPropertyRestParameter = [value: string, parameters?: FburlParameters];
+export type FburlPropertyRestConfig = [value: string, parameters?: FburlParameters];
 
 /** @todo Add URL type support? */
-export type FburlPropertyLike = FburlProperty | FburlPropertyRestParameter | string;
+export type FburlPropertyLike = FburlProperty | FburlPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 

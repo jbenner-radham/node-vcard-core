@@ -16,9 +16,9 @@ export interface InterestParameters {
     type?: Type;
 }
 
-export type InterestPropertyRestParameter = [value: string, parameters?: InterestParameters];
+export type InterestPropertyRestConfig = [value: string, parameters?: InterestParameters];
 
-export type InterestPropertyLike = InterestProperty | InterestPropertyRestParameter | string;
+export type InterestPropertyLike = InterestProperty | InterestPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
