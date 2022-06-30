@@ -48,14 +48,13 @@ describe('CategoriesProperty', () => {
             expect(CategoriesProperty.prototype.valueOf).to.be.a('function');
         });
 
-        /** @todo Un-skip these two tests after implementing array argument support! */
-        it.skip('returns a string', () => {
+        it('returns a string', () => {
             const categories = new CategoriesProperty('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
 
             expect(categories.valueOf()).to.be.a('string');
         });
 
-        it.skip('returns the same value passed to it', () => {
+        it('returns the same value passed to it', () => {
             const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
             const categories = new CategoriesProperty(value);
 

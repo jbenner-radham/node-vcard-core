@@ -136,8 +136,7 @@ describe('Vcard4Generator', () => {
         });
 
         describe('when passed a minimal vCard with a CATEGORIES property', () => {
-            /** @todo Un-skip this test after implementing array argument support! */
-            it.skip('returns the proper string format', () => {
+            it('returns the proper string format', () => {
                 const fn = 'J. Doe';
                 const categories = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
                 const vcard = new Vcard4Generator({ categories, fn });
@@ -145,7 +144,7 @@ describe('Vcard4Generator', () => {
                 const expected = [
                     'BEGIN:VCARD',
                     'VERSION:4.0',
-                    `CATEGORIES:${categories}`,
+                    'CATEGORIES:INTERNET\\,IETF\\,INDUSTRY\\,INFORMATION TECHNOLOGY',
                     `FN:${fn}`,
                     'END:VCARD'
                 ].join(EOL);
