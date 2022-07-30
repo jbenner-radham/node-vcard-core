@@ -1,0 +1,8 @@
+---
+env:
+  mocha: true
+plugins:
+  - no-only-tests
+rules:
+  no-only-tests/no-only-tests: error
+  no-useless-escape: off # Needed to test property value escaping.

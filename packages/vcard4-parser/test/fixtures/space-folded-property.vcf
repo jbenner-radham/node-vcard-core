@@ -1,0 +1,8 @@
+BEGIN:VCARD
+VERSION:4.0
+ADR;GEO="geo:12.3457,78.910";TYPE=home:;;123 Main Street;Any Town;CA;91921-
+ 1234;U.S.A.
+EMAIL:hello@example.com
+FN:Alex Awesome
+URL:http://www.example.com/
+END:VCARD

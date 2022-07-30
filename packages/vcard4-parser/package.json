@@ -1,0 +1,51 @@
+{
+  "name": "@vcard/vcard4-parser",
+  "version": "0.0.0",
+  "description": "A vCard 4 parser library.",
+  "keywords": [
+    "parser",
+    "vcard",
+    "vcard4",
+    "vcf"
+  ],
+  "homepage": "https://github.com/jbenner-radham/vcardjs/tree/main/packages/vcard4-parser#readme",
+  "bugs": {
+    "url": "https://github.com/jbenner-radham/vcardjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbenner-radham/vcardjs.git"
+  },
+  "license": "MIT",
+  "author": "James Benner <james.benner@gmail.com>",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "npm run build:js && npm run build:types && npm run cp:types",
+    "build:js": "babel --root-mode upward --out-dir dist lib --extensions '.ts' --ignore '**/*.d.ts'",
+    "build:types": "tsc --project './tsconfig.d.json'",
+    "clean": "rimraf ./dist",
+    "cp:types": "cp ./lib/types.d.ts ./dist/",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@vcard/vcard4-meta": "^1.0.0-rc.3",
+    "core-js": "^3.19.2",
+    "lodash.camelcase": "^4.3.0",
+    "type-fest": "^2.16.0"
+  },
+  "devDependencies": {
+    "@types/lodash.camelcase": "^4.3.7"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
