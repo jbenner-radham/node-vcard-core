@@ -5,20 +5,23 @@ root = true
 
 [*]
 charset = utf-8
-
-[*.{cjs,ts}]
 end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
 max_line_length = 120
-quote_type = single
 trim_trailing_whitespace = true
+
+[*.{cjs,ts}]
+quote_type = single
 
 # vCards must use CRLF EOLs:
 # https://datatracker.ietf.org/doc/html/rfc6350#section-3.2
 [*.{vcard,vcf}]
 end_of_line = crlf
+indent_size = unset
+indent_style = unset
+insert_final_newline = false
 max_line_length = 75
 
 [*.{ya,y}ml]
