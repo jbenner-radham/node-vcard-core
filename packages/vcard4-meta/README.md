@@ -2,7 +2,7 @@
 ==================
 [![CI Status][BUILD BADGE]][BUILD PAGE]
 
-A [vCard 4](https://datatracker.ietf.org/doc/html/rfc6350) module which provides data about the format.
+A [vCard 4](https://datatracker.ietf.org/doc/html/rfc6350) module which provides metadata about the format.
 
 Install
 -------
@@ -13,7 +13,15 @@ npm install @vcard/vcard4-meta
 Usage
 -----
 ```js
-import { EOL, FOLD_CONTINUATION_CHAR, MAX_OCTETS_PER_LINE } from '@vcard/vcard4-meta';
+import {
+    EOL, // The EOL for vCards (CRLF).
+    FOLD_CONTINUATION_CHAR, // The fold continuaion character preferred by the vCard.js suite (U+0020).
+    FOLD_CONTINUATION_CHARS, // Valid fold continuation characters (horizontal tab and space).
+    HORIZONTAL_TAB, // (U+0009)
+    MAX_OCTETS_PER_LINE, // 75
+    SEPARATOR, // (U+003B)
+    SPACE // (U+0020)
+} from '@vcard/vcard4-meta';
 ```
 
 Building
