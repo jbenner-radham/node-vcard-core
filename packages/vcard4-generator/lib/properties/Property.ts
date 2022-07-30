@@ -1,3 +1,4 @@
+import { SEPARATOR } from '@vcard/vcard4-meta';
 import encodeParameterValue from '../util/encode-parameter-value';
 import escapePropertyValue from '../util/escape-property-value';
 import foldLine from '../util/fold-line';
@@ -6,8 +7,6 @@ import kebabCase from 'lodash.kebabcase';
 
 export default abstract class Property {
     abstract valueOf(): unknown;
-
-    readonly COMPONENT_SEPARATOR = ';';
 
     parameters: unknown;
 
@@ -20,7 +19,7 @@ export default abstract class Property {
 
     components(): string[] {
         /** @see https://datatracker.ietf.org/doc/html/rfc6350#section-3.4 */
-        const separatorMatcher = new RegExp(`(?<!\\\\)${this.COMPONENT_SEPARATOR}`);
+        const separatorMatcher = new RegExp(`(?<!\\\\)${SEPARATOR}`);
 
         return (this.valueOf() as number | string).toString().split(separatorMatcher);
     }
@@ -33,16 +32,16 @@ export default abstract class Property {
             `${formatKey(key)}=${encodeParameterValue(maybeQuote(joinIfArray(value)))}`;
         const parameters = Object.entries(this.parameters as Record<string, number | number[] | string> ?? {})
             .map(getKeyValueString)
-            .join(this.COMPONENT_SEPARATOR);
+            .join(SEPARATOR);
 
-        return (parameters.length === 0) ? '' : `${this.COMPONENT_SEPARATOR}${parameters}`;
+        return (parameters.length === 0) ? '' : `${SEPARATOR}${parameters}`;
     }
 
     getEscapedValueString(): string {
         return this
             .components()
             .map(escapePropertyValue)
-            .join(this.COMPONENT_SEPARATOR);
+            .join(SEPARATOR);
     }
 
     toString(): string {
