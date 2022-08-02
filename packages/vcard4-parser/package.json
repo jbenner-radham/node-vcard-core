@@ -46,6 +46,10 @@
   "devDependencies": {
     "@types/lodash.camelcase": "^4.3.7"
   },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=8"
+  },
   "publishConfig": {
     "access": "public"
   }
