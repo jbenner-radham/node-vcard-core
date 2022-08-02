@@ -9,7 +9,7 @@ Heads Up!
 This is still very much a WIP project and is _**not**_ feature complete.
 
 Currently only vCard 4.0 is supported but support for other versions is planned for the future.
-vCard generation is _almost_ complete, after that work will begin on parsing.
+vCard generation is complete, work is currently being done on parsing.
 
 Testing
 -------
