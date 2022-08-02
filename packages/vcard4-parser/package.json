@@ -35,7 +35,11 @@
     "build:types": "tsc --project './tsconfig.d.json'",
     "clean": "rimraf ./dist",
     "cp:types": "cp ./lib/types.d.ts ./dist/",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "lint": "eslint lib test",
+    "lint:fix": "eslint --fix lib test",
+    "sort:pkg": "sort-package-json",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@vcard/vcard4-meta": "^1.0.0-rc.4",
