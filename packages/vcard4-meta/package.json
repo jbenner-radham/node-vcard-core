@@ -42,8 +42,8 @@
     "typecheck": "tsc"
   },
   "engines": {
-    "node": ">=12",
-    "npm": ">=6"
+    "node": ">=16.6",
+    "npm": ">=8"
   },
   "publishConfig": {
     "access": "public"
