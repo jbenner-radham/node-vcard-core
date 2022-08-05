@@ -1,12 +1,8 @@
 @vcard/vcard4-generator
 =======================
-[![CI Status][BUILD BADGE]][BUILD PAGE]
+[![Build Status][BUILD BADGE]][BUILD PAGE] [![npm Version][NPM BADGE]][NPM PAGE] [![Node Version][NODE BADGE]][NODE PAGE]
 
-A library for generating [v4 vCards](https://datatracker.ietf.org/doc/html/rfc6350)
-
-Heads Up!
----------
-This is still very much a WIP project and is _**not**_ feature complete.
+A library for generating [v4 vCards](https://datatracker.ietf.org/doc/html/rfc6350).
 
 Install
 -------
@@ -16,6 +12,8 @@ npm install @vcard/vcard4-generator
 
 Usage
 -----
+
+### TypeScript
 ```ts
 import Vcard4Generator, { Vcard4GeneratorConfig } from '@vcard/vcard4-generator';
 
@@ -27,33 +25,71 @@ const config: Vcard4GeneratorConfig = {
 const vcard = new Vcard4Generator(config);
 
 vcard.toString();
-// >> BEGIN:VCARD
-// >> VERSION:4.0
-// >> EMAIL:hello@example.com
-// >> FN:Captain Awesome
-// >> URL:http://www.example.com/
-// >> END:VCARD
+// > BEGIN:VCARD
+// > VERSION:4.0
+// > EMAIL:hello@example.com
+// > FN:Captain Awesome
+// > URL:http://www.example.com/
+// > END:VCARD
 
 // Properties that can have multiple instances are represented by arrays.
 vcard.fn[0].toString();
-// >> FN:Captain Awesome
+// > FN:Captain Awesome
 
 vcard.fn[0].valueOf();
-// >> Captain Awesome
+// > Captain Awesome
 
 // New property instances can simply be pushed to the corresponding property array.
 vcard.fn.push('Alex Awesome');
 
 vcard.toString();
-// >> BEGIN:VCARD
-// >> VERSION:4.0
-// >> EMAIL:hello@example.com
-// >> FN:Captain Awesome
-// >> FN:Alex Awesome
-// >> URL:http://www.example.com/
-// >> END:VCARD
+// > BEGIN:VCARD
+// > VERSION:4.0
+// > EMAIL:hello@example.com
+// > FN:Captain Awesome
+// > FN:Alex Awesome
+// > URL:http://www.example.com/
+// > END:VCARD
 ```
 
+### JavaScript
+```js
+import Vcard4Generator from '@vcard/vcard4-generator';
+
+const config = {
+    fn: 'Captain Awesome',
+    email: 'hello@example.com',
+    url: 'http://www.example.com/'
+};
+const vcard = new Vcard4Generator(config);
+
+vcard.toString();
+// > BEGIN:VCARD
+// > VERSION:4.0
+// > EMAIL:hello@example.com
+// > FN:Captain Awesome
+// > URL:http://www.example.com/
+// > END:VCARD
+
+// Properties that can have multiple instances are represented by arrays.
+vcard.fn[0].toString();
+// > FN:Captain Awesome
+
+vcard.fn[0].valueOf();
+// > Captain Awesome
+
+// New property instances can simply be pushed to the corresponding property array.
+vcard.fn.push('Alex Awesome');
+
+vcard.toString();
+// > BEGIN:VCARD
+// > VERSION:4.0
+// > EMAIL:hello@example.com
+// > FN:Captain Awesome
+// > FN:Alex Awesome
+// > URL:http://www.example.com/
+// > END:VCARD
+```
 Building
 --------
 From the monorepo root:
@@ -500,5 +536,9 @@ License
 -------
 The MIT License (Expat). See the [license file](LICENSE) for details.
 
-[BUILD BADGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml/badge.svg
+[BUILD BADGE]: https://img.shields.io/github/workflow/status/jbenner-radham/vcardjs/CI?logo=github
 [BUILD PAGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml
+[NODE BADGE]: https://img.shields.io/node/v/@vcard/vcard4-generator?style=flat&logo=nodedotjs
+[NODE PAGE]: https://nodejs.org/
+[NPM BADGE]: https://img.shields.io/npm/v/@vcard/vcard4-generator?style=flat&logo=npm
+[NPM PAGE]: https://www.npmjs.com/package/@vcard/vcard4-generator
