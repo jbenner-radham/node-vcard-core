@@ -1,6 +1,6 @@
 @vcard/vcard4-meta
 ==================
-[![CI Status][BUILD BADGE]][BUILD PAGE]
+[![Build Status][BUILD BADGE]][BUILD PAGE] [![npm Version][NPM BADGE]][NPM PAGE] [![Node Version][NODE BADGE]][NODE PAGE]
 
 A [vCard 4](https://datatracker.ietf.org/doc/html/rfc6350) module which provides metadata about the format.
 
@@ -44,5 +44,9 @@ License
 -------
 The MIT License (Expat). See the [license file](LICENSE) for details.
 
-[BUILD BADGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml/badge.svg
+[BUILD BADGE]: https://img.shields.io/github/workflow/status/jbenner-radham/vcardjs/CI?logo=github
 [BUILD PAGE]: https://github.com/jbenner-radham/vcardjs/actions/workflows/ci.yaml
+[NODE BADGE]: https://img.shields.io/node/v/@vcard/vcard4-meta?style=flat&logo=nodedotjs
+[NODE PAGE]: https://nodejs.org/
+[NPM BADGE]: https://img.shields.io/npm/v/@vcard/vcard4-meta?style=flat&logo=npm
+[NPM PAGE]: https://www.npmjs.com/package/@vcard/vcard4-meta
