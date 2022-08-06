@@ -15,7 +15,7 @@ Usage
 ```js
 import {
     EOL, // The EOL for vCards (CRLF).
-    FOLD_CONTINUATION_CHAR, // The fold continuaion character preferred by the vCard.js suite (U+0020).
+    FOLD_CONTINUATION_CHAR, // The fold continuation character preferred by the vCard.js suite (U+0020).
     FOLD_CONTINUATION_CHARS, // Valid fold continuation characters (horizontal tab and space).
     HORIZONTAL_TAB, // (U+0009)
     MAX_OCTETS_PER_LINE, // 75
