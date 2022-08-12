@@ -4,6 +4,10 @@
 
 A library for generating [v4 vCards](https://datatracker.ietf.org/doc/html/rfc6350).
 
+Heads Up!
+---------
+This is still a WIP project and is _**not**_ feature complete. Property grouping still needs to be implemented.
+
 Install
 -------
 ```sh-session
@@ -12,6 +16,45 @@ npm install @vcard/vcard4-generator
 
 Usage
 -----
+
+### JavaScript
+```js
+import Vcard4Generator from '@vcard/vcard4-generator';
+
+const config = {
+    fn: 'Captain Awesome',
+    email: 'hello@example.com',
+    url: 'http://www.example.com/'
+};
+const vcard = new Vcard4Generator(config);
+
+vcard.toString();
+// > BEGIN:VCARD
+// > VERSION:4.0
+// > EMAIL:hello@example.com
+// > FN:Captain Awesome
+// > URL:http://www.example.com/
+// > END:VCARD
+
+// Properties that can have multiple instances are represented by arrays.
+vcard.fn[0].toString();
+// > FN:Captain Awesome
+
+vcard.fn[0].valueOf();
+// > Captain Awesome
+
+// New property instances can simply be pushed to the corresponding property array.
+vcard.fn.push('Alex Awesome');
+
+vcard.toString();
+// > BEGIN:VCARD
+// > VERSION:4.0
+// > EMAIL:hello@example.com
+// > FN:Captain Awesome
+// > FN:Alex Awesome
+// > URL:http://www.example.com/
+// > END:VCARD
+```
 
 ### TypeScript
 ```ts
@@ -52,44 +95,6 @@ vcard.toString();
 // > END:VCARD
 ```
 
-### JavaScript
-```js
-import Vcard4Generator from '@vcard/vcard4-generator';
-
-const config = {
-    fn: 'Captain Awesome',
-    email: 'hello@example.com',
-    url: 'http://www.example.com/'
-};
-const vcard = new Vcard4Generator(config);
-
-vcard.toString();
-// > BEGIN:VCARD
-// > VERSION:4.0
-// > EMAIL:hello@example.com
-// > FN:Captain Awesome
-// > URL:http://www.example.com/
-// > END:VCARD
-
-// Properties that can have multiple instances are represented by arrays.
-vcard.fn[0].toString();
-// > FN:Captain Awesome
-
-vcard.fn[0].valueOf();
-// > Captain Awesome
-
-// New property instances can simply be pushed to the corresponding property array.
-vcard.fn.push('Alex Awesome');
-
-vcard.toString();
-// > BEGIN:VCARD
-// > VERSION:4.0
-// > EMAIL:hello@example.com
-// > FN:Captain Awesome
-// > FN:Alex Awesome
-// > URL:http://www.example.com/
-// > END:VCARD
-```
 Building
 --------
 From the monorepo root:
@@ -454,6 +459,7 @@ To-Do
     - [x] `VALUE` Parameter
     - [x] `ALTID` Parameter
 - [x] Implement Parameter Value Encoding as Specified in [RFC6868](https://datatracker.ietf.org/doc/html/rfc6868)
+- [ ] Implement Property Grouping As Specified In [RFC6350 § 3.3](https://www.rfc-editor.org/rfc/rfc6350.html#section-3.3)
 
 Reference
 ---------
