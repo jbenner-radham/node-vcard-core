@@ -24,11 +24,13 @@ describe('RevProperty', () => {
             expect(rev.toString()).to.equal(`REV:${value}`);
         });
 
-        it('accepts an object argument to the constructor', () => {
+        it('correctly groups the property', () => {
+            const parameters = undefined;
             const value = '19951031T222710Z';
-            const rev = new RevProperty(value);
+            const options = { group: 1 };
+            const rev = new RevProperty(value, parameters, options);
 
-            expect(rev.toString()).to.equal(`REV:${value}`);
+            expect(rev.toString()).to.equal(`1.REV:${value}`);
         });
 
         it('accepts a "timestamp" value parameter', () => {

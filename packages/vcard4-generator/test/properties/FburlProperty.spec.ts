@@ -34,6 +34,15 @@ describe('FburlProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://www.example.com/busy/janedoe';
+            const options = { group: 1 };
+            const fburl = new FburlProperty(value, parameters, options);
+
+            expect(fburl.toString()).to.equal(`1.FBURL:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://www.example.com/busy/janedoe';

@@ -1,5 +1,6 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface DeathplaceParameters {
@@ -8,7 +9,11 @@ export interface DeathplaceParameters {
     language?: string;
 }
 
-export type DeathplacePropertyRestConfig = [value: string, parameters?: DeathplaceParameters];
+export type DeathplacePropertyRestConfig = [
+    value: string,
+    parameters?: DeathplaceParameters,
+    options?: PropertyOptions
+];
 
 export type DeathplacePropertyLike = DeathplaceProperty | DeathplacePropertyRestConfig | string;
 
@@ -39,16 +44,22 @@ export default class DeathplaceProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: DeathplaceParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: DeathplaceParameters = {}) {
+    constructor(value: string, parameters: DeathplaceParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

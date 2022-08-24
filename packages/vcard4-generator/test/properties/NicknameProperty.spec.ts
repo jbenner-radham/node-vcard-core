@@ -34,6 +34,15 @@ describe('NicknameProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = { type: 'work' as const };
+            const value = 'Boss';
+            const options = { group: 'office' };
+            const nickname = new NicknameProperty(value, parameters, options);
+
+            expect(nickname.toString()).to.equal(`OFFICE.NICKNAME;TYPE=work:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Boss';

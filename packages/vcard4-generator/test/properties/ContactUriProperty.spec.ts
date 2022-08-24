@@ -33,6 +33,15 @@ describe('ContactUriProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'mailto:contact@example.com';
+            const options = { group: 'office' };
+            const contactUri = new ContactUriProperty(value, parameters, options);
+
+            expect(contactUri.toString()).to.equal(`OFFICE.CONTACT-URI:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

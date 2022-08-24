@@ -34,6 +34,15 @@ describe('EmailProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'jqpublic@xyz.example.com';
+            const options = { group: 'office' };
+            const email = new EmailProperty(value, parameters, options);
+
+            expect(email.toString()).to.equal(`OFFICE.EMAIL:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'jqpublic@xyz.example.com';

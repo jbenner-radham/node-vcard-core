@@ -1,5 +1,6 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface XmlParameters {
@@ -7,7 +8,7 @@ export interface XmlParameters {
     altid?: number | string;
 }
 
-export type XmlPropertyRestConfig = [value: string, parameters?: XmlParameters];
+export type XmlPropertyRestConfig = [value: string, parameters?: XmlParameters, options?: PropertyOptions];
 
 export type XmlPropertyLike = XmlProperty | XmlPropertyRestConfig | string;
 
@@ -54,16 +55,22 @@ export default class XmlProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: XmlParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: XmlParameters = {}) {
+    constructor(value: string, parameters: XmlParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

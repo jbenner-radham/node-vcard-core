@@ -34,6 +34,15 @@ describe('LangProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'it';
+            const options = { group: 1 };
+            const lang = new LangProperty(value, parameters, options);
+
+            expect(lang.toString()).to.equal(`1.LANG:${value}`);
+        });
+
         it('accepts a "language-tag" value parameter', () => {
             const parameters = { value: 'language-tag' as const };
             const value = 'en';

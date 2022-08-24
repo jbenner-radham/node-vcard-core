@@ -34,6 +34,15 @@ describe('RoleProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'Project Leader';
+            const options = { group: 1 };
+            const role = new RoleProperty(value, parameters, options);
+
+            expect(role.toString()).to.equal(`1.ROLE:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Project Leader';

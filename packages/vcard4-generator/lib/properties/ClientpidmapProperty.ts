@@ -1,12 +1,17 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface ClientpidmapParameters {
     [key: string]: never;
 }
 
-export type ClientpidmapPropertyRestConfig = [value: string, parameters?: ClientpidmapParameters];
+export type ClientpidmapPropertyRestConfig = [
+    value: string,
+    parameters?: ClientpidmapParameters,
+    options?: PropertyOptions
+];
 
 export type ClientpidmapPropertyLike = ClientpidmapProperty | ClientpidmapPropertyRestConfig | string;
 
@@ -51,16 +56,22 @@ export default class ClientpidmapProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: ClientpidmapParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ClientpidmapParameters = {}) {
+    constructor(value: string, parameters: ClientpidmapParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

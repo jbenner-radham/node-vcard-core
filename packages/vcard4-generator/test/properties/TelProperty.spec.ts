@@ -34,6 +34,15 @@ describe('TelProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = '+1-555-555-5555';
+            const options = { group: 'office' };
+            const tel = new TelProperty(value, parameters, options);
+
+            expect(tel.toString()).to.equal(`OFFICE.TEL:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = '+1-555-555-5555';

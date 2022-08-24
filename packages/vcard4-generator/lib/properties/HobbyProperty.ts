@@ -1,6 +1,7 @@
-import { Cardinality, HobbyOrInterestLevel, Type, Value } from '../types';
+import type { Cardinality, Group, HobbyOrInterestLevel, PropertyOptions, Type, Value } from '../types';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidIndexParameter from '../util/is-valid-index-parameter';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
@@ -16,7 +17,7 @@ export interface HobbyParameters {
     type?: Type;
 }
 
-export type HobbyPropertyRestConfig = [value: string, parameters?: HobbyParameters];
+export type HobbyPropertyRestConfig = [value: string, parameters?: HobbyParameters, options?: PropertyOptions];
 
 export type HobbyPropertyLike = HobbyProperty | HobbyPropertyRestConfig | string;
 
@@ -60,16 +61,22 @@ export default class HobbyProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: HobbyParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: HobbyParameters = {}) {
+    constructor(value: string, parameters: HobbyParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

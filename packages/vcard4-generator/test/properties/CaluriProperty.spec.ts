@@ -34,6 +34,15 @@ describe('CaluriProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://cal.example.com/calA';
+            const options = { group: 1 };
+            const caluri = new CaluriProperty(value, parameters, options);
+
+            expect(caluri.toString()).to.equal(`1.CALURI:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://cal.example.com/calA';

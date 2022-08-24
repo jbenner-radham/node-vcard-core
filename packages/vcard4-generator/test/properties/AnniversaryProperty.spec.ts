@@ -34,6 +34,15 @@ describe('AnniversaryProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = '19960415';
+            const options = { group: 1 };
+            const anniversary = new AnniversaryProperty(value, parameters, options);
+
+            expect(anniversary.toString()).to.equal(`1.ANNIVERSARY:${value}`);
+        });
+
         it('accepts a "date-and-or-time" value parameter', () => {
             const parameters = { value: 'date-and-or-time' as const };
             const value = '19960415';

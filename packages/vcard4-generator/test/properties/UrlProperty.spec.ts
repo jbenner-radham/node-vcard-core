@@ -34,6 +34,15 @@ describe('UrlProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://company.example.com/';
+            const options = { group: 'office' };
+            const url = new UrlProperty(value, parameters, options);
+
+            expect(url.toString()).to.equal(`OFFICE.URL:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://example.org/restaurant.french/~chezchic.html';

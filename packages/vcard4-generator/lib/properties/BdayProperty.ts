@@ -1,9 +1,10 @@
-import { Calscale, Cardinality, Value } from '../types';
+import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types';
 import {
     getInvalidCalscaleValueParameterMessage,
     getInvalidLanguageValueParameterMessage
 } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface BdayParameters {
@@ -13,7 +14,7 @@ export interface BdayParameters {
     language?: string; // For `text` type only!
 }
 
-export type BdayPropertyRestConfig = [value: string, parameters?: BdayParameters];
+export type BdayPropertyRestConfig = [value: string, parameters?: BdayParameters, options?: PropertyOptions];
 
 /** @todo Add Date type support. */
 export type BdayPropertyLike = BdayProperty | BdayPropertyRestConfig | string;
@@ -52,18 +53,24 @@ export default class BdayProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'date-and-or-time';
 
+    group: Group;
+
     parameters: BdayParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: BdayParameters = {}) {
+    constructor(value: string, parameters: BdayParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         BdayProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

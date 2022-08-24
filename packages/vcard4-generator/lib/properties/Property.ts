@@ -8,6 +8,8 @@ import kebabCase from 'lodash.kebabcase';
 export default abstract class Property {
     abstract valueOf(): unknown;
 
+    group: unknown;
+
     parameters: unknown;
 
     get hasParameters(): boolean {
@@ -45,10 +47,11 @@ export default abstract class Property {
     }
 
     toString(): string {
+        const group = this.group ? `${this.group}.`.toUpperCase() : '';
         const name = kebabCase(this.constructor.name.replace(/Property$/, '')).toUpperCase();
         const parameters = this.getParametersString();
         const value = this.getEscapedValueString();
 
-        return foldLine(`${name}${parameters}:${value}`);
+        return foldLine(`${group}${name}${parameters}:${value}`);
     }
 };

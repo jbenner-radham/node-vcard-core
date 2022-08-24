@@ -1,12 +1,13 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface VersionParameters {
     value?: 'text';
 }
 
-export type  VersionPropertyRestConfig = [value: string, parameters?: VersionParameters];
+export type VersionPropertyRestConfig = [value: string, parameters?: VersionParameters, options?: PropertyOptions];
 
 export type VersionPropertyLike = VersionProperty | VersionPropertyRestConfig | string;
 
@@ -38,14 +39,22 @@ export default class VersionProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
+    parameters: VersionParameters = {};
+
     [VALUE]: string;
 
-    constructor(value = '4.0', parameters: VersionParameters = {}) {
+    constructor(value = '4.0', parameters: VersionParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

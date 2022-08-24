@@ -35,6 +35,15 @@ describe('PhotoProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://www.example.com/pub/photos/jqpublic.gif';
+            const options = { group: 1 };
+            const photo = new PhotoProperty(value, parameters, options);
+
+            expect(photo.toString()).to.equal(`1.PHOTO:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://www.example.com/pub/photos/jqpublic.gif';

@@ -34,6 +34,15 @@ describe('CaladruriProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://example.com/calendar/jdoe';
+            const options = { group: 1 };
+            const caladruri = new CaladruriProperty(value, parameters, options);
+
+            expect(caladruri.toString()).to.equal(`1.CALADRURI:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://example.com/calendar/jdoe';

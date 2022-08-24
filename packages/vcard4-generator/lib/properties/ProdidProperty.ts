@@ -1,12 +1,13 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface ProdidParameters {
     value?: 'text';
 }
 
-export type ProdidPropertyRestConfig = [value: string, parameters?: ProdidParameters];
+export type ProdidPropertyRestConfig = [value: string, parameters?: ProdidParameters, options?: PropertyOptions];
 
 export type ProdidPropertyLike = ProdidProperty | ProdidPropertyRestConfig | string;
 
@@ -37,16 +38,22 @@ export default class ProdidProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: ProdidParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ProdidParameters = {}) {
+    constructor(value: string, parameters: ProdidParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

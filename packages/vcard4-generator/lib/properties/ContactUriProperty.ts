@@ -1,6 +1,7 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -9,7 +10,11 @@ export interface ContactUriParameters {
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
 }
 
-export type ContactUriPropertyRestConfig = [value: string, parameters?: ContactUriParameters];
+export type ContactUriPropertyRestConfig = [
+    value: string,
+    parameters?: ContactUriParameters,
+    options?: PropertyOptions
+];
 
 export type ContactUriPropertyLike = ContactUriProperty | ContactUriPropertyRestConfig | string;
 
@@ -51,18 +56,24 @@ export default class ContactUriProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: ContactUriParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ContactUriParameters = {}) {
+    constructor(value: string, parameters: ContactUriParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         ContactUriProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

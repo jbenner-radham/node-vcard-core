@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -13,7 +14,7 @@ export interface CaluriParameters {
     altid?: number | string;
 }
 
-export type CaluriPropertyRestConfig = [value: string, parameters?: CaluriParameters];
+export type CaluriPropertyRestConfig = [value: string, parameters?: CaluriParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support. */
 export type CaluriPropertyLike = CaluriProperty | CaluriPropertyRestConfig | string;
@@ -49,18 +50,24 @@ export default class CaluriProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: CaluriParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: CaluriParameters = {}) {
+    constructor(value: string, parameters: CaluriParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         CaluriProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

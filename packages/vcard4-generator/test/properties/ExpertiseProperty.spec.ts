@@ -33,6 +33,15 @@ describe('ExpertiseProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = { level: 'expert' as const };
+            const value = 'chemistry';
+            const options = { group: 'office' };
+            const expertise = new ExpertiseProperty(value, parameters, options);
+
+            expect(expertise.toString()).to.equal(`OFFICE.EXPERTISE;LEVEL=expert:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

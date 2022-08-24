@@ -32,6 +32,15 @@ describe('TitleProperty', () => {
             expect(title.toString()).to.equal(`TITLE;PREF=1:${value}`);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'Research Scientist';
+            const options = { group: 3 };
+            const title = new TitleProperty(value, parameters, options);
+
+            expect(title.toString()).to.equal(`3.TITLE:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Research Scientist';

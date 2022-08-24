@@ -34,6 +34,15 @@ describe('ImppProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'xmpp:alice@example.com';
+            const options = { group: 1 };
+            const impp = new ImppProperty(value, parameters, options);
+
+            expect(impp.toString()).to.equal(`1.IMPP:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'xmpp:alice@example.com';

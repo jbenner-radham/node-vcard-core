@@ -23,6 +23,15 @@ describe('KindProperty', () => {
             expect(kind.toString()).to.equal('KIND:individual');
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'application';
+            const options = { group: 1 };
+            const kind = new KindProperty(value, parameters, options);
+
+            expect(kind.toString()).to.equal(`1.KIND:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'application';
