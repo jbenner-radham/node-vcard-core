@@ -1,5 +1,6 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 import isString from '../util/is-string';
 
@@ -10,7 +11,7 @@ export interface NParameters {
     altid?: number | string;
 }
 
-export type NPropertyRestConfig = [value: string, parameters?: NParameters];
+export type NPropertyRestConfig = [value: string, parameters?: NParameters, options?: PropertyOptions];
 
 export type NPropertyLike = NProperty | NPropertyRestConfig | string;
 
@@ -53,6 +54,8 @@ export default class NProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: NParameters = {};
 
     [VALUE]: string;
@@ -87,14 +90,18 @@ export default class NProperty extends Property {
         return honorificSuffix;
     }
 
-    constructor(value: string, parameters: NParameters = {}) {
+    constructor(value: string, parameters: NParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         this.validate(value);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

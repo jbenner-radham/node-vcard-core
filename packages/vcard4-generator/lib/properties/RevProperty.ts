@@ -1,12 +1,13 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface RevParameters {
     value?: 'timestamp';
 }
 
-export type RevPropertyRestConfig = [value: string, parameters?: RevParameters];
+export type RevPropertyRestConfig = [value: string, parameters?: RevParameters, options?: PropertyOptions];
 
 /** @todo Add Date type support. */
 export type RevPropertyLike = RevProperty | RevPropertyRestConfig | string;
@@ -35,16 +36,22 @@ export default class RevProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'timestamp';
 
+    group: Group;
+
     parameters: RevParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: RevParameters = {}) {
+    constructor(value: string, parameters: RevParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

@@ -1,6 +1,7 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -12,7 +13,7 @@ export interface SourceParameters {
     mediatype?: string;
 }
 
-export type SourcePropertyRestConfig = [value: string, parameters?: SourceParameters];
+export type SourcePropertyRestConfig = [value: string, parameters?: SourceParameters, options?: PropertyOptions];
 
 /** Add URL type support? */
 export type SourcePropertyLike = SourceProperty | SourcePropertyRestConfig | string;
@@ -53,18 +54,24 @@ export default class SourceProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: SourceParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: SourceParameters = {}) {
+    constructor(value: string, parameters: SourceParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         SourceProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

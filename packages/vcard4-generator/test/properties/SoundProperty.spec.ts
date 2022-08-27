@@ -35,6 +35,15 @@ describe('SoundProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
+            const options = { group: 1 };
+            const sound = new SoundProperty(value, parameters, options);
+
+            expect(sound.toString()).to.equal(`1.SOUND:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';

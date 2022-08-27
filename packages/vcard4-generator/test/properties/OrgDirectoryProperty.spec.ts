@@ -33,6 +33,15 @@ describe('OrgDirectoryProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://directory.mycompany.example.com';
+            const options = { group: 5 };
+            const orgDirectory = new OrgDirectoryProperty(value, parameters, options);
+
+            expect(orgDirectory.toString()).to.equal(`5.ORG-DIRECTORY:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

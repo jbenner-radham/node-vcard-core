@@ -1,6 +1,7 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -12,7 +13,7 @@ export interface MemberParameters {
     mediatype?: string;
 }
 
-export type MemberPropertyRestConfig = [value: string, parameters?: MemberParameters];
+export type MemberPropertyRestConfig = [value: string, parameters?: MemberParameters, options?: PropertyOptions];
 
 export type MemberPropertyLike = MemberProperty | MemberPropertyRestConfig | string;
 
@@ -69,18 +70,24 @@ export default class MemberProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: MemberParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: MemberParameters = {}) {
+    constructor(value: string, parameters: MemberParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         MemberProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

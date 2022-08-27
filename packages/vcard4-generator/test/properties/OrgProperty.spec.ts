@@ -35,6 +35,16 @@ describe('OrgProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'ABC, Inc.;North American Division;Marketing';
+            const escapedValue = 'ABC\\, Inc.;North American Division;Marketing';
+            const options = { group: 5 };
+            const org = new OrgProperty(value, parameters, options);
+
+            expect(org.toString()).to.equal(`5.ORG:${escapedValue}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'ABC, Inc.;North American Division;Marketing';

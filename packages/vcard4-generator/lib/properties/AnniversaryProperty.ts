@@ -1,6 +1,7 @@
-import { Calscale, Cardinality, Value } from '../types';
+import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types';
 import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface AnniversaryParameters {
@@ -9,7 +10,11 @@ export interface AnniversaryParameters {
     calscale?: Calscale; // For `date-and-or-time` type only!
 }
 
-export type AnniversaryPropertyRestConfig = [value: string, parameters?: AnniversaryParameters];
+export type AnniversaryPropertyRestConfig = [
+    value: string,
+    parameters?: AnniversaryParameters,
+    options?: PropertyOptions
+];
 
 /** @todo Add Date type support. */
 export type AnniversaryPropertyLike = AnniversaryProperty | AnniversaryPropertyRestConfig | string;
@@ -43,18 +48,24 @@ export default class AnniversaryProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'date-and-or-time';
 
+    group: Group;
+
     parameters: AnniversaryParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: AnniversaryParameters = {}) {
+    constructor(value: string, parameters: AnniversaryParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         AnniversaryProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

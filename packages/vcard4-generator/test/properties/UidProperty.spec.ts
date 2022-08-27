@@ -24,13 +24,13 @@ describe('UidProperty', () => {
             expect(uid.toString()).to.equal(`UID:${value}`);
         });
 
-        it('accepts an object argument to the constructor', () => {
+        it('correctly groups the property', () => {
+            const parameters = undefined;
             const value = 'urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
-            const uid = new UidProperty(value);
-            const actual = uid.toString();
-            const expected = 'UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
+            const options = { group: 3 };
+            const uid = new UidProperty(value, parameters, options);
 
-            expect(actual).to.equal(expected);
+            expect(uid.toString()).to.equal(`3.UID:${value}`);
         });
 
         it('accepts a "uri" value parameter', () => {
@@ -43,7 +43,7 @@ describe('UidProperty', () => {
 
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
-            const value = '???'; // Need to find formal example to test.
+            const value = '???'; // TODO: Need to find formal example to test.
             const uid = new UidProperty(value, parameters);
 
             expect(uid.toString()).to.equal(`UID;VALUE=text:${value}`);

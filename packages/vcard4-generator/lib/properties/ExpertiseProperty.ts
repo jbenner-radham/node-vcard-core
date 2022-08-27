@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 import isValidIndexParameter from '../util/is-valid-index-parameter';
@@ -16,7 +17,7 @@ export interface ExpertiseParameters {
     type?: Type;
 }
 
-export type ExpertisePropertyRestConfig = [value: string, parameters?: ExpertiseParameters];
+export type ExpertisePropertyRestConfig = [value: string, parameters?: ExpertiseParameters, options?: PropertyOptions];
 
 export type ExpertisePropertyLike = ExpertiseProperty | ExpertisePropertyRestConfig | string;
 
@@ -51,18 +52,24 @@ export default class ExpertiseProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: ExpertiseParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ExpertiseParameters = {}) {
+    constructor(value: string, parameters: ExpertiseParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         ExpertiseProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

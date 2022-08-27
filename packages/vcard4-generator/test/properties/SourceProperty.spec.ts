@@ -39,6 +39,16 @@ describe('SourceProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
+            const escapedValue = 'ldap://ldap.example.com/cn=Babs%20Jensen\\,%20o=Babsco\\,%20c=US';
+            const options = { group: 1 };
+            const source = new SourceProperty(value, parameters, options);
+
+            expect(source.toString()).to.equal(`1.SOURCE:${escapedValue}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';

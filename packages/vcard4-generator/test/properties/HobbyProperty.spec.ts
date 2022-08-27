@@ -33,6 +33,15 @@ describe('HobbyProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'reading';
+            const options = { group: 1 };
+            const hobby = new HobbyProperty(value, parameters, options);
+
+            expect(hobby.toString()).to.equal(`1.HOBBY:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

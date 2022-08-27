@@ -186,6 +186,15 @@ describe('AdrProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+            const options = { group: 'office' };
+            const adr = new AdrProperty(value, parameters, options);
+
+            expect(adr.toString()).to.equal(`OFFICE.ADR:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';

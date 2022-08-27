@@ -33,6 +33,15 @@ describe('DeathdateProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'circa 1800';
+            const options = { group: 1 };
+            const deathdate = new DeathdateProperty(value, parameters, options);
+
+            expect(deathdate.toString()).to.equal(`1.DEATHDATE:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

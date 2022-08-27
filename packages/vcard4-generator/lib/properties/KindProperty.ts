@@ -1,5 +1,6 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
@@ -8,7 +9,7 @@ export interface KindParameters {
     value?: 'text';
 }
 
-export type KindPropertyRestConfig = [value: Kind, parameters?: KindParameters];
+export type KindPropertyRestConfig = [value: Kind, parameters?: KindParameters, options?: PropertyOptions];
 
 export type KindPropertyLike = KindProperty | KindPropertyRestConfig | Kind;
 
@@ -142,16 +143,22 @@ export default class KindProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: KindParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: Kind, parameters: KindParameters = {}) {
+    constructor(value: Kind, parameters: KindParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

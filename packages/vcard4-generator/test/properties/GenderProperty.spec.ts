@@ -35,6 +35,15 @@ describe('GenderProperty', () => {
             expect(gender.toString()).to.equal('GENDER:O;intersex');
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'O;intersex';
+            const options = { group: 1 };
+            const gender = new GenderProperty(value, parameters, options);
+
+            expect(gender.toString()).to.equal(`1.GENDER:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'O;intersex';

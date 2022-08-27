@@ -24,13 +24,13 @@ describe('ProdidProperty', () => {
             expect(prodid.toString()).to.equal(`PRODID:${value}`);
         });
 
-        it('accepts an object argument to the constructor', () => {
+        it('correctly groups the property', () => {
+            const parameters = undefined;
             const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
-            const prodid = new ProdidProperty(value);
-            const actual = prodid.toString();
-            const expected = `PRODID:${value}`;
+            const options = { group: 1 };
+            const prodid = new ProdidProperty(value, parameters, options);
 
-            expect(actual).to.equal(expected);
+            expect(prodid.toString()).to.equal(`1.PRODID:${value}`);
         });
 
         it('accepts a "text" value parameter', () => {

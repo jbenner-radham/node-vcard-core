@@ -32,6 +32,15 @@ describe('ClientpidmapProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = '1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b';
+            const options = { group: 1 };
+            const clientpidmap = new ClientpidmapProperty(value, parameters, options);
+
+            expect(clientpidmap.toString()).to.equal(`1.CLIENTPIDMAP:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

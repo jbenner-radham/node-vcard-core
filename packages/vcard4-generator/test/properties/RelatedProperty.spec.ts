@@ -36,6 +36,15 @@ describe('RelatedProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://example.com/directory/jdoe.vcf';
+            const options = { group: 1 };
+            const related = new RelatedProperty(value, parameters, options);
+
+            expect(related.toString()).to.equal(`1.RELATED:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { type: 'contact' as const, value: 'uri' as const };
             const value = 'http://example.com/directory/jdoe.vcf';

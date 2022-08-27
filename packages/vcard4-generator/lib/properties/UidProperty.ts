@@ -1,12 +1,13 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface UidParameters {
     value?: 'uri' | 'text';
 }
 
-export type UidPropertyRestConfig = [value: string, parameters?: UidParameters];
+export type UidPropertyRestConfig = [value: string, parameters?: UidParameters, options?: PropertyOptions];
 
 export type UidPropertyLike = UidProperty | UidPropertyRestConfig | string;
 
@@ -47,16 +48,22 @@ export default class UidProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: UidParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: UidParameters = {}) {
+    constructor(value: string, parameters: UidParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

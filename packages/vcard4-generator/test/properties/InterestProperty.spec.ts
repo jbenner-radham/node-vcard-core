@@ -33,6 +33,15 @@ describe('InterestProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'r&b music';
+            const options = { group: 1 };
+            const interest = new InterestProperty(value, parameters, options);
+
+            expect(interest.toString()).to.equal(`1.INTEREST:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

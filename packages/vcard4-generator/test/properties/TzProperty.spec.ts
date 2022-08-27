@@ -34,6 +34,15 @@ describe('TzProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'Raleigh/North America';
+            const options = { group: 3 };
+            const tz = new TzProperty(value, parameters, options);
+
+            expect(tz.toString()).to.equal(`3.TZ:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Raleigh/North America';

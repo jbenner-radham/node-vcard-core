@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -13,7 +14,7 @@ export interface GeoParameters {
     altid?: number | string;
 }
 
-export type GeoPropertyRestConfig = [value: string, parameters?: GeoParameters];
+export type GeoPropertyRestConfig = [value: string, parameters?: GeoParameters, options?: PropertyOptions];
 
 export type GeoPropertyLike = GeoProperty | GeoPropertyRestConfig | string;
 
@@ -43,18 +44,24 @@ export default class GeoProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: GeoParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: GeoParameters = {}) {
+    constructor(value: string, parameters: GeoParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         GeoProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

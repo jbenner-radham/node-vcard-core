@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -14,7 +15,7 @@ export interface OrgParameters {
     type?: Type;
 }
 
-export type OrgPropertyRestConfig = [value: string, parameters?: OrgParameters];
+export type OrgPropertyRestConfig = [value: string, parameters?: OrgParameters, options?: PropertyOptions];
 
 export type OrgPropertyLike = OrgProperty | OrgPropertyRestConfig | string;
 
@@ -52,18 +53,24 @@ export default class OrgProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: OrgParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: OrgParameters = {}) {
+    constructor(value: string, parameters: OrgParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         OrgProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

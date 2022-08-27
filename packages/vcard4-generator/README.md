@@ -459,7 +459,7 @@ To-Do
     - [x] `VALUE` Parameter
     - [x] `ALTID` Parameter
 - [x] Implement Parameter Value Encoding as Specified in [RFC6868](https://datatracker.ietf.org/doc/html/rfc6868)
-- [ ] Implement Property Grouping As Specified In [RFC6350 § 3.3](https://www.rfc-editor.org/rfc/rfc6350.html#section-3.3)
+- [x] Implement Property Grouping As Specified In [RFC6350 § 3.3](https://www.rfc-editor.org/rfc/rfc6350.html#section-3.3)
 
 Reference
 ---------

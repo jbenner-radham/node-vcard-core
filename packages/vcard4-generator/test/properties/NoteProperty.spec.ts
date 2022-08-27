@@ -34,6 +34,15 @@ describe('NoteProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'This is a note...';
+            const options = { group: 1 };
+            const note = new NoteProperty(value, parameters, options);
+
+            expect(note.toString()).to.equal(`1.NOTE:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'This is a note...';

@@ -1,5 +1,6 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import Property from './Property';
 
 export interface BirthplaceParameters {
@@ -8,7 +9,11 @@ export interface BirthplaceParameters {
     language?: string;
 }
 
-export type BirthplacePropertyRestConfig = [value: string, parameters?: BirthplaceParameters];
+export type BirthplacePropertyRestConfig = [
+    value: string,
+    parameters?: BirthplaceParameters,
+    options?: PropertyOptions
+];
 
 export type BirthplacePropertyLike = BirthplaceProperty | BirthplacePropertyRestConfig | string;
 
@@ -39,16 +44,22 @@ export default class BirthplaceProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: BirthplaceParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: BirthplaceParameters = {}) {
+    constructor(value: string, parameters: BirthplaceParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

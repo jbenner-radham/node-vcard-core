@@ -52,6 +52,23 @@ describe('XmlProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = [
+                '<a xmlns="http://www.w3.org/1999/xhtml"',
+                '   href="http://www.example.com">My web page!</a>'
+            ].join('\n');
+            const options = { group: 1 };
+            const xml = new XmlProperty(value, parameters, options);
+            const actual = xml.toString();
+            const expected = [
+                '1.XML:<a xmlns="http://www.w3.org/1999/xhtml"\\n   href="http://www.example.',
+                ' com">My web page!</a>'
+            ].join(EOL);
+
+            expect(actual).to.equal(expected);
+        });
     });
 
     describe('#valueOf()', () => {

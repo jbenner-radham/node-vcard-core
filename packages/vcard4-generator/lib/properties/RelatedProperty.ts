@@ -1,10 +1,11 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import {
     getInvalidLanguageValueParameterMessage,
     getInvalidMediatypeValueParameterMessage,
     getInvalidPrefParameterMessage
 } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -39,7 +40,7 @@ export interface RelatedParameters {
     type?: RelatedType;
 }
 
-export type RelatedPropertyRestConfig = [value: string, parameters?: RelatedParameters];
+export type RelatedPropertyRestConfig = [value: string, parameters?: RelatedParameters, options?: PropertyOptions];
 
 export type RelatedPropertyLike = RelatedProperty | RelatedPropertyRestConfig | string;
 
@@ -100,18 +101,24 @@ export default class RelatedProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: RelatedParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: RelatedParameters = {}) {
+    constructor(value: string, parameters: RelatedParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         RelatedProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

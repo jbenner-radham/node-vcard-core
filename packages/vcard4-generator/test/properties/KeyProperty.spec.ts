@@ -34,6 +34,15 @@ describe('KeyProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://www.example.com/keys/jdoe.cer';
+            const options = { group: 1 };
+            const key = new KeyProperty(value, parameters, options);
+
+            expect(key.toString()).to.equal(`1.KEY:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'http://www.example.com/keys/jdoe.cer';

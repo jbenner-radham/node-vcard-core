@@ -34,9 +34,18 @@ describe('CategoriesProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'TRAVEL AGENT';
+            const options = { group: 1 };
+            const categories = new CategoriesProperty(value, parameters, options);
+
+            expect(categories.toString()).to.equal(`1.CATEGORIES:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
-            const value = 'http://cal.example.com/calA';
+            const value = 'TRAVEL AGENT';
             const categories = new CategoriesProperty(value, parameters);
 
             expect(categories.toString()).to.equal(`CATEGORIES;VALUE=text:${value}`);

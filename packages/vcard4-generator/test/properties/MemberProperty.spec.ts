@@ -34,6 +34,15 @@ describe('MemberProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'mailto:subscriber1@example.com';
+            const options = { group: 1 };
+            const member = new MemberProperty(value, parameters, options);
+
+            expect(member.toString()).to.equal(`1.MEMBER:${value}`);
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'mailto:subscriber1@example.com';

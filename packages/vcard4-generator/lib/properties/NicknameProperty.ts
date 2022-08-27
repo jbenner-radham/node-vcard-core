@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -13,7 +14,7 @@ export interface NicknameParameters {
     pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
 }
 
-export type NicknamePropertyRestConfig = [value: string, parameters?: NicknameParameters];
+export type NicknamePropertyRestConfig = [value: string, parameters?: NicknameParameters, options?: PropertyOptions];
 
 export type NicknamePropertyLike = NicknameProperty | NicknamePropertyRestConfig | string;
 
@@ -45,18 +46,24 @@ export default class NicknameProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: NicknameParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: NicknameParameters = {}) {
+    constructor(value: string, parameters: NicknameParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         NicknameProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

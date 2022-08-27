@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -14,7 +15,7 @@ export interface LogoParameters {
     altid?: number | string;
 }
 
-export type LogoPropertyRestConfig = [value: string, parameters?: LogoParameters];
+export type LogoPropertyRestConfig = [value: string, parameters?: LogoParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support. */
 export type LogoPropertyLike = LogoProperty | LogoPropertyRestConfig | string;
@@ -47,18 +48,24 @@ export default class LogoProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: LogoParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: LogoParameters = {}) {
+    constructor(value: string, parameters: LogoParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         LogoProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

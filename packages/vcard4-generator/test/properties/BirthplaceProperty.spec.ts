@@ -33,6 +33,15 @@ describe('BirthplaceProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://example.com/hospitals/babiesrus.vcf';
+            const options = { group: 1 };
+            const birthplace = new BirthplaceProperty(value, parameters, options);
+
+            expect(birthplace.toString()).to.equal(`1.BIRTHPLACE:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

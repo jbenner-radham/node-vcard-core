@@ -104,6 +104,15 @@ describe('NProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'Public;John;Quinlan;Mr.;Esq.';
+            const options = { group: 1 };
+            const n = new NProperty(value, parameters, options);
+
+            expect(n.toString()).to.equal(`1.N:${value}`);
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Public;John;Quinlan;Mr.;Esq.';

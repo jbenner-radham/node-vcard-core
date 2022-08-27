@@ -35,6 +35,15 @@ describe('FnProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'Mr. John Q. Public, Esq.';
+            const options = { group: 1 };
+            const fn = new FnProperty(value, parameters, options);
+
+            expect(fn.toString()).to.equal('1.FN:Mr. John Q. Public\\, Esq.');
+        });
+
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
             const value = 'Mr. John Q. Public, Esq.';

@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidIndexParameter from '../util/is-valid-index-parameter';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
@@ -14,7 +15,11 @@ export interface OrgDirectoryParameters {
     type?: Type;
 }
 
-export type OrgDirectoryPropertyRestConfig = [value: string, parameters?: OrgDirectoryParameters];
+export type OrgDirectoryPropertyRestConfig = [
+    value: string,
+    parameters?: OrgDirectoryParameters,
+    options?: PropertyOptions
+];
 
 export type OrgDirectoryPropertyLike = OrgDirectoryProperty | OrgDirectoryPropertyRestConfig | string;
 
@@ -61,16 +66,22 @@ export default class OrgDirectoryProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: OrgDirectoryParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: OrgDirectoryParameters = {}) {
+    constructor(value: string, parameters: OrgDirectoryParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

@@ -36,6 +36,15 @@ describe('GeoProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'geo:37.386013,-122.082932';
+            const options = { group: 'office' };
+            const geo = new GeoProperty(value, parameters, options);
+
+            expect(geo.toString()).to.equal('OFFICE.GEO:geo:37.386013\\,-122.082932');
+        });
+
         it('accepts a "uri" value parameter', () => {
             const parameters = { value: 'uri' as const };
             const value = 'geo:37.386013,-122.082932';

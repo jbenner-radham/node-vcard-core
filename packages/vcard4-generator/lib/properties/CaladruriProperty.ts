@@ -1,6 +1,7 @@
-import { Cardinality, Type, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
 import { getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 
@@ -13,7 +14,7 @@ export interface CaladruriParameters {
     altid?: number | string;
 }
 
-export type CaladruriPropertyRestConfig = [value: string, parameters?: CaladruriParameters];
+export type CaladruriPropertyRestConfig = [value: string, parameters?: CaladruriParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support? */
 export type CaladruriPropertyLike = CaladruriProperty | CaladruriPropertyRestConfig | string;
@@ -47,18 +48,24 @@ export default class CaladruriProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'uri';
 
+    group: Group;
+
     parameters: CaladruriParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: CaladruriParameters = {}) {
+    constructor(value: string, parameters: CaladruriParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         CaladruriProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

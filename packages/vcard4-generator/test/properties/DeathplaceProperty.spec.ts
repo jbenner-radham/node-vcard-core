@@ -42,6 +42,15 @@ describe('DeathplaceProperty', () => {
 
             expect(actual).to.equal(expected);
         });
+
+        it('correctly groups the property', () => {
+            const parameters = undefined;
+            const value = 'http://example.com/ships/titanic.vcf';
+            const options = { group: 1 };
+            const deathplace = new DeathplaceProperty(value, parameters, options);
+
+            expect(deathplace.toString()).to.equal(`1.DEATHPLACE:${value}`);
+        });
     });
 
     describe('#valueOf()', () => {

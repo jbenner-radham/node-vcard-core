@@ -1,6 +1,7 @@
-import { Cardinality, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
 import isString from '../util/is-string';
+import isValidGroup from '../util/is-valid-group';
 import isValidPrefParameter from '../util/is-valid-pref-parameter';
 import Property from './Property';
 import { Type } from '../types';
@@ -16,7 +17,7 @@ export interface TelParameters {
     altid?: number | string;
 }
 
-export type TelPropertyRestConfig = [value: string, parameters?: TelParameters];
+export type TelPropertyRestConfig = [value: string, parameters?: TelParameters, options?: PropertyOptions];
 
 export type TelPropertyLike = TelProperty | TelPropertyRestConfig | string;
 
@@ -96,18 +97,24 @@ export default class TelProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    group: Group;
+
     parameters: TelParameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: TelParameters = {}) {
+    constructor(value: string, parameters: TelParameters = {}, { group = '' }: PropertyOptions = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        if (!isValidGroup(group))
+            throw new TypeError(`The group "${group}" is not a string or integer`);
+
         TelProperty.validateParameters(parameters);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }

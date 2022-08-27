@@ -1,5 +1,6 @@
 export type Calscale = 'gregorian';
 export type Cardinality = '1' | '*1' | '1*' | '*';
+export type Group = number | string;
 export type HobbyOrInterestLevel = 'low' | 'medium' | 'high';
 export type Type = 'home' | 'work';
 export type Value = 'boolean'
@@ -14,3 +15,7 @@ export type Value = 'boolean'
     | 'timestamp'
     | 'uri'
     | 'utc-offset';
+
+export interface PropertyOptions {
+    group?: Group;
+}
