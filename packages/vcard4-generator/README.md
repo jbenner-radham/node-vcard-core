@@ -113,7 +113,7 @@ npm test
 
 To-Do
 -----
-- [ ] Properties
+- [x] Properties
   - [x] `ADR`
     - [x] Line Folding
     - [x] Value Escaping
