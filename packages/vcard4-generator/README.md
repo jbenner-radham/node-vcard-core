@@ -6,7 +6,8 @@ A library for generating [v4 vCards](https://datatracker.ietf.org/doc/html/rfc63
 
 Heads Up!
 ---------
-This is still a WIP project and is _**not**_ feature complete. Property grouping still needs to be implemented.
+This library is fully functional but is still a work in progress and features are still being added. API stability
+across versions is not yet guaranteed.
 
 Install
 -------
