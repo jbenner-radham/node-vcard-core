@@ -16,12 +16,14 @@
     "url": "git+https://github.com/jbenner-radham/vcardjs.git"
   },
   "license": "MIT",
-  "author": "James Benner <james.benner@gmail.com> (http://www.jamesbenner.com/)",
+  "author": "James Benner <james.benner@gmail.com> (https://www.jamesbenner.com/)",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "prebuild": "npm run rm:tsbuildinfo",
     "build": "lerna run build",
     "clean": "lerna run clean",
-    "postinstall": "lerna bootstrap",
     "prepare": "husky install",
     "rm:tsbuildinfo": "rimraf tsconfig.tsbuildinfo && rimraf packages/*/tsconfig.d.tsbuildinfo",
     "test": "mocha",
@@ -44,7 +46,7 @@
     "eslint": "^8.3.0",
     "eslint-plugin-no-only-tests": "^2.6.0",
     "husky": "^7.0.0",
-    "lerna": "^4.0.0",
+    "lerna": "^8.1.8",
     "lint-staged": "^12.3.5",
     "mocha": "^9.2.2",
     "rimraf": "^3.0.2",
