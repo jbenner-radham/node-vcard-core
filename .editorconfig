@@ -28,6 +28,6 @@ max_line_length = 75
 indent_size = 2
 indent_style = space
 
-[package.json]
+[*.json]
 indent_size = 2
 indent_style = space
