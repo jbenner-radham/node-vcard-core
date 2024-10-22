@@ -1,27 +1,5 @@
 const chai = require('chai');
 
-// function chaiClass(_, utils) {
-//     // Allows you to make assertions like: `expect(value).to.be.a.class`
-//     utils.addProperty(chai.Assertion.prototype, 'class', function () {
-//         this.assert(
-//             this._obj.prototype.constructor.toString().startsWith('class') === true,
-//             'expected #{this} to be a class',
-//             'expected #{this} to not be a class'
-//         );
-//     });
-// }
-
-// function chaiClass() {
-//     // Allows you to make assertions like: `expect(value).to.be.a.class`
-//     chai.Assertion.addProperty('class', function () {
-//         this.assert(
-//             this._obj?.prototype?.constructor?.toString()?.startsWith('class') === true,
-//             'expected #{this} to be a class',
-//             'expected #{this} to not be a class'
-//         );
-//     });
-// }
-
 function chaiClass() {
     // Allows you to make assertions like: `expect(value).to.be.a('class')`
     chai.Assertion.overwriteChainableMethod(
