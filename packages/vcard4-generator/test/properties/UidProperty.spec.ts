@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import UidProperty, { UidPropertyRestConfig } from '../../lib/properties/UidProperty';
 
 describe('UidProperty', () => {
-    it('is a function class', () => {
-        expect(UidProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(UidProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

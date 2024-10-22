@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import PhotoProperty, { PhotoPropertyRestConfig } from '../../lib/properties/PhotoProperty';
 
 describe('PhotoProperty', () => {
-    it('is a function class', () => {
-        expect(PhotoProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(PhotoProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

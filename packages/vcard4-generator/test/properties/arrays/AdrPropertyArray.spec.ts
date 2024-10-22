@@ -3,8 +3,8 @@ import AdrProperty from '../../../lib/properties/AdrProperty';
 import AdrPropertyArray from '../../../lib/properties/arrays/AdrPropertyArray';
 
 describe('AdrPropertyArray', () => {
-    it('is a function class', () => {
-        expect(AdrPropertyArray).to.be.a('function');
+    it('is a class', () => {
+        expect(AdrPropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {

@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import XmlProperty, { XmlPropertyRestConfig } from '../../lib/properties/XmlProperty';
 
 describe('XmlProperty', () => {
-    it('is a function class', () => {
-        expect(XmlProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(XmlProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

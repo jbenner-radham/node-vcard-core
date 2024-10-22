@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import CaladruriProperty, { CaladruriPropertyRestConfig } from '../../lib/properties/CaladruriProperty';
 
 describe('CaladruriProperty', () => {
-    it('is a function class', () => {
-        expect(CaladruriProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(CaladruriProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

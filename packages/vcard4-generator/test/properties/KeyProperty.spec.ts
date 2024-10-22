@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import KeyProperty, { KeyPropertyRestConfig } from '../../lib/properties/KeyProperty';
 
 describe('KeyProperty', () => {
-    it('is a function class', () => {
-        expect(KeyProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(KeyProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

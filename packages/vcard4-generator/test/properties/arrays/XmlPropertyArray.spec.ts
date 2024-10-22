@@ -3,8 +3,8 @@ import XmlProperty from '../../../lib/properties/XmlProperty';
 import XmlPropertyArray from '../../../lib/properties/arrays/XmlPropertyArray';
 
 describe('XmlPropertyArray', () => {
-    it('is a function class', () => {
-        expect(XmlPropertyArray).to.be.a('function');
+    it('is a class', () => {
+        expect(XmlPropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {

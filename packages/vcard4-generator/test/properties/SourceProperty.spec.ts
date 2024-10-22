@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import SourceProperty, { SourcePropertyRestConfig } from '../../lib/properties/SourceProperty';
 
 describe('SourceProperty', () => {
-    it('is a function class', () => {
-        expect(SourceProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(SourceProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

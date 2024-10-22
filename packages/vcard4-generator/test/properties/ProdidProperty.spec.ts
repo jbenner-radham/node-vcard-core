@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import ProdidProperty, { ProdidPropertyRestConfig } from '../../lib/properties/ProdidProperty';
 
 describe('ProdidProperty', () => {
-    it('is a function class', () => {
-        expect(ProdidProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(ProdidProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

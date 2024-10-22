@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import CaluriProperty, { CaluriPropertyRestConfig } from '../../lib/properties/CaluriProperty';
 
 describe('CaluriProperty', () => {
-    it('is a function class', () => {
-        expect(CaluriProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(CaluriProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

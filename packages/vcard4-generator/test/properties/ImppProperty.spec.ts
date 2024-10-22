@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import ImppProperty, { ImppPropertyRestConfig } from '../../lib/properties/ImppProperty';
 
 describe('ImppProperty', () => {
-    it('is a function class', () => {
-        expect(ImppProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(ImppProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

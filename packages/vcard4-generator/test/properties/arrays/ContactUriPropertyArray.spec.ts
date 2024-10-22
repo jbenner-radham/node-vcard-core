@@ -3,8 +3,8 @@ import ContactUriProperty from '../../../lib/properties/ContactUriProperty';
 import ContactUriPropertyArray from '../../../lib/properties/arrays/ContactUriPropertyArray';
 
 describe('ContactUriPropertyArray', () => {
-    it('is a function class', () => {
-        expect(ContactUriPropertyArray).to.be.a('function');
+    it('is a class', () => {
+        expect(ContactUriPropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {

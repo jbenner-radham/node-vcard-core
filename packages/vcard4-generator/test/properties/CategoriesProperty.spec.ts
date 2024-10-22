@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import CategoriesProperty, { CategoriesPropertyRestConfig } from '../../lib/properties/CategoriesProperty';
 
 describe('CategoriesProperty', () => {
-    it('is a function class', () => {
-        expect(CategoriesProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(CategoriesProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

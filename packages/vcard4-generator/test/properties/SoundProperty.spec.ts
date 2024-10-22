@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import SoundProperty, { SoundPropertyRestConfig } from '../../lib/properties/SoundProperty';
 
 describe('SoundProperty', () => {
-    it('is a function class', () => {
-        expect(SoundProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(SoundProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

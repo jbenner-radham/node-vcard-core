@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import HobbyProperty, { HobbyPropertyRestConfig } from '../../lib/properties/HobbyProperty';
 
 describe('HobbyProperty', () => {
-    it('is a function class', () => {
-        expect(HobbyProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(HobbyProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

@@ -3,8 +3,8 @@ import OrgDirectoryProperty from '../../../lib/properties/OrgDirectoryProperty';
 import OrgDirectoryPropertyArray from '../../../lib/properties/arrays/OrgDirectoryPropertyArray';
 
 describe('OrgDirectoryPropertyArray', () => {
-    it('is a function class', () => {
-        expect(OrgDirectoryPropertyArray).to.be.a('function');
+    it('is a class', () => {
+        expect(OrgDirectoryPropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {

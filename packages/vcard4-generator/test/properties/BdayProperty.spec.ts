@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import BdayProperty, { BdayPropertyRestConfig } from '../../lib/properties/BdayProperty';
 
 describe('BdayProperty', () => {
-    it('is a function class', () => {
-        expect(BdayProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(BdayProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import TelProperty, { TelPropertyRestConfig } from '../../lib/properties/TelProperty';
 
 describe('TelProperty', () => {
-    it('is a function class', () => {
-        expect(TelProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(TelProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

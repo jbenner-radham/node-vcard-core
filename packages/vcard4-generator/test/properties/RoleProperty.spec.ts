@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import RoleProperty, { RolePropertyRestConfig } from '../../lib/properties/RoleProperty';
 
 describe('RoleProperty', () => {
-    it('is a function class', () => {
-        expect(RoleProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(RoleProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

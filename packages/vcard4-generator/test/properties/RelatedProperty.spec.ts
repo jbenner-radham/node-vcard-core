@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import RelatedProperty, { RelatedPropertyRestConfig } from '../../lib/properties/RelatedProperty';
 
 describe('RelatedProperty', () => {
-    it('is a function class', () => {
-        expect(RelatedProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(RelatedProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

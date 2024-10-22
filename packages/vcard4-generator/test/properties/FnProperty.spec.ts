@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import FnProperty, { FnPropertyRestConfig } from '../../lib/properties/FnProperty';
 
 describe('FnProperty', () => {
-    it('is a function class', () => {
-        expect(FnProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(FnProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

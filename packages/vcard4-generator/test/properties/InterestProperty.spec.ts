@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import InterestProperty, { InterestPropertyRestConfig } from '../../lib/properties/InterestProperty';
 
 describe('InterestProperty', () => {
-    it('is a function class', () => {
-        expect(InterestProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(InterestProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import DeathplaceProperty, { DeathplacePropertyRestConfig } from '../../lib/properties/DeathplaceProperty';
 
 describe('DeathplaceProperty', () => {
-    it('is a function class', () => {
-        expect(DeathplaceProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(DeathplaceProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

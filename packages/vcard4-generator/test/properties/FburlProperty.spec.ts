@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import FburlProperty, { FburlPropertyRestConfig } from '../../lib/properties/FburlProperty';
 
 describe('FburlProperty', () => {
-    it('is a function class', () => {
-        expect(FburlProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(FburlProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

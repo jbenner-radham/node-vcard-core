@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import AdrProperty, { AdrPropertyRestConfig } from '../../lib/properties/AdrProperty';
 
 describe('AdrProperty', () => {
-    it('is a function class', () => {
-        expect(AdrProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(AdrProperty).to.be.a('class');
     });
 
     describe('#postOfficeBox', () => {

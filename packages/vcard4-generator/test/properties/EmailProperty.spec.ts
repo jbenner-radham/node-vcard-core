@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import EmailProperty, { EmailPropertyRestConfig } from '../../lib/properties/EmailProperty';
 
 describe('EmailProperty', () => {
-    it('is a function class', () => {
-        expect(EmailProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(EmailProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

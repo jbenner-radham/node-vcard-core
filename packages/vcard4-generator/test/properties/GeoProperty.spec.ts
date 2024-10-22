@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import GeoProperty, { GeoPropertyRestConfig } from '../../lib/properties/GeoProperty';
 
 describe('GeoProperty', () => {
-    it('is a function class', () => {
-        expect(GeoProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(GeoProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

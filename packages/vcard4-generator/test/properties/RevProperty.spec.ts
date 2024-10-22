@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import RevProperty, { RevPropertyRestConfig } from '../../lib/properties/RevProperty';
 
 describe('RevProperty', () => {
-    it('is a function class', () => {
-        expect(RevProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(RevProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

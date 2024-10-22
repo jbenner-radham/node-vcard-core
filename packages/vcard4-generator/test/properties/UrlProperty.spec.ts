@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import UrlProperty, { UrlPropertyRestConfig } from '../../lib/properties/UrlProperty';
 
 describe('UrlProperty', () => {
-    it('is a function class', () => {
-        expect(UrlProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(UrlProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

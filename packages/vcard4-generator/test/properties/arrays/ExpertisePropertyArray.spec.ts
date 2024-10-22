@@ -3,8 +3,8 @@ import ExpertiseProperty from '../../../lib/properties/ExpertiseProperty';
 import ExpertisePropertyArray from '../../../lib/properties/arrays/ExpertisePropertyArray';
 
 describe('ExpertisePropertyArray', () => {
-    it('is a function class', () => {
-        expect(ExpertisePropertyArray).to.be.a('function');
+    it('is a class', () => {
+        expect(ExpertisePropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {

@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import MemberProperty, { MemberPropertyRestConfig } from '../../lib/properties/MemberProperty';
 
 describe('MemberProperty', () => {
-    it('is a function class', () => {
-        expect(MemberProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(MemberProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import TitleProperty, { TitlePropertyRestConfig } from '../../lib/properties/TitleProperty';
 
 describe('TitleProperty', () => {
-    it('is a function class', () => {
-        expect(TitleProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(TitleProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import OrgProperty, { OrgPropertyRestConfig } from '../../lib/properties/OrgProperty';
 
 describe('OrgProperty', () => {
-    it('is a function class', () => {
-        expect(OrgProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(OrgProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

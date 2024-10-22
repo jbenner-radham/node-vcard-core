@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import BirthplaceProperty, { BirthplacePropertyRestConfig } from '../../lib/properties/BirthplaceProperty';
 
 describe('BirthplaceProperty', () => {
-    it('is a function class', () => {
-        expect(BirthplaceProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(BirthplaceProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

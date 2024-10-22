@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import KindProperty, { KindPropertyRestConfig } from '../../lib/properties/KindProperty';
 
 describe('KindProperty', () => {
-    it('is a function class', () => {
-        expect(KindProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(KindProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

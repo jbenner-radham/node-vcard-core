@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import NoteProperty, { NotePropertyRestConfig } from '../../lib/properties/NoteProperty';
 
 describe('NoteProperty', () => {
-    it('is a function class', () => {
-        expect(NoteProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(NoteProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

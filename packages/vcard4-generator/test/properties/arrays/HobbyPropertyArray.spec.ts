@@ -3,8 +3,8 @@ import HobbyProperty from '../../../lib/properties/HobbyProperty';
 import HobbyPropertyArray from '../../../lib/properties/arrays/HobbyPropertyArray';
 
 describe('HobbyPropertyArray', () => {
-    it('is a function class', () => {
-        expect(HobbyPropertyArray).to.be.a('function');
+    it('is a class', () => {
+        expect(HobbyPropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {

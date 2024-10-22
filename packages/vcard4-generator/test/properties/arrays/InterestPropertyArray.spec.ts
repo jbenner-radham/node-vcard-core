@@ -3,8 +3,8 @@ import InterestProperty from '../../../lib/properties/InterestProperty';
 import InterestPropertyArray from '../../../lib/properties/arrays/InterestPropertyArray';
 
 describe('InterestPropertyArray', () => {
-    it('is a function class', () => {
-        expect(InterestPropertyArray).to.be.a('function');
+    it('is a class', () => {
+        expect(InterestPropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {

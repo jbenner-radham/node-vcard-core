@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import NProperty, { NPropertyRestConfig } from '../../lib/properties/NProperty';
 
 describe('NProperty', () => {
-    it('is a function class', () => {
-        expect(NProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(NProperty).to.be.a('class');
     });
 
     describe('#familyName', () => {

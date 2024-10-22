@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import ExpertiseProperty, { ExpertisePropertyRestConfig } from '../../lib/properties/ExpertiseProperty';
 
 describe('ExpertiseProperty', () => {
-    it('is a function class', () => {
-        expect(ExpertiseProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(ExpertiseProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import ContactUriProperty, { ContactUriPropertyRestConfig } from '../../lib/properties/ContactUriProperty';
 
 describe('ContactUriProperty', () => {
-    it('is a function class', () => {
-        expect(ContactUriProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(ContactUriProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

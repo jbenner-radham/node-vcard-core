@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import VersionProperty, { VersionPropertyRestConfig } from '../../lib/properties/VersionProperty';
 
 describe('VersionProperty', () => {
-    it('is a function class', () => {
-        expect(VersionProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(VersionProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

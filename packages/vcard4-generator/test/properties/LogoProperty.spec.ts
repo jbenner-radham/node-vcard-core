@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import LogoProperty, { LogoPropertyRestConfig } from '../../lib/properties/LogoProperty';
 
 describe('LogoProperty', () => {
-    it('is a function class', () => {
-        expect(LogoProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(LogoProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import TzProperty, { TzPropertyRestConfig } from '../../lib/properties/TzProperty';
 
 describe('TzProperty', () => {
-    it('is a function class', () => {
-        expect(TzProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(TzProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {

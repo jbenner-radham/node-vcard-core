@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import AnniversaryProperty, { AnniversaryPropertyRestConfig } from '../../lib/properties/AnniversaryProperty';
 
 describe('AnniversaryProperty', () => {
-    it('is a function class', () => {
-        expect(AnniversaryProperty).to.be.a('function');
+    it('is a class', () => {
+        expect(AnniversaryProperty).to.be.a('class');
     });
 
     describe('#toString()', () => {
