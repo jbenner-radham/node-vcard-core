@@ -1,11 +1,9 @@
 {
-    "extends": "../../tsconfig.d.json",
-    "compilerOptions": {
-        "baseUrl": "./",
-        "rootDir": "./lib",
-        "outDir": "./dist"
-    },
-    "include": [
-        "lib"
-    ]
+  "extends": "../../tsconfig.d.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./lib",
+    "outDir": "./dist"
+  },
+  "include": ["lib"]
 }
