@@ -68,7 +68,7 @@ export default class PropertyParser {
     }
 
     /**
-     * @see https://datatracker.ietf.org/doc/html/rfc6350#section-3.4
+     * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-3.4 RFC 6350 - vCard Format Specification § Property Value Escaping}
      */
     getUnescapedValue(): string {
         return this.getRawValue()
@@ -101,7 +101,7 @@ export default class PropertyParser {
     }
 
     /**
-     * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.10
+     * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.10 RFC 6350 - vCard Format Specification § Extended Properties and Parameters}
      */
     isAllowed(): boolean {
         const isAllowed = PROPERTY_ALLOWLIST.has(this.name);

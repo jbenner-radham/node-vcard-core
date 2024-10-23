@@ -16,7 +16,7 @@ export default class ParameterParser {
     }
 
     /**
-     * @see https://datatracker.ietf.org/doc/html/rfc6868
+     * @see {@link https://datatracker.ietf.org/doc/html/rfc6868 RFC 6868 - Parameter Value Encoding in iCalendar and vCard}
      */
     getDecodedValue(): string {
         const value = this.getRawValue();
@@ -26,7 +26,7 @@ export default class ParameterParser {
         const unquotedValue = isQuoted ? unquote(value) : value;
         const decodedValue = unquotedValue
             .replaceAll(`^'`, '"')
-            .replaceAll('^n', os.EOL) /** @todo Make this browser compatible. */
+            .replaceAll('^n', os.EOL) /** @todo Make this browser compatible. Use `window.navigator.userAgent`? */
             .replaceAll('^^', '^');
 
         return isQuoted ? quote(decodedValue) : decodedValue;
@@ -45,7 +45,7 @@ export default class ParameterParser {
     }
 
     /**
-     * @see https://datatracker.ietf.org/doc/html/rfc6350#section-5
+     * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-5 RFC 6350 - vCard Format Specification § Property Parameters}
      */
     isAllowedFor(property: Property): boolean {
         const isAllowed = PARAMETER_ALLOWLISTS[property].has(this.name);
