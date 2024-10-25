@@ -19,8 +19,7 @@ export type CategoriesPropertyRestConfig = [
     options?: PropertyOptions
 ];
 
-/** @todo Add string[] type support. */
-export type CategoriesPropertyLike = CategoriesProperty | CategoriesPropertyRestConfig | string;
+export type CategoriesPropertyLike = CategoriesProperty | CategoriesPropertyRestConfig | string | string[];
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -76,7 +75,9 @@ export default class CategoriesProperty extends Property {
     static factory(value: CategoriesPropertyLike): CategoriesProperty {
         if (value instanceof CategoriesProperty) return value;
 
-        if (Array.isArray(value)) return new CategoriesProperty(...value);
+        if (Array.isArray(value) && value.every(isString)) return new CategoriesProperty(value.join(','));
+
+        if (Array.isArray(value)) return new CategoriesProperty(...value as CategoriesPropertyRestConfig);
 
         if (isString(value)) return new CategoriesProperty(value);
 

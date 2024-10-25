@@ -82,24 +82,76 @@ describe('CategoriesProperty', () => {
             expect(categories instanceof CategoriesProperty).to.equal(true);
         });
 
-        it('returns an instance if provided one as an argument', () => {
-            const categories = new CategoriesProperty('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
+        describe('when passed an instance', () => {
+            it('returns that instance', () => {
+                const categories = new CategoriesProperty('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
 
-            expect(CategoriesProperty.factory(categories) instanceof CategoriesProperty).to.equal(true);
+                expect(categories).to.equal(CategoriesProperty.factory(categories));
+            });
+
+            it('outputs the correct value when `toString()` is called on the factory returned instance', () => {
+                const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
+                const categories = CategoriesProperty.factory(value);
+                const actual = categories.toString();
+                const expected = 'CATEGORIES:INTERNET\\,IETF\\,INDUSTRY\\,INFORMATION TECHNOLOGY';
+
+                expect(actual).to.equal(expected);
+            });
         });
 
-        it('creates an instance from a string value argument', () => {
-            const categories = CategoriesProperty.factory('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
+        describe('when passed a string', () => {
+            it('creates an instance', () => {
+                const categories = CategoriesProperty.factory('INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY');
 
-            expect(categories instanceof CategoriesProperty).to.equal(true);
+                expect(categories instanceof CategoriesProperty).to.equal(true);
+            });
+
+            it('outputs the correct value when `toString()` is called on the factory created instance', () => {
+                const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
+                const categories = CategoriesProperty.factory(value);
+                const actual = categories.toString();
+                const expected = 'CATEGORIES:INTERNET\\,IETF\\,INDUSTRY\\,INFORMATION TECHNOLOGY';
+
+                expect(actual).to.equal(expected);
+            });
         });
 
-        it('creates an instance from an array argument', () => {
-            const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
-            const config: CategoriesPropertyRestConfig = [value, { pref: 1 }];
-            const categories = CategoriesProperty.factory(config);
+        describe('when passed an array of strings', () => {
+            it('creates an instance', () => {
+                const value = ['INTERNET', 'IETF', 'INDUSTRY', 'INFORMATION TECHNOLOGY'];
+                const categories = CategoriesProperty.factory(value);
 
-            expect(categories instanceof CategoriesProperty).to.equal(true);
+                expect(categories instanceof CategoriesProperty).to.equal(true);
+            });
+
+            it('outputs the correct value when `toString()` is called on the factory created instance', () => {
+                const value = ['INTERNET', 'IETF', 'INDUSTRY', 'INFORMATION TECHNOLOGY'];
+                const categories = CategoriesProperty.factory(value);
+                const actual = categories.toString();
+                const expected = 'CATEGORIES:INTERNET\\,IETF\\,INDUSTRY\\,INFORMATION TECHNOLOGY';
+
+                expect(actual).to.equal(expected);
+            });
+        });
+
+        describe('when passed an array', () => {
+            it('creates an instance', () => {
+                const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
+                const config: CategoriesPropertyRestConfig = [value, { pref: 1 }];
+                const categories = CategoriesProperty.factory(config);
+
+                expect(categories instanceof CategoriesProperty).to.equal(true);
+            });
+
+            it('outputs the correct value when `toString()` is called on the factory created instance', () => {
+                const value = 'INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY';
+                const config: CategoriesPropertyRestConfig = [value, { pref: 1 }];
+                const categories = CategoriesProperty.factory(config);
+                const actual = categories.toString();
+                const expected = 'CATEGORIES;PREF=1:INTERNET\\,IETF\\,INDUSTRY\\,INFORMATION TECHNOLOGY';
+
+                expect(actual).to.equal(expected);
+            });
         });
     });
 });
