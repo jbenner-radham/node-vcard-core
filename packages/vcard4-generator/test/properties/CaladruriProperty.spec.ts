@@ -34,6 +34,16 @@ describe('CaladruriProperty', () => {
             expect(actual).to.equal(expected);
         });
 
+        it('correctly adds a pref to the property', () => {
+            const parameters = { pref: 1 };
+            const value = 'mailto:janedoe@example.com';
+            const caladruri = new CaladruriProperty(value, parameters);
+            const actual = caladruri.toString();
+            const expected = `CALADRURI;PREF=1:${value}`;
+
+            expect(actual).to.equal(expected);
+        });
+
         it('correctly groups the property', () => {
             const parameters = undefined;
             const value = 'http://example.com/calendar/jdoe';
