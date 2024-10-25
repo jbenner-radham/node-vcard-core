@@ -40,7 +40,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   CATEGORIES:TRAVEL AGENT
  * >   CATEGORIES:INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.1 RFC 6350 - vCard Format Specification § CATEGORIES}
  */
 export default class CategoriesProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

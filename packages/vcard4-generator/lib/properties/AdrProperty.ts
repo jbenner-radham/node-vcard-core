@@ -94,7 +94,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
  * >    U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1 RFC 6350 - vCard Format Specification § ADR}
  */
 export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

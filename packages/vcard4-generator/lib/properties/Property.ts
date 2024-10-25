@@ -20,7 +20,7 @@ export default abstract class Property {
     }
 
     components(): string[] {
-        /** @see https://datatracker.ietf.org/doc/html/rfc6350#section-3.4 */
+        /** @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-3.4 RFC 6350 - vCard Format Specification § Property Value Escaping} */
         const separatorMatcher = new RegExp(`(?<!\\\\)${SEPARATOR}`);
 
         return (this.valueOf() as number | string).toString().split(separatorMatcher);

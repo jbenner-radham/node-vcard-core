@@ -46,7 +46,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   BDAY;19531015T231000Z
  * >   BDAY;VALUE=text:circa 1800
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5 RFC 6350 - vCard Format Specification § BDAY}
  */
 export default class BdayProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

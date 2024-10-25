@@ -37,7 +37,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   BIRTHPLACE;VALUE=uri:http://example.com/hospitals/babiesrus.vcf
  * >   BIRTHPLACE;VALUE=uri:geo:46.769307,-71.283079
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6474/#section-2.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6474/#section-2.1 RFC 6474 - vCard Format Extensions: Place of Birth, Place and Date of Death § BIRTHPLACE}
  */
 export default class BirthplaceProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

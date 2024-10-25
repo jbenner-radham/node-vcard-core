@@ -43,7 +43,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   CALURI;PREF=1:http://cal.example.com/calA
  * >   CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3 RFC 6350 - vCard Format Specification § CALURI}
  */
 export default class CaluriProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

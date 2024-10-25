@@ -40,7 +40,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Examples _(sic)_:
  * >   ANNIVERSARY:19960415
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.6
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.6 RFC 6350 - vCard Format Specification § ANNIVERSARY}
  * @todo Add enforcement of calscale-param for only date-and-or-time types!
  */
 export default class AnniversaryProperty extends Property {

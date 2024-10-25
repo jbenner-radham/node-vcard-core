@@ -41,7 +41,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   CALADRURI;PREF=1:mailto:janedoe@example.com
  * >   CALADRURI:http://example.com/calendar/jdoe
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.2
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.2 RFC 6350 - vCard Format Specification § CALADRURI}
  */
 export default class CaladruriProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
