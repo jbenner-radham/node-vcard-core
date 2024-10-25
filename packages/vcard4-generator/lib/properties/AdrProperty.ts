@@ -20,6 +20,7 @@ export interface AdrParameters {
 
 export type AdrPropertyRestConfig = [value: string, parameters?: AdrParameters, options?: PropertyOptions];
 
+/** @todo Add ADR object support. */
 export type AdrPropertyLike = AdrProperty | AdrPropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');

@@ -49,7 +49,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   CLIENTPIDMAP:1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b
  * >   CLIENTPIDMAP:2;urn:uuid:d89c9c7a-2e1b-4832-82de-7e992d95faa5
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.7
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.7 RFC 6350 - vCard Format Specification § CLIENTPIDMAP}
  */
 export default class ClientpidmapProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

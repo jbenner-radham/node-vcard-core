@@ -41,12 +41,13 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Examples:
  * >   GENDER:M
  * >   GENDER:F
- * >   GENDER:M;Fellow
- * >   GENDER:F;grrrl
- * >   GENDER:O;intersex
- * >   GENDER:;it's complicated
+ * >   GENDER:M;Transgender Man
+ * >   GENDER:F;Transfeminine
+ * >   GENDER:O;Intersex
+ * >   GENDER:;Agender
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.7
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.7 RFC 6350 - vCard Format Specification § GENDER}
+ * @see {@link https://www.rfc-editor.org/errata/eid6812 RFC Errata Report » RFC Editor}
  */
 export default class GenderProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

@@ -45,7 +45,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   EXPERTISE;LEVEL=beginner;INDEX=2:chinese literature
  * >   EXPERTISE;INDEX=1;LEVEL=expert:chemistry
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6715/#section-2.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6715/#section-2.1 RFC 6715 - vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group § Property: EXPERTISE}
  */
 export default class ExpertiseProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

@@ -38,7 +38,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   FN:Mr. John Q. Public\, Esq.
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.1 RFC 6350 - vCard Format Specification § FN}
  */
 export default class FnProperty extends Property {
     static readonly CARDINALITY: Cardinality = '1*'; // One or more instances per vCard MUST be present.

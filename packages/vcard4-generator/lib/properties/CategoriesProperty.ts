@@ -36,7 +36,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >                    / type-param / altid-param / any-param
  * >   CATEGORIES-value = text-list
  * >
- * > Example _(sic)_:
+ * > Example:
  * >   CATEGORIES:TRAVEL AGENT
  * >   CATEGORIES:INTERNET,IETF,INDUSTRY,INFORMATION TECHNOLOGY
  *

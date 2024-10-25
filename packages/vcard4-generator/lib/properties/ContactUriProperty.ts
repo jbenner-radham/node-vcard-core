@@ -49,7 +49,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >
  * >   CONTACT-URI;PREF=1:mailto:contact@example.com
  *
- * @see https://datatracker.ietf.org/doc/html/rfc8605/#section-2.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc8605/#section-2.1 RFC 8605 - vCard Format Extensions: ICANN Extensions for the Registration Data Access Protocol (RDAP) § Property: CONTACT-URI}
  */
 export default class ContactUriProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

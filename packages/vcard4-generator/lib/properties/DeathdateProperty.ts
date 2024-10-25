@@ -51,7 +51,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   DEATHDATE:19531015T231000Z
  * >   DEATHDATE;VALUE=text:circa 1800
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6474/#section-2.3
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6474/#section-2.3 RFC 6474 - vCard Format Extensions: Place of Birth, Place and Date of Death § Property: DEATHDATE}
  */
 export default class DeathdateProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

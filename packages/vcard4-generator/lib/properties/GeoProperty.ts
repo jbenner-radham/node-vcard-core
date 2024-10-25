@@ -37,7 +37,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   GEO:geo:37.386013\,-122.082932
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.5.2
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.5.2 RFC 6350 - vCard Format Specification § GEO}
  */
 export default class GeoProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

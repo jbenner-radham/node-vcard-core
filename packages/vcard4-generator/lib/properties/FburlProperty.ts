@@ -44,7 +44,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   FBURL;PREF=1:http://www.example.com/busy/janedoe
  * >   FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.1 RFC 6350 - vCard Format Specification § FBURL}
  */
 export default class FburlProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

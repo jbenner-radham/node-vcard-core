@@ -44,7 +44,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   EMAIL;TYPE=work:jqpublic@xyz.example.com
  * >   EMAIL;PREF=1:jane_doe@example.com
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2 RFC 6350 - vCard Format Specification § EMAIL}
  */
 export default class EmailProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

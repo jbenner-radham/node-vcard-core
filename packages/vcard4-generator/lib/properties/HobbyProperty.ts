@@ -54,7 +54,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   HOBBY;INDEX=1;LEVEL=high:reading
  * >   HOBBY;INDEX=2;LEVEL=high:sewing
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6715#section-2.2
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6715#section-2.2 RFC 6715 - vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group § Property: HOBBY}
  */
 export default class HobbyProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
