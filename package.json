@@ -25,7 +25,7 @@
     "prebuild": "npm run rm:tsbuildinfo",
     "build": "lerna run build",
     "clean": "lerna run clean",
-    "prepare": "husky install",
+    "prepare": "husky",
     "rm:tsbuildinfo": "rimraf tsconfig.tsbuildinfo && rimraf packages/*/tsconfig.d.tsbuildinfo",
     "test": "vitest --watch=false",
     "test:watch": "vitest"
@@ -45,7 +45,7 @@
     "core-js": "^3.24.1",
     "eslint": "^8.3.0",
     "eslint-plugin-no-only-tests": "^2.6.0",
-    "husky": "^7.0.0",
+    "husky": "^9.1.6",
     "lerna": "^8.1.8",
     "lint-staged": "^15.2.10",
     "rimraf": "^6.0.1",
