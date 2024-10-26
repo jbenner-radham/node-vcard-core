@@ -25,20 +25,20 @@ describe('GenderProperty', () => {
         });
 
         it('returns the proper string format when passed a gender component', () => {
-            const gender = new GenderProperty(`;it's complicated`);
+            const gender = new GenderProperty(';Agender');
 
-            expect(gender.toString()).to.equal(`GENDER:;it's complicated`);
+            expect(gender.toString()).to.equal('GENDER:;Agender');
         });
 
         it('returns the proper string format when passed a sex and gender component', () => {
-            const gender = new GenderProperty('O;intersex');
+            const gender = new GenderProperty('O;Intersex');
 
-            expect(gender.toString()).to.equal('GENDER:O;intersex');
+            expect(gender.toString()).to.equal('GENDER:O;Intersex');
         });
 
         it('correctly groups the property', () => {
             const parameters = undefined;
-            const value = 'O;intersex';
+            const value = 'O;Intersex';
             const options = { group: 1 };
             const gender = new GenderProperty(value, parameters, options);
 
@@ -47,10 +47,10 @@ describe('GenderProperty', () => {
 
         it('accepts a "text" value parameter', () => {
             const parameters = { value: 'text' as const };
-            const value = 'O;intersex';
+            const value = 'O;Intersex';
             const gender = new GenderProperty(value, parameters);
 
-            expect(gender.toString()).to.equal('GENDER;VALUE=text:O;intersex');
+            expect(gender.toString()).to.equal('GENDER;VALUE=text:O;Intersex');
         });
     });
 
@@ -79,25 +79,25 @@ describe('GenderProperty', () => {
         });
 
         it('returns an instance of `GenderProperty`', () => {
-            const gender = GenderProperty.factory('M;Fellow');
+            const gender = GenderProperty.factory('M;Transgender Man');
 
             expect(gender instanceof GenderProperty).to.equal(true);
         });
 
         it('returns an instance if provided one as an argument', () => {
-            const gender = new GenderProperty('M;Fellow');
+            const gender = new GenderProperty('M;Transgender Man');
 
             expect(GenderProperty.factory(gender) instanceof GenderProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const gender = GenderProperty.factory('M;Fellow');
+            const gender = GenderProperty.factory('M;Transgender Man');
 
             expect(gender instanceof GenderProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
-            const value = 'M;Fellow';
+            const value = 'M;Transgender Man';
             const config: GenderPropertyRestConfig = [value, { value: 'text' }];
             const gender = GenderProperty.factory(config);
 
