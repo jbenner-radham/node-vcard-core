@@ -1,4 +1,4 @@
-const chai = require('chai');
+import * as chai from 'chai';
 
 function chaiClass() {
     // Allows you to make assertions like: `expect(value).to.be.a('class')`
