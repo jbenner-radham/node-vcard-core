@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import VersionProperty, { VersionPropertyRestConfig } from '../../lib/properties/VersionProperty';
+import VersionProperty, { type VersionPropertyRestConfig } from '../../lib/properties/VersionProperty.js';
 
 describe('VersionProperty', () => {
     it('is a class', () => {

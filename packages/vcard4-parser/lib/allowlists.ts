@@ -1,4 +1,4 @@
-import type { Parameter, Property } from './types';
+import type { Parameter, Property } from './types.js';
 
 const PARAMETER_ALLOWLISTS: Record<Property, Set<Parameter>> = {
     ADR: new Set([

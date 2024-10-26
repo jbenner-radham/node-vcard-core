@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import HobbyProperty, { HobbyPropertyRestConfig } from '../../lib/properties/HobbyProperty';
+import HobbyProperty, { HobbyPropertyRestConfig } from '../../lib/properties/HobbyProperty.js';
 
 describe('HobbyProperty', () => {
     it('is a class', () => {

@@ -1,8 +1,8 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types';
-import isString from '../util/is-string';
-import isValidGroup from '../util/is-valid-group';
-import Property from './Property';
-import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import isString from '../util/is-string.js';
+import isValidGroup from '../util/is-valid-group.js';
+import Property from './Property.js';
+import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 
 export type Sex = '' | 'F' | 'M' | 'N' | 'O' | 'U';
 

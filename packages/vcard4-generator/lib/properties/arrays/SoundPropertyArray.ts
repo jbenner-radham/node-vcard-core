@@ -1,4 +1,4 @@
-import SoundProperty from '../SoundProperty';
+import SoundProperty from '../SoundProperty.js';
 
 export default class SoundPropertyArray extends Array {
     push(...items: any[]): number {

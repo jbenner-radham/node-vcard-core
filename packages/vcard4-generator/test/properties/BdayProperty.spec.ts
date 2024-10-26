@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import BdayProperty, { BdayPropertyRestConfig } from '../../lib/properties/BdayProperty';
+import BdayProperty, { type BdayPropertyRestConfig } from '../../lib/properties/BdayProperty.js';
 
 describe('BdayProperty', () => {
     it('is a class', () => {

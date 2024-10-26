@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import foldLine from '../../lib/util/fold-line';
+import foldLine from '../../lib/util/fold-line.js';
 
 describe('foldLine', () => {
     it('is a function', () => {

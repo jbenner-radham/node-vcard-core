@@ -1,4 +1,4 @@
-import AdrProperty from '../AdrProperty';
+import AdrProperty from '../AdrProperty.js';
 
 export default class AdrPropertyArray extends Array {
     push(...items: any[]): number {

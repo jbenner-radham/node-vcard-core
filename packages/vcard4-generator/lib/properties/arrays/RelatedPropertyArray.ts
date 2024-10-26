@@ -1,4 +1,4 @@
-import RelatedProperty from '../RelatedProperty';
+import RelatedProperty from '../RelatedProperty.js';
 
 export default class RelatedPropertyArray extends Array {
     push(...items: any[]): number {

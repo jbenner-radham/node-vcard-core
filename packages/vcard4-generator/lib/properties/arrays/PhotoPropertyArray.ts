@@ -1,4 +1,4 @@
-import PhotoProperty from '../PhotoProperty';
+import PhotoProperty from '../PhotoProperty.js';
 
 export default class PhotoPropertyArray extends Array {
     push(...items: any[]): number {

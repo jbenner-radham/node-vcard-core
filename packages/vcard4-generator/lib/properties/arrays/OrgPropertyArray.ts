@@ -1,4 +1,4 @@
-import OrgProperty from '../OrgProperty';
+import OrgProperty from '../OrgProperty.js';
 
 export default class OrgPropertyArray extends Array {
     push(...items: any[]): number {

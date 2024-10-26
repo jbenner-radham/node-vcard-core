@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import CategoriesProperty, { CategoriesPropertyRestConfig } from '../../lib/properties/CategoriesProperty';
+import CategoriesProperty, { type CategoriesPropertyRestConfig } from '../../lib/properties/CategoriesProperty.js';
 
 describe('CategoriesProperty', () => {
     it('is a class', () => {

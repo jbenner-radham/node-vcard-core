@@ -1,8 +1,9 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import * as fs from 'fs';
-import * as path from 'path';
-import Vcard4Parser from '../lib';
-import PropertyParser from '../lib/PropertyParser';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import Vcard4Parser from '../lib/index.js';
+import PropertyParser from '../lib/PropertyParser.js';
 
 const readVcardFixture = (basename: string): string => {
     const filepath = path.join(__dirname, 'fixtures', `${basename}.vcf`);
@@ -56,7 +57,7 @@ describe('@vcard/vcard4-parser > Vcard4Parser', () => {
         it('contains each correctly parsed property in a vCard', () => {
             const parser = new Vcard4Parser(SPACE_FOLDED_PROPERTY_VCARD);
             const properties = ['BEGIN', 'VERSION', 'ADR', 'EMAIL', 'FN', 'URL', 'END'];
-            const propertyMatches = (property, index) => property.name === properties[index];
+            const propertyMatches = (property: PropertyParser, index: number) => property.name === properties[index];
             const actual = parser.properties.every(propertyMatches);
 
             expect(actual).to.equal(true);

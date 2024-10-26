@@ -1,4 +1,4 @@
-import XmlProperty from '../XmlProperty';
+import XmlProperty from '../XmlProperty.js';
 
 export default class XmlPropertyArray extends Array {
     push(...items: any[]): number {

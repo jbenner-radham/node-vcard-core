@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { EOL } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import XmlProperty, { XmlPropertyRestConfig } from '../../lib/properties/XmlProperty';
+import XmlProperty, { type XmlPropertyRestConfig } from '../../lib/properties/XmlProperty.js';
 
 describe('XmlProperty', () => {
     it('is a class', () => {

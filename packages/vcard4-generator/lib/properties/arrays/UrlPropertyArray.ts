@@ -1,4 +1,4 @@
-import UrlProperty from '../UrlProperty';
+import UrlProperty from '../UrlProperty.js';
 
 export default class UrlPropertyArray extends Array {
     push(...items: any[]): number {

@@ -1,4 +1,4 @@
-import LogoProperty from '../LogoProperty';
+import LogoProperty from '../LogoProperty.js';
 
 export default class LogoPropertyArray extends Array {
     push(...items: any[]): number {

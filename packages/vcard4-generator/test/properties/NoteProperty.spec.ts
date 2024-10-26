@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import NoteProperty, { NotePropertyRestConfig } from '../../lib/properties/NoteProperty';
+import NoteProperty, { type NotePropertyRestConfig } from '../../lib/properties/NoteProperty.js';
 
 describe('NoteProperty', () => {
     it('is a class', () => {

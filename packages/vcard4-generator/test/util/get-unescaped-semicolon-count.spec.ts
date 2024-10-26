@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import getUnescapedSemicolonCount from '../../lib/util/get-unescaped-semicolon-count';
+import getUnescapedSemicolonCount from '../../lib/util/get-unescaped-semicolon-count.js';
 
 describe('getUnescapedSemicolonCount', () => {
     it('is a function', () => {

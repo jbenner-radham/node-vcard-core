@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import InterestProperty, { InterestPropertyRestConfig } from '../../lib/properties/InterestProperty';
+import InterestProperty, { InterestPropertyRestConfig } from '../../lib/properties/InterestProperty.js';
 
 describe('InterestProperty', () => {
     it('is a class', () => {

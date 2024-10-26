@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import GenderProperty, { GenderPropertyRestConfig } from '../../lib/properties/GenderProperty';
+import GenderProperty, { type GenderPropertyRestConfig } from '../../lib/properties/GenderProperty.js';
 
 describe('GenderProperty', () => {
     it('is a class', () => {

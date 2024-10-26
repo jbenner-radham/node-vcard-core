@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import encodeParameterValue from '../../lib/util/encode-parameter-value';
+import encodeParameterValue from '../../lib/util/encode-parameter-value.js';
 
 describe('encodeParameterValue', () => {
     it('is a function', () => {

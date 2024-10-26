@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import DeathplaceProperty, { DeathplacePropertyRestConfig } from '../../lib/properties/DeathplaceProperty';
+import DeathplaceProperty, { type DeathplacePropertyRestConfig } from '../../lib/properties/DeathplaceProperty.js';
 
 describe('DeathplaceProperty', () => {
     it('is a class', () => {

@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import TzProperty, { TzPropertyRestConfig } from '../../lib/properties/TzProperty';
+import TzProperty, { type TzPropertyRestConfig } from '../../lib/properties/TzProperty.js';
 
 describe('TzProperty', () => {
     it('is a class', () => {

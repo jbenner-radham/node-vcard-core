@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import GeoProperty, { GeoPropertyRestConfig } from '../../lib/properties/GeoProperty';
+import GeoProperty, { GeoPropertyRestConfig } from '../../lib/properties/GeoProperty.js';
 
 describe('GeoProperty', () => {
     it('is a class', () => {

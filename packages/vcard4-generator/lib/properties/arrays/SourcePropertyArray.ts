@@ -1,4 +1,4 @@
-import SourceProperty from '../SourceProperty';
+import SourceProperty from '../SourceProperty.js';
 
 export default class SourcePropertyArray extends Array {
     push(...items: any[]): number {

@@ -1,7 +1,8 @@
+import { describe, it } from 'vitest';
 import { EOL } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import { EmailPropertyConfig } from '../lib/properties/EmailProperty';
-import Vcard4Generator from '../lib';
+import type { EmailPropertyRestConfig } from '../lib/properties/EmailProperty.js';
+import Vcard4Generator from '../lib/index.js';
 
 describe('Vcard4Generator', () => {
     it('is a function class', () => {
@@ -156,7 +157,7 @@ describe('Vcard4Generator', () => {
         describe('when passed a minimal vCard with a CLIENTPIDMAP property', () => {
             it('returns the proper string format', () => {
                 const fn = 'J. Doe';
-                const email: EmailPropertyConfig = ['jdoe@example.com', { pid: [4.1, 5.2] }];
+                const email: EmailPropertyRestConfig = ['jdoe@example.com', { pid: [4.1, 5.2] }];
                 const clientpidmap = '2;urn:uuid:d89c9c7a-2e1b-4832-82de-7e992d95faa5';
                 const vcard = new Vcard4Generator({ clientpidmap, email, fn });
                 const actual = vcard.toString();

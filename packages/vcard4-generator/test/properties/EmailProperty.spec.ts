@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import EmailProperty, { EmailPropertyRestConfig } from '../../lib/properties/EmailProperty';
+import EmailProperty, { EmailPropertyRestConfig } from '../../lib/properties/EmailProperty.js';
 
 describe('EmailProperty', () => {
     it('is a class', () => {

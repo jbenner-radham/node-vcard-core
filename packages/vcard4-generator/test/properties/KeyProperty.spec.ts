@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import KeyProperty, { KeyPropertyRestConfig } from '../../lib/properties/KeyProperty';
+import KeyProperty, { type KeyPropertyRestConfig } from '../../lib/properties/KeyProperty.js';
 
 describe('KeyProperty', () => {
     it('is a class', () => {

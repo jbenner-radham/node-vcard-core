@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import AdrProperty, { AdrPropertyRestConfig } from '../../lib/properties/AdrProperty';
+import AdrProperty, { type AdrPropertyRestConfig } from '../../lib/properties/AdrProperty.js';
 
 describe('AdrProperty', () => {
     it('is a class', () => {

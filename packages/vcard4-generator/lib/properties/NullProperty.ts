@@ -1,4 +1,4 @@
-import Property from './Property';
+import Property from './Property.js';
 
 /**
  * The null property is not an actual vCard property. It is merely an

@@ -1,11 +1,11 @@
-import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types';
+import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types.js';
 import {
     getInvalidCalscaleValueParameterMessage,
     getInvalidLanguageValueParameterMessage
-} from '../util/error-messages';
-import isString from '../util/is-string';
-import isValidGroup from '../util/is-valid-group';
-import Property from './Property';
+} from '../util/error-messages.js';
+import isString from '../util/is-string.js';
+import isValidGroup from '../util/is-valid-group.js';
+import Property from './Property.js';
 
 export interface BdayParameters {
     value?: 'date-and-or-time' | 'text';

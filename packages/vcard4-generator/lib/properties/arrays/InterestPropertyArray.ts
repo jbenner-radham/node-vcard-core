@@ -1,4 +1,4 @@
-import InterestProperty from '../InterestProperty';
+import InterestProperty from '../InterestProperty.js';
 
 export default class InterestPropertyArray extends Array {
     push(...items: any[]): number {

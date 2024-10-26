@@ -1,4 +1,4 @@
-import TitleProperty from '../TitleProperty';
+import TitleProperty from '../TitleProperty.js';
 
 export default class TitlePropertyArray extends Array {
     push(...items: any[]): number {

@@ -1,3 +1,4 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
 import {
     EOL,
@@ -7,7 +8,7 @@ import {
     MAX_OCTETS_PER_LINE,
     SEPARATOR,
     SPACE
-} from '../lib';
+} from '../lib/index.js';
 
 describe('EOL', () => {
     it('is a string', () => {

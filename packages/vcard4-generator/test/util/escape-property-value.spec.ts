@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import escapePropertyValue from '../../lib/util/escape-property-value';
+import escapePropertyValue from '../../lib/util/escape-property-value.js';
 
 describe('escapePropertyValue', () => {
     it('is a function', () => {

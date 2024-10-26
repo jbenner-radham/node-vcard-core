@@ -1,4 +1,4 @@
-import TzProperty from '../TzProperty';
+import TzProperty from '../TzProperty.js';
 
 export default class TzPropertyArray extends Array {
     push(...items: any[]): number {

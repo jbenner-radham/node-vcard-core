@@ -1,6 +1,6 @@
-import * as os from 'os';
-import type { Parameter, Property } from './types';
-import { PARAMETER_ALLOWLISTS } from './allowlists';
+import os from 'node:os';
+import type { Parameter, Property } from './types.js';
+import { PARAMETER_ALLOWLISTS } from './allowlists.js';
 
 export default class ParameterParser {
     #parameter: string;

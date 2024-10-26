@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import PhotoProperty, { PhotoPropertyRestConfig } from '../../lib/properties/PhotoProperty';
+import PhotoProperty, { type PhotoPropertyRestConfig } from '../../lib/properties/PhotoProperty.js';
 
 describe('PhotoProperty', () => {
     it('is a class', () => {

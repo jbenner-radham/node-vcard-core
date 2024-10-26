@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import BirthplaceProperty, { BirthplacePropertyRestConfig } from '../../lib/properties/BirthplaceProperty';
+import BirthplaceProperty, { type BirthplacePropertyRestConfig } from '../../lib/properties/BirthplaceProperty.js';
 
 describe('BirthplaceProperty', () => {
     it('is a class', () => {

@@ -1,4 +1,4 @@
-import NicknameProperty from '../NicknameProperty';
+import NicknameProperty from '../NicknameProperty.js';
 
 export default class NicknamePropertyArray extends Array {
     push(...items: any[]): number {

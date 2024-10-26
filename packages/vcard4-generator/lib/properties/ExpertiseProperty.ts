@@ -1,10 +1,10 @@
-import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
-import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
-import isString from '../util/is-string';
-import isValidGroup from '../util/is-valid-group';
-import isValidPrefParameter from '../util/is-valid-pref-parameter';
-import Property from './Property';
-import isValidIndexParameter from '../util/is-valid-index-parameter';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types.js';
+import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import isString from '../util/is-string.js';
+import isValidGroup from '../util/is-valid-group.js';
+import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
+import Property from './Property.js';
+import isValidIndexParameter from '../util/is-valid-index-parameter.js';
 
 export type ExpertiseLevel = 'beginner' | 'average' | 'expert';
 

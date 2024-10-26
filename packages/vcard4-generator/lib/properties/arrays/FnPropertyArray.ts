@@ -1,4 +1,4 @@
-import FnProperty from '../FnProperty';
+import FnProperty from '../FnProperty.js';
 
 export default class FnPropertyArray extends Array {
     push(...items: any[]): number {

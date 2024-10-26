@@ -1,4 +1,4 @@
-import HobbyProperty from '../HobbyProperty';
+import HobbyProperty from '../HobbyProperty.js';
 
 export default class HobbyPropertyArray extends Array {
     push(...items: any[]): number {

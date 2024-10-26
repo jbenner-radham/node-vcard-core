@@ -1,4 +1,4 @@
-import KeyProperty from '../KeyProperty';
+import KeyProperty from '../KeyProperty.js';
 
 export default class KeyPropertyArray extends Array {
     push(...items: any[]): number {

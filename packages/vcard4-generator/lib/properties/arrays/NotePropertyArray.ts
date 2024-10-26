@@ -1,4 +1,4 @@
-import NoteProperty from '../NoteProperty';
+import NoteProperty from '../NoteProperty.js';
 
 export default class NotePropertyArray extends Array {
     push(...items: any[]): number {

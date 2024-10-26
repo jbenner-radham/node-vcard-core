@@ -1,4 +1,4 @@
-import OrgDirectoryProperty from '../OrgDirectoryProperty';
+import OrgDirectoryProperty from '../OrgDirectoryProperty.js';
 
 export default class OrgDirectoryPropertyArray extends Array {
     push(...items: any[]): number {

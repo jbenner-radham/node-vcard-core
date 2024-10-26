@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import SoundProperty, { SoundPropertyRestConfig } from '../../lib/properties/SoundProperty';
+import SoundProperty, { type SoundPropertyRestConfig } from '../../lib/properties/SoundProperty.js';
 
 describe('SoundProperty', () => {
     it('is a class', () => {

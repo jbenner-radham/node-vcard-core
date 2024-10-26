@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import ExpertiseProperty, { ExpertisePropertyRestConfig } from '../../lib/properties/ExpertiseProperty';
+import ExpertiseProperty, { ExpertisePropertyRestConfig } from '../../lib/properties/ExpertiseProperty.js';
 
 describe('ExpertiseProperty', () => {
     it('is a class', () => {

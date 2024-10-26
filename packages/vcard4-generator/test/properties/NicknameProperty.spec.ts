@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import NicknameProperty, { NicknamePropertyRestConfig } from '../../lib/properties/NicknameProperty';
+import NicknameProperty, { type NicknamePropertyRestConfig } from '../../lib/properties/NicknameProperty.js';
 
 describe('NicknameProperty', () => {
     it('is a class', () => {

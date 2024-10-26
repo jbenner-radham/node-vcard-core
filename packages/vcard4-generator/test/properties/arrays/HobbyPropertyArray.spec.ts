@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import HobbyProperty from '../../../lib/properties/HobbyProperty';
-import HobbyPropertyArray from '../../../lib/properties/arrays/HobbyPropertyArray';
+import HobbyProperty from '../../../lib/properties/HobbyProperty.js';
+import HobbyPropertyArray from '../../../lib/properties/arrays/HobbyPropertyArray.js';
 
 describe('HobbyPropertyArray', () => {
     it('is a class', () => {

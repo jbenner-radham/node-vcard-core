@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import CaluriProperty, { CaluriPropertyRestConfig } from '../../lib/properties/CaluriProperty';
+import CaluriProperty, { type CaluriPropertyRestConfig } from '../../lib/properties/CaluriProperty.js';
 
 describe('CaluriProperty', () => {
     it('is a class', () => {

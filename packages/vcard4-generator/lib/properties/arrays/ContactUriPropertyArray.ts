@@ -1,4 +1,4 @@
-import ContactUriProperty from '../ContactUriProperty';
+import ContactUriProperty from '../ContactUriProperty.js';
 
 export default class ContactUriPropertyArray extends Array {
     push(...items: any[]): number {

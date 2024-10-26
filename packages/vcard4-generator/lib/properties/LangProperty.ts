@@ -1,9 +1,9 @@
-import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types';
-import { getInvalidPrefParameterMessage } from '../util/error-messages';
-import isString from '../util/is-string';
-import isValidGroup from '../util/is-valid-group';
-import isValidPrefParameter from '../util/is-valid-pref-parameter';
-import Property from './Property';
+import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types.js';
+import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import isString from '../util/is-string.js';
+import isValidGroup from '../util/is-valid-group.js';
+import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
+import Property from './Property.js';
 
 export interface LangParameters {
     value?: 'language-tag';

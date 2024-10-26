@@ -1,8 +1,8 @@
 import { SEPARATOR } from '@vcard/vcard4-meta';
-import encodeParameterValue from '../util/encode-parameter-value';
-import escapePropertyValue from '../util/escape-property-value';
-import foldLine from '../util/fold-line';
-import isString from '../util/is-string';
+import encodeParameterValue from '../util/encode-parameter-value.js';
+import escapePropertyValue from '../util/escape-property-value.js';
+import foldLine from '../util/fold-line.js';
+import isString from '../util/is-string.js';
 import kebabCase from 'lodash.kebabcase';
 
 export default abstract class Property {

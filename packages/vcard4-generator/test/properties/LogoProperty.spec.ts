@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import LogoProperty, { LogoPropertyRestConfig } from '../../lib/properties/LogoProperty';
+import LogoProperty, { type LogoPropertyRestConfig } from '../../lib/properties/LogoProperty.js';
 
 describe('LogoProperty', () => {
     it('is a class', () => {

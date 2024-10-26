@@ -1,4 +1,4 @@
-import TelProperty from '../TelProperty';
+import TelProperty from '../TelProperty.js';
 
 export default class TelPropertyArray extends Array {
     push(...items: any[]): number {

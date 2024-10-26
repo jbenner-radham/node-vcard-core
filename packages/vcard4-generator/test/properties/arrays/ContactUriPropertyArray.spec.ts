@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import ContactUriProperty from '../../../lib/properties/ContactUriProperty';
-import ContactUriPropertyArray from '../../../lib/properties/arrays/ContactUriPropertyArray';
+import ContactUriProperty from '../../../lib/properties/ContactUriProperty.js';
+import ContactUriPropertyArray from '../../../lib/properties/arrays/ContactUriPropertyArray.js';
 
 describe('ContactUriPropertyArray', () => {
     it('is a class', () => {

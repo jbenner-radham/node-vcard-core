@@ -1,14 +1,15 @@
+import { afterAll, beforeAll, describe, it } from 'vitest';
 import { expect } from 'chai';
-import sinon from 'sinon';
-import ParameterParser from '../lib/ParameterParser';
+import * as sinon from 'sinon';
+import ParameterParser from '../lib/ParameterParser.js';
 
 describe('@vcard/vcard4-parser > ParameterParser', () => {
-    before(() => {
+    beforeAll(() => {
         // Silence the warning from `#isAllowedFor()`.
         sinon.replace(console, 'warn', sinon.fake());
     });
 
-    after(() => {
+    afterAll(() => {
         sinon.restore();
     });
 

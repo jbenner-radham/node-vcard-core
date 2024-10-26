@@ -1,10 +1,10 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types';
-import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages';
-import isString from '../util/is-string';
-import isValidGroup from '../util/is-valid-group';
-import isValidPrefParameter from '../util/is-valid-pref-parameter';
-import Property from './Property';
-import { Type } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import isString from '../util/is-string.js';
+import isValidGroup from '../util/is-valid-group.js';
+import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
+import Property from './Property.js';
+import { Type } from '../types.js';
 
 export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' | 'voice';
 

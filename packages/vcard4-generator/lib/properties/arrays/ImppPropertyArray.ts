@@ -1,4 +1,4 @@
-import ImppProperty from '../ImppProperty';
+import ImppProperty from '../ImppProperty.js';
 
 export default class ImppPropertyArray extends Array {
     push(...items: any[]): number {

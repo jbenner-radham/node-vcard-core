@@ -1,4 +1,4 @@
-import MemberProperty from '../MemberProperty';
+import MemberProperty from '../MemberProperty.js';
 
 export default class MemberPropertyArray extends Array {
     push(...items: any[]): number {

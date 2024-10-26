@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import isValidPrefParameter from '../../lib/util/is-valid-pref-parameter';
+import isValidPrefParameter from '../../lib/util/is-valid-pref-parameter.js';
 
 describe('isValidPrefParameter', () => {
     it('is a function', () => {

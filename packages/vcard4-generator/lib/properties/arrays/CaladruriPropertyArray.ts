@@ -1,4 +1,4 @@
-import CaladruriProperty from '../CaladruriProperty';
+import CaladruriProperty from '../CaladruriProperty.js';
 
 export default class CaladruriPropertyArray extends Array {
     push(...items: any[]): number {

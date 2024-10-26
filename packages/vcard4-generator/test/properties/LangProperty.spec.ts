@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import LangProperty, { LangPropertyRestConfig } from '../../lib/properties/LangProperty';
+import LangProperty, { type LangPropertyRestConfig } from '../../lib/properties/LangProperty.js';
 
 describe('LangProperty', () => {
     it('is a class', () => {

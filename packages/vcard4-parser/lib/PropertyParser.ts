@@ -1,8 +1,8 @@
 import camelCase from 'lodash.camelcase';
 import { SEPARATOR } from '@vcard/vcard4-meta';
-import type { Parameters, Property } from './types';
-import ParameterParser from './ParameterParser';
-import { PROPERTY_ALLOWLIST } from './allowlists';
+import type { Parameters, Property } from './types.js';
+import ParameterParser from './ParameterParser.js';
+import { PROPERTY_ALLOWLIST } from './allowlists.js';
 
 export default class PropertyParser {
     #colonIndex: number;

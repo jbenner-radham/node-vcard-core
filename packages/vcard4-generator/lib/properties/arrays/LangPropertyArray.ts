@@ -1,4 +1,4 @@
-import LangProperty from '../LangProperty';
+import LangProperty from '../LangProperty.js';
 
 export default class LangPropertyArray extends Array {
     push(...items: any[]): number {

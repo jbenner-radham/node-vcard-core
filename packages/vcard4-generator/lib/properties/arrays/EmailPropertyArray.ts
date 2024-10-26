@@ -1,4 +1,4 @@
-import EmailProperty from '../EmailProperty';
+import EmailProperty from '../EmailProperty.js';
 
 export default class EmailPropertyArray extends Array {
     push(...items: any[]): number {

@@ -1,8 +1,8 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types';
-import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count';
-import isValidGroup from '../util/is-valid-group';
-import Property from './Property';
-import isString from '../util/is-string';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
+import isValidGroup from '../util/is-valid-group.js';
+import Property from './Property.js';
+import isString from '../util/is-string.js';
 
 export interface NParameters {
     value?: 'text';

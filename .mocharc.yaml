@@ -1,6 +1,0 @@
----
-extension: ts
-require:
-  - babel-register.cjs
-  - chai-register.cjs
-spec: packages/*/test/**/*.spec.ts

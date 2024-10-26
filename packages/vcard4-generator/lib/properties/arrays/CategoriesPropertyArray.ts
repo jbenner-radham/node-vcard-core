@@ -1,4 +1,4 @@
-import CategoriesProperty from '../CategoriesProperty';
+import CategoriesProperty from '../CategoriesProperty.js';
 
 export default class CategoriesPropertyArray extends Array {
     push(...items: any[]): number {

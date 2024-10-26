@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import FburlProperty, { FburlPropertyRestConfig } from '../../lib/properties/FburlProperty';
+import FburlProperty, { FburlPropertyRestConfig } from '../../lib/properties/FburlProperty.js';
 
 describe('FburlProperty', () => {
     it('is a class', () => {

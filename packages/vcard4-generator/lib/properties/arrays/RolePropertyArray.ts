@@ -1,4 +1,4 @@
-import RoleProperty from '../RoleProperty';
+import RoleProperty from '../RoleProperty.js';
 
 export default class RolePropertyArray extends Array {
     push(...items: any[]): number {

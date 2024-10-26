@@ -1,5 +1,8 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import ClientpidmapProperty, { ClientpidmapPropertyRestConfig } from '../../lib/properties/ClientpidmapProperty';
+import ClientpidmapProperty, {
+    type ClientpidmapPropertyRestConfig
+} from '../../lib/properties/ClientpidmapProperty.js';
 
 describe('ClientpidmapProperty', () => {
     it('is a class', () => {

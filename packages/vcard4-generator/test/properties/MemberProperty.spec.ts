@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import MemberProperty, { MemberPropertyRestConfig } from '../../lib/properties/MemberProperty';
+import MemberProperty, { type MemberPropertyRestConfig } from '../../lib/properties/MemberProperty.js';
 
 describe('MemberProperty', () => {
     it('is a class', () => {

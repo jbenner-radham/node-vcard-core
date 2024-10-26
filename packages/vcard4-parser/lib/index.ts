@@ -1,5 +1,5 @@
 import { EOL, FOLD_CONTINUATION_CHARS } from '@vcard/vcard4-meta';
-import PropertyParser from './PropertyParser';
+import PropertyParser from './PropertyParser.js';
 
 export default class Vcard4Parser {
     #index: number;

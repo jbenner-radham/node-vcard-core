@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import SourceProperty, { SourcePropertyRestConfig } from '../../lib/properties/SourceProperty';
+import SourceProperty, { type SourcePropertyRestConfig } from '../../lib/properties/SourceProperty.js';
 
 describe('SourceProperty', () => {
     it('is a class', () => {

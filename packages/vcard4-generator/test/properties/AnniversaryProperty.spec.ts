@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import AnniversaryProperty, { AnniversaryPropertyRestConfig } from '../../lib/properties/AnniversaryProperty';
+import AnniversaryProperty, { type AnniversaryPropertyRestConfig } from '../../lib/properties/AnniversaryProperty.js';
 
 describe('AnniversaryProperty', () => {
     it('is a class', () => {

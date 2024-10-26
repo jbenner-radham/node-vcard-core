@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import FnProperty, { FnPropertyRestConfig } from '../../lib/properties/FnProperty';
+import FnProperty, { FnPropertyRestConfig } from '../../lib/properties/FnProperty.js';
 
 describe('FnProperty', () => {
     it('is a class', () => {

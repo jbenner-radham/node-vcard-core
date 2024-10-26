@@ -1,4 +1,4 @@
-import CaluriProperty from '../CaluriProperty';
+import CaluriProperty from '../CaluriProperty.js';
 
 export default class CaluriPropertyArray extends Array {
     push(...items: any[]): number {

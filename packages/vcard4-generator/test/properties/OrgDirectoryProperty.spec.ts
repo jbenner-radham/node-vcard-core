@@ -1,5 +1,8 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import OrgDirectoryProperty, { OrgDirectoryPropertyRestConfig } from '../../lib/properties/OrgDirectoryProperty';
+import OrgDirectoryProperty, {
+    type OrgDirectoryPropertyRestConfig
+} from '../../lib/properties/OrgDirectoryProperty.js';
 
 describe('OrgDirectoryProperty', () => {
     it('is a class', () => {

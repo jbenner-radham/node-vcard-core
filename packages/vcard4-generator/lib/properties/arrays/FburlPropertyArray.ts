@@ -1,4 +1,4 @@
-import FburlProperty from '../FburlProperty';
+import FburlProperty from '../FburlProperty.js';
 
 export default class FburlPropertyArray extends Array {
     push(...items: any[]): number {

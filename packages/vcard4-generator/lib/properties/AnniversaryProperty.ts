@@ -1,8 +1,8 @@
-import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types';
-import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages';
-import isString from '../util/is-string';
-import isValidGroup from '../util/is-valid-group';
-import Property from './Property';
+import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages.js';
+import isString from '../util/is-string.js';
+import isValidGroup from '../util/is-valid-group.js';
+import Property from './Property.js';
 
 export interface AnniversaryParameters {
     value?: 'date-and-or-time' | 'text';

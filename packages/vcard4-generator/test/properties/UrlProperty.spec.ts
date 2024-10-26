@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import UrlProperty, { UrlPropertyRestConfig } from '../../lib/properties/UrlProperty';
+import UrlProperty, { type UrlPropertyRestConfig } from '../../lib/properties/UrlProperty.js';
 
 describe('UrlProperty', () => {
     it('is a class', () => {

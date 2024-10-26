@@ -1,13 +1,13 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types';
+import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
 import {
     getInvalidLanguageValueParameterMessage,
     getInvalidMediatypeValueParameterMessage,
     getInvalidPrefParameterMessage
-} from '../util/error-messages';
-import isString from '../util/is-string';
-import isValidGroup from '../util/is-valid-group';
-import isValidPrefParameter from '../util/is-valid-pref-parameter';
-import Property from './Property';
+} from '../util/error-messages.js';
+import isString from '../util/is-string.js';
+import isValidGroup from '../util/is-valid-group.js';
+import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
+import Property from './Property.js';
 
 export type RelatedType = 'acquaintance'
     | 'agent'

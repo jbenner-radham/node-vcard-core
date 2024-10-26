@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import UidProperty, { UidPropertyRestConfig } from '../../lib/properties/UidProperty';
+import UidProperty, { type UidPropertyRestConfig } from '../../lib/properties/UidProperty.js';
 
 describe('UidProperty', () => {
     it('is a class', () => {

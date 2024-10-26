@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import NProperty, { NPropertyRestConfig } from '../../lib/properties/NProperty';
+import NProperty, { type NPropertyRestConfig } from '../../lib/properties/NProperty.js';
 
 describe('NProperty', () => {
     it('is a class', () => {

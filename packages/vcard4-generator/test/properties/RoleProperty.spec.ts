@@ -1,5 +1,6 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import RoleProperty, { RolePropertyRestConfig } from '../../lib/properties/RoleProperty';
+import RoleProperty, { type RolePropertyRestConfig } from '../../lib/properties/RoleProperty.js';
 
 describe('RoleProperty', () => {
     it('is a class', () => {

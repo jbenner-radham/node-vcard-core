@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import XmlProperty from '../../../lib/properties/XmlProperty';
-import XmlPropertyArray from '../../../lib/properties/arrays/XmlPropertyArray';
+import XmlProperty from '../../../lib/properties/XmlProperty.js';
+import XmlPropertyArray from '../../../lib/properties/arrays/XmlPropertyArray.js';
 
 describe('XmlPropertyArray', () => {
     it('is a class', () => {

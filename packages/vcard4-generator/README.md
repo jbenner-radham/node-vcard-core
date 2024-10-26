@@ -96,6 +96,8 @@ vcard.toString();
 // > END:VCARD
 ```
 
+**NOTE**: This is a pure ESM package. See [here](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) for details.
+
 Building
 --------
 From the monorepo root:

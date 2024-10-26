@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import AdrProperty from '../../../lib/properties/AdrProperty';
-import AdrPropertyArray from '../../../lib/properties/arrays/AdrPropertyArray';
+import AdrProperty from '../../../lib/properties/AdrProperty.js';
+import AdrPropertyArray from '../../../lib/properties/arrays/AdrPropertyArray.js';
 
 describe('AdrPropertyArray', () => {
     it('is a class', () => {

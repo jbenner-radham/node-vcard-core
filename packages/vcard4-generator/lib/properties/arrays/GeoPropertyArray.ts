@@ -1,4 +1,4 @@
-import GeoProperty from '../GeoProperty';
+import GeoProperty from '../GeoProperty.js';
 
 export default class GeoPropertyArray extends Array {
     push(...items: any[]): number {

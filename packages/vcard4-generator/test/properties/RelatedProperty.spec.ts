@@ -1,6 +1,7 @@
+import { describe, it } from 'vitest';
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import RelatedProperty, { RelatedPropertyRestConfig } from '../../lib/properties/RelatedProperty';
+import RelatedProperty, { type RelatedPropertyRestConfig } from '../../lib/properties/RelatedProperty.js';
 
 describe('RelatedProperty', () => {
     it('is a class', () => {
