@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
@@ -14,7 +14,7 @@ export interface AdrParameters {
     tz?: string;
     altid?: string;
     pid?: string;
-    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pref?: Pref;
     type?: Type;
 }
 

@@ -1,4 +1,4 @@
-import type { Cardinality, Group, HobbyOrInterestLevel, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, HobbyOrInterestLevel, Pref, PropertyOptions, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -13,7 +13,7 @@ export interface InterestParameters {
     index?: number; // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
     language?: string;
     level?: InterestLevel;
-    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pref?: Pref;
     type?: Type;
 }
 

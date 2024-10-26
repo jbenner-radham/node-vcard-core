@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Pref, PropertyOptions, Value } from '../types.js';
 import {
     getInvalidLanguageValueParameterMessage,
     getInvalidMediatypeValueParameterMessage,
@@ -35,7 +35,7 @@ export interface RelatedParameters {
     mediatype?: string;
     language?: string;
     pid?: number | number[];
-    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pref?: Pref;
     altid?: number | string;
     type?: RelatedType;
 }

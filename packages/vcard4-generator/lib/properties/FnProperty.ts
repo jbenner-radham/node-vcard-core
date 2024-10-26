@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -11,7 +11,7 @@ export interface FnParameters {
     language?: string;
     altid?: string;
     pid?: string;
-    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pref?: Pref;
 }
 
 export type FnPropertyRestConfig = [value: string, parameters?: FnParameters, options?: PropertyOptions];

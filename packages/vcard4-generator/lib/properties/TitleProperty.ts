@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Pref, PropertyOptions, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -8,7 +8,7 @@ import Property from './Property.js';
 export interface TitleParameters {
     value?: 'text';
     pid?: number | number[];
-    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pref?: Pref;
     altid?: number | string;
     mediatype?: string;
 }

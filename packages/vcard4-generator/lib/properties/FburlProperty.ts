@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -8,7 +8,7 @@ import Property from './Property.js';
 export interface FburlParameters {
     value?: 'uri';
     pid?: number | number[];
-    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pref?: Pref;
     type?: Type;
     mediatype?: string;
     altid?: number | string;
