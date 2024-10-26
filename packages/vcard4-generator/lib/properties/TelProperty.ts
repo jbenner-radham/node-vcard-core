@@ -90,7 +90,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   TEL;VALUE=uri;PREF=1;TYPE="voice,home":tel:+1-555-555-5555;ext=5555
  * >   TEL;VALUE=uri;TYPE=home:tel:+33-01-23-45-67
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1 RFC 6350 - vCard Format Specification § TEL}
  */
 export default class TelProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

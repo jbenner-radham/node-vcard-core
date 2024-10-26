@@ -35,7 +35,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   LANG;TYPE=work;PREF=2:fr
  * >   LANG;TYPE=home:fr
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.4
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.4 RFC 6350 - vCard Format Specification § LANG}
  */
 export default class LangProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

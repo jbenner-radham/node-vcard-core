@@ -135,8 +135,8 @@ const VALUE: unique symbol = Symbol.for('value');
  * >     ORG:ABC\, Inc.;North American Division;Marketing
  * >     END:VCARD
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.4
- * @see https://datatracker.ietf.org/doc/html/rfc6473
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.4 RFC 6350 - vCard Format Specification § KIND}
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6473 RFC 6473 - vCard KIND:application}
  */
 export default class KindProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

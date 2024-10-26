@@ -47,7 +47,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   SOURCE:http://directory.example.com/addressbooks/jdoe/
  * >    Jean%20Dupont.vcf
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3 RFC 6350 - vCard Format Specification § SOURCE}
  */
 export default class SourceProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

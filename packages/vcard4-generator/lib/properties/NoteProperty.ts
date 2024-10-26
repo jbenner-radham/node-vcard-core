@@ -38,7 +38,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   NOTE:This fax number is operational 0800 to 1715
  * >     EST\, Mon-Fri.
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.2
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.2 RFC 6350 - vCard Format Specification § NOTE}
  */
 export default class NoteProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

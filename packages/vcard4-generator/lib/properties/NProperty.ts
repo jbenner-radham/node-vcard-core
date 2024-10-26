@@ -47,7 +47,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >
  * >   N:Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2 RFC 6350 - vCard Format Specification § N}
  */
 export default class NProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

@@ -32,7 +32,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   VERSION:4.0
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.9
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.9 RFC 6350 - vCard Format Specification § VERSION}
  */
 export default class VersionProperty extends Property {
     static readonly CARDINALITY: Cardinality = '1'; // Exactly one instance per vCard MUST be present.

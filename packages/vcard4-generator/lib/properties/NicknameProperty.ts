@@ -39,7 +39,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   NICKNAME:Jim,Jimmie
  * >   NICKNAME;TYPE=work:Boss
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.3
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.3 RFC 6350 - vCard Format Specification § NICKNAME}
  */
 export default class NicknameProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

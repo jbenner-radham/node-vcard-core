@@ -59,7 +59,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   ORG-DIRECTORY;PREF=1:ldap://ldap.tech.example/
  * >   o=Example%20Tech,ou=Engineering
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6715/#section-2.4 RFC 6715 - vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group § Property: ORG-DIRECTORY}
  */
 export default class OrgDirectoryProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

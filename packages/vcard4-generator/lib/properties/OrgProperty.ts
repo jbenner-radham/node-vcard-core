@@ -46,7 +46,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >
  * >   ORG:ABC\, Inc.;North American Division;Marketing
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.4
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.4 RFC 6350 - vCard Format Specification § ORG}
  */
 export default class OrgProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

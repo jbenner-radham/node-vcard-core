@@ -31,7 +31,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.3
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.3 RFC 6350 - vCard Format Specification § PRODID}
  */
 export default class ProdidProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

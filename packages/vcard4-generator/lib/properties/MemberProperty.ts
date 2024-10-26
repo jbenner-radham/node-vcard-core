@@ -63,7 +63,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   MEMBER:tel:+1-418-555-5555
  * >   END:VCARD
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.5
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.5 RFC 6350 - vCard Format Specification § MEMBER}
  */
 export default class MemberProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

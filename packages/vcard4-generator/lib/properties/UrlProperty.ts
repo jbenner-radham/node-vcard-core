@@ -37,7 +37,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   URL:http://example.org/restaurant.french/~chezchic.html
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.8
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.8 RFC 6350 - vCard Format Specification § URL}
  */
 export default class UrlProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

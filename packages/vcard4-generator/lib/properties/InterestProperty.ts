@@ -55,7 +55,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   INTEREST;INDEX=1;LEVEL=medium:r&b music
  * >   INTEREST;INDEX=2;LEVEL=high:rock 'n' roll music
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6715/#section-2.3
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6715/#section-2.3 RFC 6715 - vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group § Property: INTEREST}
  */
 export default class InterestProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

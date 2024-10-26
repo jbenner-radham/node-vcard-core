@@ -94,7 +94,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane
  * >    Doe for any inquiries.
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.6
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.6 RFC 6350 - vCard Format Specification § RELATED}
  */
 export default class RelatedProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

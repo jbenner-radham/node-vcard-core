@@ -56,7 +56,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   TZ;VALUE=utc-offset:-0500
  * >     ; Note: utc-offset format is NOT RECOMMENDED.
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.5.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.5.1 RFC 6350 - vCard Format Specification § TZ}
  */
 export default class TzProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

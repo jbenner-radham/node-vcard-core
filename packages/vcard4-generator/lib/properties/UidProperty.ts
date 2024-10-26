@@ -41,7 +41,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.6
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.6 RFC 6350 - vCard Format Specification § UID}
  */
 export default class UidProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

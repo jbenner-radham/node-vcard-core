@@ -36,7 +36,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   TITLE:Research Scientist
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.1 RFC 6350 - vCard Format Specification § TITLE}
  */
 export default class TitleProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

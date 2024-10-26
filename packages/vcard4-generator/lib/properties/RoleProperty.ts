@@ -40,7 +40,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   ROLE:Project Leader
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.2
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.6.2 RFC 6350 - vCard Format Specification § ROLE}
  */
 export default class RoleProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

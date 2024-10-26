@@ -36,7 +36,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >               / any-param
  * >   SOUND-value = URI
  * >
- * > Example _(sic)_:
+ * > Example:
  * >   SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com
  * >
  * >   SOUND:data:audio/basic;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIh
@@ -44,7 +44,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    ljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0
  * >    <...the remainder of base64-encoded data...>
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5 RFC 6350 - vCard Format Specification § SOUND}
  */
 export default class SoundProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

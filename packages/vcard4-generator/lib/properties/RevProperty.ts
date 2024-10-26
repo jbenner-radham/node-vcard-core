@@ -29,7 +29,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   REV:19951031T222710Z
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.4
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.4 RFC 6350 - vCard Format Specification § REV}
  */
 export default class RevProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.

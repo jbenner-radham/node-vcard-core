@@ -44,7 +44,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Example:
  * >   IMPP;PREF=1:xmpp:alice@example.com
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.3
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.3 RFC 6350 - vCard Format Specification § IMPP}
  */
 export default class ImppProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

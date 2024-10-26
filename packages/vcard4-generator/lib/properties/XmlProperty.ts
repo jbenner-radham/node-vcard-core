@@ -48,7 +48,8 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   XML:<a xmlns="http://www.w3.org/1999/xhtml"\n
  * >       href="http://www.example.com">My web page!</a>
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.5
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.5 RFC 6350 - vCard Format Specification § XML}
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6351#section-6 RFC 6351 - xCard: vCard XML Representation § Format Conversions}
  */
 export default class XmlProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.

@@ -50,7 +50,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    UwDQYJKoZIhvcNAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05l
  * >    <... remainder of base64-encoded data ...>
  *
- * @see https://datatracker.ietf.org/doc/html/rfc6350#section-6.8.1
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.8.1 RFC 6350 - vCard Format Specification § KEY}
  */
 export default class KeyProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
