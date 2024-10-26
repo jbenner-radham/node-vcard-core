@@ -13,8 +13,8 @@ describe('@vcard/vcard4-parser > PropertyParser', () => {
         sinon.restore();
     });
 
-    it('is a function class', () => {
-        expect(PropertyParser).to.be.a('function');
+    it('is a class', () => {
+        expect(PropertyParser).to.be.a('class');
     });
 
     describe('#getName()', () => {
