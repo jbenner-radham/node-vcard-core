@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/vcard4-generator"
+    },
+    {
+      "path": "packages/vcard4-meta"
+    },
+    {
+      "path": "packages/vcard4-parser"
+    }
+  ]
+}

@@ -31,12 +31,12 @@ Building
 From the monorepo root:
 
 ```sh-session
-npx lerna --scope @vcard/vcard4-meta run build
+npm run build
 ```
 
 Testing
 --------
-From the monorepo root:
+From the monorepo root (after building):
 
 ```sh-session
 npm test

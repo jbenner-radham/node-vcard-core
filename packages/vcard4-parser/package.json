@@ -31,20 +31,16 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "npm run build:js && npm run build:types && npm run cp:types",
-    "build:js": "babel --root-mode upward --out-dir dist lib --extensions '.ts' --ignore '**/*.d.ts'",
-    "build:types": "tsc --project './tsconfig.d.json'",
-    "clean": "rimraf ./dist",
-    "cp:types": "cp ./lib/types.d.ts ./dist/",
+    "build": "tsc --build",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
     "lint": "eslint lib test",
     "lint:fix": "eslint --fix lib test",
+    "prepack": "npm run build",
     "sort:pkg": "sort-package-json",
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "typecheck": "tsc"
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
     "@vcard/vcard4-meta": "^1.0.0-rc.4",
-    "core-js": "^3.24.1",
     "lodash.camelcase": "^4.3.0",
     "type-fest": "^4.26.1"
   },
