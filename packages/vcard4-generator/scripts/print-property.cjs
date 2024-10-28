@@ -7,11 +7,12 @@ if (process.argv.length < 3) {
     process.exit(1);
 }
 
-const upperCamelCase = (string) => _.upperFirst(_.camelCase(string));
+const pascalCase = (string) => _.upperFirst(_.camelCase(string));
+const upperKebabCase = (string) => _.kebabCase(string).toUpperCase();
 
 Handlebars.registerHelper('camelCase', (string) => _.camelCase(string));
-Handlebars.registerHelper('upperCamelCase', (string) => upperCamelCase(string));
-Handlebars.registerHelper('upperCase', (string) => string.toUpperCase());
+Handlebars.registerHelper('pascalCase', (string) => pascalCase(string));
+Handlebars.registerHelper('upperKebabCase', (string) => upperKebabCase(string));
 
 const cardinalityDescriptions = {
     '*': 'One or more instances per vCard MAY be present.',

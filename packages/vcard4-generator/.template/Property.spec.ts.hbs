@@ -1,36 +1,36 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import {{{upperCamelCase property}}}Property, { type {{{upperCamelCase property}}}PropertyRestConfig } from '../../lib/properties/{{{upperCamelCase property}}}Property.js';
+import {{{pascalCase property}}}Property, { type {{{pascalCase property}}}PropertyRestConfig } from '../../lib/properties/{{{pascalCase property}}}Property.js';
 
-describe('{{{upperCamelCase property}}}Property', () => {
+describe('{{{pascalCase property}}}Property', () => {
     it('is a class', () => {
-        expect({{{upperCamelCase property}}}Property).to.be.a('class');
+        expect({{{pascalCase property}}}Property).to.be.a('class');
     });
 
     describe('#toString()', () => {
         it('is a method', () => {
-            expect({{{upperCamelCase property}}}Property.prototype.toString).to.be.a('function');
+            expect({{{pascalCase property}}}Property.prototype.toString).to.be.a('function');
         });
 
         it('returns a string', () => {
-            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property('...');
+            const {{{camelCase property}}} = new {{{pascalCase property}}}Property('...');
 
             expect({{{camelCase property}}}.toString()).to.be.a('string');
         });
 
         it('returns the proper string format', () => {
             const value = '...';
-            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property(value);
+            const {{{camelCase property}}} = new {{{pascalCase property}}}Property(value);
 
-            expect({{{camelCase property}}}.toString()).to.equal(`{{{upperCase property}}}:${value}`);
+            expect({{{camelCase property}}}.toString()).to.equal(`{{{upperKebabCase property}}}:${value}`);
         });
 
         it('correctly returns parameters', () => {
             const parameters = { pref: 1 };
             const value = '...';
-            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property(value, parameters);
+            const {{{camelCase property}}} = new {{{pascalCase property}}}Property(value, parameters);
             const actual = {{{camelCase property}}}.toString();
-            const expected = `{{{upperCase property}}};PREF=1:${value}`;
+            const expected = `{{{upperKebabCase property}}};PREF=1:${value}`;
 
             expect(actual).to.equal(expected);
         });
@@ -38,18 +38,18 @@ describe('{{{upperCamelCase property}}}Property', () => {
 
     describe('#valueOf()', () => {
         it('is a method', () => {
-            expect({{{upperCamelCase property}}}Property.prototype.valueOf).to.be.a('function');
+            expect({{{pascalCase property}}}Property.prototype.valueOf).to.be.a('function');
         });
 
         it('returns a string', () => {
-            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property('...');
+            const {{{camelCase property}}} = new {{{pascalCase property}}}Property('...');
 
             expect({{{camelCase property}}}.valueOf()).to.be.a('string');
         });
 
         it('returns the same value passed to it', () => {
             const value = '...';
-            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property(value);
+            const {{{camelCase property}}} = new {{{pascalCase property}}}Property(value);
 
             expect({{{camelCase property}}}.valueOf()).to.equal(value);
         });
@@ -57,33 +57,33 @@ describe('{{{upperCamelCase property}}}Property', () => {
 
     describe('.factory()', () => {
         it('is a static method', () => {
-            expect({{{upperCamelCase property}}}Property.factory).to.be.a('function');
+            expect({{{pascalCase property}}}Property.factory).to.be.a('function');
         });
 
-        it('returns an instance of `{{{upperCamelCase property}}}Property`', () => {
-            const {{{camelCase property}}} = {{{upperCamelCase property}}}Property.factory('...');
+        it('returns an instance of `{{{pascalCase property}}}Property`', () => {
+            const {{{camelCase property}}} = {{{pascalCase property}}}Property.factory('...');
 
-            expect({{{camelCase property}}} instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+            expect({{{camelCase property}}} instanceof {{{pascalCase property}}}Property).to.equal(true);
         });
 
         it('returns an instance if provided one as an argument', () => {
-            const {{{camelCase property}}} = new {{{upperCamelCase property}}}Property('...');
+            const {{{camelCase property}}} = new {{{pascalCase property}}}Property('...');
 
-            expect({{{upperCamelCase property}}}Property.factory({{{camelCase property}}})).to.equal({{{camelCase property}}});
+            expect({{{pascalCase property}}}Property.factory({{{camelCase property}}})).to.equal({{{camelCase property}}});
         });
 
         it('creates an instance from a string value argument', () => {
-            const {{{camelCase property}}} = {{{upperCamelCase property}}}Property.factory('...');
+            const {{{camelCase property}}} = {{{pascalCase property}}}Property.factory('...');
 
-            expect({{{camelCase property}}} instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+            expect({{{camelCase property}}} instanceof {{{pascalCase property}}}Property).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = '...';
-            const config: {{{upperCamelCase property}}}PropertyRestConfig = [value, { type: 'home' }];
-            const {{{camelCase property}}} = {{{upperCamelCase property}}}Property.factory(config);
+            const config: {{{pascalCase property}}}PropertyRestConfig = [value, { type: 'home' }];
+            const {{{camelCase property}}} = {{{pascalCase property}}}Property.factory(config);
 
-            expect({{{camelCase property}}} instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+            expect({{{camelCase property}}} instanceof {{{pascalCase property}}}Property).to.equal(true);
         });
     });
 });

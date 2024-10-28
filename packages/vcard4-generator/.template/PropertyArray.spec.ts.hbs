@@ -1,44 +1,44 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import {{{upperCamelCase property}}}Property from '../../../lib/properties/{{{upperCamelCase property}}}Property.js';
-import {{{upperCamelCase property}}}PropertyArray from '../../../lib/properties/arrays/{{{upperCamelCase property}}}PropertyArray.js';
+import {{{pascalCase property}}}Property from '../../../lib/properties/{{{pascalCase property}}}Property.js';
+import {{{pascalCase property}}}PropertyArray from '../../../lib/properties/arrays/{{{pascalCase property}}}PropertyArray.js';
 
-describe('{{{upperCamelCase property}}}PropertyArray', () => {
+describe('{{{pascalCase property}}}PropertyArray', () => {
     it('is a class', () => {
-        expect({{{upperCamelCase property}}}PropertyArray).to.be.a('class');
+        expect({{{pascalCase property}}}PropertyArray).to.be.a('class');
     });
 
     describe('#push()', () => {
         it('is a method', () => {
-            expect({{{upperCamelCase property}}}PropertyArray.prototype.push).to.be.a('function');
+            expect({{{pascalCase property}}}PropertyArray.prototype.push).to.be.a('function');
         });
 
         it('returns a number', () => {
             const value = '...';
-            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+            const {{{camelCase property}}}Properties = new {{{pascalCase property}}}PropertyArray();
 
             expect({{{camelCase property}}}Properties.push(value)).to.be.a('number');
         });
 
         it('returns the length of the array', () => {
             const value = '...';
-            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+            const {{{camelCase property}}}Properties = new {{{pascalCase property}}}PropertyArray();
 
             expect({{{camelCase property}}}Properties.push(value)).to.equal(1);
         });
 
-        it('creates an `{{{upperCamelCase property}}}Property` object in the array', () => {
+        it('creates an `{{{pascalCase property}}}Property` object in the array', () => {
             const value = '...';
-            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+            const {{{camelCase property}}}Properties = new {{{pascalCase property}}}PropertyArray();
 
             {{{camelCase property}}}Properties.push(value);
 
-            expect({{{camelCase property}}}Properties.at(0) instanceof {{{upperCamelCase property}}}Property).to.equal(true);
+            expect({{{camelCase property}}}Properties.at(0) instanceof {{{pascalCase property}}}Property).to.equal(true);
         });
 
-        it('creates an `{{{upperCamelCase property}}}Property` object in the array with the proper value', () => {
+        it('creates an `{{{pascalCase property}}}Property` object in the array with the proper value', () => {
             const value = '...';
-            const {{{camelCase property}}}Properties = new {{{upperCamelCase property}}}PropertyArray();
+            const {{{camelCase property}}}Properties = new {{{pascalCase property}}}PropertyArray();
 
             {{{camelCase property}}}Properties.push(value);
 

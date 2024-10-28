@@ -1,8 +1,8 @@
-import { Calscale, Cardinality, Type, Value } from '../types';
-import isString from '../util/is-string';
-import Property from './Property';
+import { Calscale, Cardinality, Pref, Type, Value } from '../types.js';
+import isString from '../util/is-string.js';
+import Property from './Property.js';
 
-export interface {{{upperCamelCase property}}}Parameters {
+export interface {{{pascalCase property}}}Parameters {
     [key: string]: never;
     value?: '';
     altid?: number | string;
@@ -12,15 +12,15 @@ export interface {{{upperCamelCase property}}}Parameters {
     language?: string;
     mediatype?: string;
     pid?: number | number[];
-    pref?: number; // > Its value MUST be an integer between 1 and 100 that quantifies the level of preference.
+    pref?: Pref;
     sortAs?: string;
     type?: Type;
     tz?: string;
 }
 
-export type {{{upperCamelCase property}}}PropertyRestConfig = [value: string, parameters?: {{{upperCamelCase property}}}Parameters];
+export type {{{pascalCase property}}}PropertyRestConfig = [value: string, parameters?: {{{pascalCase property}}}Parameters];
 
-export type {{{upperCamelCase property}}}PropertyLike = {{{upperCamelCase property}}}Property | {{{upperCamelCase property}}}PropertyRestConfig | string;
+export type {{{pascalCase property}}}PropertyLike = {{{pascalCase property}}}Property | {{{pascalCase property}}}PropertyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -30,25 +30,25 @@ const VALUE: unique symbol = Symbol.for('value');
  * > Value type:  ...
  * >
  * > ABNF:
- * >   {{{upperCase property}}}-param =
+ * >   {{{upperKebabCase property}}}-param =
  * >
- * >   {{{upperCase property}}}-value =
+ * >   {{{upperKebabCase property}}}-value =
  * >
  * > Example:
- * >   {{{upperCase property}}}:
+ * >   {{{upperKebabCase property}}}:
  *
  * @see https://datatracker.ietf.org/doc/html/rfc6350#section-
  */
-export default class {{{upperCamelCase property}}}Property extends Property {
+export default class {{{pascalCase property}}}Property extends Property {
     static readonly CARDINALITY: Cardinality = '{{{cardinality}}}'; // {{{cardinalityDescription}}}
 
     static readonly DEFAULT_VALUE_TYPE: Value = '';
 
-    parameters: {{{upperCamelCase property}}}Parameters = {};
+    parameters: {{{pascalCase property}}}Parameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: {{{upperCamelCase property}}}Parameters = {}) {
+    constructor(value: string, parameters: {{{pascalCase property}}}Parameters = {}) {
         super();
 
         if (!isString(value))
@@ -62,13 +62,13 @@ export default class {{{upperCamelCase property}}}Property extends Property {
         return this[VALUE];
     }
 
-    static factory(value: {{{upperCamelCase property}}}PropertyLike): {{{upperCamelCase property}}}Property {
-        if (value instanceof {{{upperCamelCase property}}}Property) return value;
+    static factory(value: {{{pascalCase property}}}PropertyLike): {{{pascalCase property}}}Property {
+        if (value instanceof {{{pascalCase property}}}Property) return value;
 
-        if (Array.isArray(value)) return new {{{upperCamelCase property}}}Property(...value);
+        if (Array.isArray(value)) return new {{{pascalCase property}}}Property(...value);
 
-        if (isString(value)) return new {{{upperCamelCase property}}}Property(value);
+        if (isString(value)) return new {{{pascalCase property}}}Property(value);
 
-        throw new TypeError(`The value "${value}" is not a {{{upperCamelCase property}}}PropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a {{{pascalCase property}}}PropertyLike type`);
     }
 }
