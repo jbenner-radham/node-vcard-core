@@ -35,7 +35,7 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "prepack": "npm run build",
     "sort:pkg": "sort-package-json",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "cd ../../; npm test"
   },
   "dependencies": {
     "@vcard/vcard4-meta": "^1.0.0-rc.4",

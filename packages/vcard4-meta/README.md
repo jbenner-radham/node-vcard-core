@@ -28,19 +28,19 @@ import {
 
 Building
 --------
-From the monorepo root:
-
 ```sh-session
 npm run build
 ```
 
 Testing
 --------
-From the monorepo root (after building):
+After building:
 
 ```sh-session
 npm test
 ```
+
+**NOTE**: This tests the entire monorepo, not just this package.
 
 License
 -------
