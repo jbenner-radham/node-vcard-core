@@ -56,4 +56,4 @@ export default abstract class Property {
 
         return foldLine(`${group}${name}${parameters}:${value}`);
     }
-};
+}
