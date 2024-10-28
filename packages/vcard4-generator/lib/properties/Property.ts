@@ -5,6 +5,8 @@ import foldLine from '../util/fold-line.js';
 import isString from '../util/is-string.js';
 import kebabCase from 'lodash.kebabcase';
 
+const upperKebabCase = (string: string): string => kebabCase(string).toUpperCase();
+
 export default abstract class Property {
     abstract valueOf(): unknown;
 
@@ -27,7 +29,7 @@ export default abstract class Property {
     }
 
     getParametersString(): string {
-        const formatKey = (key: string): string => kebabCase(key).toUpperCase();
+        const formatKey = (key: string): string => upperKebabCase(key);
         const joinIfArray = (value: any): any => Array.isArray(value) ? value.join(',') : value;
         const maybeQuote = (value: any): any => isString(value) && value.includes(',') ? `"${value}"` : value;
         const getKeyValueString = ([key, value]: [string, number | number[] | string]) =>
@@ -48,7 +50,7 @@ export default abstract class Property {
 
     toString(): string {
         const group = this.group ? `${this.group}.`.toUpperCase() : '';
-        const name = kebabCase(this.constructor.name.replace(/Property$/, '')).toUpperCase();
+        const name = upperKebabCase(this.constructor.name.replace(/Property$/, ''));
         const parameters = this.getParametersString();
         const value = this.getEscapedValueString();
 
