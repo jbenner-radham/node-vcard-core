@@ -5,8 +5,8 @@ import type { EmailPropertyRestConfig } from '../lib/properties/EmailProperty.js
 import Vcard4Generator from '../lib/index.js';
 
 describe('Vcard4Generator', () => {
-    it('is a function class', () => {
-        expect(Vcard4Generator).to.be.a('function');
+    it('is a class', () => {
+        expect(Vcard4Generator).to.be.a('class');
     });
 
     describe('#toString()', () => {

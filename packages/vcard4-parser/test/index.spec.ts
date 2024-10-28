@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import fs from 'node:fs';
+import path from 'node:path';
 import Vcard4Parser from '../lib/index.js';
 import PropertyParser from '../lib/PropertyParser.js';
 
@@ -14,8 +14,8 @@ const readVcardFixture = (basename: string): string => {
 const SPACE_FOLDED_PROPERTY_VCARD = readVcardFixture('space-folded-property');
 
 describe('@vcard/vcard4-parser > Vcard4Parser', () => {
-    it('is a function class', () => {
-        expect(Vcard4Parser).to.be.a('function');
+    it('is a class', () => {
+        expect(Vcard4Parser).to.be.a('class');
     });
 
     describe('.isLineFolded()', () => {

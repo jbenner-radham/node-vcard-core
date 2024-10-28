@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, it } from 'vitest';
 import { expect } from 'chai';
-import * as sinon from 'sinon';
+import sinon from 'sinon';
 import ParameterParser from '../lib/ParameterParser.js';
 
 describe('@vcard/vcard4-parser > ParameterParser', () => {
@@ -13,8 +13,8 @@ describe('@vcard/vcard4-parser > ParameterParser', () => {
         sinon.restore();
     });
 
-    it('is a function class', () => {
-        expect(ParameterParser).to.be.a('function');
+    it('is a class', () => {
+        expect(ParameterParser).to.be.a('class');
     });
 
     describe('#getDecodedValue()', () => {
