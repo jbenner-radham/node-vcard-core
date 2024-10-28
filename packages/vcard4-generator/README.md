@@ -25,7 +25,7 @@ import Vcard4Generator from '@vcard/vcard4-generator';
 const config = {
     fn: 'Captain Awesome',
     email: 'hello@example.com',
-    url: 'http://www.example.com/'
+    url: 'https://www.example.com/'
 };
 const vcard = new Vcard4Generator(config);
 
@@ -34,7 +34,7 @@ vcard.toString();
 // > VERSION:4.0
 // > EMAIL:hello@example.com
 // > FN:Captain Awesome
-// > URL:http://www.example.com/
+// > URL:https://www.example.com/
 // > END:VCARD
 
 // Properties that can have multiple instances are represented by arrays.
@@ -53,7 +53,7 @@ vcard.toString();
 // > EMAIL:hello@example.com
 // > FN:Captain Awesome
 // > FN:Alex Awesome
-// > URL:http://www.example.com/
+// > URL:https://www.example.com/
 // > END:VCARD
 ```
 
@@ -64,7 +64,7 @@ import Vcard4Generator, { Vcard4GeneratorConfig } from '@vcard/vcard4-generator'
 const config: Vcard4GeneratorConfig = {
     fn: 'Captain Awesome',
     email: 'hello@example.com',
-    url: 'http://www.example.com/'
+    url: 'https://www.example.com/'
 };
 const vcard = new Vcard4Generator(config);
 
@@ -73,7 +73,7 @@ vcard.toString();
 // > VERSION:4.0
 // > EMAIL:hello@example.com
 // > FN:Captain Awesome
-// > URL:http://www.example.com/
+// > URL:https://www.example.com/
 // > END:VCARD
 
 // Properties that can have multiple instances are represented by arrays.
@@ -92,7 +92,7 @@ vcard.toString();
 // > EMAIL:hello@example.com
 // > FN:Captain Awesome
 // > FN:Alex Awesome
-// > URL:http://www.example.com/
+// > URL:https://www.example.com/
 // > END:VCARD
 ```
 
