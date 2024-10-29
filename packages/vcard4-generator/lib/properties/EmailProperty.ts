@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -13,7 +13,7 @@ export interface EmailParameters {
     altid?: number | string;
 }
 
-export type EmailRestConfig = [value: string, parameters?: EmailParameters, options?: PropertyOptions];
+export type EmailRestConfig = [value: string, parameters?: EmailParameters, options?: Options];
 
 export type EmailConfig = EmailProperty | EmailRestConfig | string;
 
@@ -57,7 +57,7 @@ export default class EmailProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: EmailParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: EmailParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

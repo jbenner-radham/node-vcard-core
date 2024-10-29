@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -7,7 +7,7 @@ export interface VersionParameters {
     value?: 'text';
 }
 
-export type VersionRestConfig = [value: string, parameters?: VersionParameters, options?: PropertyOptions];
+export type VersionRestConfig = [value: string, parameters?: VersionParameters, options?: Options];
 
 export type VersionConfig = VersionProperty | VersionRestConfig | string;
 
@@ -45,7 +45,7 @@ export default class VersionProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value = '4.0', parameters: VersionParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value = '4.0', parameters: VersionParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

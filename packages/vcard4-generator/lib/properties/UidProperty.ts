@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -7,7 +7,7 @@ export interface UidParameters {
     value?: 'uri' | 'text';
 }
 
-export type UidRestConfig = [value: string, parameters?: UidParameters, options?: PropertyOptions];
+export type UidRestConfig = [value: string, parameters?: UidParameters, options?: Options];
 
 export type UidConfig = UidProperty | UidRestConfig | string;
 
@@ -54,7 +54,7 @@ export default class UidProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: UidParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: UidParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

@@ -22,6 +22,6 @@ export type Value = 'boolean'
     | 'uri'
     | 'utc-offset';
 
-export interface PropertyOptions {
+export interface Options {
     group?: Group;
 }

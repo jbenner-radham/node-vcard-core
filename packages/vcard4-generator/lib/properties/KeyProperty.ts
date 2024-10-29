@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface KeyParameters {
     type?: Type;
 }
 
-export type KeyRestConfig = [value: string, parameters?: KeyParameters, options?: PropertyOptions];
+export type KeyRestConfig = [value: string, parameters?: KeyParameters, options?: Options];
 
 /** @todo Add URL type support? */
 export type KeyConfig = KeyProperty | KeyRestConfig | string;
@@ -63,7 +63,7 @@ export default class KeyProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: KeyParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: KeyParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

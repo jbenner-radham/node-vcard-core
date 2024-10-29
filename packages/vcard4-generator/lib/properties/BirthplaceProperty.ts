@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -12,7 +12,7 @@ export interface BirthplaceParameters {
 export type BirthplaceRestConfig = [
     value: string,
     parameters?: BirthplaceParameters,
-    options?: PropertyOptions
+    options?: Options
 ];
 
 export type BirthplaceConfig = BirthplaceProperty | BirthplaceRestConfig | string;
@@ -50,7 +50,7 @@ export default class BirthplaceProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: BirthplaceParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: BirthplaceParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

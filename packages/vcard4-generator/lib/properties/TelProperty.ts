@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -16,7 +16,7 @@ export interface TelParameters {
     altid?: number | string;
 }
 
-export type TelRestConfig = [value: string, parameters?: TelParameters, options?: PropertyOptions];
+export type TelRestConfig = [value: string, parameters?: TelParameters, options?: Options];
 
 export type TelConfig = TelProperty | TelRestConfig | string;
 
@@ -102,7 +102,7 @@ export default class TelProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: TelParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: TelParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -13,7 +13,7 @@ export interface SourceParameters {
     mediatype?: string;
 }
 
-export type SourceRestConfig = [value: string, parameters?: SourceParameters, options?: PropertyOptions];
+export type SourceRestConfig = [value: string, parameters?: SourceParameters, options?: Options];
 
 /** Add URL type support. */
 export type SourceConfig = SourceProperty | SourceRestConfig | string;
@@ -60,7 +60,7 @@ export default class SourceProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: SourceParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: SourceParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

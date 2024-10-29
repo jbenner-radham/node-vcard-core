@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -16,7 +16,7 @@ export interface CategoriesParameters {
 export type CategoriesRestConfig = [
     value: string,
     parameters?: CategoriesParameters,
-    options?: PropertyOptions
+    options?: Options
 ];
 
 export type CategoriesConfig = CategoriesProperty | CategoriesRestConfig | string | string[];
@@ -52,7 +52,7 @@ export default class CategoriesProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: CategoriesParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: CategoriesParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

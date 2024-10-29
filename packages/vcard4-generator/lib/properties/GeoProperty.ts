@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface GeoParameters {
     altid?: number | string;
 }
 
-export type GeoRestConfig = [value: string, parameters?: GeoParameters, options?: PropertyOptions];
+export type GeoRestConfig = [value: string, parameters?: GeoParameters, options?: Options];
 
 export type GeoConfig = GeoProperty | GeoRestConfig | string;
 
@@ -50,7 +50,7 @@ export default class GeoProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: GeoParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: GeoParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface FnParameters {
     pref?: Pref;
 }
 
-export type FnRestConfig = [value: string, parameters?: FnParameters, options?: PropertyOptions];
+export type FnRestConfig = [value: string, parameters?: FnParameters, options?: Options];
 
 export type FnConfig = FnProperty | FnRestConfig | string;
 
@@ -51,7 +51,7 @@ export default class FnProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: FnParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: FnParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

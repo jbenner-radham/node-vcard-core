@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface RoleParameters {
     altid?: number | string;
 }
 
-export type RoleRestConfig = [value: string, parameters?: RoleParameters, options?: PropertyOptions];
+export type RoleRestConfig = [value: string, parameters?: RoleParameters, options?: Options];
 
 export type RoleConfig = RoleProperty | RoleRestConfig | string;
 
@@ -53,7 +53,7 @@ export default class RoleProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: RoleParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: RoleParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

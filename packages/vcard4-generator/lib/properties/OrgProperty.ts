@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -15,7 +15,7 @@ export interface OrgParameters {
     type?: Type;
 }
 
-export type OrgRestConfig = [value: string, parameters?: OrgParameters, options?: PropertyOptions];
+export type OrgRestConfig = [value: string, parameters?: OrgParameters, options?: Options];
 
 export type OrgConfig = OrgProperty | OrgRestConfig | string;
 
@@ -59,7 +59,7 @@ export default class OrgProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: OrgParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: OrgParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

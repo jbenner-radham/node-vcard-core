@@ -1,4 +1,4 @@
-import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Calscale, Cardinality, Group, Options, Value } from '../types.js';
 import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -13,7 +13,7 @@ export interface AnniversaryParameters {
 export type AnniversaryRestConfig = [
     value: string,
     parameters?: AnniversaryParameters,
-    options?: PropertyOptions
+    options?: Options
 ];
 
 /** @todo Add Date type support. */
@@ -54,7 +54,7 @@ export default class AnniversaryProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: AnniversaryParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: AnniversaryParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

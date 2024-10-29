@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
@@ -18,7 +18,7 @@ export interface AdrParameters {
     type?: Type;
 }
 
-export type AdrRestConfig = [value: string, parameters?: AdrParameters, options?: PropertyOptions];
+export type AdrRestConfig = [value: string, parameters?: AdrParameters, options?: Options];
 
 /** @todo Add ADR object support. */
 export type AdrConfig = AdrProperty | AdrRestConfig | string;
@@ -150,7 +150,7 @@ export default class AdrProperty extends Property {
         return countryName;
     }
 
-    constructor(value: string, parameters: AdrParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: AdrParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

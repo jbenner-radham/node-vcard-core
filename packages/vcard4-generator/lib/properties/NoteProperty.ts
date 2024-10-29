@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface NoteParameters {
     altid?: number | string;
 }
 
-export type NoteRestConfig = [value: string, parameters?: NoteParameters, options?: PropertyOptions];
+export type NoteRestConfig = [value: string, parameters?: NoteParameters, options?: Options];
 
 export type NoteConfig = NoteProperty | NoteRestConfig | string;
 
@@ -51,7 +51,7 @@ export default class NoteProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: NoteParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: NoteParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

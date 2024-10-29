@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -13,7 +13,7 @@ export interface ContactUriParameters {
 export type ContactUriRestConfig = [
     value: string,
     parameters?: ContactUriParameters,
-    options?: PropertyOptions
+    options?: Options
 ];
 
 export type ContactUriConfig = ContactUriProperty | ContactUriRestConfig | string;
@@ -62,7 +62,7 @@ export default class ContactUriProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ContactUriParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: ContactUriParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

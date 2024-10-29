@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -18,7 +18,7 @@ export interface OrgDirectoryParameters {
 export type OrgDirectoryRestConfig = [
     value: string,
     parameters?: OrgDirectoryParameters,
-    options?: PropertyOptions
+    options?: Options
 ];
 
 export type OrgDirectoryConfig = OrgDirectoryProperty | OrgDirectoryRestConfig | string;
@@ -72,7 +72,7 @@ export default class OrgDirectoryProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: OrgDirectoryParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: OrgDirectoryParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

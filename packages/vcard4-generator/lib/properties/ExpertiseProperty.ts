@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -17,7 +17,7 @@ export interface ExpertiseParameters {
     type?: Type;
 }
 
-export type ExpertiseRestConfig = [value: string, parameters?: ExpertiseParameters, options?: PropertyOptions];
+export type ExpertiseRestConfig = [value: string, parameters?: ExpertiseParameters, options?: Options];
 
 export type ExpertiseConfig = ExpertiseProperty | ExpertiseRestConfig | string;
 
@@ -58,7 +58,7 @@ export default class ExpertiseProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ExpertiseParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: ExpertiseParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

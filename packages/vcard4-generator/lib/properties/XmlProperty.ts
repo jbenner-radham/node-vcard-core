@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -8,7 +8,7 @@ export interface XmlParameters {
     altid?: number | string;
 }
 
-export type XmlRestConfig = [value: string, parameters?: XmlParameters, options?: PropertyOptions];
+export type XmlRestConfig = [value: string, parameters?: XmlParameters, options?: Options];
 
 export type XmlConfig = XmlProperty | XmlRestConfig | string;
 
@@ -62,7 +62,7 @@ export default class XmlProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: XmlParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: XmlParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

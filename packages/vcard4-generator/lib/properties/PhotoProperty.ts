@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface PhotoParameters {
     pid?: number | number[];
 }
 
-export type PhotoRestConfig = [value: string, parameters?: PhotoParameters, options?: PropertyOptions];
+export type PhotoRestConfig = [value: string, parameters?: PhotoParameters, options?: Options];
 
 /** @todo Add URL type support. */
 export type PhotoConfig = PhotoProperty | PhotoRestConfig | string;
@@ -52,7 +52,7 @@ export default class PhotoProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: PhotoParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: PhotoParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

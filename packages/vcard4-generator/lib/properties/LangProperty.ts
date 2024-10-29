@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -13,7 +13,7 @@ export interface LangParameters {
     type?: Type;
 }
 
-export type LangRestConfig = [value: string, parameters?: LangParameters, options?: PropertyOptions];
+export type LangRestConfig = [value: string, parameters?: LangParameters, options?: Options];
 
 export type LangConfig = LangProperty | LangRestConfig | string;
 
@@ -48,7 +48,7 @@ export default class LangProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: LangParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: LangParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

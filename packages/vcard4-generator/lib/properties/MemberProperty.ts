@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -13,7 +13,7 @@ export interface MemberParameters {
     mediatype?: string;
 }
 
-export type MemberRestConfig = [value: string, parameters?: MemberParameters, options?: PropertyOptions];
+export type MemberRestConfig = [value: string, parameters?: MemberParameters, options?: Options];
 
 export type MemberConfig = MemberProperty | MemberRestConfig | string;
 
@@ -76,7 +76,7 @@ export default class MemberProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: MemberParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: MemberParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface ImppParameters {
     altid?: number | string;
 }
 
-export type ImppRestConfig = [value: string, parameters?: ImppParameters, options?: PropertyOptions];
+export type ImppRestConfig = [value: string, parameters?: ImppParameters, options?: Options];
 
 export type ImppConfig = ImppProperty | ImppRestConfig | string;
 
@@ -57,7 +57,7 @@ export default class ImppProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ImppParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: ImppParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

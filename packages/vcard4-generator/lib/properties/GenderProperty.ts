@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -10,7 +10,7 @@ export interface GenderParameters {
     value?: 'text';
 }
 
-export type GenderRestConfig = [value: string, parameters?: GenderParameters, options?: PropertyOptions];
+export type GenderRestConfig = [value: string, parameters?: GenderParameters, options?: Options];
 
 export type GenderConfig = GenderProperty | GenderRestConfig | string;
 
@@ -72,7 +72,7 @@ export default class GenderProperty extends Property {
         return genderIdentity;
     }
 
-    constructor(value: string, parameters: GenderParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: GenderParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

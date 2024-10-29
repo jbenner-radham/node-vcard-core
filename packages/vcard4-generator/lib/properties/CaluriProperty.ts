@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface CaluriParameters {
     altid?: number | string;
 }
 
-export type CaluriRestConfig = [value: string, parameters?: CaluriParameters, options?: PropertyOptions];
+export type CaluriRestConfig = [value: string, parameters?: CaluriParameters, options?: Options];
 
 /** @todo Add URL type support. */
 export type CaluriConfig = CaluriProperty | CaluriRestConfig | string;
@@ -56,7 +56,7 @@ export default class CaluriProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: CaluriParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: CaluriParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

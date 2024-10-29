@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -15,7 +15,7 @@ export interface LogoParameters {
     altid?: number | string;
 }
 
-export type LogoRestConfig = [value: string, parameters?: LogoParameters, options?: PropertyOptions];
+export type LogoRestConfig = [value: string, parameters?: LogoParameters, options?: Options];
 
 /** @todo Add URL type support. */
 export type LogoConfig = LogoProperty | LogoRestConfig | string;
@@ -54,7 +54,7 @@ export default class LogoProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: LogoParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: LogoParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -15,7 +15,7 @@ export interface SoundParameters {
     altid?: number | string;
 }
 
-export type SoundRestConfig = [value: string, parameters?: SoundParameters, options?: PropertyOptions];
+export type SoundRestConfig = [value: string, parameters?: SoundParameters, options?: Options];
 
 /** @todo Add URL type support. */
 export type SoundConfig = SoundProperty | SoundRestConfig | string;
@@ -57,7 +57,7 @@ export default class SoundProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: SoundParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: SoundParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

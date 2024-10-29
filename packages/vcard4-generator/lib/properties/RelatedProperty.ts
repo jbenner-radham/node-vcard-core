@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Value } from '../types.js';
 import {
     getInvalidLanguageValueParameterMessage,
     getInvalidMediatypeValueParameterMessage,
@@ -40,7 +40,7 @@ export interface RelatedParameters {
     type?: RelatedType;
 }
 
-export type RelatedRestConfig = [value: string, parameters?: RelatedParameters, options?: PropertyOptions];
+export type RelatedRestConfig = [value: string, parameters?: RelatedParameters, options?: Options];
 
 export type RelatedConfig = RelatedProperty | RelatedRestConfig | string;
 
@@ -107,7 +107,7 @@ export default class RelatedProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: RelatedParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: RelatedParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

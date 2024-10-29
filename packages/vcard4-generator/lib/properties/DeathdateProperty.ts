@@ -1,4 +1,4 @@
-import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Calscale, Cardinality, Group, Options, Value } from '../types.js';
 import {
     getInvalidCalscaleValueParameterMessage,
     getInvalidLanguageValueParameterMessage
@@ -14,7 +14,7 @@ export interface DeathdateParameters {
     language?: string; // For `text` type only!
 }
 
-export type DeathdateRestConfig = [value: string, parameters?: DeathdateParameters, options?: PropertyOptions];
+export type DeathdateRestConfig = [value: string, parameters?: DeathdateParameters, options?: Options];
 
 /** @todo Add Date support. */
 export type DeathdateConfig = DeathdateProperty | DeathdateRestConfig | string;
@@ -65,7 +65,7 @@ export default class DeathdateProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: DeathdateParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: DeathdateParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

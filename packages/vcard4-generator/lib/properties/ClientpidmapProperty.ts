@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -10,7 +10,7 @@ export interface ClientpidmapParameters {
 export type ClientpidmapRestConfig = [
     value: string,
     parameters?: ClientpidmapParameters,
-    options?: PropertyOptions
+    options?: Options
 ];
 
 export type ClientpidmapConfig = ClientpidmapProperty | ClientpidmapRestConfig | string;
@@ -62,7 +62,7 @@ export default class ClientpidmapProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ClientpidmapParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: ClientpidmapParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

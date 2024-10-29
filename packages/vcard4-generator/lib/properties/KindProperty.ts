@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -9,7 +9,7 @@ export interface KindParameters {
     value?: 'text';
 }
 
-export type KindRestConfig = [value: Kind, parameters?: KindParameters, options?: PropertyOptions];
+export type KindRestConfig = [value: Kind, parameters?: KindParameters, options?: Options];
 
 export type KindConfig = KindProperty | KindRestConfig | Kind;
 
@@ -149,7 +149,7 @@ export default class KindProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: Kind, parameters: KindParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: Kind, parameters: KindParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

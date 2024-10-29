@@ -1,4 +1,4 @@
-import type { Cardinality, Group, HobbyOrInterestLevel, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, HobbyOrInterestLevel, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -17,7 +17,7 @@ export interface InterestParameters {
     type?: Type;
 }
 
-export type InterestRestConfig = [value: string, parameters?: InterestParameters, options?: PropertyOptions];
+export type InterestRestConfig = [value: string, parameters?: InterestParameters, options?: Options];
 
 export type InterestConfig = InterestProperty | InterestRestConfig | string;
 
@@ -68,7 +68,7 @@ export default class InterestProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: InterestParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: InterestParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

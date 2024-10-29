@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -7,7 +7,7 @@ export interface RevParameters {
     value?: 'timestamp';
 }
 
-export type RevRestConfig = [value: string, parameters?: RevParameters, options?: PropertyOptions];
+export type RevRestConfig = [value: string, parameters?: RevParameters, options?: Options];
 
 /** @todo Add Date type support. */
 export type RevConfig = RevProperty | RevRestConfig | string;
@@ -42,7 +42,7 @@ export default class RevProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: RevParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: RevParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

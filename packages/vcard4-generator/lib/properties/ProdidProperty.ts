@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -7,7 +7,7 @@ export interface ProdidParameters {
     value?: 'text';
 }
 
-export type ProdidRestConfig = [value: string, parameters?: ProdidParameters, options?: PropertyOptions];
+export type ProdidRestConfig = [value: string, parameters?: ProdidParameters, options?: Options];
 
 export type ProdidConfig = ProdidProperty | ProdidRestConfig | string;
 
@@ -44,7 +44,7 @@ export default class ProdidProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: ProdidParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: ProdidParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

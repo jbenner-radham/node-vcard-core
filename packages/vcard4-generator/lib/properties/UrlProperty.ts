@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface UrlParameters {
     altid?: number | string;
 }
 
-export type UrlRestConfig = [value: string, parameters?: UrlParameters, options?: PropertyOptions];
+export type UrlRestConfig = [value: string, parameters?: UrlParameters, options?: Options];
 
 /** @todo Add URL type support. */
 export type UrlConfig = UrlProperty | UrlRestConfig | string;
@@ -50,7 +50,7 @@ export default class UrlProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: UrlParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: UrlParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

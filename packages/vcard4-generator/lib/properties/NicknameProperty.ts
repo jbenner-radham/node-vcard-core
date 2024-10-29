@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface NicknameParameters {
     pref?: Pref;
 }
 
-export type NicknameRestConfig = [value: string, parameters?: NicknameParameters, options?: PropertyOptions];
+export type NicknameRestConfig = [value: string, parameters?: NicknameParameters, options?: Options];
 
 export type NicknameConfig = NicknameProperty | NicknameRestConfig | string;
 
@@ -52,7 +52,7 @@ export default class NicknameProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: NicknameParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: NicknameParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

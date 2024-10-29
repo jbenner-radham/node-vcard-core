@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -12,7 +12,7 @@ export interface DeathplaceParameters {
 export type DeathplaceRestConfig = [
     value: string,
     parameters?: DeathplaceParameters,
-    options?: PropertyOptions
+    options?: Options
 ];
 
 /** @todo Add URL support. */
@@ -51,7 +51,7 @@ export default class DeathplaceProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: DeathplaceParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: DeathplaceParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

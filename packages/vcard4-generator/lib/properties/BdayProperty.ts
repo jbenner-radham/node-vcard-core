@@ -1,4 +1,4 @@
-import type { Calscale, Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Calscale, Cardinality, Group, Options, Value } from '../types.js';
 import {
     getInvalidCalscaleValueParameterMessage,
     getInvalidLanguageValueParameterMessage
@@ -14,7 +14,7 @@ export interface BdayParameters {
     language?: string; // For `text` type only!
 }
 
-export type BdayRestConfig = [value: string, parameters?: BdayParameters, options?: PropertyOptions];
+export type BdayRestConfig = [value: string, parameters?: BdayParameters, options?: Options];
 
 /** @todo Add Date type support. */
 export type BdayConfig = BdayProperty | BdayRestConfig | string;
@@ -59,7 +59,7 @@ export default class BdayProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: BdayParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: BdayParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

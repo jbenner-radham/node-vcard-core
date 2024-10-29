@@ -1,4 +1,4 @@
-import type { Cardinality, Group, HobbyOrInterestLevel, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, HobbyOrInterestLevel, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -17,7 +17,7 @@ export interface HobbyParameters {
     type?: Type;
 }
 
-export type HobbyRestConfig = [value: string, parameters?: HobbyParameters, options?: PropertyOptions];
+export type HobbyRestConfig = [value: string, parameters?: HobbyParameters, options?: Options];
 
 export type HobbyConfig = HobbyProperty | HobbyRestConfig | string;
 
@@ -67,7 +67,7 @@ export default class HobbyProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: HobbyParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: HobbyParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

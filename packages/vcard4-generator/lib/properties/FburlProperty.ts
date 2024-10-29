@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface FburlParameters {
     altid?: number | string;
 }
 
-export type FburlRestConfig = [value: string, parameters?: FburlParameters, options?: PropertyOptions];
+export type FburlRestConfig = [value: string, parameters?: FburlParameters, options?: Options];
 
 /** @todo Add URL type support? */
 export type FburlConfig = FburlProperty | FburlRestConfig | string;
@@ -57,7 +57,7 @@ export default class FburlProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: FburlParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: FburlParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

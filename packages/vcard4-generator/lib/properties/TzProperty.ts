@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, PropertyOptions, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -14,7 +14,7 @@ export interface TzParameters {
     mediatype?: string;
 }
 
-export type TzRestConfig = [value: string, parameters?: TzParameters, options?: PropertyOptions];
+export type TzRestConfig = [value: string, parameters?: TzParameters, options?: Options];
 
 export type TzConfig = TzProperty | TzRestConfig | string;
 
@@ -69,7 +69,7 @@ export default class TzProperty extends Property {
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: TzParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: TzParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))

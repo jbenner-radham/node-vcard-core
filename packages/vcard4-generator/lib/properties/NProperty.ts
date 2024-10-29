@@ -1,4 +1,4 @@
-import type { Cardinality, Group, PropertyOptions, Value } from '../types.js';
+import type { Cardinality, Group, Options, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -11,7 +11,7 @@ export interface NParameters {
     altid?: number | string;
 }
 
-export type NRestConfig = [value: string, parameters?: NParameters, options?: PropertyOptions];
+export type NRestConfig = [value: string, parameters?: NParameters, options?: Options];
 
 export type NConfig = NProperty | NRestConfig | string;
 
@@ -90,7 +90,7 @@ export default class NProperty extends Property {
         return honorificSuffix;
     }
 
-    constructor(value: string, parameters: NParameters = {}, { group = '' }: PropertyOptions = {}) {
+    constructor(value: string, parameters: NParameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))
