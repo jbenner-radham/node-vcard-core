@@ -1,7 +1,7 @@
-import {{{pascalCase property}}}Property from '../{{{pascalCase property}}}Property';
+import {{{pascalCase property}}}Property, { type {{{pascalCase property}}}PropertyLike } from '../{{{pascalCase property}}}Property';
 
 export default class {{{pascalCase property}}}PropertyArray extends Array {
-    push(...items: any[]): number {
+    push(...items: {{{pascalCase property}}}PropertyLike[]): number {
         items.forEach(item => super.push({{{pascalCase property}}}Property.factory(item)));
 
         return this.length;

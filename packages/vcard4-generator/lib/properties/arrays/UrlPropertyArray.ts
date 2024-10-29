@@ -1,7 +1,7 @@
-import UrlProperty from '../UrlProperty.js';
+import UrlProperty, { type UrlPropertyLike } from '../UrlProperty.js';
 
 export default class UrlPropertyArray extends Array {
-    push(...items: any[]): number {
+    push(...items: UrlPropertyLike[]): number {
         items.forEach(item => super.push(UrlProperty.factory(item)));
 
         return this.length;

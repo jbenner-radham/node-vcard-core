@@ -1,7 +1,7 @@
-import TzProperty from '../TzProperty.js';
+import TzProperty, { type TzPropertyLike } from '../TzProperty.js';
 
 export default class TzPropertyArray extends Array {
-    push(...items: any[]): number {
+    push(...items: TzPropertyLike[]): number {
         items.forEach(item => super.push(TzProperty.factory(item)));
 
         return this.length;

@@ -1,7 +1,7 @@
-import OrgDirectoryProperty from '../OrgDirectoryProperty.js';
+import OrgDirectoryProperty, { type OrgDirectoryPropertyLike } from '../OrgDirectoryProperty.js';
 
 export default class OrgDirectoryPropertyArray extends Array {
-    push(...items: any[]): number {
+    push(...items: OrgDirectoryPropertyLike[]): number {
         items.forEach(item => super.push(OrgDirectoryProperty.factory(item)));
 
         return this.length;
