@@ -81,6 +81,8 @@ export default class OrgDirectoryProperty extends Property {
         if (!isValidGroup(group))
             throw new TypeError(`The group "${group}" is not a string or integer`);
 
+        OrgDirectoryProperty.validateParameters(parameters);
+
         this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
