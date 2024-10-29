@@ -1,8 +1,8 @@
-import LogoProperty, { type LogoPropertyLike } from '../LogoProperty.js';
+import LogoProperty, { type LogoConfig } from '../LogoProperty.js';
 
 export default class LogoPropertyArray extends Array {
-    push(...items: LogoPropertyLike[]): number {
-        items.forEach(item => super.push(LogoProperty.factory(item)));
+    push(...items: LogoConfig[]): number {
+        items.forEach(item => super.push(LogoProperty.from(item)));
 
         return this.length;
     }

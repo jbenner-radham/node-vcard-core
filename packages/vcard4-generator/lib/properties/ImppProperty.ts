@@ -14,9 +14,9 @@ export interface ImppParameters {
     altid?: number | string;
 }
 
-export type ImppPropertyRestConfig = [value: string, parameters?: ImppParameters, options?: PropertyOptions];
+export type ImppRestConfig = [value: string, parameters?: ImppParameters, options?: PropertyOptions];
 
-export type ImppPropertyLike = ImppProperty | ImppPropertyRestConfig | string;
+export type ImppConfig = ImppProperty | ImppRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -77,14 +77,14 @@ export default class ImppProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: ImppPropertyLike): ImppProperty {
+    static from(value: ImppConfig): ImppProperty {
         if (value instanceof ImppProperty) return value;
 
         if (Array.isArray(value)) return new ImppProperty(...value);
 
         if (isString(value)) return new ImppProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a ImppPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a ImppConfig type`);
     }
 
     static validateParameters({ pref }: ImppParameters): void {

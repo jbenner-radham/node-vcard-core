@@ -13,9 +13,9 @@ export interface MemberParameters {
     mediatype?: string;
 }
 
-export type MemberPropertyRestConfig = [value: string, parameters?: MemberParameters, options?: PropertyOptions];
+export type MemberRestConfig = [value: string, parameters?: MemberParameters, options?: PropertyOptions];
 
-export type MemberPropertyLike = MemberProperty | MemberPropertyRestConfig | string;
+export type MemberConfig = MemberProperty | MemberRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -96,14 +96,14 @@ export default class MemberProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: MemberPropertyLike): MemberProperty {
+    static from(value: MemberConfig): MemberProperty {
         if (value instanceof MemberProperty) return value;
 
         if (Array.isArray(value)) return new MemberProperty(...value);
 
         if (isString(value)) return new MemberProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a MemberPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a MemberConfig type`);
     }
 
     static validateParameters({ pref }: MemberParameters): void {

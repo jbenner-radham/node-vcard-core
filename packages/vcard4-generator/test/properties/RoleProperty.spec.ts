@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import RoleProperty, { type RolePropertyRestConfig } from '../../lib/properties/RoleProperty.js';
+import RoleProperty, { type RoleRestConfig } from '../../lib/properties/RoleProperty.js';
 
 describe('RoleProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('RoleProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(RoleProperty.factory).to.be.a('function');
+            expect(RoleProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `RoleProperty`', () => {
-            const role = RoleProperty.factory('Project Leader');
+            const role = RoleProperty.from('Project Leader');
 
             expect(role instanceof RoleProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('RoleProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const role = new RoleProperty('Project Leader');
 
-            expect(RoleProperty.factory(role)).to.equal(role);
+            expect(RoleProperty.from(role)).to.equal(role);
         });
 
         it('creates an instance from a string value argument', () => {
-            const role = RoleProperty.factory('Project Leader');
+            const role = RoleProperty.from('Project Leader');
 
             expect(role instanceof RoleProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'Project Leader';
-            const config: RolePropertyRestConfig = [value, { type: 'work' }];
-            const role = RoleProperty.factory(config);
+            const config: RoleRestConfig = [value, { type: 'work' }];
+            const role = RoleProperty.from(config);
 
             expect(role instanceof RoleProperty).to.equal(true);
         });

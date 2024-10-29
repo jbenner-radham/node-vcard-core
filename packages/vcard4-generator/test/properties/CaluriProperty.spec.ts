@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import CaluriProperty, { type CaluriPropertyRestConfig } from '../../lib/properties/CaluriProperty.js';
+import CaluriProperty, { type CaluriRestConfig } from '../../lib/properties/CaluriProperty.js';
 
 describe('CaluriProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('CaluriProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(CaluriProperty.factory).to.be.a('function');
+            expect(CaluriProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `CaluriProperty`', () => {
-            const caluri = CaluriProperty.factory('http://cal.example.com/calA');
+            const caluri = CaluriProperty.from('http://cal.example.com/calA');
 
             expect(caluri instanceof CaluriProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('CaluriProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const caluri = new CaluriProperty('http://cal.example.com/calA');
 
-            expect(CaluriProperty.factory(caluri) instanceof CaluriProperty).to.equal(true);
+            expect(CaluriProperty.from(caluri) instanceof CaluriProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const caluri = CaluriProperty.factory('http://cal.example.com/calA');
+            const caluri = CaluriProperty.from('http://cal.example.com/calA');
 
             expect(caluri instanceof CaluriProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'http://cal.example.com/calA';
-            const config: CaluriPropertyRestConfig = [value, { type: 'home' }];
-            const caluri = CaluriProperty.factory(config);
+            const config: CaluriRestConfig = [value, { type: 'home' }];
+            const caluri = CaluriProperty.from(config);
 
             expect(caluri instanceof CaluriProperty).to.equal(true);
         });

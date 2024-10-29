@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import CaladruriProperty, { type CaladruriPropertyRestConfig } from '../../lib/properties/CaladruriProperty.js';
+import CaladruriProperty, { type CaladruriRestConfig } from '../../lib/properties/CaladruriProperty.js';
 
 describe('CaladruriProperty', () => {
     it('is a class', () => {
@@ -82,13 +82,13 @@ describe('CaladruriProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(CaladruriProperty.factory).to.be.a('function');
+            expect(CaladruriProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `CaladruriProperty`', () => {
-            const caladruri = CaladruriProperty.factory('http://example.com/calendar/jdoe');
+            const caladruri = CaladruriProperty.from('http://example.com/calendar/jdoe');
 
             expect(caladruri instanceof CaladruriProperty).to.equal(true);
         });
@@ -96,19 +96,19 @@ describe('CaladruriProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const caladruri = new CaladruriProperty('http://example.com/calendar/jdoe');
 
-            expect(CaladruriProperty.factory(caladruri) instanceof CaladruriProperty).to.equal(true);
+            expect(CaladruriProperty.from(caladruri) instanceof CaladruriProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const caladruri = CaladruriProperty.factory('http://example.com/calendar/jdoe');
+            const caladruri = CaladruriProperty.from('http://example.com/calendar/jdoe');
 
             expect(caladruri instanceof CaladruriProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'http://example.com/calendar/jdoe';
-            const config: CaladruriPropertyRestConfig = [value, { type: 'home' }];
-            const caladruri = CaladruriProperty.factory(config);
+            const config: CaladruriRestConfig = [value, { type: 'home' }];
+            const caladruri = CaladruriProperty.from(config);
 
             expect(caladruri instanceof CaladruriProperty).to.equal(true);
         });

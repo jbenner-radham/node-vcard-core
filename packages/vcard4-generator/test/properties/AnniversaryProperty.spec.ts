@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import AnniversaryProperty, { type AnniversaryPropertyRestConfig } from '../../lib/properties/AnniversaryProperty.js';
+import AnniversaryProperty, { type AnniversaryRestConfig } from '../../lib/properties/AnniversaryProperty.js';
 
 describe('AnniversaryProperty', () => {
     it('is a class', () => {
@@ -80,13 +80,13 @@ describe('AnniversaryProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(AnniversaryProperty.factory).to.be.a('function');
+            expect(AnniversaryProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `AnniversaryProperty`', () => {
-            const anniversary = AnniversaryProperty.factory('19960415');
+            const anniversary = AnniversaryProperty.from('19960415');
 
             expect(anniversary instanceof AnniversaryProperty).to.equal(true);
         });
@@ -94,18 +94,18 @@ describe('AnniversaryProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const anniversary = new AnniversaryProperty('19960415');
 
-            expect(AnniversaryProperty.factory(anniversary)).to.equal(anniversary);
+            expect(AnniversaryProperty.from(anniversary)).to.equal(anniversary);
         });
 
         it('creates an instance from a string value argument', () => {
-            const anniversary = AnniversaryProperty.factory('19960415');
+            const anniversary = AnniversaryProperty.from('19960415');
 
             expect(anniversary instanceof AnniversaryProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
-            const config: AnniversaryPropertyRestConfig = ['19960415', { calscale: 'gregorian' }];
-            const anniversary = AnniversaryProperty.factory(config);
+            const config: AnniversaryRestConfig = ['19960415', { calscale: 'gregorian' }];
+            const anniversary = AnniversaryProperty.from(config);
 
             expect(anniversary instanceof AnniversaryProperty).to.equal(true);
         });

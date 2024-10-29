@@ -14,10 +14,10 @@ export interface FburlParameters {
     altid?: number | string;
 }
 
-export type FburlPropertyRestConfig = [value: string, parameters?: FburlParameters, options?: PropertyOptions];
+export type FburlRestConfig = [value: string, parameters?: FburlParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support? */
-export type FburlPropertyLike = FburlProperty | FburlPropertyRestConfig | string;
+export type FburlConfig = FburlProperty | FburlRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -77,14 +77,14 @@ export default class FburlProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: FburlPropertyLike): FburlProperty {
+    static from(value: FburlConfig): FburlProperty {
         if (value instanceof FburlProperty) return value;
 
         if (Array.isArray(value)) return new FburlProperty(...value);
 
         if (isString(value)) return new FburlProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a FburlPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a FburlConfig type`);
     }
 
     static validateParameters({ pref }: FburlParameters): void {

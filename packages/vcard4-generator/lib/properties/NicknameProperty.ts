@@ -14,9 +14,9 @@ export interface NicknameParameters {
     pref?: Pref;
 }
 
-export type NicknamePropertyRestConfig = [value: string, parameters?: NicknameParameters, options?: PropertyOptions];
+export type NicknameRestConfig = [value: string, parameters?: NicknameParameters, options?: PropertyOptions];
 
-export type NicknamePropertyLike = NicknameProperty | NicknamePropertyRestConfig | string;
+export type NicknameConfig = NicknameProperty | NicknameRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -72,14 +72,14 @@ export default class NicknameProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: NicknamePropertyLike): NicknameProperty {
+    static from(value: NicknameConfig): NicknameProperty {
         if (value instanceof NicknameProperty) return value;
 
         if (Array.isArray(value)) return new NicknameProperty(...value);
 
         if (isString(value)) return new NicknameProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a NicknamePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a NicknameConfig type`);
     }
 
     static validateParameters({ pref }: NicknameParameters): void {

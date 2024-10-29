@@ -40,9 +40,9 @@ export interface RelatedParameters {
     type?: RelatedType;
 }
 
-export type RelatedPropertyRestConfig = [value: string, parameters?: RelatedParameters, options?: PropertyOptions];
+export type RelatedRestConfig = [value: string, parameters?: RelatedParameters, options?: PropertyOptions];
 
-export type RelatedPropertyLike = RelatedProperty | RelatedPropertyRestConfig | string;
+export type RelatedConfig = RelatedProperty | RelatedRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -127,14 +127,14 @@ export default class RelatedProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: RelatedPropertyLike): RelatedProperty {
+    static from(value: RelatedConfig): RelatedProperty {
         if (value instanceof RelatedProperty) return value;
 
         if (Array.isArray(value)) return new RelatedProperty(...value);
 
         if (isString(value)) return new RelatedProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a RelatedPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a RelatedConfig type`);
     }
 
     static validateParameters({ language, mediatype, pref, value }: RelatedParameters): void {

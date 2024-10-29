@@ -9,13 +9,13 @@ export interface BirthplaceParameters {
     language?: string;
 }
 
-export type BirthplacePropertyRestConfig = [
+export type BirthplaceRestConfig = [
     value: string,
     parameters?: BirthplaceParameters,
     options?: PropertyOptions
 ];
 
-export type BirthplacePropertyLike = BirthplaceProperty | BirthplacePropertyRestConfig | string;
+export type BirthplaceConfig = BirthplaceProperty | BirthplaceRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -68,13 +68,13 @@ export default class BirthplaceProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: BirthplacePropertyLike): BirthplaceProperty {
+    static from(value: BirthplaceConfig): BirthplaceProperty {
         if (value instanceof BirthplaceProperty) return value;
 
         if (Array.isArray(value)) return new BirthplaceProperty(...value);
 
         if (isString(value)) return new BirthplaceProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a BirthplacePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a BirthplaceConfig type`);
     }
 }

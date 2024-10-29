@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import KindProperty, { type KindPropertyRestConfig } from '../../lib/properties/KindProperty.js';
+import KindProperty, { type KindRestConfig } from '../../lib/properties/KindProperty.js';
 
 describe('KindProperty', () => {
     it('is a class', () => {
@@ -61,13 +61,13 @@ describe('KindProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(KindProperty.factory).to.be.a('function');
+            expect(KindProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `KindProperty`', () => {
-            const kind = KindProperty.factory('application');
+            const kind = KindProperty.from('application');
 
             expect(kind instanceof KindProperty).to.equal(true);
         });
@@ -75,19 +75,19 @@ describe('KindProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const kind = new KindProperty('application');
 
-            expect(KindProperty.factory(kind) instanceof KindProperty).to.equal(true);
+            expect(KindProperty.from(kind) instanceof KindProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const kind = KindProperty.factory('application');
+            const kind = KindProperty.from('application');
 
             expect(kind instanceof KindProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'application';
-            const config: KindPropertyRestConfig = [value, { value: 'text' }];
-            const kind = KindProperty.factory(config);
+            const config: KindRestConfig = [value, { value: 'text' }];
+            const kind = KindProperty.from(config);
 
             expect(kind instanceof KindProperty).to.equal(true);
         });

@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import HobbyProperty, { HobbyPropertyRestConfig } from '../../lib/properties/HobbyProperty.js';
+import HobbyProperty, { HobbyRestConfig } from '../../lib/properties/HobbyProperty.js';
 
 describe('HobbyProperty', () => {
     it('is a class', () => {
@@ -64,13 +64,13 @@ describe('HobbyProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(HobbyProperty.factory).to.be.a('function');
+            expect(HobbyProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `HobbyProperty`', () => {
-            const hobby = HobbyProperty.factory('sewing');
+            const hobby = HobbyProperty.from('sewing');
 
             expect(hobby instanceof HobbyProperty).to.equal(true);
         });
@@ -78,19 +78,19 @@ describe('HobbyProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const hobby = new HobbyProperty('sewing');
 
-            expect(HobbyProperty.factory(hobby)).to.equal(hobby);
+            expect(HobbyProperty.from(hobby)).to.equal(hobby);
         });
 
         it('creates an instance from a string value argument', () => {
-            const hobby = HobbyProperty.factory('sewing');
+            const hobby = HobbyProperty.from('sewing');
 
             expect(hobby instanceof HobbyProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'sewing';
-            const config: HobbyPropertyRestConfig = [value, { index: 2, level: 'high' }];
-            const hobby = HobbyProperty.factory(config);
+            const config: HobbyRestConfig = [value, { index: 2, level: 'high' }];
+            const hobby = HobbyProperty.from(config);
 
             expect(hobby instanceof HobbyProperty).to.equal(true);
         });

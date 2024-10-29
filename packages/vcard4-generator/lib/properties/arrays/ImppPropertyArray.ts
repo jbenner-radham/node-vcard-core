@@ -1,8 +1,8 @@
-import ImppProperty, { type ImppPropertyLike } from '../ImppProperty.js';
+import ImppProperty, { type ImppConfig } from '../ImppProperty.js';
 
 export default class ImppPropertyArray extends Array {
-    push(...items: ImppPropertyLike[]): number {
-        items.forEach(item => super.push(ImppProperty.factory(item)));
+    push(...items: ImppConfig[]): number {
+        items.forEach(item => super.push(ImppProperty.from(item)));
 
         return this.length;
     }

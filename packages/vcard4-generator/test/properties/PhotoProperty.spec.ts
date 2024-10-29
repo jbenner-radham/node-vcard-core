@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import PhotoProperty, { type PhotoPropertyRestConfig } from '../../lib/properties/PhotoProperty.js';
+import PhotoProperty, { type PhotoRestConfig } from '../../lib/properties/PhotoProperty.js';
 
 describe('PhotoProperty', () => {
     it('is a class', () => {
@@ -54,37 +54,6 @@ describe('PhotoProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
-        it('is a static method', () => {
-            expect(PhotoProperty.factory).to.be.a('function');
-        });
-
-        it('returns an instance of `PhotoProperty`', () => {
-            const photo = PhotoProperty.factory('http://www.example.com/pub/photos/jqpublic.gif');
-
-            expect(photo instanceof PhotoProperty).to.equal(true);
-        });
-
-        it('returns an instance if provided one as an argument', () => {
-            const photo = new PhotoProperty('http://www.example.com/pub/photos/jqpublic.gif');
-
-            expect(PhotoProperty.factory(photo)).to.equal(photo);
-        });
-
-        it('creates an instance from a string value argument', () => {
-            const photo = PhotoProperty.factory('http://www.example.com/pub/photos/jqpublic.gif');
-
-            expect(photo instanceof PhotoProperty).to.equal(true);
-        });
-
-        it('creates an instance from an array argument', () => {
-            const value = 'http://www.example.com/pub/photos/jqpublic.gif';
-            const config: PhotoPropertyRestConfig = [value, { type: 'home' }];
-            const photo = PhotoProperty.factory(config);
-
-            expect(photo instanceof PhotoProperty).to.equal(true);
-        });
-    });
     describe('#valueOf()', () => {
         it('is a method', () => {
             expect(PhotoProperty.prototype.valueOf).to.be.a('function');
@@ -101,6 +70,38 @@ describe('PhotoProperty', () => {
             const photo = new PhotoProperty(value);
 
             expect(photo.valueOf()).to.equal(value);
+        });
+    });
+
+    describe('.from()', () => {
+        it('is a static method', () => {
+            expect(PhotoProperty.from).to.be.a('function');
+        });
+
+        it('returns an instance of `PhotoProperty`', () => {
+            const photo = PhotoProperty.from('http://www.example.com/pub/photos/jqpublic.gif');
+
+            expect(photo instanceof PhotoProperty).to.equal(true);
+        });
+
+        it('returns an instance if provided one as an argument', () => {
+            const photo = new PhotoProperty('http://www.example.com/pub/photos/jqpublic.gif');
+
+            expect(PhotoProperty.from(photo)).to.equal(photo);
+        });
+
+        it('creates an instance from a string value argument', () => {
+            const photo = PhotoProperty.from('http://www.example.com/pub/photos/jqpublic.gif');
+
+            expect(photo instanceof PhotoProperty).to.equal(true);
+        });
+
+        it('creates an instance from an array argument', () => {
+            const value = 'http://www.example.com/pub/photos/jqpublic.gif';
+            const config: PhotoRestConfig = [value, { type: 'home' }];
+            const photo = PhotoProperty.from(config);
+
+            expect(photo instanceof PhotoProperty).to.equal(true);
         });
     });
 });

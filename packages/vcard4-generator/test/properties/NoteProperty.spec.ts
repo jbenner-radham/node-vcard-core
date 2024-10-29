@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import NoteProperty, { type NotePropertyRestConfig } from '../../lib/properties/NoteProperty.js';
+import NoteProperty, { type NoteRestConfig } from '../../lib/properties/NoteProperty.js';
 
 describe('NoteProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('NoteProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(NoteProperty.factory).to.be.a('function');
+            expect(NoteProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `NoteProperty`', () => {
-            const note = NoteProperty.factory('This is a note...');
+            const note = NoteProperty.from('This is a note...');
 
             expect(note instanceof NoteProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('NoteProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const note = new NoteProperty('This is a note...');
 
-            expect(NoteProperty.factory(note)).to.equal(note);
+            expect(NoteProperty.from(note)).to.equal(note);
         });
 
         it('creates an instance from a string value argument', () => {
-            const note = NoteProperty.factory('This is a note...');
+            const note = NoteProperty.from('This is a note...');
 
             expect(note instanceof NoteProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'This is a note...';
-            const config: NotePropertyRestConfig = [value, { type: 'home' }];
-            const note = NoteProperty.factory(config);
+            const config: NoteRestConfig = [value, { type: 'home' }];
+            const note = NoteProperty.from(config);
 
             expect(note instanceof NoteProperty).to.equal(true);
         });

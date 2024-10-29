@@ -17,9 +17,9 @@ export interface ExpertiseParameters {
     type?: Type;
 }
 
-export type ExpertisePropertyRestConfig = [value: string, parameters?: ExpertiseParameters, options?: PropertyOptions];
+export type ExpertiseRestConfig = [value: string, parameters?: ExpertiseParameters, options?: PropertyOptions];
 
-export type ExpertisePropertyLike = ExpertiseProperty | ExpertisePropertyRestConfig | string;
+export type ExpertiseConfig = ExpertiseProperty | ExpertiseRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -78,14 +78,14 @@ export default class ExpertiseProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: ExpertisePropertyLike): ExpertiseProperty {
+    static from(value: ExpertiseConfig): ExpertiseProperty {
         if (value instanceof ExpertiseProperty) return value;
 
         if (Array.isArray(value)) return new ExpertiseProperty(...value);
 
         if (isString(value)) return new ExpertiseProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a ExpertisePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a ExpertiseConfig type`);
     }
 
     static validateParameters({ index, pref }: ExpertiseParameters): void {

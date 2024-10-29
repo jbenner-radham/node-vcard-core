@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import DeathdateProperty, { type DeathdatePropertyRestConfig } from '../../lib/properties/DeathdateProperty.js';
+import DeathdateProperty, { type DeathdateRestConfig } from '../../lib/properties/DeathdateProperty.js';
 
 describe('DeathdateProperty', () => {
     it('is a class', () => {
@@ -64,13 +64,13 @@ describe('DeathdateProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(DeathdateProperty.factory).to.be.a('function');
+            expect(DeathdateProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `DeathdateProperty`', () => {
-            const deathdate = DeathdateProperty.factory('19531015T231000Z');
+            const deathdate = DeathdateProperty.from('19531015T231000Z');
 
             expect(deathdate instanceof DeathdateProperty).to.equal(true);
         });
@@ -78,19 +78,19 @@ describe('DeathdateProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const deathdate = new DeathdateProperty('19531015T231000Z');
 
-            expect(DeathdateProperty.factory(deathdate)).to.equal(deathdate);
+            expect(DeathdateProperty.from(deathdate)).to.equal(deathdate);
         });
 
         it('creates an instance from a string value argument', () => {
-            const deathdate = DeathdateProperty.factory('19531015T231000Z');
+            const deathdate = DeathdateProperty.from('19531015T231000Z');
 
             expect(deathdate instanceof DeathdateProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'circa 1800';
-            const config: DeathdatePropertyRestConfig = [value, { value: 'text' }];
-            const deathdate = DeathdateProperty.factory(config);
+            const config: DeathdateRestConfig = [value, { value: 'text' }];
+            const deathdate = DeathdateProperty.from(config);
 
             expect(deathdate instanceof DeathdateProperty).to.equal(true);
         });

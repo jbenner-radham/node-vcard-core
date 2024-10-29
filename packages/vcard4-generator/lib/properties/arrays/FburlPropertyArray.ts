@@ -1,8 +1,8 @@
-import FburlProperty, { type FburlPropertyLike } from '../FburlProperty.js';
+import FburlProperty, { type FburlConfig } from '../FburlProperty.js';
 
 export default class FburlPropertyArray extends Array {
-    push(...items: FburlPropertyLike[]): number {
-        items.forEach(item => super.push(FburlProperty.factory(item)));
+    push(...items: FburlConfig[]): number {
+        items.forEach(item => super.push(FburlProperty.from(item)));
 
         return this.length;
     }

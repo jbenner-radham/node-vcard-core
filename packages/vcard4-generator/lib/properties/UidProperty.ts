@@ -7,9 +7,9 @@ export interface UidParameters {
     value?: 'uri' | 'text';
 }
 
-export type UidPropertyRestConfig = [value: string, parameters?: UidParameters, options?: PropertyOptions];
+export type UidRestConfig = [value: string, parameters?: UidParameters, options?: PropertyOptions];
 
-export type UidPropertyLike = UidProperty | UidPropertyRestConfig | string;
+export type UidConfig = UidProperty | UidRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -72,13 +72,13 @@ export default class UidProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: UidPropertyLike): UidProperty {
+    static from(value: UidConfig): UidProperty {
         if (value instanceof UidProperty) return value;
 
         if (Array.isArray(value)) return new UidProperty(...value);
 
         if (isString(value)) return new UidProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a UidPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a UidConfig type`);
     }
 }

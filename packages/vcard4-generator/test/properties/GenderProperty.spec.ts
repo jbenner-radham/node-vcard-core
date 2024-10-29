@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import GenderProperty, { type GenderPropertyRestConfig } from '../../lib/properties/GenderProperty.js';
+import GenderProperty, { type GenderRestConfig } from '../../lib/properties/GenderProperty.js';
 
 describe('GenderProperty', () => {
     it('is a class', () => {
@@ -73,13 +73,13 @@ describe('GenderProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(GenderProperty.factory).to.be.a('function');
+            expect(GenderProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `GenderProperty`', () => {
-            const gender = GenderProperty.factory('M;Transgender Man');
+            const gender = GenderProperty.from('M;Transgender Man');
 
             expect(gender instanceof GenderProperty).to.equal(true);
         });
@@ -87,19 +87,19 @@ describe('GenderProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const gender = new GenderProperty('M;Transgender Man');
 
-            expect(GenderProperty.factory(gender) instanceof GenderProperty).to.equal(true);
+            expect(GenderProperty.from(gender) instanceof GenderProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const gender = GenderProperty.factory('M;Transgender Man');
+            const gender = GenderProperty.from('M;Transgender Man');
 
             expect(gender instanceof GenderProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'M;Transgender Man';
-            const config: GenderPropertyRestConfig = [value, { value: 'text' }];
-            const gender = GenderProperty.factory(config);
+            const config: GenderRestConfig = [value, { value: 'text' }];
+            const gender = GenderProperty.from(config);
 
             expect(gender instanceof GenderProperty).to.equal(true);
         });

@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import VersionProperty, { type VersionPropertyRestConfig } from '../../lib/properties/VersionProperty.js';
+import VersionProperty, { type VersionRestConfig } from '../../lib/properties/VersionProperty.js';
 
 describe('VersionProperty', () => {
     it('is a class', () => {
@@ -55,13 +55,13 @@ describe('VersionProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(VersionProperty.factory).to.be.a('function');
+            expect(VersionProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `VersionProperty`', () => {
-            const version = VersionProperty.factory('4.0');
+            const version = VersionProperty.from('4.0');
 
             expect(version instanceof VersionProperty).to.equal(true);
         });
@@ -69,19 +69,19 @@ describe('VersionProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const version = new VersionProperty('4.0');
 
-            expect(VersionProperty.factory(version)).to.equal(version);
+            expect(VersionProperty.from(version)).to.equal(version);
         });
 
         it('creates an instance from a string value argument', () => {
-            const version = VersionProperty.factory('4.0');
+            const version = VersionProperty.from('4.0');
 
             expect(version instanceof VersionProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = '4.0';
-            const config: VersionPropertyRestConfig = [value, { value: 'text' }];
-            const version = VersionProperty.factory(config);
+            const config: VersionRestConfig = [value, { value: 'text' }];
+            const version = VersionProperty.from(config);
 
             expect(version instanceof VersionProperty).to.equal(true);
         });

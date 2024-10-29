@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import SourceProperty, { type SourcePropertyRestConfig } from '../../lib/properties/SourceProperty.js';
+import SourceProperty, { type SourceRestConfig } from '../../lib/properties/SourceProperty.js';
 
 describe('SourceProperty', () => {
     it('is a class', () => {
@@ -83,14 +83,14 @@ describe('SourceProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(SourceProperty.factory).to.be.a('function');
+            expect(SourceProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `SourceProperty`', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
-            const source = SourceProperty.factory(value);
+            const source = SourceProperty.from(value);
 
             expect(source instanceof SourceProperty).to.equal(true);
         });
@@ -99,20 +99,20 @@ describe('SourceProperty', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
             const source = new SourceProperty(value);
 
-            expect(SourceProperty.factory(source)).to.equal(source);
+            expect(SourceProperty.from(source)).to.equal(source);
         });
 
         it('creates an instance from a string value argument', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
-            const source = SourceProperty.factory(value);
+            const source = SourceProperty.from(value);
 
             expect(source instanceof SourceProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US';
-            const config: SourcePropertyRestConfig = [value, { value: 'uri' }];
-            const source = SourceProperty.factory(config);
+            const config: SourceRestConfig = [value, { value: 'uri' }];
+            const source = SourceProperty.from(config);
 
             expect(source instanceof SourceProperty).to.equal(true);
         });

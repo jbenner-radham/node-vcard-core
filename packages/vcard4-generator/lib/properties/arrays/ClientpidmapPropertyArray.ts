@@ -1,8 +1,8 @@
-import ClientpidmapProperty, { type ClientpidmapPropertyLike } from '../ClientpidmapProperty.js';
+import ClientpidmapProperty, { type ClientpidmapConfig } from '../ClientpidmapProperty.js';
 
 export default class ClientpidmapPropertyArray extends Array {
-    push(...items: ClientpidmapPropertyLike[]): number {
-        items.forEach(item => super.push(ClientpidmapProperty.factory(item)));
+    push(...items: ClientpidmapConfig[]): number {
+        items.forEach(item => super.push(ClientpidmapProperty.from(item)));
 
         return this.length;
     }

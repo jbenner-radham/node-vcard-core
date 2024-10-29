@@ -1,8 +1,8 @@
-import TelProperty, { type TelPropertyLike } from '../TelProperty.js';
+import TelProperty, { type TelConfig } from '../TelProperty.js';
 
 export default class TelPropertyArray extends Array {
-    push(...items: TelPropertyLike[]): number {
-        items.forEach(item => super.push(TelProperty.factory(item)));
+    push(...items: TelConfig[]): number {
+        items.forEach(item => super.push(TelProperty.from(item)));
 
         return this.length;
     }

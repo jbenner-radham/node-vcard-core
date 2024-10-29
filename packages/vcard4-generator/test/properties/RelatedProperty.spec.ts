@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import RelatedProperty, { type RelatedPropertyRestConfig } from '../../lib/properties/RelatedProperty.js';
+import RelatedProperty, { type RelatedRestConfig } from '../../lib/properties/RelatedProperty.js';
 
 describe('RelatedProperty', () => {
     it('is a class', () => {
@@ -86,13 +86,13 @@ describe('RelatedProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(RelatedProperty.factory).to.be.a('function');
+            expect(RelatedProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `RelatedProperty`', () => {
-            const related = RelatedProperty.factory('http://example.com/directory/jdoe.vcf');
+            const related = RelatedProperty.from('http://example.com/directory/jdoe.vcf');
 
             expect(related instanceof RelatedProperty).to.equal(true);
         });
@@ -100,19 +100,19 @@ describe('RelatedProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const related = new RelatedProperty('http://example.com/directory/jdoe.vcf');
 
-            expect(RelatedProperty.factory(related)).to.equal(related);
+            expect(RelatedProperty.from(related)).to.equal(related);
         });
 
         it('creates an instance from a string value argument', () => {
-            const related = RelatedProperty.factory('http://example.com/directory/jdoe.vcf');
+            const related = RelatedProperty.from('http://example.com/directory/jdoe.vcf');
 
             expect(related instanceof RelatedProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'http://example.com/directory/jdoe.vcf';
-            const config: RelatedPropertyRestConfig = [value, { type: 'contact' }];
-            const related = RelatedProperty.factory(config);
+            const config: RelatedRestConfig = [value, { type: 'contact' }];
+            const related = RelatedProperty.from(config);
 
             expect(related instanceof RelatedProperty).to.equal(true);
         });

@@ -15,13 +15,13 @@ export interface OrgDirectoryParameters {
     type?: Type;
 }
 
-export type OrgDirectoryPropertyRestConfig = [
+export type OrgDirectoryRestConfig = [
     value: string,
     parameters?: OrgDirectoryParameters,
     options?: PropertyOptions
 ];
 
-export type OrgDirectoryPropertyLike = OrgDirectoryProperty | OrgDirectoryPropertyRestConfig | string;
+export type OrgDirectoryConfig = OrgDirectoryProperty | OrgDirectoryRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -92,14 +92,14 @@ export default class OrgDirectoryProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: OrgDirectoryPropertyLike): OrgDirectoryProperty {
+    static from(value: OrgDirectoryConfig): OrgDirectoryProperty {
         if (value instanceof OrgDirectoryProperty) return value;
 
         if (Array.isArray(value)) return new OrgDirectoryProperty(...value);
 
         if (isString(value)) return new OrgDirectoryProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a OrgDirectoryPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a OrgDirectoryConfig type`);
     }
 
     static validateParameters({ index, pref }: OrgDirectoryParameters): void {

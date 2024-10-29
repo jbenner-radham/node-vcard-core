@@ -10,13 +10,13 @@ export interface ContactUriParameters {
     pref?: Pref;
 }
 
-export type ContactUriPropertyRestConfig = [
+export type ContactUriRestConfig = [
     value: string,
     parameters?: ContactUriParameters,
     options?: PropertyOptions
 ];
 
-export type ContactUriPropertyLike = ContactUriProperty | ContactUriPropertyRestConfig | string;
+export type ContactUriConfig = ContactUriProperty | ContactUriRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -82,14 +82,14 @@ export default class ContactUriProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: ContactUriPropertyLike): ContactUriProperty {
+    static from(value: ContactUriConfig): ContactUriProperty {
         if (value instanceof ContactUriProperty) return value;
 
         if (Array.isArray(value)) return new ContactUriProperty(...value);
 
         if (isString(value)) return new ContactUriProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a ContactUriPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a ContactUriConfig type`);
     }
 
     static validateParameters({ pref }: ContactUriParameters): void {

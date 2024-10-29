@@ -9,9 +9,9 @@ export interface KindParameters {
     value?: 'text';
 }
 
-export type KindPropertyRestConfig = [value: Kind, parameters?: KindParameters, options?: PropertyOptions];
+export type KindRestConfig = [value: Kind, parameters?: KindParameters, options?: PropertyOptions];
 
-export type KindPropertyLike = KindProperty | KindPropertyRestConfig | Kind;
+export type KindConfig = KindProperty | KindRestConfig | Kind;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -167,13 +167,13 @@ export default class KindProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: KindPropertyLike): KindProperty {
+    static from(value: KindConfig): KindProperty {
         if (value instanceof KindProperty) return value;
 
         if (Array.isArray(value)) return new KindProperty(...value);
 
         if (isString(value)) return new KindProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a KindPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a KindConfig type`);
     }
 }

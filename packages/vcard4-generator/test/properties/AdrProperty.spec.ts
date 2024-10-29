@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { EOL, FOLD_CONTINUATION_CHAR } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import AdrProperty, { type AdrPropertyRestConfig } from '../../lib/properties/AdrProperty.js';
+import AdrProperty, { type AdrRestConfig } from '../../lib/properties/AdrProperty.js';
 
 describe('AdrProperty', () => {
     it('is a class', () => {
@@ -205,13 +205,13 @@ describe('AdrProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(AdrProperty.factory).to.be.a('function');
+            expect(AdrProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `AdrProperty`', () => {
-            const adr = AdrProperty.factory(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
+            const adr = AdrProperty.from(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
 
             expect(adr instanceof AdrProperty).to.equal(true);
         });
@@ -219,19 +219,19 @@ describe('AdrProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const adr = new AdrProperty(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
 
-            expect(AdrProperty.factory(adr)).to.equal(adr);
+            expect(AdrProperty.from(adr)).to.equal(adr);
         });
 
         it('creates an instance from a string value argument', () => {
-            const adr = AdrProperty.factory(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
+            const adr = AdrProperty.from(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.');
 
             expect(adr instanceof AdrProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
-            const config: AdrPropertyRestConfig = [value, { type: 'home' }];
-            const adr = AdrProperty.factory(config);
+            const config: AdrRestConfig = [value, { type: 'home' }];
+            const adr = AdrProperty.from(config);
 
             expect(adr instanceof AdrProperty).to.equal(true);
         });

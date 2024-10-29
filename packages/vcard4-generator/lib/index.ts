@@ -1,139 +1,139 @@
 import { EOL } from '@vcard/vcard4-meta';
-import AdrProperty, { AdrPropertyLike } from './properties/AdrProperty.js';
+import AdrProperty, { AdrConfig } from './properties/AdrProperty.js';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray.js';
-import AnniversaryProperty, { AnniversaryPropertyLike } from './properties/AnniversaryProperty.js';
-import BdayProperty, { BdayPropertyLike } from './properties/BdayProperty.js';
-import BirthplaceProperty, { BirthplacePropertyLike } from './properties/BirthplaceProperty.js';
-import CaladruriProperty, { CaladruriPropertyLike } from './properties/CaladruriProperty.js';
+import AnniversaryProperty, { AnniversaryConfig } from './properties/AnniversaryProperty.js';
+import BdayProperty, { BdayConfig } from './properties/BdayProperty.js';
+import BirthplaceProperty, { BirthplaceConfig } from './properties/BirthplaceProperty.js';
+import CaladruriProperty, { CaladruriConfig } from './properties/CaladruriProperty.js';
 import CaladruriPropertyArray from './properties/arrays/CaladruriPropertyArray.js';
-import CaluriProperty, { CaluriPropertyLike } from './properties/CaluriProperty.js';
+import CaluriProperty, { CaluriConfig } from './properties/CaluriProperty.js';
 import CaluriPropertyArray from './properties/arrays/CaluriPropertyArray.js';
-import CategoriesProperty, { CategoriesPropertyLike } from './properties/CategoriesProperty.js';
+import CategoriesProperty, { CategoriesConfig } from './properties/CategoriesProperty.js';
 import CategoriesPropertyArray from './properties/arrays/CategoriesPropertyArray.js';
-import ClientpidmapProperty, { ClientpidmapPropertyLike } from './properties/ClientpidmapProperty.js';
+import ClientpidmapProperty, { ClientpidmapConfig } from './properties/ClientpidmapProperty.js';
 import ClientpidmapPropertyArray from './properties/arrays/ClientpidmapPropertyArray.js';
-import ContactUriProperty, { ContactUriPropertyLike } from './properties/ContactUriProperty.js';
+import ContactUriProperty, { ContactUriConfig } from './properties/ContactUriProperty.js';
 import ContactUriPropertyArray from './properties/arrays/ContactUriPropertyArray.js';
-import DeathdateProperty, { DeathdatePropertyLike } from './properties/DeathdateProperty.js';
-import DeathplaceProperty, { DeathplacePropertyLike } from './properties/DeathplaceProperty.js';
-import EmailProperty, { EmailPropertyLike } from './properties/EmailProperty.js';
+import DeathdateProperty, { DeathdateConfig } from './properties/DeathdateProperty.js';
+import DeathplaceProperty, { DeathplaceConfig } from './properties/DeathplaceProperty.js';
+import EmailProperty, { EmailConfig } from './properties/EmailProperty.js';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray.js';
-import ExpertiseProperty, { ExpertisePropertyLike } from './properties/ExpertiseProperty.js';
+import ExpertiseProperty, { ExpertiseConfig } from './properties/ExpertiseProperty.js';
 import ExpertisePropertyArray from './properties/arrays/ExpertisePropertyArray.js';
-import FburlProperty, { FburlPropertyLike } from './properties/FburlProperty.js';
+import FburlProperty, { FburlConfig } from './properties/FburlProperty.js';
 import FburlPropertyArray from './properties/arrays/FburlPropertyArray.js';
-import FnProperty, { FnPropertyLike } from './properties/FnProperty.js';
+import FnProperty, { FnConfig } from './properties/FnProperty.js';
 import FnPropertyArray from './properties/arrays/FnPropertyArray.js';
-import GenderProperty, { GenderPropertyLike } from './properties/GenderProperty.js';
-import GeoProperty, { GeoPropertyLike } from './properties/GeoProperty.js';
+import GenderProperty, { GenderConfig } from './properties/GenderProperty.js';
+import GeoProperty, { GeoConfig } from './properties/GeoProperty.js';
 import GeoPropertyArray from './properties/arrays/GeoPropertyArray.js';
-import HobbyProperty, { HobbyPropertyLike } from './properties/HobbyProperty.js';
+import HobbyProperty, { HobbyConfig } from './properties/HobbyProperty.js';
 import HobbyPropertyArray from './properties/arrays/HobbyPropertyArray.js';
-import ImppProperty, { ImppPropertyLike } from './properties/ImppProperty.js';
+import ImppProperty, { ImppConfig } from './properties/ImppProperty.js';
 import ImppPropertyArray from './properties/arrays/ImppPropertyArray.js';
 import isNotEmptyString from './util/is-not-empty-string.js';
-import InterestProperty, { InterestPropertyLike } from './properties/InterestProperty.js';
+import InterestProperty, { InterestConfig } from './properties/InterestProperty.js';
 import InterestPropertyArray from './properties/arrays/InterestPropertyArray.js';
-import KeyProperty, { KeyPropertyLike } from './properties/KeyProperty.js';
+import KeyProperty, { KeyConfig } from './properties/KeyProperty.js';
 import KeyPropertyArray from './properties/arrays/KeyPropertyArray.js';
-import KindProperty, { KindPropertyLike } from './properties/KindProperty.js';
-import LangProperty, { LangPropertyLike } from './properties/LangProperty.js';
+import KindProperty, { KindConfig } from './properties/KindProperty.js';
+import LangProperty, { LangConfig } from './properties/LangProperty.js';
 import LangPropertyArray from './properties/arrays/LangPropertyArray.js';
-import LogoProperty, { LogoPropertyLike } from './properties/LogoProperty.js';
+import LogoProperty, { LogoConfig } from './properties/LogoProperty.js';
 import LogoPropertyArray from './properties/arrays/LogoPropertyArray.js';
-import MemberProperty, { MemberPropertyLike } from './properties/MemberProperty.js';
+import MemberProperty, { MemberConfig } from './properties/MemberProperty.js';
 import MemberPropertyArray from './properties/arrays/MemberPropertyArray.js';
-import NProperty, { NPropertyLike } from './properties/NProperty.js';
-import NicknameProperty, { NicknamePropertyLike } from './properties/NicknameProperty.js';
+import NProperty, { NConfig } from './properties/NProperty.js';
+import NicknameProperty, { NicknameConfig } from './properties/NicknameProperty.js';
 import NicknamePropertyArray from './properties/arrays/NicknamePropertyArray.js';
-import NoteProperty, { NotePropertyLike } from './properties/NoteProperty.js';
+import NoteProperty, { NoteConfig } from './properties/NoteProperty.js';
 import NotePropertyArray from './properties/arrays/NotePropertyArray.js';
 import NullProperty from './properties/NullProperty.js';
-import OrgProperty, { OrgPropertyLike } from './properties/OrgProperty.js';
+import OrgProperty, { OrgConfig } from './properties/OrgProperty.js';
 import OrgPropertyArray from './properties/arrays/OrgPropertyArray.js';
-import OrgDirectoryProperty, { OrgDirectoryPropertyLike } from './properties/OrgDirectoryProperty.js';
+import OrgDirectoryProperty, { OrgDirectoryConfig } from './properties/OrgDirectoryProperty.js';
 import OrgDirectoryPropertyArray from './properties/arrays/OrgDirectoryPropertyArray.js';
-import PhotoProperty, { PhotoPropertyLike } from './properties/PhotoProperty.js';
+import PhotoProperty, { PhotoConfig } from './properties/PhotoProperty.js';
 import PhotoPropertyArray from './properties/arrays/PhotoPropertyArray.js';
-import ProdidProperty, { ProdidPropertyLike } from './properties/ProdidProperty.js';
-import RelatedProperty, { RelatedPropertyLike } from './properties/RelatedProperty.js';
+import ProdidProperty, { ProdidConfig } from './properties/ProdidProperty.js';
+import RelatedProperty, { RelatedConfig } from './properties/RelatedProperty.js';
 import RelatedPropertyArray from './properties/arrays/RelatedPropertyArray.js';
-import RevProperty, { RevPropertyLike } from './properties/RevProperty.js';
-import RoleProperty, { RolePropertyLike } from './properties/RoleProperty.js';
+import RevProperty, { RevConfig } from './properties/RevProperty.js';
+import RoleProperty, { RoleConfig } from './properties/RoleProperty.js';
 import RolePropertyArray from './properties/arrays/RolePropertyArray.js';
-import SoundProperty, { SoundPropertyLike } from './properties/SoundProperty.js';
+import SoundProperty, { SoundConfig } from './properties/SoundProperty.js';
 import SoundPropertyArray from './properties/arrays/SoundPropertyArray.js';
-import SourceProperty, { SourcePropertyLike } from './properties/SourceProperty.js';
+import SourceProperty, { SourceConfig } from './properties/SourceProperty.js';
 import SourcePropertyArray from './properties/arrays/SourcePropertyArray.js';
-import TelProperty, { TelPropertyLike } from './properties/TelProperty.js';
+import TelProperty, { TelConfig } from './properties/TelProperty.js';
 import TelPropertyArray from './properties/arrays/TelPropertyArray.js';
-import TitleProperty, { TitlePropertyLike } from './properties/TitleProperty.js';
+import TitleProperty, { TitleConfig } from './properties/TitleProperty.js';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray.js';
-import TzProperty, { TzPropertyLike } from './properties/TzProperty.js';
+import TzProperty, { TzConfig } from './properties/TzProperty.js';
 import TzPropertyArray from './properties/arrays/TzPropertyArray.js';
 import toString from './util/to-string.js';
-import UidProperty, { UidPropertyLike } from './properties/UidProperty.js';
-import UrlProperty, { UrlPropertyLike } from './properties/UrlProperty.js';
+import UidProperty, { UidConfig } from './properties/UidProperty.js';
+import UrlProperty, { UrlConfig } from './properties/UrlProperty.js';
 import UrlPropertyArray from './properties/arrays/UrlPropertyArray.js';
-import VersionProperty, { VersionPropertyLike } from './properties/VersionProperty.js';
-import XmlProperty, { XmlPropertyLike } from './properties/XmlProperty.js';
+import VersionProperty, { VersionConfig } from './properties/VersionProperty.js';
+import XmlProperty, { XmlConfig } from './properties/XmlProperty.js';
 import XmlPropertyArray from './properties/arrays/XmlPropertyArray.js';
 
 export interface Vcard4GeneratorConfig {
-    adr?: AdrPropertyLike;
-    anniversary?: AnniversaryPropertyLike;
-    bday?: BdayPropertyLike;
-    birthplace?: BirthplacePropertyLike;
-    caluri?: CaluriPropertyLike;
-    caladruri?: CaladruriPropertyLike;
-    categories?: CategoriesPropertyLike;
-    clientpidmap?: ClientpidmapPropertyLike;
-    contactUri?: ContactUriPropertyLike;
-    deathdate?: DeathdatePropertyLike;
-    deathplace?: DeathplacePropertyLike;
-    email?: EmailPropertyLike;
-    expertise?: ExpertisePropertyLike;
-    fburl?: FburlPropertyLike;
-    fn: FnPropertyLike;
-    gender?: GenderPropertyLike;
-    geo?: GeoPropertyLike;
-    hobby?: HobbyPropertyLike;
-    impp?: ImppPropertyLike;
-    interest?: InterestPropertyLike;
-    key?: KeyPropertyLike;
-    kind?: KindPropertyLike;
-    lang?: LangPropertyLike;
-    logo?: LogoPropertyLike;
-    member?: MemberPropertyLike;
-    n?: NPropertyLike;
-    nickname?: NicknamePropertyLike;
-    note?: NotePropertyLike;
-    org?: OrgPropertyLike;
-    orgDirectory?: OrgDirectoryPropertyLike;
-    photo?: PhotoPropertyLike;
-    prodid?: ProdidPropertyLike;
-    related?: RelatedPropertyLike;
-    rev?: RevPropertyLike;
-    role?: RolePropertyLike;
-    sound?: SoundPropertyLike;
-    source?: SourcePropertyLike;
-    tel?: TelPropertyLike;
-    title?: TitlePropertyLike;
-    tz?: TzPropertyLike;
-    uid?: UidPropertyLike;
-    url?: UrlPropertyLike;
+    adr?: AdrConfig;
+    anniversary?: AnniversaryConfig;
+    bday?: BdayConfig;
+    birthplace?: BirthplaceConfig;
+    caluri?: CaluriConfig;
+    caladruri?: CaladruriConfig;
+    categories?: CategoriesConfig;
+    clientpidmap?: ClientpidmapConfig;
+    contactUri?: ContactUriConfig;
+    deathdate?: DeathdateConfig;
+    deathplace?: DeathplaceConfig;
+    email?: EmailConfig;
+    expertise?: ExpertiseConfig;
+    fburl?: FburlConfig;
+    fn: FnConfig;
+    gender?: GenderConfig;
+    geo?: GeoConfig;
+    hobby?: HobbyConfig;
+    impp?: ImppConfig;
+    interest?: InterestConfig;
+    key?: KeyConfig;
+    kind?: KindConfig;
+    lang?: LangConfig;
+    logo?: LogoConfig;
+    member?: MemberConfig;
+    n?: NConfig;
+    nickname?: NicknameConfig;
+    note?: NoteConfig;
+    org?: OrgConfig;
+    orgDirectory?: OrgDirectoryConfig;
+    photo?: PhotoConfig;
+    prodid?: ProdidConfig;
+    related?: RelatedConfig;
+    rev?: RevConfig;
+    role?: RoleConfig;
+    sound?: SoundConfig;
+    source?: SourceConfig;
+    tel?: TelConfig;
+    title?: TitleConfig;
+    tz?: TzConfig;
+    uid?: UidConfig;
+    url?: UrlConfig;
     version?: VersionProperty;
-    xml?: XmlPropertyLike;
+    xml?: XmlConfig;
 }
 
 export default class Vcard4Generator {
     adr: AdrPropertyArray;
 
-    anniversary: AnniversaryPropertyLike | NullProperty;
+    anniversary: AnniversaryConfig | NullProperty;
 
-    bday: BdayPropertyLike | NullProperty;
+    bday: BdayConfig | NullProperty;
 
-    birthplace: BirthplacePropertyLike | NullProperty;
+    birthplace: BirthplaceConfig | NullProperty;
 
     caluri: CaluriPropertyArray;
 
@@ -145,9 +145,9 @@ export default class Vcard4Generator {
 
     contactUri: ContactUriPropertyArray;
 
-    deathdate: DeathdatePropertyLike | NullProperty;
+    deathdate: DeathdateConfig | NullProperty;
 
-    deathplace: DeathplacePropertyLike | NullProperty;
+    deathplace: DeathplaceConfig | NullProperty;
 
     email: EmailPropertyArray;
 
@@ -157,7 +157,7 @@ export default class Vcard4Generator {
 
     fn: FnPropertyArray;
 
-    gender: GenderPropertyLike | NullProperty;
+    gender: GenderConfig | NullProperty;
 
     geo: GeoPropertyArray;
 
@@ -169,7 +169,7 @@ export default class Vcard4Generator {
 
     key: KeyPropertyArray;
 
-    kind: KindPropertyLike | NullProperty;
+    kind: KindConfig | NullProperty;
 
     lang: LangPropertyArray;
 
@@ -177,7 +177,7 @@ export default class Vcard4Generator {
 
     member: MemberPropertyArray;
 
-    n: NPropertyLike | NullProperty;
+    n: NConfig | NullProperty;
 
     nickname: NicknamePropertyArray;
 
@@ -189,11 +189,11 @@ export default class Vcard4Generator {
 
     photo: PhotoPropertyArray;
 
-    prodid: ProdidPropertyLike | NullProperty;
+    prodid: ProdidConfig | NullProperty;
 
     related: RelatedPropertyArray;
 
-    rev: RevPropertyLike | NullProperty;
+    rev: RevConfig | NullProperty;
 
     role: RolePropertyArray;
 
@@ -207,11 +207,11 @@ export default class Vcard4Generator {
 
     tz: TzPropertyArray;
 
-    uid: UidPropertyLike | NullProperty;
+    uid: UidConfig | NullProperty;
 
     url: UrlPropertyArray;
 
-    version: VersionPropertyLike;
+    version: VersionConfig;
 
     xml: XmlPropertyArray;
 
@@ -326,18 +326,18 @@ export default class Vcard4Generator {
         tz && this.tz.push(tz);
         url && this.url.push(url);
         xml && this.xml.push(xml);
-        this.anniversary = anniversary ? AnniversaryProperty.factory(anniversary) : new NullProperty();
-        this.bday = bday ? BdayProperty.factory(bday) : new NullProperty();
-        this.birthplace = birthplace ? BirthplaceProperty.factory(birthplace) : new NullProperty();
-        this.deathdate = deathdate ? DeathdateProperty.factory(deathdate) : new NullProperty();
-        this.deathplace = deathplace ? DeathplaceProperty.factory(deathplace) : new NullProperty();
-        this.gender = gender ? GenderProperty.factory(gender) : new NullProperty();
-        this.kind = kind ? KindProperty.factory(kind) : new NullProperty();
-        this.n = n ? NProperty.factory(n) : new NullProperty();
-        this.prodid = prodid ? ProdidProperty.factory(prodid) : new NullProperty();
-        this.rev = rev ? RevProperty.factory(rev) : new NullProperty();
-        this.uid = uid ? UidProperty.factory(uid) : new NullProperty();
-        this.version = version ? VersionProperty.factory(version) : new VersionProperty();
+        this.anniversary = anniversary ? AnniversaryProperty.from(anniversary) : new NullProperty();
+        this.bday = bday ? BdayProperty.from(bday) : new NullProperty();
+        this.birthplace = birthplace ? BirthplaceProperty.from(birthplace) : new NullProperty();
+        this.deathdate = deathdate ? DeathdateProperty.from(deathdate) : new NullProperty();
+        this.deathplace = deathplace ? DeathplaceProperty.from(deathplace) : new NullProperty();
+        this.gender = gender ? GenderProperty.from(gender) : new NullProperty();
+        this.kind = kind ? KindProperty.from(kind) : new NullProperty();
+        this.n = n ? NProperty.from(n) : new NullProperty();
+        this.prodid = prodid ? ProdidProperty.from(prodid) : new NullProperty();
+        this.rev = rev ? RevProperty.from(rev) : new NullProperty();
+        this.uid = uid ? UidProperty.from(uid) : new NullProperty();
+        this.version = version ? VersionProperty.from(version) : new VersionProperty();
     }
 
     toString(): string {

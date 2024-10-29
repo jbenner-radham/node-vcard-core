@@ -17,9 +17,9 @@ export interface HobbyParameters {
     type?: Type;
 }
 
-export type HobbyPropertyRestConfig = [value: string, parameters?: HobbyParameters, options?: PropertyOptions];
+export type HobbyRestConfig = [value: string, parameters?: HobbyParameters, options?: PropertyOptions];
 
-export type HobbyPropertyLike = HobbyProperty | HobbyPropertyRestConfig | string;
+export type HobbyConfig = HobbyProperty | HobbyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -87,14 +87,14 @@ export default class HobbyProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: HobbyPropertyLike): HobbyProperty {
+    static from(value: HobbyConfig): HobbyProperty {
         if (value instanceof HobbyProperty) return value;
 
         if (Array.isArray(value)) return new HobbyProperty(...value);
 
         if (isString(value)) return new HobbyProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a HobbyPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a HobbyConfig type`);
     }
 
     static validateParameters({ index, pref }: HobbyParameters): void {

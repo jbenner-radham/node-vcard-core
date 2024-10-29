@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import BirthplaceProperty, { type BirthplacePropertyRestConfig } from '../../lib/properties/BirthplaceProperty.js';
+import BirthplaceProperty, { type BirthplaceRestConfig } from '../../lib/properties/BirthplaceProperty.js';
 
 describe('BirthplaceProperty', () => {
     it('is a class', () => {
@@ -64,13 +64,13 @@ describe('BirthplaceProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(BirthplaceProperty.factory).to.be.a('function');
+            expect(BirthplaceProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `BirthplaceProperty`', () => {
-            const birthplace = BirthplaceProperty.factory(`Babies'R'Us Hospital`);
+            const birthplace = BirthplaceProperty.from(`Babies'R'Us Hospital`);
 
             expect(birthplace instanceof BirthplaceProperty).to.equal(true);
         });
@@ -78,19 +78,19 @@ describe('BirthplaceProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const birthplace = new BirthplaceProperty(`Babies'R'Us Hospital`);
 
-            expect(BirthplaceProperty.factory(birthplace)).to.equal(birthplace);
+            expect(BirthplaceProperty.from(birthplace)).to.equal(birthplace);
         });
 
         it('creates an instance from a string value argument', () => {
-            const birthplace = BirthplaceProperty.factory(`Babies'R'Us Hospital`);
+            const birthplace = BirthplaceProperty.from(`Babies'R'Us Hospital`);
 
             expect(birthplace instanceof BirthplaceProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'geo:46.769307,-71.283079';
-            const config: BirthplacePropertyRestConfig = [value, { value: 'uri' }];
-            const birthplace = BirthplaceProperty.factory(config);
+            const config: BirthplaceRestConfig = [value, { value: 'uri' }];
+            const birthplace = BirthplaceProperty.from(config);
 
             expect(birthplace instanceof BirthplaceProperty).to.equal(true);
         });

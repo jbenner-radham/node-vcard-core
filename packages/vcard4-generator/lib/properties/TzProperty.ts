@@ -14,9 +14,9 @@ export interface TzParameters {
     mediatype?: string;
 }
 
-export type TzPropertyRestConfig = [value: string, parameters?: TzParameters, options?: PropertyOptions];
+export type TzRestConfig = [value: string, parameters?: TzParameters, options?: PropertyOptions];
 
-export type TzPropertyLike = TzProperty | TzPropertyRestConfig | string;
+export type TzConfig = TzProperty | TzRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -89,14 +89,14 @@ export default class TzProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: TzPropertyLike): TzProperty {
+    static from(value: TzConfig): TzProperty {
         if (value instanceof TzProperty) return value;
 
         if (Array.isArray(value)) return new TzProperty(...value);
 
         if (isString(value)) return new TzProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a TzPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a TzConfig type`);
     }
 
     static validateParameters({ pref }: TzParameters): void {

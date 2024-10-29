@@ -1,8 +1,8 @@
-import LangProperty, { type LangPropertyLike } from '../LangProperty.js';
+import LangProperty, { type LangConfig } from '../LangProperty.js';
 
 export default class LangPropertyArray extends Array {
-    push(...items: LangPropertyLike[]): number {
-        items.forEach(item => super.push(LangProperty.factory(item)));
+    push(...items: LangConfig[]): number {
+        items.forEach(item => super.push(LangProperty.from(item)));
 
         return this.length;
     }

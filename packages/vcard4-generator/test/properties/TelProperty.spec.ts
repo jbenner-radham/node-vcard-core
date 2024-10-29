@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import TelProperty, { type TelPropertyRestConfig } from '../../lib/properties/TelProperty.js';
+import TelProperty, { type TelRestConfig } from '../../lib/properties/TelProperty.js';
 
 describe('TelProperty', () => {
     it('is a class', () => {
@@ -89,13 +89,13 @@ describe('TelProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(TelProperty.factory).to.be.a('function');
+            expect(TelProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `TelProperty`', () => {
-            const tel = TelProperty.factory('+1-555-555-5555');
+            const tel = TelProperty.from('+1-555-555-5555');
 
             expect(tel instanceof TelProperty).to.equal(true);
         });
@@ -103,19 +103,19 @@ describe('TelProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const tel = new TelProperty('+1-555-555-5555');
 
-            expect(TelProperty.factory(tel)).to.equal(tel);
+            expect(TelProperty.from(tel)).to.equal(tel);
         });
 
         it('creates an instance from a string value argument', () => {
-            const tel = TelProperty.factory('+1-555-555-5555');
+            const tel = TelProperty.from('+1-555-555-5555');
 
             expect(tel instanceof TelProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = '+1-555-555-5555';
-            const config: TelPropertyRestConfig = [value, { type: 'home' }];
-            const tel = TelProperty.factory(config);
+            const config: TelRestConfig = [value, { type: 'home' }];
+            const tel = TelProperty.from(config);
 
             expect(tel instanceof TelProperty).to.equal(true);
         });

@@ -1,8 +1,8 @@
-import CaluriProperty, { type CaluriPropertyLike } from '../CaluriProperty.js';
+import CaluriProperty, { type CaluriConfig } from '../CaluriProperty.js';
 
 export default class CaluriPropertyArray extends Array {
-    push(...items: CaluriPropertyLike[]): number {
-        items.forEach(item => super.push(CaluriProperty.factory(item)));
+    push(...items: CaluriConfig[]): number {
+        items.forEach(item => super.push(CaluriProperty.from(item)));
 
         return this.length;
     }

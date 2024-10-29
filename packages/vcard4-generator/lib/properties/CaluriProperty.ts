@@ -14,10 +14,10 @@ export interface CaluriParameters {
     altid?: number | string;
 }
 
-export type CaluriPropertyRestConfig = [value: string, parameters?: CaluriParameters, options?: PropertyOptions];
+export type CaluriRestConfig = [value: string, parameters?: CaluriParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support. */
-export type CaluriPropertyLike = CaluriProperty | CaluriPropertyRestConfig | string;
+export type CaluriConfig = CaluriProperty | CaluriRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -76,14 +76,14 @@ export default class CaluriProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: CaluriPropertyLike): CaluriProperty {
+    static from(value: CaluriConfig): CaluriProperty {
         if (value instanceof CaluriProperty) return value;
 
         if (Array.isArray(value)) return new CaluriProperty(...value);
 
         if (isString(value)) return new CaluriProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a CaluriPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a CaluriConfig type`);
     }
 
     static validateParameters({ pref }: CaluriParameters): void {

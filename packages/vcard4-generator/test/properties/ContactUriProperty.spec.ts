@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import ContactUriProperty, { type ContactUriPropertyRestConfig } from '../../lib/properties/ContactUriProperty.js';
+import ContactUriProperty, { type ContactUriRestConfig } from '../../lib/properties/ContactUriProperty.js';
 
 describe('ContactUriProperty', () => {
     it('is a class', () => {
@@ -64,13 +64,13 @@ describe('ContactUriProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(ContactUriProperty.factory).to.be.a('function');
+            expect(ContactUriProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `ContactUriProperty`', () => {
-            const contactUri = ContactUriProperty.factory('https://contact.example.com');
+            const contactUri = ContactUriProperty.from('https://contact.example.com');
 
             expect(contactUri instanceof ContactUriProperty).to.equal(true);
         });
@@ -78,19 +78,19 @@ describe('ContactUriProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const contactUri = new ContactUriProperty('https://contact.example.com');
 
-            expect(ContactUriProperty.factory(contactUri)).to.equal(contactUri);
+            expect(ContactUriProperty.from(contactUri)).to.equal(contactUri);
         });
 
         it('creates an instance from a string value argument', () => {
-            const contactUri = ContactUriProperty.factory('https://contact.example.com');
+            const contactUri = ContactUriProperty.from('https://contact.example.com');
 
             expect(contactUri instanceof ContactUriProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'mailto:contact@example.com';
-            const config: ContactUriPropertyRestConfig = [value, { pref: 1 }];
-            const contactUri = ContactUriProperty.factory(config);
+            const config: ContactUriRestConfig = [value, { pref: 1 }];
+            const contactUri = ContactUriProperty.from(config);
 
             expect(contactUri instanceof ContactUriProperty).to.equal(true);
         });

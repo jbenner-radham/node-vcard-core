@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import OrgProperty, { type OrgPropertyRestConfig } from '../../lib/properties/OrgProperty.js';
+import OrgProperty, { type OrgRestConfig } from '../../lib/properties/OrgProperty.js';
 
 describe('OrgProperty', () => {
     it('is a class', () => {
@@ -75,13 +75,13 @@ describe('OrgProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(OrgProperty.factory).to.be.a('function');
+            expect(OrgProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `OrgProperty`', () => {
-            const org = OrgProperty.factory('ABC, Inc.;North American Division;Marketing');
+            const org = OrgProperty.from('ABC, Inc.;North American Division;Marketing');
 
             expect(org instanceof OrgProperty).to.equal(true);
         });
@@ -89,19 +89,19 @@ describe('OrgProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const org = new OrgProperty('ABC, Inc.;North American Division;Marketing');
 
-            expect(OrgProperty.factory(org)).to.equal(org);
+            expect(OrgProperty.from(org)).to.equal(org);
         });
 
         it('creates an instance from a string value argument', () => {
-            const org = OrgProperty.factory('ABC, Inc.;North American Division;Marketing');
+            const org = OrgProperty.from('ABC, Inc.;North American Division;Marketing');
 
             expect(org instanceof OrgProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'ABC, Inc.;North American Division;Marketing';
-            const config: OrgPropertyRestConfig = [value, { type: 'work' }];
-            const org = OrgProperty.factory(config);
+            const config: OrgRestConfig = [value, { type: 'work' }];
+            const org = OrgProperty.from(config);
 
             expect(org instanceof OrgProperty).to.equal(true);
         });

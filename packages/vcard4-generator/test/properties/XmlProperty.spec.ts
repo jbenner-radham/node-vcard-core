@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { EOL } from '@vcard/vcard4-meta';
 import { expect } from 'chai';
-import XmlProperty, { type XmlPropertyRestConfig } from '../../lib/properties/XmlProperty.js';
+import XmlProperty, { type XmlRestConfig } from '../../lib/properties/XmlProperty.js';
 
 describe('XmlProperty', () => {
     it('is a class', () => {
@@ -98,9 +98,9 @@ describe('XmlProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(XmlProperty.factory).to.be.a('function');
+            expect(XmlProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `XmlProperty`', () => {
@@ -108,7 +108,7 @@ describe('XmlProperty', () => {
                 '<a xmlns="http://www.w3.org/1999/xhtml"',
                 '   href="http://www.example.com">My web page!</a>'
             ].join('\n');
-            const xml = XmlProperty.factory(value);
+            const xml = XmlProperty.from(value);
 
             expect(xml instanceof XmlProperty).to.equal(true);
         });
@@ -120,7 +120,7 @@ describe('XmlProperty', () => {
             ].join('\n');
             const xml = new XmlProperty(value);
 
-            expect(XmlProperty.factory(xml)).to.equal(xml);
+            expect(XmlProperty.from(xml)).to.equal(xml);
         });
 
         it('creates an instance from a string value argument', () => {
@@ -128,7 +128,7 @@ describe('XmlProperty', () => {
                 '<a xmlns="http://www.w3.org/1999/xhtml"',
                 '   href="http://www.example.com">My web page!</a>'
             ].join('\n');
-            const xml = XmlProperty.factory(value);
+            const xml = XmlProperty.from(value);
 
             expect(xml instanceof XmlProperty).to.equal(true);
         });
@@ -138,8 +138,8 @@ describe('XmlProperty', () => {
                 '<a xmlns="http://www.w3.org/1999/xhtml"',
                 '   href="http://www.example.com">My web page!</a>'
             ].join('\n');
-            const config: XmlPropertyRestConfig = [value, { value: 'text' }];
-            const xml = XmlProperty.factory(config);
+            const config: XmlRestConfig = [value, { value: 'text' }];
+            const xml = XmlProperty.from(config);
 
             expect(xml instanceof XmlProperty).to.equal(true);
         });

@@ -15,10 +15,10 @@ export interface SoundParameters {
     altid?: number | string;
 }
 
-export type SoundPropertyRestConfig = [value: string, parameters?: SoundParameters, options?: PropertyOptions];
+export type SoundRestConfig = [value: string, parameters?: SoundParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support. */
-export type SoundPropertyLike = SoundProperty | SoundPropertyRestConfig | string;
+export type SoundConfig = SoundProperty | SoundRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -77,14 +77,14 @@ export default class SoundProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: SoundPropertyLike): SoundProperty {
+    static from(value: SoundConfig): SoundProperty {
         if (value instanceof SoundProperty) return value;
 
         if (Array.isArray(value)) return new SoundProperty(...value);
 
         if (isString(value)) return new SoundProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a SoundPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a SoundConfig type`);
     }
 
     static validateParameters({ pref }: SoundParameters): void {

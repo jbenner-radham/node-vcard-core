@@ -1,8 +1,8 @@
-import SourceProperty, { type SourcePropertyLike } from '../SourceProperty.js';
+import SourceProperty, { type SourceConfig } from '../SourceProperty.js';
 
 export default class SourcePropertyArray extends Array {
-    push(...items: SourcePropertyLike[]): number {
-        items.forEach(item => super.push(SourceProperty.factory(item)));
+    push(...items: SourceConfig[]): number {
+        items.forEach(item => super.push(SourceProperty.from(item)));
 
         return this.length;
     }

@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import UrlProperty, { type UrlPropertyRestConfig } from '../../lib/properties/UrlProperty.js';
+import UrlProperty, { type UrlRestConfig } from '../../lib/properties/UrlProperty.js';
 
 describe('UrlProperty', () => {
     it('is a class', () => {
@@ -99,13 +99,13 @@ describe('UrlProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(UrlProperty.factory).to.be.a('function');
+            expect(UrlProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `UrlProperty`', () => {
-            const url = UrlProperty.factory('http://www.example.com/');
+            const url = UrlProperty.from('http://www.example.com/');
 
             expect(url instanceof UrlProperty).to.equal(true);
         });
@@ -113,19 +113,19 @@ describe('UrlProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const url = new UrlProperty('http://www.example.com/');
 
-            expect(UrlProperty.factory(url)).to.equal(url);
+            expect(UrlProperty.from(url)).to.equal(url);
         });
 
         it('creates an instance from a string value argument', () => {
-            const url = UrlProperty.factory('http://www.example.com/');
+            const url = UrlProperty.from('http://www.example.com/');
 
             expect(url instanceof UrlProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/';
-            const config: UrlPropertyRestConfig = [value, { type: 'home' }];
-            const url = UrlProperty.factory(config);
+            const config: UrlRestConfig = [value, { type: 'home' }];
+            const url = UrlProperty.from(config);
 
             expect(url instanceof UrlProperty).to.equal(true);
         });

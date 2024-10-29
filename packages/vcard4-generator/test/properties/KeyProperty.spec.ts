@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import KeyProperty, { type KeyPropertyRestConfig } from '../../lib/properties/KeyProperty.js';
+import KeyProperty, { type KeyRestConfig } from '../../lib/properties/KeyProperty.js';
 
 describe('KeyProperty', () => {
     it('is a class', () => {
@@ -80,13 +80,13 @@ describe('KeyProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(KeyProperty.factory).to.be.a('function');
+            expect(KeyProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `KeyProperty`', () => {
-            const key = KeyProperty.factory('http://www.example.com/keys/jdoe.cer');
+            const key = KeyProperty.from('http://www.example.com/keys/jdoe.cer');
 
             expect(key instanceof KeyProperty).to.equal(true);
         });
@@ -94,19 +94,19 @@ describe('KeyProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const key = new KeyProperty('http://www.example.com/keys/jdoe.cer');
 
-            expect(KeyProperty.factory(key) instanceof KeyProperty).to.equal(true);
+            expect(KeyProperty.from(key) instanceof KeyProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const key = KeyProperty.factory('http://www.example.com/keys/jdoe.cer');
+            const key = KeyProperty.from('http://www.example.com/keys/jdoe.cer');
 
             expect(key instanceof KeyProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/keys/jdoe.cer';
-            const config: KeyPropertyRestConfig = [value, { value: 'uri' }];
-            const key = KeyProperty.factory(config);
+            const config: KeyRestConfig = [value, { value: 'uri' }];
+            const key = KeyProperty.from(config);
 
             expect(key instanceof KeyProperty).to.equal(true);
         });

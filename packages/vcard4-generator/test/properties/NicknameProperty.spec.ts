@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import NicknameProperty, { type NicknamePropertyRestConfig } from '../../lib/properties/NicknameProperty.js';
+import NicknameProperty, { type NicknameRestConfig } from '../../lib/properties/NicknameProperty.js';
 
 describe('NicknameProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('NicknameProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(NicknameProperty.factory).to.be.a('function');
+            expect(NicknameProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `NicknameProperty`', () => {
-            const nickname = NicknameProperty.factory('Boss');
+            const nickname = NicknameProperty.from('Boss');
 
             expect(nickname instanceof NicknameProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('NicknameProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const nickname = new NicknameProperty('Boss');
 
-            expect(NicknameProperty.factory(nickname)).to.equal(nickname);
+            expect(NicknameProperty.from(nickname)).to.equal(nickname);
         });
 
         it('creates an instance from a string value argument', () => {
-            const nickname = NicknameProperty.factory('Boss');
+            const nickname = NicknameProperty.from('Boss');
 
             expect(nickname instanceof NicknameProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'Boss';
-            const config: NicknamePropertyRestConfig = [value, { type: 'work' }];
-            const nickname = NicknameProperty.factory(config);
+            const config: NicknameRestConfig = [value, { type: 'work' }];
+            const nickname = NicknameProperty.from(config);
 
             expect(nickname instanceof NicknameProperty).to.equal(true);
         });

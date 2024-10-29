@@ -1,8 +1,8 @@
-import ContactUriProperty, { type ContactUriPropertyLike } from '../ContactUriProperty.js';
+import ContactUriProperty, { type ContactUriConfig } from '../ContactUriProperty.js';
 
 export default class ContactUriPropertyArray extends Array {
-    push(...items: ContactUriPropertyLike[]): number {
-        items.forEach(item => super.push(ContactUriProperty.factory(item)));
+    push(...items: ContactUriConfig[]): number {
+        items.forEach(item => super.push(ContactUriProperty.from(item)));
 
         return this.length;
     }

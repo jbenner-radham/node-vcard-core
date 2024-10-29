@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import FburlProperty, { FburlPropertyRestConfig } from '../../lib/properties/FburlProperty.js';
+import FburlProperty, { FburlRestConfig } from '../../lib/properties/FburlProperty.js';
 
 describe('FburlProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('FburlProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(FburlProperty.factory).to.be.a('function');
+            expect(FburlProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `FburlProperty`', () => {
-            const fburl = FburlProperty.factory('http://www.example.com/busy/janedoe');
+            const fburl = FburlProperty.from('http://www.example.com/busy/janedoe');
 
             expect(fburl instanceof FburlProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('FburlProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const fburl = new FburlProperty('http://www.example.com/busy/janedoe');
 
-            expect(FburlProperty.factory(fburl) instanceof FburlProperty).to.equal(true);
+            expect(FburlProperty.from(fburl) instanceof FburlProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const fburl = FburlProperty.factory('http://www.example.com/busy/janedoe');
+            const fburl = FburlProperty.from('http://www.example.com/busy/janedoe');
 
             expect(fburl instanceof FburlProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/busy/janedoe';
-            const config: FburlPropertyRestConfig = [value, { type: 'work' }];
-            const fburl = FburlProperty.factory(config);
+            const config: FburlRestConfig = [value, { type: 'work' }];
+            const fburl = FburlProperty.from(config);
 
             expect(fburl instanceof FburlProperty).to.equal(true);
         });

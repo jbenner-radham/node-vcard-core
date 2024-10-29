@@ -14,10 +14,10 @@ export interface PhotoParameters {
     pid?: number | number[];
 }
 
-export type PhotoPropertyRestConfig = [value: string, parameters?: PhotoParameters, options?: PropertyOptions];
+export type PhotoRestConfig = [value: string, parameters?: PhotoParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support. */
-export type PhotoPropertyLike = PhotoProperty | PhotoPropertyRestConfig | string;
+export type PhotoConfig = PhotoProperty | PhotoRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -81,14 +81,14 @@ export default class PhotoProperty extends Property {
         }
     }
 
-    static factory(value: PhotoPropertyLike): PhotoProperty {
+    static from(value: PhotoConfig): PhotoProperty {
         if (value instanceof PhotoProperty) return value;
 
         if (Array.isArray(value)) return new PhotoProperty(...value);
 
         if (isString(value)) return new PhotoProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a PhotoPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a PhotoConfig type`);
     }
 
     static validateParameters({ pref }: PhotoParameters): void {

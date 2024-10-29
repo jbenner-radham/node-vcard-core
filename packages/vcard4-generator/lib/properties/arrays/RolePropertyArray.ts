@@ -1,8 +1,8 @@
-import RoleProperty, { type RolePropertyLike } from '../RoleProperty.js';
+import RoleProperty, { type RoleConfig } from '../RoleProperty.js';
 
 export default class RolePropertyArray extends Array {
-    push(...items: RolePropertyLike[]): number {
-        items.forEach(item => super.push(RoleProperty.factory(item)));
+    push(...items: RoleConfig[]): number {
+        items.forEach(item => super.push(RoleProperty.from(item)));
 
         return this.length;
     }

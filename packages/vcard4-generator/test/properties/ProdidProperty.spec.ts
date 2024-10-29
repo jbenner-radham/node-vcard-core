@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import ProdidProperty, { type ProdidPropertyRestConfig } from '../../lib/properties/ProdidProperty.js';
+import ProdidProperty, { type ProdidRestConfig } from '../../lib/properties/ProdidProperty.js';
 
 describe('ProdidProperty', () => {
     it('is a class', () => {
@@ -62,13 +62,13 @@ describe('ProdidProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(ProdidProperty.factory).to.be.a('function');
+            expect(ProdidProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `ProdidProperty`', () => {
-            const prodid = ProdidProperty.factory('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
+            const prodid = ProdidProperty.from('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
 
             expect(prodid instanceof ProdidProperty).to.equal(true);
         });
@@ -76,19 +76,19 @@ describe('ProdidProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const prodid = new ProdidProperty('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
 
-            expect(ProdidProperty.factory(prodid)).to.equal(prodid);
+            expect(ProdidProperty.from(prodid)).to.equal(prodid);
         });
 
         it('creates an instance from a string value argument', () => {
-            const prodid = ProdidProperty.factory('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
+            const prodid = ProdidProperty.from('-//ONLINE DIRECTORY//NONSGML Version 1//EN');
 
             expect(prodid instanceof ProdidProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = '-//ONLINE DIRECTORY//NONSGML Version 1//EN';
-            const config: ProdidPropertyRestConfig = [value, { value: 'text' }];
-            const prodid = ProdidProperty.factory(config);
+            const config: ProdidRestConfig = [value, { value: 'text' }];
+            const prodid = ProdidProperty.from(config);
 
             expect(prodid instanceof ProdidProperty).to.equal(true);
         });

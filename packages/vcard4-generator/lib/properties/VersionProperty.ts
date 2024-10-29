@@ -7,9 +7,9 @@ export interface VersionParameters {
     value?: 'text';
 }
 
-export type VersionPropertyRestConfig = [value: string, parameters?: VersionParameters, options?: PropertyOptions];
+export type VersionRestConfig = [value: string, parameters?: VersionParameters, options?: PropertyOptions];
 
-export type VersionPropertyLike = VersionProperty | VersionPropertyRestConfig | string;
+export type VersionConfig = VersionProperty | VersionRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -63,13 +63,13 @@ export default class VersionProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: VersionPropertyLike): VersionProperty {
+    static from(value: VersionConfig): VersionProperty {
         if (value instanceof VersionProperty) return value;
 
         if (Array.isArray(value)) return new VersionProperty(...value);
 
         if (isString(value)) return new VersionProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a VersionPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a VersionConfig type`);
     }
 }

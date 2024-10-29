@@ -9,13 +9,14 @@ export interface DeathplaceParameters {
     language?: string;
 }
 
-export type DeathplacePropertyRestConfig = [
+export type DeathplaceRestConfig = [
     value: string,
     parameters?: DeathplaceParameters,
     options?: PropertyOptions
 ];
 
-export type DeathplacePropertyLike = DeathplaceProperty | DeathplacePropertyRestConfig | string;
+/** @todo Add URL support. */
+export type DeathplaceConfig = DeathplaceProperty | DeathplaceRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -68,13 +69,13 @@ export default class DeathplaceProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: DeathplacePropertyLike): DeathplaceProperty {
+    static from(value: DeathplaceConfig): DeathplaceProperty {
         if (value instanceof DeathplaceProperty) return value;
 
         if (Array.isArray(value)) return new DeathplaceProperty(...value);
 
         if (isString(value)) return new DeathplaceProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a DeathplacePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a DeathplaceConfig type`);
     }
 }

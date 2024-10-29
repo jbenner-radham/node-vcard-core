@@ -14,9 +14,9 @@ export interface RoleParameters {
     altid?: number | string;
 }
 
-export type RolePropertyRestConfig = [value: string, parameters?: RoleParameters, options?: PropertyOptions];
+export type RoleRestConfig = [value: string, parameters?: RoleParameters, options?: PropertyOptions];
 
-export type RolePropertyLike = RoleProperty | RolePropertyRestConfig | string;
+export type RoleConfig = RoleProperty | RoleRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -73,14 +73,14 @@ export default class RoleProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: RolePropertyLike): RoleProperty {
+    static from(value: RoleConfig): RoleProperty {
         if (value instanceof RoleProperty) return value;
 
         if (Array.isArray(value)) return new RoleProperty(...value);
 
         if (isString(value)) return new RoleProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a RolePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a RoleConfig type`);
     }
 
     static validateParameters({ pref }: RoleParameters): void {

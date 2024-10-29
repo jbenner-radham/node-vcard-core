@@ -10,14 +10,14 @@ export interface AnniversaryParameters {
     calscale?: Calscale; // For `date-and-or-time` type only!
 }
 
-export type AnniversaryPropertyRestConfig = [
+export type AnniversaryRestConfig = [
     value: string,
     parameters?: AnniversaryParameters,
     options?: PropertyOptions
 ];
 
 /** @todo Add Date type support. */
-export type AnniversaryPropertyLike = AnniversaryProperty | AnniversaryPropertyRestConfig | string;
+export type AnniversaryConfig = AnniversaryProperty | AnniversaryRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -74,14 +74,14 @@ export default class AnniversaryProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: AnniversaryPropertyLike): AnniversaryProperty {
+    static from(value: AnniversaryConfig): AnniversaryProperty {
         if (value instanceof AnniversaryProperty) return value;
 
         if (Array.isArray(value)) return new AnniversaryProperty(...value);
 
         if (isString(value)) return new AnniversaryProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a AnniversaryPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a AnniversaryConfig type`);
     }
 
     static validateParameters({ calscale, value }: AnniversaryParameters): void {

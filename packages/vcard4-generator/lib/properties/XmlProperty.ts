@@ -8,9 +8,9 @@ export interface XmlParameters {
     altid?: number | string;
 }
 
-export type XmlPropertyRestConfig = [value: string, parameters?: XmlParameters, options?: PropertyOptions];
+export type XmlRestConfig = [value: string, parameters?: XmlParameters, options?: PropertyOptions];
 
-export type XmlPropertyLike = XmlProperty | XmlPropertyRestConfig | string;
+export type XmlConfig = XmlProperty | XmlRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -80,13 +80,13 @@ export default class XmlProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: XmlPropertyLike): XmlProperty {
+    static from(value: XmlConfig): XmlProperty {
         if (value instanceof XmlProperty) return value;
 
         if (Array.isArray(value)) return new XmlProperty(...value);
 
         if (isString(value)) return new XmlProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a XmlPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a XmlConfig type`);
     }
 }

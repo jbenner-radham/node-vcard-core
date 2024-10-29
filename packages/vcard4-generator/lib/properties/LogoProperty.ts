@@ -15,10 +15,10 @@ export interface LogoParameters {
     altid?: number | string;
 }
 
-export type LogoPropertyRestConfig = [value: string, parameters?: LogoParameters, options?: PropertyOptions];
+export type LogoRestConfig = [value: string, parameters?: LogoParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support. */
-export type LogoPropertyLike = LogoProperty | LogoPropertyRestConfig | string;
+export type LogoConfig = LogoProperty | LogoRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -74,14 +74,14 @@ export default class LogoProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: LogoPropertyLike): LogoProperty {
+    static from(value: LogoConfig): LogoProperty {
         if (value instanceof LogoProperty) return value;
 
         if (Array.isArray(value)) return new LogoProperty(...value);
 
         if (isString(value)) return new LogoProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a LogoPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a LogoConfig type`);
     }
 
     static validateParameters({ pref }: LogoParameters): void {

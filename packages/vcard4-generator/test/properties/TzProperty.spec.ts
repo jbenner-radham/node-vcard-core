@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import TzProperty, { type TzPropertyRestConfig } from '../../lib/properties/TzProperty.js';
+import TzProperty, { type TzRestConfig } from '../../lib/properties/TzProperty.js';
 
 describe('TzProperty', () => {
     it('is a class', () => {
@@ -88,13 +88,13 @@ describe('TzProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(TzProperty.factory).to.be.a('function');
+            expect(TzProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `TzProperty`', () => {
-            const tz = TzProperty.factory('Raleigh/North America');
+            const tz = TzProperty.from('Raleigh/North America');
 
             expect(tz instanceof TzProperty).to.equal(true);
         });
@@ -102,19 +102,19 @@ describe('TzProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const tz = new TzProperty('Raleigh/North America');
 
-            expect(TzProperty.factory(tz)).to.equal(tz);
+            expect(TzProperty.from(tz)).to.equal(tz);
         });
 
         it('creates an instance from a string value argument', () => {
-            const tz = TzProperty.factory('Raleigh/North America');
+            const tz = TzProperty.from('Raleigh/North America');
 
             expect(tz instanceof TzProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'Raleigh/North America';
-            const config: TzPropertyRestConfig = [value, { type: 'home' }];
-            const tz = TzProperty.factory(config);
+            const config: TzRestConfig = [value, { type: 'home' }];
+            const tz = TzProperty.from(config);
 
             expect(tz instanceof TzProperty).to.equal(true);
         });

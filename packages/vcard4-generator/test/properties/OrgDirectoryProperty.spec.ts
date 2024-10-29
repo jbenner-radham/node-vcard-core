@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
 import OrgDirectoryProperty, {
-    type OrgDirectoryPropertyRestConfig
+    type OrgDirectoryRestConfig
 } from '../../lib/properties/OrgDirectoryProperty.js';
 
 describe('OrgDirectoryProperty', () => {
@@ -66,14 +66,14 @@ describe('OrgDirectoryProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(OrgDirectoryProperty.factory).to.be.a('function');
+            expect(OrgDirectoryProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `OrgDirectoryProperty`', () => {
             const value = 'ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering';
-            const orgDirectory = OrgDirectoryProperty.factory(value);
+            const orgDirectory = OrgDirectoryProperty.from(value);
 
             expect(orgDirectory instanceof OrgDirectoryProperty).to.equal(true);
         });
@@ -82,20 +82,20 @@ describe('OrgDirectoryProperty', () => {
             const value = 'ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering';
             const orgDirectory = new OrgDirectoryProperty(value);
 
-            expect(OrgDirectoryProperty.factory(orgDirectory)).to.equal(orgDirectory);
+            expect(OrgDirectoryProperty.from(orgDirectory)).to.equal(orgDirectory);
         });
 
         it('creates an instance from a string value argument', () => {
             const value = 'ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering';
-            const orgDirectory = OrgDirectoryProperty.factory(value);
+            const orgDirectory = OrgDirectoryProperty.from(value);
 
             expect(orgDirectory instanceof OrgDirectoryProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'ldap://ldap.tech.example/o=Example%20Tech,ou=Engineering';
-            const config: OrgDirectoryPropertyRestConfig = [value, { pref: 1 }];
-            const orgDirectory = OrgDirectoryProperty.factory(config);
+            const config: OrgDirectoryRestConfig = [value, { pref: 1 }];
+            const orgDirectory = OrgDirectoryProperty.from(config);
 
             expect(orgDirectory instanceof OrgDirectoryProperty).to.equal(true);
         });

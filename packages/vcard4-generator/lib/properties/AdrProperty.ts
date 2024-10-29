@@ -18,10 +18,10 @@ export interface AdrParameters {
     type?: Type;
 }
 
-export type AdrPropertyRestConfig = [value: string, parameters?: AdrParameters, options?: PropertyOptions];
+export type AdrRestConfig = [value: string, parameters?: AdrParameters, options?: PropertyOptions];
 
 /** @todo Add ADR object support. */
-export type AdrPropertyLike = AdrProperty | AdrPropertyRestConfig | string;
+export type AdrConfig = AdrProperty | AdrRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -178,14 +178,14 @@ export default class AdrProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: AdrPropertyLike): AdrProperty {
+    static from(value: AdrConfig): AdrProperty {
         if (value instanceof AdrProperty) return value;
 
         if (Array.isArray(value)) return new AdrProperty(...value);
 
         if (isString(value)) return new AdrProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a AdrPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a AdrConfig type`);
     }
 
     static validateParameters({ pref }: AdrParameters): void {

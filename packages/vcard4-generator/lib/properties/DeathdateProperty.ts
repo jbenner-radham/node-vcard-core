@@ -14,9 +14,10 @@ export interface DeathdateParameters {
     language?: string; // For `text` type only!
 }
 
-export type DeathdatePropertyRestConfig = [value: string, parameters?: DeathdateParameters, options?: PropertyOptions];
+export type DeathdateRestConfig = [value: string, parameters?: DeathdateParameters, options?: PropertyOptions];
 
-export type DeathdatePropertyLike = DeathdateProperty | DeathdatePropertyRestConfig | string;
+/** @todo Add Date support. */
+export type DeathdateConfig = DeathdateProperty | DeathdateRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -84,14 +85,14 @@ export default class DeathdateProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: DeathdatePropertyLike): DeathdateProperty {
+    static from(value: DeathdateConfig): DeathdateProperty {
         if (value instanceof DeathdateProperty) return value;
 
         if (Array.isArray(value)) return new DeathdateProperty(...value);
 
         if (isString(value)) return new DeathdateProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a DeathdatePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a DeathdateConfig type`);
     }
 
     static validateParameters({ calscale, language, value }: DeathdateParameters): void {

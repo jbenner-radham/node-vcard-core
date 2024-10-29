@@ -11,9 +11,9 @@ export interface NParameters {
     altid?: number | string;
 }
 
-export type NPropertyRestConfig = [value: string, parameters?: NParameters, options?: PropertyOptions];
+export type NRestConfig = [value: string, parameters?: NParameters, options?: PropertyOptions];
 
-export type NPropertyLike = NProperty | NPropertyRestConfig | string;
+export type NConfig = NProperty | NRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -117,13 +117,13 @@ export default class NProperty extends Property {
             throw new TypeError(`The value "${value}" is not a valid N format`);
     }
 
-    static factory(value: NPropertyLike): NProperty {
+    static from(value: NConfig): NProperty {
         if (value instanceof NProperty) return value;
 
         if (Array.isArray(value)) return new NProperty(...value);
 
         if (isString(value)) return new NProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a NPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a NConfig type`);
     }
 }

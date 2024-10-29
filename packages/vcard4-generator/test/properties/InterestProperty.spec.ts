@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import InterestProperty, { InterestPropertyRestConfig } from '../../lib/properties/InterestProperty.js';
+import InterestProperty, { InterestRestConfig } from '../../lib/properties/InterestProperty.js';
 
 describe('InterestProperty', () => {
     it('is a class', () => {
@@ -64,13 +64,13 @@ describe('InterestProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(InterestProperty.factory).to.be.a('function');
+            expect(InterestProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `InterestProperty`', () => {
-            const interest = InterestProperty.factory(`rock 'n' roll music`);
+            const interest = InterestProperty.from(`rock 'n' roll music`);
 
             expect(interest instanceof InterestProperty).to.equal(true);
         });
@@ -78,19 +78,19 @@ describe('InterestProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const interest = new InterestProperty(`rock 'n' roll music`);
 
-            expect(InterestProperty.factory(interest)).to.equal(interest);
+            expect(InterestProperty.from(interest)).to.equal(interest);
         });
 
         it('creates an instance from a string value argument', () => {
-            const interest = InterestProperty.factory(`rock 'n' roll music`);
+            const interest = InterestProperty.from(`rock 'n' roll music`);
 
             expect(interest instanceof InterestProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = `rock 'n' roll music`;
-            const config: InterestPropertyRestConfig = [value, { index: 2, level: 'high' }];
-            const interest = InterestProperty.factory(config);
+            const config: InterestRestConfig = [value, { index: 2, level: 'high' }];
+            const interest = InterestProperty.from(config);
 
             expect(interest instanceof InterestProperty).to.equal(true);
         });

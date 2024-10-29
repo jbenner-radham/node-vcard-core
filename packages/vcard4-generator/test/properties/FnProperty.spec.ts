@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import FnProperty, { FnPropertyRestConfig } from '../../lib/properties/FnProperty.js';
+import FnProperty, { FnRestConfig } from '../../lib/properties/FnProperty.js';
 
 describe('FnProperty', () => {
     it('is a class', () => {
@@ -73,13 +73,13 @@ describe('FnProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(FnProperty.factory).to.be.a('function');
+            expect(FnProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `FnProperty`', () => {
-            const fn = FnProperty.factory('Mr. John Q. Public, Esq.');
+            const fn = FnProperty.from('Mr. John Q. Public, Esq.');
 
             expect(fn instanceof FnProperty).to.equal(true);
         });
@@ -87,19 +87,19 @@ describe('FnProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const fn = new FnProperty('Mr. John Q. Public, Esq.');
 
-            expect(FnProperty.factory(fn) instanceof FnProperty).to.equal(true);
+            expect(FnProperty.from(fn) instanceof FnProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const fn = FnProperty.factory('Mr. John Q. Public, Esq.');
+            const fn = FnProperty.from('Mr. John Q. Public, Esq.');
 
             expect(fn instanceof FnProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'Mr. John Q. Public, Esq.';
-            const config: FnPropertyRestConfig = [value, { type: 'work' }];
-            const fn = FnProperty.factory(config);
+            const config: FnRestConfig = [value, { type: 'work' }];
+            const fn = FnProperty.from(config);
 
             expect(fn instanceof FnProperty).to.equal(true);
         });

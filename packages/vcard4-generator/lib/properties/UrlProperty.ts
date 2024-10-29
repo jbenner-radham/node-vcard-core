@@ -14,10 +14,10 @@ export interface UrlParameters {
     altid?: number | string;
 }
 
-export type UrlPropertyRestConfig = [value: string, parameters?: UrlParameters, options?: PropertyOptions];
+export type UrlRestConfig = [value: string, parameters?: UrlParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support. */
-export type UrlPropertyLike = UrlProperty | UrlPropertyRestConfig | string;
+export type UrlConfig = UrlProperty | UrlRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -79,14 +79,14 @@ export default class UrlProperty extends Property {
         }
     }
 
-    static factory(value: UrlPropertyLike): UrlProperty {
+    static from(value: UrlConfig): UrlProperty {
         if (value instanceof UrlProperty) return value;
 
         if (Array.isArray(value)) return new UrlProperty(...value);
 
         if (isString(value)) return new UrlProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a UrlPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a UrlConfig type`);
     }
 
     static validateParameters({ pref }: UrlParameters): void {

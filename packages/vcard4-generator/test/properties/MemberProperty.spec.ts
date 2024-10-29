@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import MemberProperty, { type MemberPropertyRestConfig } from '../../lib/properties/MemberProperty.js';
+import MemberProperty, { type MemberRestConfig } from '../../lib/properties/MemberProperty.js';
 
 describe('MemberProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('MemberProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(MemberProperty.factory).to.be.a('function');
+            expect(MemberProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `MemberProperty`', () => {
-            const member = MemberProperty.factory('mailto:subscriber1@example.com');
+            const member = MemberProperty.from('mailto:subscriber1@example.com');
 
             expect(member instanceof MemberProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('MemberProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const member = new MemberProperty('mailto:subscriber1@example.com');
 
-            expect(MemberProperty.factory(member)).to.equal(member);
+            expect(MemberProperty.from(member)).to.equal(member);
         });
 
         it('creates an instance from a string value argument', () => {
-            const member = MemberProperty.factory('mailto:subscriber1@example.com');
+            const member = MemberProperty.from('mailto:subscriber1@example.com');
 
             expect(member instanceof MemberProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'mailto:subscriber1@example.com';
-            const config: MemberPropertyRestConfig = [value, { value: 'uri' }];
-            const member = MemberProperty.factory(config);
+            const config: MemberRestConfig = [value, { value: 'uri' }];
+            const member = MemberProperty.from(config);
 
             expect(member instanceof MemberProperty).to.equal(true);
         });

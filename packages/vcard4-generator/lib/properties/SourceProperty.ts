@@ -13,10 +13,10 @@ export interface SourceParameters {
     mediatype?: string;
 }
 
-export type SourcePropertyRestConfig = [value: string, parameters?: SourceParameters, options?: PropertyOptions];
+export type SourceRestConfig = [value: string, parameters?: SourceParameters, options?: PropertyOptions];
 
-/** Add URL type support? */
-export type SourcePropertyLike = SourceProperty | SourcePropertyRestConfig | string;
+/** Add URL type support. */
+export type SourceConfig = SourceProperty | SourceRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -80,14 +80,14 @@ export default class SourceProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: SourcePropertyLike): SourceProperty {
+    static from(value: SourceConfig): SourceProperty {
         if (value instanceof SourceProperty) return value;
 
         if (Array.isArray(value)) return new SourceProperty(...value);
 
         if (isString(value)) return new SourceProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a SourcePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a SourceConfig type`);
     }
 
     static validateParameters({ pref }: SourceParameters): void {

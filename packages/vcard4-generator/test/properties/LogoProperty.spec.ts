@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import LogoProperty, { type LogoPropertyRestConfig } from '../../lib/properties/LogoProperty.js';
+import LogoProperty, { type LogoRestConfig } from '../../lib/properties/LogoProperty.js';
 
 describe('LogoProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('LogoProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(LogoProperty.factory).to.be.a('function');
+            expect(LogoProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `LogoProperty`', () => {
-            const logo = LogoProperty.factory('http://www.example.com/pub/logos/abccorp.jpg');
+            const logo = LogoProperty.from('http://www.example.com/pub/logos/abccorp.jpg');
 
             expect(logo instanceof LogoProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('LogoProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const logo = new LogoProperty('http://www.example.com/pub/logos/abccorp.jpg');
 
-            expect(LogoProperty.factory(logo)).to.equal(logo);
+            expect(LogoProperty.from(logo)).to.equal(logo);
         });
 
         it('creates an instance from a string value argument', () => {
-            const logo = LogoProperty.factory('http://www.example.com/pub/logos/abccorp.jpg');
+            const logo = LogoProperty.from('http://www.example.com/pub/logos/abccorp.jpg');
 
             expect(logo instanceof LogoProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'http://www.example.com/pub/logos/abccorp.jpg';
-            const config: LogoPropertyRestConfig = [value, { type: 'work' }];
-            const logo = LogoProperty.factory(config);
+            const config: LogoRestConfig = [value, { type: 'work' }];
+            const logo = LogoProperty.from(config);
 
             expect(logo instanceof LogoProperty).to.equal(true);
         });

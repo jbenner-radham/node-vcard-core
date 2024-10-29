@@ -14,10 +14,10 @@ export interface BdayParameters {
     language?: string; // For `text` type only!
 }
 
-export type BdayPropertyRestConfig = [value: string, parameters?: BdayParameters, options?: PropertyOptions];
+export type BdayRestConfig = [value: string, parameters?: BdayParameters, options?: PropertyOptions];
 
 /** @todo Add Date type support. */
-export type BdayPropertyLike = BdayProperty | BdayPropertyRestConfig | string;
+export type BdayConfig = BdayProperty | BdayRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -79,14 +79,14 @@ export default class BdayProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: BdayPropertyLike): BdayProperty {
+    static from(value: BdayConfig): BdayProperty {
         if (value instanceof BdayProperty) return value;
 
         if (Array.isArray(value)) return new BdayProperty(...value);
 
         if (isString(value)) return new BdayProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a BdayPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a BdayConfig type`);
     }
 
     static validateParameters({ calscale, language, value }: BdayParameters): void {

@@ -7,13 +7,13 @@ export interface ClientpidmapParameters {
     [key: string]: never;
 }
 
-export type ClientpidmapPropertyRestConfig = [
+export type ClientpidmapRestConfig = [
     value: string,
     parameters?: ClientpidmapParameters,
     options?: PropertyOptions
 ];
 
-export type ClientpidmapPropertyLike = ClientpidmapProperty | ClientpidmapPropertyRestConfig | string;
+export type ClientpidmapConfig = ClientpidmapProperty | ClientpidmapRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -80,13 +80,13 @@ export default class ClientpidmapProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: ClientpidmapPropertyLike): ClientpidmapProperty {
+    static from(value: ClientpidmapConfig): ClientpidmapProperty {
         if (value instanceof ClientpidmapProperty) return value;
 
         if (Array.isArray(value)) return new ClientpidmapProperty(...value);
 
         if (isString(value)) return new ClientpidmapProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a ClientpidmapPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a ClientpidmapConfig type`);
     }
 }

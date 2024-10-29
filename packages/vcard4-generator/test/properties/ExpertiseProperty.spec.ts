@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import ExpertiseProperty, { ExpertisePropertyRestConfig } from '../../lib/properties/ExpertiseProperty.js';
+import ExpertiseProperty, { ExpertiseRestConfig } from '../../lib/properties/ExpertiseProperty.js';
 
 describe('ExpertiseProperty', () => {
     it('is a class', () => {
@@ -64,13 +64,13 @@ describe('ExpertiseProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(ExpertiseProperty.factory).to.be.a('function');
+            expect(ExpertiseProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `ExpertiseProperty`', () => {
-            const expertise = ExpertiseProperty.factory('chinese literature');
+            const expertise = ExpertiseProperty.from('chinese literature');
 
             expect(expertise instanceof ExpertiseProperty).to.equal(true);
         });
@@ -78,19 +78,19 @@ describe('ExpertiseProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const expertise = new ExpertiseProperty('chinese literature');
 
-            expect(ExpertiseProperty.factory(expertise)).to.equal(expertise);
+            expect(ExpertiseProperty.from(expertise)).to.equal(expertise);
         });
 
         it('creates an instance from a string value argument', () => {
-            const expertise = ExpertiseProperty.factory('chinese literature');
+            const expertise = ExpertiseProperty.from('chinese literature');
 
             expect(expertise instanceof ExpertiseProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'chinese literature';
-            const config: ExpertisePropertyRestConfig = [value, { index: 1, level: 'expert' }];
-            const expertise = ExpertiseProperty.factory(config);
+            const config: ExpertiseRestConfig = [value, { index: 1, level: 'expert' }];
+            const expertise = ExpertiseProperty.from(config);
 
             expect(expertise instanceof ExpertiseProperty).to.equal(true);
         });

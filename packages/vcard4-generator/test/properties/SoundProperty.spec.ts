@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import SoundProperty, { type SoundPropertyRestConfig } from '../../lib/properties/SoundProperty.js';
+import SoundProperty, { type SoundRestConfig } from '../../lib/properties/SoundProperty.js';
 
 describe('SoundProperty', () => {
     it('is a class', () => {
@@ -74,14 +74,14 @@ describe('SoundProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(SoundProperty.factory).to.be.a('function');
+            expect(SoundProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `SoundProperty`', () => {
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
-            const sound = SoundProperty.factory(value);
+            const sound = SoundProperty.from(value);
 
             expect(sound instanceof SoundProperty).to.equal(true);
         });
@@ -90,20 +90,20 @@ describe('SoundProperty', () => {
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
             const sound = new SoundProperty(value);
 
-            expect(SoundProperty.factory(sound)).to.equal(sound);
+            expect(SoundProperty.from(sound)).to.equal(sound);
         });
 
         it('creates an instance from a string value argument', () => {
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
-            const sound = SoundProperty.factory(value);
+            const sound = SoundProperty.from(value);
 
             expect(sound instanceof SoundProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com';
-            const config: SoundPropertyRestConfig = [value, { type: 'home' }];
-            const sound = SoundProperty.factory(config);
+            const config: SoundRestConfig = [value, { type: 'home' }];
+            const sound = SoundProperty.from(config);
 
             expect(sound instanceof SoundProperty).to.equal(true);
         });

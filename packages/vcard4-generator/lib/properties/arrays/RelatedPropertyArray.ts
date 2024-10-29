@@ -1,8 +1,8 @@
-import RelatedProperty, { type RelatedPropertyLike } from '../RelatedProperty.js';
+import RelatedProperty, { type RelatedConfig } from '../RelatedProperty.js';
 
 export default class RelatedPropertyArray extends Array {
-    push(...items: RelatedPropertyLike[]): number {
-        items.forEach(item => super.push(RelatedProperty.factory(item)));
+    push(...items: RelatedConfig[]): number {
+        items.forEach(item => super.push(RelatedProperty.from(item)));
 
         return this.length;
     }

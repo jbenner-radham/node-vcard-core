@@ -7,9 +7,9 @@ export interface ProdidParameters {
     value?: 'text';
 }
 
-export type ProdidPropertyRestConfig = [value: string, parameters?: ProdidParameters, options?: PropertyOptions];
+export type ProdidRestConfig = [value: string, parameters?: ProdidParameters, options?: PropertyOptions];
 
-export type ProdidPropertyLike = ProdidProperty | ProdidPropertyRestConfig | string;
+export type ProdidConfig = ProdidProperty | ProdidRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -62,13 +62,13 @@ export default class ProdidProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: ProdidPropertyLike): ProdidProperty {
+    static from(value: ProdidConfig): ProdidProperty {
         if (value instanceof ProdidProperty) return value;
 
         if (Array.isArray(value)) return new ProdidProperty(...value);
 
         if (isString(value)) return new ProdidProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a ProdidPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a ProdidConfig type`);
     }
 }

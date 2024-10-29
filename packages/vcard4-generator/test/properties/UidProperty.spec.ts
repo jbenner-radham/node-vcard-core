@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import UidProperty, { type UidPropertyRestConfig } from '../../lib/properties/UidProperty.js';
+import UidProperty, { type UidRestConfig } from '../../lib/properties/UidProperty.js';
 
 describe('UidProperty', () => {
     it('is a class', () => {
@@ -70,13 +70,13 @@ describe('UidProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(UidProperty.factory).to.be.a('function');
+            expect(UidProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `UidProperty`', () => {
-            const uid = UidProperty.factory('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6');
+            const uid = UidProperty.from('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6');
 
             expect(uid instanceof UidProperty).to.equal(true);
         });
@@ -84,19 +84,19 @@ describe('UidProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const uid = new UidProperty('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6');
 
-            expect(UidProperty.factory(uid)).to.equal(uid);
+            expect(UidProperty.from(uid)).to.equal(uid);
         });
 
         it('creates an instance from a string value argument', () => {
-            const uid = UidProperty.factory('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6');
+            const uid = UidProperty.from('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6');
 
             expect(uid instanceof UidProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6';
-            const config: UidPropertyRestConfig = [value, { value: 'uri' }];
-            const uid = UidProperty.factory(config);
+            const config: UidRestConfig = [value, { value: 'uri' }];
+            const uid = UidProperty.from(config);
 
             expect(uid instanceof UidProperty).to.equal(true);
         });

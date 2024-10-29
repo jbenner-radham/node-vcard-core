@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import TitleProperty, { type TitlePropertyRestConfig } from '../../lib/properties/TitleProperty.js';
+import TitleProperty, { type TitleRestConfig } from '../../lib/properties/TitleProperty.js';
 
 describe('TitleProperty', () => {
     it('is a class', () => {
@@ -70,13 +70,13 @@ describe('TitleProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(TitleProperty.factory).to.be.a('function');
+            expect(TitleProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `TitleProperty`', () => {
-            const title = TitleProperty.factory('Research Scientist');
+            const title = TitleProperty.from('Research Scientist');
 
             expect(title instanceof TitleProperty).to.equal(true);
         });
@@ -84,19 +84,19 @@ describe('TitleProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const title = new TitleProperty('Research Scientist');
 
-            expect(TitleProperty.factory(title)).to.equal(title);
+            expect(TitleProperty.from(title)).to.equal(title);
         });
 
         it('creates an instance from a string value argument', () => {
-            const title = TitleProperty.factory('Research Scientist');
+            const title = TitleProperty.from('Research Scientist');
 
             expect(title instanceof TitleProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'Research Scientist';
-            const config: TitlePropertyRestConfig = [value, { value: 'text' }];
-            const title = TitleProperty.factory(config);
+            const config: TitleRestConfig = [value, { value: 'text' }];
+            const title = TitleProperty.from(config);
 
             expect(title instanceof TitleProperty).to.equal(true);
         });

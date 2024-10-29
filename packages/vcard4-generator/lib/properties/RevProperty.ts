@@ -7,10 +7,10 @@ export interface RevParameters {
     value?: 'timestamp';
 }
 
-export type RevPropertyRestConfig = [value: string, parameters?: RevParameters, options?: PropertyOptions];
+export type RevRestConfig = [value: string, parameters?: RevParameters, options?: PropertyOptions];
 
 /** @todo Add Date type support. */
-export type RevPropertyLike = RevProperty | RevPropertyRestConfig | string;
+export type RevConfig = RevProperty | RevRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -60,13 +60,13 @@ export default class RevProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: RevPropertyLike): RevProperty {
+    static from(value: RevConfig): RevProperty {
         if (value instanceof RevProperty) return value;
 
         if (Array.isArray(value)) return new RevProperty(...value);
 
         if (isString(value)) return new RevProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a RevPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a RevConfig type`);
     }
 }

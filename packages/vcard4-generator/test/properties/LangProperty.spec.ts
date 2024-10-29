@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import LangProperty, { type LangPropertyRestConfig } from '../../lib/properties/LangProperty.js';
+import LangProperty, { type LangRestConfig } from '../../lib/properties/LangProperty.js';
 
 describe('LangProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('LangProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(LangProperty.factory).to.be.a('function');
+            expect(LangProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `LangProperty`', () => {
-            const lang = LangProperty.factory('en');
+            const lang = LangProperty.from('en');
 
             expect(lang instanceof LangProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('LangProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const lang = new LangProperty('en');
 
-            expect(LangProperty.factory(lang)).to.equal(lang);
+            expect(LangProperty.from(lang)).to.equal(lang);
         });
 
         it('creates an instance from a string value argument', () => {
-            const lang = LangProperty.factory('en');
+            const lang = LangProperty.from('en');
 
             expect(lang instanceof LangProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'en';
-            const config: LangPropertyRestConfig = [value, { type: 'home' }];
-            const lang = LangProperty.factory(config);
+            const config: LangRestConfig = [value, { type: 'home' }];
+            const lang = LangProperty.from(config);
 
             expect(lang instanceof LangProperty).to.equal(true);
         });

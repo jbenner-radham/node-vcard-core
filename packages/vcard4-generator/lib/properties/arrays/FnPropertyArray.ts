@@ -1,8 +1,8 @@
-import FnProperty, { type FnPropertyLike } from '../FnProperty.js';
+import FnProperty, { type FnConfig } from '../FnProperty.js';
 
 export default class FnPropertyArray extends Array {
-    push(...items: FnPropertyLike[]): number {
-        items.forEach(item => super.push(FnProperty.factory(item)));
+    push(...items: FnConfig[]): number {
+        items.forEach(item => super.push(FnProperty.from(item)));
 
         return this.length;
     }

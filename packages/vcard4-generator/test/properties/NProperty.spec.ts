@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import NProperty, { type NPropertyRestConfig } from '../../lib/properties/NProperty.js';
+import NProperty, { type NRestConfig } from '../../lib/properties/NProperty.js';
 
 describe('NProperty', () => {
     it('is a class', () => {
@@ -142,13 +142,13 @@ describe('NProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(NProperty.factory).to.be.a('function');
+            expect(NProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `NProperty`', () => {
-            const n = NProperty.factory('Public;John;Quinlan;Mr.;Esq.');
+            const n = NProperty.from('Public;John;Quinlan;Mr.;Esq.');
 
             expect(n instanceof NProperty).to.equal(true);
         });
@@ -156,19 +156,19 @@ describe('NProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
 
-            expect(NProperty.factory(n)).to.equal(n);
+            expect(NProperty.from(n)).to.equal(n);
         });
 
         it('creates an instance from a string value argument', () => {
-            const n = NProperty.factory('Public;John;Quinlan;Mr.;Esq.');
+            const n = NProperty.from('Public;John;Quinlan;Mr.;Esq.');
 
             expect(n instanceof NProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'Public;John;Quinlan;Mr.;Esq.';
-            const config: NPropertyRestConfig = [value, { value: 'text' }];
-            const n = NProperty.factory(config);
+            const config: NRestConfig = [value, { value: 'text' }];
+            const n = NProperty.from(config);
 
             expect(n instanceof NProperty).to.equal(true);
         });

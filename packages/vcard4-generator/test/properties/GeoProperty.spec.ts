@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import GeoProperty, { GeoPropertyRestConfig } from '../../lib/properties/GeoProperty.js';
+import GeoProperty, { GeoRestConfig } from '../../lib/properties/GeoProperty.js';
 
 describe('GeoProperty', () => {
     it('is a class', () => {
@@ -75,13 +75,13 @@ describe('GeoProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(GeoProperty.factory).to.be.a('function');
+            expect(GeoProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `GeoProperty`', () => {
-            const geo = GeoProperty.factory('geo:37.386013,-122.082932');
+            const geo = GeoProperty.from('geo:37.386013,-122.082932');
 
             expect(geo instanceof GeoProperty).to.equal(true);
         });
@@ -89,19 +89,19 @@ describe('GeoProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const geo = new GeoProperty('geo:37.386013,-122.082932');
 
-            expect(GeoProperty.factory(geo) instanceof GeoProperty).to.equal(true);
+            expect(GeoProperty.from(geo) instanceof GeoProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const geo = GeoProperty.factory('geo:37.386013,-122.082932');
+            const geo = GeoProperty.from('geo:37.386013,-122.082932');
 
             expect(geo instanceof GeoProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'geo:37.386013,-122.082932';
-            const config: GeoPropertyRestConfig = [value, { value: 'uri' }];
-            const geo = GeoProperty.factory(config);
+            const config: GeoRestConfig = [value, { value: 'uri' }];
+            const geo = GeoProperty.from(config);
 
             expect(geo instanceof GeoProperty).to.equal(true);
         });

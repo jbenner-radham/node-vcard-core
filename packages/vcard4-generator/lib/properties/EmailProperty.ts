@@ -13,9 +13,9 @@ export interface EmailParameters {
     altid?: number | string;
 }
 
-export type EmailPropertyRestConfig = [value: string, parameters?: EmailParameters, options?: PropertyOptions];
+export type EmailRestConfig = [value: string, parameters?: EmailParameters, options?: PropertyOptions];
 
-export type EmailPropertyLike = EmailProperty | EmailPropertyRestConfig | string;
+export type EmailConfig = EmailProperty | EmailRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -77,14 +77,14 @@ export default class EmailProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: EmailPropertyLike): EmailProperty {
+    static from(value: EmailConfig): EmailProperty {
         if (value instanceof EmailProperty) return value;
 
         if (Array.isArray(value)) return new EmailProperty(...value);
 
         if (isString(value)) return new EmailProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a EmailPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a EmailConfig type`);
     }
 
     static validateParameters({ pref }: EmailParameters): void {

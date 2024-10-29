@@ -1,8 +1,8 @@
-import NoteProperty, { type NotePropertyLike } from '../NoteProperty.js';
+import NoteProperty, { type NoteConfig } from '../NoteProperty.js';
 
 export default class NotePropertyArray extends Array {
-    push(...items: NotePropertyLike[]): number {
-        items.forEach(item => super.push(NoteProperty.factory(item)));
+    push(...items: NoteConfig[]): number {
+        items.forEach(item => super.push(NoteProperty.from(item)));
 
         return this.length;
     }

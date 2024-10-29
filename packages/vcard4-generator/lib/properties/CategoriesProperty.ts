@@ -13,13 +13,13 @@ export interface CategoriesParameters {
     altid?: number | string;
 }
 
-export type CategoriesPropertyRestConfig = [
+export type CategoriesRestConfig = [
     value: string,
     parameters?: CategoriesParameters,
     options?: PropertyOptions
 ];
 
-export type CategoriesPropertyLike = CategoriesProperty | CategoriesPropertyRestConfig | string | string[];
+export type CategoriesConfig = CategoriesProperty | CategoriesRestConfig | string | string[];
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -72,16 +72,16 @@ export default class CategoriesProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: CategoriesPropertyLike): CategoriesProperty {
+    static from(value: CategoriesConfig): CategoriesProperty {
         if (value instanceof CategoriesProperty) return value;
 
         if (Array.isArray(value) && value.every(isString)) return new CategoriesProperty(value.join(','));
 
-        if (Array.isArray(value)) return new CategoriesProperty(...value as CategoriesPropertyRestConfig);
+        if (Array.isArray(value)) return new CategoriesProperty(...value as CategoriesRestConfig);
 
         if (isString(value)) return new CategoriesProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a CategoriesPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a CategoriesConfig type`);
     }
 
     static validateParameters({ pref }: CategoriesParameters): void {

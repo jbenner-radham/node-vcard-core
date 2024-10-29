@@ -1,8 +1,8 @@
-import EmailProperty, { type EmailPropertyLike } from '../EmailProperty.js';
+import EmailProperty, { type EmailConfig } from '../EmailProperty.js';
 
 export default class EmailPropertyArray extends Array {
-    push(...items: EmailPropertyLike[]): number {
-        items.forEach(item => super.push(EmailProperty.factory(item)));
+    push(...items: EmailConfig[]): number {
+        items.forEach(item => super.push(EmailProperty.from(item)));
 
         return this.length;
     }

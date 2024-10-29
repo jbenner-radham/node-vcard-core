@@ -18,9 +18,9 @@ export interface {{{pascalCase property}}}Parameters {
     tz?: string;
 }
 
-export type {{{pascalCase property}}}PropertyRestConfig = [value: string, parameters?: {{{pascalCase property}}}Parameters];
+export type {{{pascalCase property}}}RestConfig = [value: string, parameters?: {{{pascalCase property}}}Parameters];
 
-export type {{{pascalCase property}}}PropertyLike = {{{pascalCase property}}}Property | {{{pascalCase property}}}PropertyRestConfig | string;
+export type {{{pascalCase property}}}Config = {{{pascalCase property}}}Property | {{{pascalCase property}}}RestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -62,13 +62,13 @@ export default class {{{pascalCase property}}}Property extends Property {
         return this[VALUE];
     }
 
-    static factory(value: {{{pascalCase property}}}PropertyLike): {{{pascalCase property}}}Property {
+    static from(value: {{{pascalCase property}}}Config): {{{pascalCase property}}}Property {
         if (value instanceof {{{pascalCase property}}}Property) return value;
 
         if (Array.isArray(value)) return new {{{pascalCase property}}}Property(...value);
 
         if (isString(value)) return new {{{pascalCase property}}}Property(value);
 
-        throw new TypeError(`The value "${value}" is not a {{{pascalCase property}}}PropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a {{{pascalCase property}}}Config type`);
     }
 }

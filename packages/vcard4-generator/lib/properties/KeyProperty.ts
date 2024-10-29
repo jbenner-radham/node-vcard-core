@@ -14,10 +14,10 @@ export interface KeyParameters {
     type?: Type;
 }
 
-export type KeyPropertyRestConfig = [value: string, parameters?: KeyParameters, options?: PropertyOptions];
+export type KeyRestConfig = [value: string, parameters?: KeyParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support? */
-export type KeyPropertyLike = KeyProperty | KeyPropertyRestConfig | string;
+export type KeyConfig = KeyProperty | KeyRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -83,14 +83,14 @@ export default class KeyProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: KeyPropertyLike): KeyProperty {
+    static from(value: KeyConfig): KeyProperty {
         if (value instanceof KeyProperty) return value;
 
         if (Array.isArray(value)) return new KeyProperty(...value);
 
         if (isString(value)) return new KeyProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a KeyPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a KeyConfig type`);
     }
 
     static validateParameters({ mediatype, pref, value }: KeyParameters): void {

@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import BdayProperty, { type BdayPropertyRestConfig } from '../../lib/properties/BdayProperty.js';
+import BdayProperty, { type BdayRestConfig } from '../../lib/properties/BdayProperty.js';
 
 describe('BdayProperty', () => {
     it('is a class', () => {
@@ -80,13 +80,13 @@ describe('BdayProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(BdayProperty.factory).to.be.a('function');
+            expect(BdayProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `BdayProperty`', () => {
-            const bday = BdayProperty.factory('--0415');
+            const bday = BdayProperty.from('--0415');
 
             expect(bday instanceof BdayProperty).to.equal(true);
         });
@@ -94,18 +94,18 @@ describe('BdayProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const bday = new BdayProperty('--0415');
 
-            expect(BdayProperty.factory(bday)).to.equal(bday);
+            expect(BdayProperty.from(bday)).to.equal(bday);
         });
 
         it('creates an instance from a string value argument', () => {
-            const bday = BdayProperty.factory('--0415');
+            const bday = BdayProperty.from('--0415');
 
             expect(bday instanceof BdayProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
-            const config: BdayPropertyRestConfig = ['--0415', { value: 'date-and-or-time' }];
-            const bday = BdayProperty.factory(config);
+            const config: BdayRestConfig = ['--0415', { value: 'date-and-or-time' }];
+            const bday = BdayProperty.from(config);
 
             expect(bday instanceof BdayProperty).to.equal(true);
         });

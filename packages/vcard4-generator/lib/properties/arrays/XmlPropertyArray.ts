@@ -1,8 +1,8 @@
-import XmlProperty, { type XmlPropertyLike } from '../XmlProperty.js';
+import XmlProperty, { type XmlConfig } from '../XmlProperty.js';
 
 export default class XmlPropertyArray extends Array {
-    push(...items: XmlPropertyLike[]): number {
-        items.forEach(item => super.push(XmlProperty.factory(item)));
+    push(...items: XmlConfig[]): number {
+        items.forEach(item => super.push(XmlProperty.from(item)));
 
         return this.length;
     }

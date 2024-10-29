@@ -13,9 +13,9 @@ export interface TitleParameters {
     mediatype?: string;
 }
 
-export type TitlePropertyRestConfig = [value: string, parameters?: TitleParameters, options?: PropertyOptions];
+export type TitleRestConfig = [value: string, parameters?: TitleParameters, options?: PropertyOptions];
 
-export type TitlePropertyLike = TitleProperty | TitlePropertyRestConfig | string;
+export type TitleConfig = TitleProperty | TitleRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -69,14 +69,14 @@ export default class TitleProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: TitlePropertyLike): TitleProperty {
+    static from(value: TitleConfig): TitleProperty {
         if (value instanceof TitleProperty) return value;
 
         if (Array.isArray(value)) return new TitleProperty(...value);
 
         if (isString(value)) return new TitleProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a TitlePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a TitleConfig type`);
     }
 
     static validateParameters({ pref }: TitleParameters): void {

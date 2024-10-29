@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import EmailProperty, { EmailPropertyRestConfig } from '../../lib/properties/EmailProperty.js';
+import EmailProperty, { EmailRestConfig } from '../../lib/properties/EmailProperty.js';
 
 describe('EmailProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('EmailProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(EmailProperty.factory).to.be.a('function');
+            expect(EmailProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `EmailProperty`', () => {
-            const email = EmailProperty.factory('jqpublic@xyz.example.com');
+            const email = EmailProperty.from('jqpublic@xyz.example.com');
 
             expect(email instanceof EmailProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('EmailProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const email = new EmailProperty('jqpublic@xyz.example.com');
 
-            expect(EmailProperty.factory(email) instanceof EmailProperty).to.equal(true);
+            expect(EmailProperty.from(email) instanceof EmailProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const email = EmailProperty.factory('jqpublic@xyz.example.com');
+            const email = EmailProperty.from('jqpublic@xyz.example.com');
 
             expect(email instanceof EmailProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'jqpublic@xyz.example.com';
-            const config: EmailPropertyRestConfig = [value, { type: 'work' }];
-            const email = EmailProperty.factory(config);
+            const config: EmailRestConfig = [value, { type: 'work' }];
+            const email = EmailProperty.from(config);
 
             expect(email instanceof EmailProperty).to.equal(true);
         });

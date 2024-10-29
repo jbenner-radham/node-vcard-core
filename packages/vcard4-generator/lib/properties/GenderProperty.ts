@@ -10,9 +10,9 @@ export interface GenderParameters {
     value?: 'text';
 }
 
-export type GenderPropertyRestConfig = [value: string, parameters?: GenderParameters, options?: PropertyOptions];
+export type GenderRestConfig = [value: string, parameters?: GenderParameters, options?: PropertyOptions];
 
-export type GenderPropertyLike = GenderProperty | GenderPropertyRestConfig | string;
+export type GenderConfig = GenderProperty | GenderRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -103,13 +103,13 @@ export default class GenderProperty extends Property {
             throw new TypeError(`The value "${value}" is not a valid GENDER format`);
     }
 
-    static factory(value: GenderPropertyLike): GenderProperty {
+    static from(value: GenderConfig): GenderProperty {
         if (value instanceof GenderProperty) return value;
 
         if (Array.isArray(value)) return new GenderProperty(...value);
 
         if (isString(value)) return new GenderProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a GenderPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a GenderConfig type`);
     }
 }

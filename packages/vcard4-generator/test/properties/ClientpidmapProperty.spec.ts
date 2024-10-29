@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
 import ClientpidmapProperty, {
-    type ClientpidmapPropertyRestConfig
+    type ClientpidmapRestConfig
 } from '../../lib/properties/ClientpidmapProperty.js';
 
 describe('ClientpidmapProperty', () => {
@@ -65,13 +65,13 @@ describe('ClientpidmapProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(ClientpidmapProperty.factory).to.be.a('function');
+            expect(ClientpidmapProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `ClientpidmapProperty`', () => {
-            const clientpidmap = ClientpidmapProperty.factory('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
+            const clientpidmap = ClientpidmapProperty.from('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
 
             expect(clientpidmap instanceof ClientpidmapProperty).to.equal(true);
         });
@@ -79,19 +79,19 @@ describe('ClientpidmapProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const clientpidmap = new ClientpidmapProperty('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
 
-            expect(ClientpidmapProperty.factory(clientpidmap) instanceof ClientpidmapProperty).to.equal(true);
+            expect(ClientpidmapProperty.from(clientpidmap) instanceof ClientpidmapProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const clientpidmap = ClientpidmapProperty.factory('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
+            const clientpidmap = ClientpidmapProperty.from('1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b');
 
             expect(clientpidmap instanceof ClientpidmapProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = '1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b';
-            const config: ClientpidmapPropertyRestConfig = [value, {}];
-            const clientpidmap = ClientpidmapProperty.factory(config);
+            const config: ClientpidmapRestConfig = [value, {}];
+            const clientpidmap = ClientpidmapProperty.from(config);
 
             expect(clientpidmap instanceof ClientpidmapProperty).to.equal(true);
         });

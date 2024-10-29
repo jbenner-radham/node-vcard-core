@@ -14,9 +14,9 @@ export interface FnParameters {
     pref?: Pref;
 }
 
-export type FnPropertyRestConfig = [value: string, parameters?: FnParameters, options?: PropertyOptions];
+export type FnRestConfig = [value: string, parameters?: FnParameters, options?: PropertyOptions];
 
-export type FnPropertyLike = FnProperty | FnPropertyRestConfig | string;
+export type FnConfig = FnProperty | FnRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -71,14 +71,14 @@ export default class FnProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: FnPropertyLike): FnProperty {
+    static from(value: FnConfig): FnProperty {
         if (value instanceof FnProperty) return value;
 
         if (Array.isArray(value)) return new FnProperty(...value);
 
         if (isString(value)) return new FnProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a FnPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a FnConfig type`);
     }
 
     static validateParameters({ pref }: FnParameters): void {

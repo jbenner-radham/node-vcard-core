@@ -1,8 +1,8 @@
-import NicknameProperty, { type NicknamePropertyLike } from '../NicknameProperty.js';
+import NicknameProperty, { type NicknameConfig } from '../NicknameProperty.js';
 
 export default class NicknamePropertyArray extends Array {
-    push(...items: NicknamePropertyLike[]): number {
-        items.forEach(item => super.push(NicknameProperty.factory(item)));
+    push(...items: NicknameConfig[]): number {
+        items.forEach(item => super.push(NicknameProperty.from(item)));
 
         return this.length;
     }

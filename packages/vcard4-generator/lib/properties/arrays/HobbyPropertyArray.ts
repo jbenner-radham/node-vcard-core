@@ -1,8 +1,8 @@
-import HobbyProperty, { type HobbyPropertyLike } from '../HobbyProperty.js';
+import HobbyProperty, { type HobbyConfig } from '../HobbyProperty.js';
 
 export default class HobbyPropertyArray extends Array {
-    push(...items: HobbyPropertyLike[]): number {
-        items.forEach(item => super.push(HobbyProperty.factory(item)));
+    push(...items: HobbyConfig[]): number {
+        items.forEach(item => super.push(HobbyProperty.from(item)));
 
         return this.length;
     }

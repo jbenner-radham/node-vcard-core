@@ -14,10 +14,10 @@ export interface CaladruriParameters {
     altid?: number | string;
 }
 
-export type CaladruriPropertyRestConfig = [value: string, parameters?: CaladruriParameters, options?: PropertyOptions];
+export type CaladruriRestConfig = [value: string, parameters?: CaladruriParameters, options?: PropertyOptions];
 
 /** @todo Add URL type support? */
-export type CaladruriPropertyLike = CaladruriProperty | CaladruriPropertyRestConfig | string;
+export type CaladruriConfig = CaladruriProperty | CaladruriRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -74,14 +74,14 @@ export default class CaladruriProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: CaladruriPropertyLike): CaladruriProperty {
+    static from(value: CaladruriConfig): CaladruriProperty {
         if (value instanceof CaladruriProperty) return value;
 
         if (Array.isArray(value)) return new CaladruriProperty(...value);
 
         if (isString(value)) return new CaladruriProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a CaladruriPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a CaladruriConfig type`);
     }
 
     static validateParameters({ pref }: CaladruriParameters): void {

@@ -17,9 +17,9 @@ export interface InterestParameters {
     type?: Type;
 }
 
-export type InterestPropertyRestConfig = [value: string, parameters?: InterestParameters, options?: PropertyOptions];
+export type InterestRestConfig = [value: string, parameters?: InterestParameters, options?: PropertyOptions];
 
-export type InterestPropertyLike = InterestProperty | InterestPropertyRestConfig | string;
+export type InterestConfig = InterestProperty | InterestRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -86,14 +86,14 @@ export default class InterestProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: InterestPropertyLike): InterestProperty {
+    static from(value: InterestConfig): InterestProperty {
         if (value instanceof InterestProperty) return value;
 
         if (Array.isArray(value)) return new InterestProperty(...value);
 
         if (isString(value)) return new InterestProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a InterestPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a InterestConfig type`);
     }
 
     static validateParameters({ index, pref }: InterestParameters): void {

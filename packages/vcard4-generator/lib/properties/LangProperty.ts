@@ -13,9 +13,9 @@ export interface LangParameters {
     type?: Type;
 }
 
-export type LangPropertyRestConfig = [value: string, parameters?: LangParameters, options?: PropertyOptions];
+export type LangRestConfig = [value: string, parameters?: LangParameters, options?: PropertyOptions];
 
-export type LangPropertyLike = LangProperty | LangPropertyRestConfig | string;
+export type LangConfig = LangProperty | LangRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -68,14 +68,14 @@ export default class LangProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: LangPropertyLike): LangProperty {
+    static from(value: LangConfig): LangProperty {
         if (value instanceof LangProperty) return value;
 
         if (Array.isArray(value)) return new LangProperty(...value);
 
         if (isString(value)) return new LangProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a LangPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a LangConfig type`);
     }
 
     static validateParameters({ pref }: LangParameters): void {

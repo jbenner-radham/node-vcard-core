@@ -1,8 +1,8 @@
-import InterestProperty, { type InterestPropertyLike } from '../InterestProperty.js';
+import InterestProperty, { type InterestConfig } from '../InterestProperty.js';
 
 export default class InterestPropertyArray extends Array {
-    push(...items: InterestPropertyLike[]): number {
-        items.forEach(item => super.push(InterestProperty.factory(item)));
+    push(...items: InterestConfig[]): number {
+        items.forEach(item => super.push(InterestProperty.from(item)));
 
         return this.length;
     }

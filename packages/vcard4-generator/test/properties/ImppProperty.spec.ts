@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import ImppProperty, { ImppPropertyRestConfig } from '../../lib/properties/ImppProperty.js';
+import ImppProperty, { ImppRestConfig } from '../../lib/properties/ImppProperty.js';
 
 describe('ImppProperty', () => {
     it('is a class', () => {
@@ -72,13 +72,13 @@ describe('ImppProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(ImppProperty.factory).to.be.a('function');
+            expect(ImppProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `ImppProperty`', () => {
-            const impp = ImppProperty.factory('xmpp:alice@example.com');
+            const impp = ImppProperty.from('xmpp:alice@example.com');
 
             expect(impp instanceof ImppProperty).to.equal(true);
         });
@@ -86,19 +86,19 @@ describe('ImppProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const impp = new ImppProperty('xmpp:alice@example.com');
 
-            expect(ImppProperty.factory(impp) instanceof ImppProperty).to.equal(true);
+            expect(ImppProperty.from(impp) instanceof ImppProperty).to.equal(true);
         });
 
         it('creates an instance from a string value argument', () => {
-            const impp = ImppProperty.factory('xmpp:alice@example.com');
+            const impp = ImppProperty.from('xmpp:alice@example.com');
 
             expect(impp instanceof ImppProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'xmpp:alice@example.com';
-            const config: ImppPropertyRestConfig = [value, { value: 'uri' }];
-            const impp = ImppProperty.factory(config);
+            const config: ImppRestConfig = [value, { value: 'uri' }];
+            const impp = ImppProperty.from(config);
 
             expect(impp instanceof ImppProperty).to.equal(true);
         });

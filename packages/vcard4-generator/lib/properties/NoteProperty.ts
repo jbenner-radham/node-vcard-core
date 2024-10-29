@@ -14,9 +14,9 @@ export interface NoteParameters {
     altid?: number | string;
 }
 
-export type NotePropertyRestConfig = [value: string, parameters?: NoteParameters, options?: PropertyOptions];
+export type NoteRestConfig = [value: string, parameters?: NoteParameters, options?: PropertyOptions];
 
-export type NotePropertyLike = NoteProperty | NotePropertyRestConfig | string;
+export type NoteConfig = NoteProperty | NoteRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -71,14 +71,14 @@ export default class NoteProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: NotePropertyLike): NoteProperty {
+    static from(value: NoteConfig): NoteProperty {
         if (value instanceof NoteProperty) return value;
 
         if (Array.isArray(value)) return new NoteProperty(...value);
 
         if (isString(value)) return new NoteProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a NotePropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a NoteConfig type`);
     }
 
     static validateParameters({ pref }: NoteParameters): void {

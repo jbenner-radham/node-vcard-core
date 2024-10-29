@@ -15,9 +15,9 @@ export interface OrgParameters {
     type?: Type;
 }
 
-export type OrgPropertyRestConfig = [value: string, parameters?: OrgParameters, options?: PropertyOptions];
+export type OrgRestConfig = [value: string, parameters?: OrgParameters, options?: PropertyOptions];
 
-export type OrgPropertyLike = OrgProperty | OrgPropertyRestConfig | string;
+export type OrgConfig = OrgProperty | OrgRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -79,14 +79,14 @@ export default class OrgProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: OrgPropertyLike): OrgProperty {
+    static from(value: OrgConfig): OrgProperty {
         if (value instanceof OrgProperty) return value;
 
         if (Array.isArray(value)) return new OrgProperty(...value);
 
         if (isString(value)) return new OrgProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a OrgPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a OrgConfig type`);
     }
 
     static validateParameters({ pref }: OrgParameters): void {

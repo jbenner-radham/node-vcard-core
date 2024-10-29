@@ -14,9 +14,9 @@ export interface GeoParameters {
     altid?: number | string;
 }
 
-export type GeoPropertyRestConfig = [value: string, parameters?: GeoParameters, options?: PropertyOptions];
+export type GeoRestConfig = [value: string, parameters?: GeoParameters, options?: PropertyOptions];
 
-export type GeoPropertyLike = GeoProperty | GeoPropertyRestConfig | string;
+export type GeoConfig = GeoProperty | GeoRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -70,14 +70,14 @@ export default class GeoProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: GeoPropertyLike): GeoProperty {
+    static from(value: GeoConfig): GeoProperty {
         if (value instanceof GeoProperty) return value;
 
         if (Array.isArray(value)) return new GeoProperty(...value);
 
         if (isString(value)) return new GeoProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a GeoPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a GeoConfig type`);
     }
 
     static validateParameters({ pref }: GeoParameters): void {

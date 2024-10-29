@@ -1,8 +1,8 @@
-import TitleProperty, { type TitlePropertyLike } from '../TitleProperty.js';
+import TitleProperty, { type TitleConfig } from '../TitleProperty.js';
 
 export default class TitlePropertyArray extends Array {
-    push(...items: TitlePropertyLike[]): number {
-        items.forEach(item => super.push(TitleProperty.factory(item)));
+    push(...items: TitleConfig[]): number {
+        items.forEach(item => super.push(TitleProperty.from(item)));
 
         return this.length;
     }

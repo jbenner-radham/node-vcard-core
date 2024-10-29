@@ -1,8 +1,8 @@
-import CaladruriProperty, { type CaladruriPropertyLike } from '../CaladruriProperty.js';
+import CaladruriProperty, { type CaladruriConfig } from '../CaladruriProperty.js';
 
 export default class CaladruriPropertyArray extends Array {
-    push(...items: CaladruriPropertyLike[]): number {
-        items.forEach(item => super.push(CaladruriProperty.factory(item)));
+    push(...items: CaladruriConfig[]): number {
+        items.forEach(item => super.push(CaladruriProperty.from(item)));
 
         return this.length;
     }

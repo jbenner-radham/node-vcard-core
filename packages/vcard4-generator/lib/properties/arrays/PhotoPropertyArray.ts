@@ -1,8 +1,8 @@
-import PhotoProperty, { type PhotoPropertyLike } from '../PhotoProperty.js';
+import PhotoProperty, { type PhotoConfig } from '../PhotoProperty.js';
 
 export default class PhotoPropertyArray extends Array {
-    push(...items: PhotoPropertyLike[]): number {
-        items.forEach(item => super.push(PhotoProperty.factory(item)));
+    push(...items: PhotoConfig[]): number {
+        items.forEach(item => super.push(PhotoProperty.from(item)));
 
         return this.length;
     }

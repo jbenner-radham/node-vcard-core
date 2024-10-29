@@ -16,9 +16,9 @@ export interface TelParameters {
     altid?: number | string;
 }
 
-export type TelPropertyRestConfig = [value: string, parameters?: TelParameters, options?: PropertyOptions];
+export type TelRestConfig = [value: string, parameters?: TelParameters, options?: PropertyOptions];
 
-export type TelPropertyLike = TelProperty | TelPropertyRestConfig | string;
+export type TelConfig = TelProperty | TelRestConfig | string;
 
 const VALUE: unique symbol = Symbol.for('value');
 
@@ -122,14 +122,14 @@ export default class TelProperty extends Property {
         return this[VALUE];
     }
 
-    static factory(value: TelPropertyLike): TelProperty {
+    static from(value: TelConfig): TelProperty {
         if (value instanceof TelProperty) return value;
 
         if (Array.isArray(value)) return new TelProperty(...value);
 
         if (isString(value)) return new TelProperty(value);
 
-        throw new TypeError(`The value "${value}" is not a TelPropertyLike type`);
+        throw new TypeError(`The value "${value}" is not a TelConfig type`);
     }
 
     static validateParameters({ mediatype, pref, value }: TelParameters): void {

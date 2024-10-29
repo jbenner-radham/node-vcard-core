@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import DeathplaceProperty, { type DeathplacePropertyRestConfig } from '../../lib/properties/DeathplaceProperty.js';
+import DeathplaceProperty, { type DeathplaceRestConfig } from '../../lib/properties/DeathplaceProperty.js';
 
 describe('DeathplaceProperty', () => {
     it('is a class', () => {
@@ -74,13 +74,13 @@ describe('DeathplaceProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(DeathplaceProperty.factory).to.be.a('function');
+            expect(DeathplaceProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `DeathplaceProperty`', () => {
-            const deathplace = DeathplaceProperty.factory('Aboard the Titanic, near Newfoundland');
+            const deathplace = DeathplaceProperty.from('Aboard the Titanic, near Newfoundland');
 
             expect(deathplace instanceof DeathplaceProperty).to.equal(true);
         });
@@ -88,19 +88,19 @@ describe('DeathplaceProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const deathplace = new DeathplaceProperty('Aboard the Titanic, near Newfoundland');
 
-            expect(DeathplaceProperty.factory(deathplace)).to.equal(deathplace);
+            expect(DeathplaceProperty.from(deathplace)).to.equal(deathplace);
         });
 
         it('creates an instance from a string value argument', () => {
-            const deathplace = DeathplaceProperty.factory('Aboard the Titanic, near Newfoundland');
+            const deathplace = DeathplaceProperty.from('Aboard the Titanic, near Newfoundland');
 
             expect(deathplace instanceof DeathplaceProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = 'geo:41.731944,-49.945833';
-            const config: DeathplacePropertyRestConfig = [value, { value: 'uri' }];
-            const deathplace = DeathplaceProperty.factory(config);
+            const config: DeathplaceRestConfig = [value, { value: 'uri' }];
+            const deathplace = DeathplaceProperty.from(config);
 
             expect(deathplace instanceof DeathplaceProperty).to.equal(true);
         });

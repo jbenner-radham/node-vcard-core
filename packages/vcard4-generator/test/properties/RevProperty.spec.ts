@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import { expect } from 'chai';
-import RevProperty, { type RevPropertyRestConfig } from '../../lib/properties/RevProperty.js';
+import RevProperty, { type RevRestConfig } from '../../lib/properties/RevProperty.js';
 
 describe('RevProperty', () => {
     it('is a class', () => {
@@ -62,13 +62,13 @@ describe('RevProperty', () => {
         });
     });
 
-    describe('.factory()', () => {
+    describe('.from()', () => {
         it('is a static method', () => {
-            expect(RevProperty.factory).to.be.a('function');
+            expect(RevProperty.from).to.be.a('function');
         });
 
         it('returns an instance of `RevProperty`', () => {
-            const rev = RevProperty.factory('19951031T222710Z');
+            const rev = RevProperty.from('19951031T222710Z');
 
             expect(rev instanceof RevProperty).to.equal(true);
         });
@@ -76,19 +76,19 @@ describe('RevProperty', () => {
         it('returns an instance if provided one as an argument', () => {
             const rev = new RevProperty('19951031T222710Z');
 
-            expect(RevProperty.factory(rev)).to.equal(rev);
+            expect(RevProperty.from(rev)).to.equal(rev);
         });
 
         it('creates an instance from a string value argument', () => {
-            const rev = RevProperty.factory('19951031T222710Z');
+            const rev = RevProperty.from('19951031T222710Z');
 
             expect(rev instanceof RevProperty).to.equal(true);
         });
 
         it('creates an instance from an array argument', () => {
             const value = '19951031T222710Z';
-            const config: RevPropertyRestConfig = [value, { value: 'timestamp' }];
-            const rev = RevProperty.factory(config);
+            const config: RevRestConfig = [value, { value: 'timestamp' }];
+            const rev = RevProperty.from(config);
 
             expect(rev instanceof RevProperty).to.equal(true);
         });
