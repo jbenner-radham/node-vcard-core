@@ -7,11 +7,7 @@ export interface ClientpidmapParameters {
     [key: string]: never;
 }
 
-export type ClientpidmapRestConfig = [
-    value: string,
-    parameters?: ClientpidmapParameters,
-    options?: Options
-];
+export type ClientpidmapRestConfig = [value: string, parameters?: ClientpidmapParameters, options?: Options];
 
 export type ClientpidmapConfig = ClientpidmapProperty | ClientpidmapRestConfig | string;
 
