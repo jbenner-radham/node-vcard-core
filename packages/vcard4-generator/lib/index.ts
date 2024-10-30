@@ -35,7 +35,7 @@ import DeathplaceProperty, {
 import EmailProperty, { type EmailConfig, EmailParameters, EmailRestConfig } from './properties/EmailProperty.js';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray.js';
 import ExpertiseProperty, {
-    type ExpertiseConfig, ExpertiseParameters, ExpertiseRestConfig
+    type ExpertiseConfig, ExpertiseLevel, ExpertiseParameters, ExpertiseRestConfig
 } from './properties/ExpertiseProperty.js';
 import ExpertisePropertyArray from './properties/arrays/ExpertisePropertyArray.js';
 import FburlProperty, { type FburlConfig, FburlParameters, FburlRestConfig } from './properties/FburlProperty.js';
@@ -684,7 +684,8 @@ export type {
     UidParameters,
     UrlParameters,
     VersionParameters,
-    XmlParameters
+    XmlParameters,
+    ExpertiseLevel
 };
 
 export type {
