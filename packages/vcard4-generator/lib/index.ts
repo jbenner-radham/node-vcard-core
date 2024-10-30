@@ -58,7 +58,7 @@ import InterestProperty, {
 import InterestPropertyArray from './properties/arrays/InterestPropertyArray.js';
 import KeyProperty, { type KeyConfig, KeyParameters, KeyRestConfig } from './properties/KeyProperty.js';
 import KeyPropertyArray from './properties/arrays/KeyPropertyArray.js';
-import KindProperty, { type KindConfig, KindParameters, KindRestConfig } from './properties/KindProperty.js';
+import KindProperty, { type Kind, KindConfig, KindParameters, KindRestConfig } from './properties/KindProperty.js';
 import LangProperty, { type LangConfig, LangParameters, LangRestConfig } from './properties/LangProperty.js';
 import LangPropertyArray from './properties/arrays/LangPropertyArray.js';
 import LogoProperty, { type LogoConfig, LogoParameters, LogoRestConfig } from './properties/LogoProperty.js';
@@ -688,7 +688,8 @@ export type {
     VersionParameters,
     XmlParameters,
     ExpertiseLevel,
-    Sex
+    Sex,
+    Kind
 };
 
 export type {
