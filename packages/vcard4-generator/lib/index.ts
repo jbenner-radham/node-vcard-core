@@ -83,7 +83,7 @@ import PhotoProperty, { type PhotoConfig, PhotoParameters, PhotoRestConfig } fro
 import PhotoPropertyArray from './properties/arrays/PhotoPropertyArray.js';
 import ProdidProperty, { type ProdidConfig, ProdidParameters, ProdidRestConfig } from './properties/ProdidProperty.js';
 import RelatedProperty, {
-    type RelatedConfig, RelatedParameters, RelatedRestConfig
+    type RelatedConfig, RelatedParameters, RelatedRestConfig, RelatedType
 } from './properties/RelatedProperty.js';
 import RelatedPropertyArray from './properties/arrays/RelatedPropertyArray.js';
 import RevProperty, { type RevConfig, RevParameters, RevRestConfig } from './properties/RevProperty.js';
@@ -689,7 +689,8 @@ export type {
     XmlParameters,
     ExpertiseLevel,
     Sex,
-    Kind
+    Kind,
+    RelatedType
 };
 
 export type {
