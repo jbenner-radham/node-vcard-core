@@ -7,12 +7,21 @@ import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
-export interface DeathdateParameters {
-    value?: Extract<Value, 'date-and-or-time' | 'text'>;
+type DeathdateCommonParameters = {
     altid?: Altid;
-    calscale?: Calscale; // For `date-and-or-time` type only!
-    language?: string; // For `text` type only!
-}
+};
+
+type DeathdateDateAndOrTimeOrUndefinedValueParameters = {
+    value?: Extract<Value, 'date-and-or-time'>;
+    calscale?: Calscale;
+} & DeathdateCommonParameters;
+
+type DeathdateTextValueParameters = {
+    value: Extract<Value, 'text'>;
+    language?: string;
+} & DeathdateCommonParameters;
+
+export type DeathdateParameters = DeathdateDateAndOrTimeOrUndefinedValueParameters | DeathdateTextValueParameters;
 
 export type DeathdateRestConfig = [value: string, parameters?: DeathdateParameters, options?: Options];
 
@@ -95,12 +104,14 @@ export default class DeathdateProperty extends Property {
         throw new TypeError(`The value "${value}" is not a DeathdateConfig type`);
     }
 
-    static validateParameters({ calscale, language, value }: DeathdateParameters): void {
-        if (calscale && value && value?.toLowerCase() !== 'date-and-or-time') {
+    static validateParameters(parameters: DeathdateParameters): void {
+        const { calscale, language, value } = parameters as Record<string, unknown>;
+
+        if (calscale && isString(value) && value.toLowerCase() !== 'date-and-or-time') {
             throw new TypeError(getInvalidCalscaleValueParameterMessage({ value }));
         }
 
-        if (language && (!value || value?.toLowerCase() !== 'text')) {
+        if (language && (!value || (isString(value) && value.toLowerCase() !== 'text'))) {
             throw new TypeError(getInvalidLanguageValueParameterMessage({ value }));
         }
     }
