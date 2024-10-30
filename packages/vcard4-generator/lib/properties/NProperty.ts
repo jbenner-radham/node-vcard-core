@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Cardinality, Group, Options, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -8,7 +8,7 @@ export interface NParameters {
     value?: Extract<Value, 'text'>;
     sortAs?: string;
     language?: string;
-    altid?: number | string;
+    altid?: Altid;
 }
 
 export type NRestConfig = [value: string, parameters?: NParameters, options?: Options];

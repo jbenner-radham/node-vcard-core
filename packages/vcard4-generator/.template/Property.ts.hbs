@@ -1,11 +1,11 @@
-import { Calscale, Cardinality, Group, Options, Pid, Pref, Type, Value } from '../types.js';
+import { Altid, Calscale, Cardinality, Group, Options, Pid, Pref, Type, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import Property from './Property.js';
 
 export interface {{{pascalCase property}}}Parameters {
     [key: string]: never;
     value?: '';
-    altid?: number | string;
+    altid?: Altid;
     calscale?: Calscale; // For `date-and-or-time` type only!
     geo?: string;
     label?: string;

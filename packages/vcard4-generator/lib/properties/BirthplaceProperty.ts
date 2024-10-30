@@ -1,11 +1,11 @@
-import type { Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Cardinality, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface BirthplaceParameters {
     value?: Extract<Value, 'text' | 'uri'>;
-    altid?: number | string;
+    altid?: Altid;
     language?: string;
 }
 

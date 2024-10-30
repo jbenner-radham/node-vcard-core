@@ -1,4 +1,4 @@
-import type { Calscale, Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Calscale, Cardinality, Group, Options, Value } from '../types.js';
 import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -6,7 +6,7 @@ import Property from './Property.js';
 
 export interface AnniversaryParameters {
     value?: Extract<Value, 'date-and-or-time' | 'text'>;
-    altid?: number | string;
+    altid?: Altid;
     calscale?: Calscale; // For `date-and-or-time` type only!
 }
 

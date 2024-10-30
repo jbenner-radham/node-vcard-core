@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -9,7 +9,7 @@ import isValidIndexParameter from '../util/is-valid-index-parameter.js';
 export type ExpertiseLevel = 'beginner' | 'average' | 'expert';
 
 export interface ExpertiseParameters {
-    altid?: number | string;
+    altid?: Altid;
     index?: number; // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
     language?: string;
     level?: ExpertiseLevel;

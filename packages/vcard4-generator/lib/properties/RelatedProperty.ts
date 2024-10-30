@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pid, Pref, Options, Value } from '../types.js';
+import type { Altid, Cardinality, Group, Pid, Pref, Options, Value } from '../types.js';
 import {
     getInvalidLanguageValueParameterMessage,
     getInvalidMediatypeValueParameterMessage,
@@ -36,7 +36,7 @@ export interface RelatedParameters {
     language?: string;
     pid?: Pid;
     pref?: Pref;
-    altid?: number | string;
+    altid?: Altid;
     type?: RelatedType;
 }
 

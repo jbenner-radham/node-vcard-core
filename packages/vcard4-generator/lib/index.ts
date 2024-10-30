@@ -695,6 +695,7 @@ export type {
 };
 
 export type {
+    Altid,
     Calscale,
     Cardinality,
     Group,

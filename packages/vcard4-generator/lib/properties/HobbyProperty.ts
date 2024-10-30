@@ -1,4 +1,4 @@
-import type { Cardinality, Group, HobbyOrInterestLevel, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, Group, HobbyOrInterestLevel, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -9,7 +9,7 @@ import Property from './Property.js';
 export interface HobbyParameters {
     level?: HobbyOrInterestLevel;
     index?: number; // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
-    altid?: number | string;
+    altid?: Altid;
     language?: string;
     pref?: Pref;
     type?: Type;

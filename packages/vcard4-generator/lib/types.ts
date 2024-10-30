@@ -3,6 +3,7 @@ import type { IntRange } from 'type-fest';
 type PREF_INCLUSIVE_FROM = 1;
 type PREF_EXCLUSIVE_TO = 101;
 
+export type Altid = number | string;
 export type Calscale = 'gregorian';
 export type Cardinality = '1' | '*1' | '1*' | '*';
 export type Group = number | string;

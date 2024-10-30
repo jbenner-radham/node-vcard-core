@@ -1,4 +1,4 @@
-import type { Calscale, Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Calscale, Cardinality, Group, Options, Value } from '../types.js';
 import {
     getInvalidCalscaleValueParameterMessage,
     getInvalidLanguageValueParameterMessage
@@ -9,7 +9,7 @@ import Property from './Property.js';
 
 export interface DeathdateParameters {
     value?: Extract<Value, 'date-and-or-time' | 'text'>;
-    altid?: number | string;
+    altid?: Altid;
     calscale?: Calscale; // For `date-and-or-time` type only!
     language?: string; // For `text` type only!
 }

@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -11,7 +11,7 @@ export interface UrlParameters {
     pref?: Pref;
     type?: Type;
     mediatype?: string;
-    altid?: number | string;
+    altid?: Altid;
 }
 
 export type UrlRestConfig = [value: string, parameters?: UrlParameters, options?: Options];

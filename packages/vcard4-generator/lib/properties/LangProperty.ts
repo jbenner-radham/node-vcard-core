@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -9,7 +9,7 @@ export interface LangParameters {
     value?: Extract<Value, 'language-tag'>;
     pid?: Pid;
     pref?: Pref;
-    altid?: number | string;
+    altid?: Altid;
     type?: Type;
 }
 
