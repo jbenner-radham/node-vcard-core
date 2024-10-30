@@ -10,11 +10,7 @@ export interface ContactUriParameters {
     pref?: Pref;
 }
 
-export type ContactUriRestConfig = [
-    value: string,
-    parameters?: ContactUriParameters,
-    options?: Options
-];
+export type ContactUriRestConfig = [value: string, parameters?: ContactUriParameters, options?: Options];
 
 export type ContactUriConfig = ContactUriProperty | ContactUriRestConfig | string;
 
