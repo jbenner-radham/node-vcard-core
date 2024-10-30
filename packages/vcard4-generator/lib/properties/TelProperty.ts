@@ -10,7 +10,7 @@ export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' 
 export interface TelParameters {
     value?: Extract<Value, 'text' | 'uri'>;
     mediatype?: string; // For `URI` type only!
-    type?: (Type | TelType) | (Type | TelType)[];
+    type?: Type | TelType | (Type | TelType)[];
     pid?: number | number[];
     pref?: Pref;
     altid?: number | string;
