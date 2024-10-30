@@ -7,7 +7,7 @@ import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js
 export type Sex = '' | 'F' | 'M' | 'N' | 'O' | 'U';
 
 export interface GenderParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
 }
 
 export type GenderRestConfig = [value: string, parameters?: GenderParameters, options?: Options];

@@ -4,7 +4,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface XmlParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
     altid?: number | string;
 }
 

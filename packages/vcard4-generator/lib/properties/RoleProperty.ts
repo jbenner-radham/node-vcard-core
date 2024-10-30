@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface RoleParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
     language?: string;
     pid?: number | number[];
     pref?: Pref;

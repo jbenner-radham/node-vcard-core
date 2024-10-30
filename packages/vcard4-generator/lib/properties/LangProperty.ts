@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface LangParameters {
-    value?: 'language-tag';
+    value?: Extract<Value, 'language-tag'>;
     pid?: number | number[];
     pref?: Pref;
     altid?: number | string;

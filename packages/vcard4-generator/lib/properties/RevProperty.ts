@@ -4,7 +4,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface RevParameters {
-    value?: 'timestamp';
+    value?: Extract<Value, 'timestamp'>;
 }
 
 export type RevRestConfig = [value: string, parameters?: RevParameters, options?: Options];

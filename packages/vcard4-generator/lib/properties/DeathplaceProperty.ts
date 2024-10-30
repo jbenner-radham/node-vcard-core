@@ -4,7 +4,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface DeathplaceParameters {
-    value?: 'text' | 'uri';
+    value?: Extract<Value, 'text' | 'uri'>;
     altid?: number | string;
     language?: string;
 }

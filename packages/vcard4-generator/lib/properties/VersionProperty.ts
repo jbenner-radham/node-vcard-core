@@ -4,7 +4,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface VersionParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
 }
 
 export type VersionRestConfig = [value: string, parameters?: VersionParameters, options?: Options];

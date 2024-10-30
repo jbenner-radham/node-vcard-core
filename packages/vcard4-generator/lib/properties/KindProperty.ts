@@ -6,7 +6,7 @@ import Property from './Property.js';
 export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
 
 export interface KindParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
 }
 
 export type KindRestConfig = [value: Kind, parameters?: KindParameters, options?: Options];

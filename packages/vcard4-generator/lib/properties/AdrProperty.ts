@@ -7,7 +7,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface AdrParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
     label?: string;
     language?: string;
     geo?: string;

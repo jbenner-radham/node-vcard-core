@@ -5,7 +5,7 @@ import Property from './Property.js';
 import isString from '../util/is-string.js';
 
 export interface NParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
     sortAs?: string;
     language?: string;
     altid?: number | string;

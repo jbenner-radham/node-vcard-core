@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface KeyParameters {
-    value?: 'uri' | 'text';
+    value?: Extract<Value, 'uri' | 'text'>;
     mediatype?: string; // For `URI` type only!
     altid?: number | string;
     pid?: number | number[];

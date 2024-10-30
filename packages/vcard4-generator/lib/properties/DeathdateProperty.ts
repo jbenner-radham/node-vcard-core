@@ -8,7 +8,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface DeathdateParameters {
-    value?: 'date-and-or-time' | 'text';
+    value?: Extract<Value, 'date-and-or-time' | 'text'>;
     altid?: number | string;
     calscale?: Calscale; // For `date-and-or-time` type only!
     language?: string; // For `text` type only!

@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface OrgParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
     sortAs?: string;
     language?: string;
     pid?: number | number[];

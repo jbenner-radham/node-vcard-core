@@ -8,7 +8,7 @@ import Property from './Property.js';
 export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' | 'voice';
 
 export interface TelParameters {
-    value?: 'text' | 'uri';
+    value?: Extract<Value, 'text' | 'uri'>;
     mediatype?: string; // For `URI` type only!
     type?: (Type | TelType) | (Type | TelType)[];
     pid?: number | number[];

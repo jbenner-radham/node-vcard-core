@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface TzParameters {
-    value?: 'text' | 'uri' | 'utc-offset';
+    value?: Extract<Value, 'text' | 'uri' | 'utc-offset'>;
     altid?: number | string;
     pid?: number | number[];
     pref?: Pref;

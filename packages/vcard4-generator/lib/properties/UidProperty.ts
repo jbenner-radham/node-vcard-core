@@ -4,7 +4,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface UidParameters {
-    value?: 'uri' | 'text';
+    value?: Extract<Value, 'uri' | 'text'>;
 }
 
 export type UidRestConfig = [value: string, parameters?: UidParameters, options?: Options];

@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface PhotoParameters {
-    value?: 'uri';
+    value?: Extract<Value, 'uri'>;
     altid?: number | string;
     type?: Type;
     mediatype?: string;

@@ -93,7 +93,7 @@ import SoundProperty, { type SoundConfig, SoundParameters, SoundRestConfig } fro
 import SoundPropertyArray from './properties/arrays/SoundPropertyArray.js';
 import SourceProperty, { type SourceConfig, SourceParameters, SourceRestConfig } from './properties/SourceProperty.js';
 import SourcePropertyArray from './properties/arrays/SourcePropertyArray.js';
-import TelProperty, { type TelConfig, TelParameters, TelRestConfig } from './properties/TelProperty.js';
+import TelProperty, { type TelConfig, TelParameters, TelRestConfig, TelType } from './properties/TelProperty.js';
 import TelPropertyArray from './properties/arrays/TelPropertyArray.js';
 import TitleProperty, { type TitleConfig, TitleParameters, TitleRestConfig } from './properties/TitleProperty.js';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray.js';
@@ -690,7 +690,8 @@ export type {
     ExpertiseLevel,
     Sex,
     Kind,
-    RelatedType
+    RelatedType,
+    TelType
 };
 
 export type {

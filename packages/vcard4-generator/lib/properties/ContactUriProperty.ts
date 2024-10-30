@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface ContactUriParameters {
-    value?: 'uri';
+    value?: Extract<Value, 'uri'>;
     pref?: Pref;
 }
 

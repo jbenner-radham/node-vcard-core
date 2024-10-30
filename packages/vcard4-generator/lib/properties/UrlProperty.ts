@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface UrlParameters {
-    value?: 'uri';
+    value?: Extract<Value, 'uri'>;
     pid?: number | number[];
     pref?: Pref;
     type?: Type;

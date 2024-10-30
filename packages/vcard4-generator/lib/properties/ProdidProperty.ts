@@ -4,7 +4,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export interface ProdidParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
 }
 
 export type ProdidRestConfig = [value: string, parameters?: ProdidParameters, options?: Options];

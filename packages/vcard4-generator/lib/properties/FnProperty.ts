@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface FnParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
     type?: Type;
     language?: string;
     altid?: string;

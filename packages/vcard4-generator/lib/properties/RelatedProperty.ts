@@ -31,7 +31,7 @@ export type RelatedType = 'acquaintance'
     | 'sweetheart';
 
 export interface RelatedParameters {
-    value?: 'uri' | 'text';
+    value?: Extract<Value, 'uri' | 'text'>;
     mediatype?: string;
     language?: string;
     pid?: number | number[];

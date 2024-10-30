@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface MemberParameters {
-    value?: 'uri';
+    value?: Extract<Value, 'uri'>;
     pid?: number | number[];
     pref?: Pref;
     altid?: number | string;

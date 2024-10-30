@@ -6,7 +6,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
 export interface TitleParameters {
-    value?: 'text';
+    value?: Extract<Value, 'text'>;
     pid?: number | number[];
     pref?: Pref;
     altid?: number | string;
