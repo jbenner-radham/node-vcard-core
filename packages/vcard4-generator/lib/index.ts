@@ -620,3 +620,14 @@ export type {
     VersionRestConfig,
     XmlRestConfig
 };
+
+export type {
+    Calscale,
+    Cardinality,
+    Group,
+    HobbyOrInterestLevel,
+    Pref,
+    Type,
+    Value,
+    Options
+} from './types.js';
