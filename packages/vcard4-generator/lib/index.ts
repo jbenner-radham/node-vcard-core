@@ -1,88 +1,110 @@
 import { EOL } from '@vcard/vcard4-meta';
-import AdrProperty, { type AdrConfig, AdrRestConfig } from './properties/AdrProperty.js';
+import AdrProperty, { type AdrConfig, AdrParameters, AdrRestConfig } from './properties/AdrProperty.js';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray.js';
 import AnniversaryProperty, {
-    type AnniversaryConfig, AnniversaryRestConfig
+    type AnniversaryConfig, AnniversaryParameters, AnniversaryRestConfig
 } from './properties/AnniversaryProperty.js';
-import BdayProperty, { type BdayConfig, BdayRestConfig } from './properties/BdayProperty.js';
-import BirthplaceProperty, { type BirthplaceConfig, BirthplaceRestConfig } from './properties/BirthplaceProperty.js';
-import CaladruriProperty, { type CaladruriConfig, CaladruriRestConfig } from './properties/CaladruriProperty.js';
+import BdayProperty, { type BdayConfig, BdayParameters, BdayRestConfig } from './properties/BdayProperty.js';
+import BirthplaceProperty, {
+    type BirthplaceConfig, BirthplaceParameters, BirthplaceRestConfig
+} from './properties/BirthplaceProperty.js';
+import CaladruriProperty, {
+    type CaladruriConfig, CaladruriParameters, CaladruriRestConfig
+} from './properties/CaladruriProperty.js';
 import CaladruriPropertyArray from './properties/arrays/CaladruriPropertyArray.js';
-import CaluriProperty, { type CaluriConfig, CaluriRestConfig } from './properties/CaluriProperty.js';
+import CaluriProperty, { type CaluriConfig, CaluriParameters, CaluriRestConfig } from './properties/CaluriProperty.js';
 import CaluriPropertyArray from './properties/arrays/CaluriPropertyArray.js';
-import CategoriesProperty, { type CategoriesConfig, CategoriesRestConfig } from './properties/CategoriesProperty.js';
+import CategoriesProperty, {
+    type CategoriesConfig, CategoriesParameters, CategoriesRestConfig
+} from './properties/CategoriesProperty.js';
 import CategoriesPropertyArray from './properties/arrays/CategoriesPropertyArray.js';
 import ClientpidmapProperty, {
-    type ClientpidmapConfig, ClientpidmapRestConfig
+    type ClientpidmapConfig, ClientpidmapParameters, ClientpidmapRestConfig
 } from './properties/ClientpidmapProperty.js';
 import ClientpidmapPropertyArray from './properties/arrays/ClientpidmapPropertyArray.js';
-import ContactUriProperty, { type ContactUriConfig, ContactUriRestConfig } from './properties/ContactUriProperty.js';
+import ContactUriProperty, {
+    type ContactUriConfig, ContactUriParameters, ContactUriRestConfig
+} from './properties/ContactUriProperty.js';
 import ContactUriPropertyArray from './properties/arrays/ContactUriPropertyArray.js';
-import DeathdateProperty, { type DeathdateConfig, DeathdateRestConfig } from './properties/DeathdateProperty.js';
-import DeathplaceProperty, { type DeathplaceConfig, DeathplaceRestConfig } from './properties/DeathplaceProperty.js';
-import EmailProperty, { type EmailConfig, EmailRestConfig } from './properties/EmailProperty.js';
+import DeathdateProperty, {
+    type DeathdateConfig, DeathdateParameters, DeathdateRestConfig
+} from './properties/DeathdateProperty.js';
+import DeathplaceProperty, {
+    type DeathplaceConfig, DeathplaceParameters, DeathplaceRestConfig
+} from './properties/DeathplaceProperty.js';
+import EmailProperty, { type EmailConfig, EmailParameters, EmailRestConfig } from './properties/EmailProperty.js';
 import EmailPropertyArray from './properties/arrays/EmailPropertyArray.js';
-import ExpertiseProperty, { type ExpertiseConfig, ExpertiseRestConfig } from './properties/ExpertiseProperty.js';
+import ExpertiseProperty, {
+    type ExpertiseConfig, ExpertiseParameters, ExpertiseRestConfig
+} from './properties/ExpertiseProperty.js';
 import ExpertisePropertyArray from './properties/arrays/ExpertisePropertyArray.js';
-import FburlProperty, { type FburlConfig, FburlRestConfig } from './properties/FburlProperty.js';
+import FburlProperty, { type FburlConfig, FburlParameters, FburlRestConfig } from './properties/FburlProperty.js';
 import FburlPropertyArray from './properties/arrays/FburlPropertyArray.js';
-import FnProperty, { type FnConfig, FnRestConfig } from './properties/FnProperty.js';
+import FnProperty, { type FnConfig, FnParameters, FnRestConfig } from './properties/FnProperty.js';
 import FnPropertyArray from './properties/arrays/FnPropertyArray.js';
-import GenderProperty, { type GenderConfig, GenderRestConfig } from './properties/GenderProperty.js';
-import GeoProperty, { type GeoConfig, GeoRestConfig } from './properties/GeoProperty.js';
+import GenderProperty, { type GenderConfig, GenderParameters, GenderRestConfig } from './properties/GenderProperty.js';
+import GeoProperty, { type GeoConfig, GeoParameters, GeoRestConfig } from './properties/GeoProperty.js';
 import GeoPropertyArray from './properties/arrays/GeoPropertyArray.js';
-import HobbyProperty, { type HobbyConfig, HobbyRestConfig } from './properties/HobbyProperty.js';
+import HobbyProperty, { type HobbyConfig, HobbyParameters, HobbyRestConfig } from './properties/HobbyProperty.js';
 import HobbyPropertyArray from './properties/arrays/HobbyPropertyArray.js';
-import ImppProperty, { type ImppConfig, ImppRestConfig } from './properties/ImppProperty.js';
+import ImppProperty, { type ImppConfig, ImppParameters, ImppRestConfig } from './properties/ImppProperty.js';
 import ImppPropertyArray from './properties/arrays/ImppPropertyArray.js';
 import isNotEmptyString from './util/is-not-empty-string.js';
-import InterestProperty, { type InterestConfig, InterestRestConfig } from './properties/InterestProperty.js';
+import InterestProperty, {
+    type InterestConfig, InterestParameters, InterestRestConfig
+} from './properties/InterestProperty.js';
 import InterestPropertyArray from './properties/arrays/InterestPropertyArray.js';
-import KeyProperty, { type KeyConfig, KeyRestConfig } from './properties/KeyProperty.js';
+import KeyProperty, { type KeyConfig, KeyParameters, KeyRestConfig } from './properties/KeyProperty.js';
 import KeyPropertyArray from './properties/arrays/KeyPropertyArray.js';
-import KindProperty, { type KindConfig, KindRestConfig } from './properties/KindProperty.js';
-import LangProperty, { type LangConfig, LangRestConfig } from './properties/LangProperty.js';
+import KindProperty, { type KindConfig, KindParameters, KindRestConfig } from './properties/KindProperty.js';
+import LangProperty, { type LangConfig, LangParameters, LangRestConfig } from './properties/LangProperty.js';
 import LangPropertyArray from './properties/arrays/LangPropertyArray.js';
-import LogoProperty, { type LogoConfig, LogoRestConfig } from './properties/LogoProperty.js';
+import LogoProperty, { type LogoConfig, LogoParameters, LogoRestConfig } from './properties/LogoProperty.js';
 import LogoPropertyArray from './properties/arrays/LogoPropertyArray.js';
-import MemberProperty, { type MemberConfig, MemberRestConfig } from './properties/MemberProperty.js';
+import MemberProperty, { type MemberConfig, MemberParameters, MemberRestConfig } from './properties/MemberProperty.js';
 import MemberPropertyArray from './properties/arrays/MemberPropertyArray.js';
-import NProperty, { type NConfig, NRestConfig } from './properties/NProperty.js';
-import NicknameProperty, { type NicknameConfig, NicknameRestConfig } from './properties/NicknameProperty.js';
+import NProperty, { type NConfig, NParameters, NRestConfig } from './properties/NProperty.js';
+import NicknameProperty, {
+    type NicknameConfig, NicknameParameters, NicknameRestConfig
+} from './properties/NicknameProperty.js';
 import NicknamePropertyArray from './properties/arrays/NicknamePropertyArray.js';
-import NoteProperty, { type NoteConfig, NoteRestConfig } from './properties/NoteProperty.js';
+import NoteProperty, { type NoteConfig, NoteParameters, NoteRestConfig } from './properties/NoteProperty.js';
 import NotePropertyArray from './properties/arrays/NotePropertyArray.js';
 import NullProperty from './properties/NullProperty.js';
-import OrgProperty, { type OrgConfig, OrgRestConfig } from './properties/OrgProperty.js';
+import OrgProperty, { type OrgConfig, OrgParameters, OrgRestConfig } from './properties/OrgProperty.js';
 import OrgPropertyArray from './properties/arrays/OrgPropertyArray.js';
 import OrgDirectoryProperty, {
-    type OrgDirectoryConfig, OrgDirectoryRestConfig
+    type OrgDirectoryConfig, OrgDirectoryParameters, OrgDirectoryRestConfig
 } from './properties/OrgDirectoryProperty.js';
 import OrgDirectoryPropertyArray from './properties/arrays/OrgDirectoryPropertyArray.js';
-import PhotoProperty, { type PhotoConfig, PhotoRestConfig } from './properties/PhotoProperty.js';
+import PhotoProperty, { type PhotoConfig, PhotoParameters, PhotoRestConfig } from './properties/PhotoProperty.js';
 import PhotoPropertyArray from './properties/arrays/PhotoPropertyArray.js';
-import ProdidProperty, { type ProdidConfig, ProdidRestConfig } from './properties/ProdidProperty.js';
-import RelatedProperty, { type RelatedConfig, RelatedRestConfig } from './properties/RelatedProperty.js';
+import ProdidProperty, { type ProdidConfig, ProdidParameters, ProdidRestConfig } from './properties/ProdidProperty.js';
+import RelatedProperty, {
+    type RelatedConfig, RelatedParameters, RelatedRestConfig
+} from './properties/RelatedProperty.js';
 import RelatedPropertyArray from './properties/arrays/RelatedPropertyArray.js';
-import RevProperty, { type RevConfig, RevRestConfig } from './properties/RevProperty.js';
-import RoleProperty, { type RoleConfig, RoleRestConfig } from './properties/RoleProperty.js';
+import RevProperty, { type RevConfig, RevParameters, RevRestConfig } from './properties/RevProperty.js';
+import RoleProperty, { type RoleConfig, RoleParameters, RoleRestConfig } from './properties/RoleProperty.js';
 import RolePropertyArray from './properties/arrays/RolePropertyArray.js';
-import SoundProperty, { type SoundConfig, SoundRestConfig } from './properties/SoundProperty.js';
+import SoundProperty, { type SoundConfig, SoundParameters, SoundRestConfig } from './properties/SoundProperty.js';
 import SoundPropertyArray from './properties/arrays/SoundPropertyArray.js';
-import SourceProperty, { type SourceConfig, SourceRestConfig } from './properties/SourceProperty.js';
+import SourceProperty, { type SourceConfig, SourceParameters, SourceRestConfig } from './properties/SourceProperty.js';
 import SourcePropertyArray from './properties/arrays/SourcePropertyArray.js';
-import TelProperty, { type TelConfig, TelRestConfig } from './properties/TelProperty.js';
+import TelProperty, { type TelConfig, TelParameters, TelRestConfig } from './properties/TelProperty.js';
 import TelPropertyArray from './properties/arrays/TelPropertyArray.js';
-import TitleProperty, { type TitleConfig, TitleRestConfig } from './properties/TitleProperty.js';
+import TitleProperty, { type TitleConfig, TitleParameters, TitleRestConfig } from './properties/TitleProperty.js';
 import TitlePropertyArray from './properties/arrays/TitlePropertyArray.js';
-import TzProperty, { type TzConfig, TzRestConfig } from './properties/TzProperty.js';
+import TzProperty, { type TzConfig, TzParameters, TzRestConfig } from './properties/TzProperty.js';
 import TzPropertyArray from './properties/arrays/TzPropertyArray.js';
 import toString from './util/to-string.js';
-import UidProperty, { type UidConfig, UidRestConfig } from './properties/UidProperty.js';
-import UrlProperty, { type UrlConfig, UrlRestConfig } from './properties/UrlProperty.js';
+import UidProperty, { type UidConfig, UidParameters, UidRestConfig } from './properties/UidProperty.js';
+import UrlProperty, { type UrlConfig, UrlParameters, UrlRestConfig } from './properties/UrlProperty.js';
 import UrlPropertyArray from './properties/arrays/UrlPropertyArray.js';
-import VersionProperty, { type VersionConfig, VersionRestConfig } from './properties/VersionProperty.js';
-import XmlProperty, { type XmlConfig, XmlRestConfig } from './properties/XmlProperty.js';
+import VersionProperty, {
+    type VersionConfig, VersionParameters, VersionRestConfig
+} from './properties/VersionProperty.js';
+import XmlProperty, { type XmlConfig, XmlParameters, XmlRestConfig } from './properties/XmlProperty.js';
 import XmlPropertyArray from './properties/arrays/XmlPropertyArray.js';
 
 export interface Vcard4GeneratorConfig {
@@ -618,7 +640,51 @@ export type {
     UidRestConfig,
     UrlRestConfig,
     VersionRestConfig,
-    XmlRestConfig
+    XmlRestConfig,
+    AdrParameters,
+    AnniversaryParameters,
+    BdayParameters,
+    BirthplaceParameters,
+    CaladruriParameters,
+    CaluriParameters,
+    CategoriesParameters,
+    ClientpidmapParameters,
+    ContactUriParameters,
+    DeathdateParameters,
+    DeathplaceParameters,
+    EmailParameters,
+    ExpertiseParameters,
+    FburlParameters,
+    FnParameters,
+    GenderParameters,
+    GeoParameters,
+    HobbyParameters,
+    ImppParameters,
+    InterestParameters,
+    KeyParameters,
+    KindParameters,
+    LangParameters,
+    LogoParameters,
+    MemberParameters,
+    NParameters,
+    NicknameParameters,
+    NoteParameters,
+    OrgParameters,
+    OrgDirectoryParameters,
+    PhotoParameters,
+    ProdidParameters,
+    RelatedParameters,
+    RevParameters,
+    RoleParameters,
+    SoundParameters,
+    SourceParameters,
+    TelParameters,
+    TitleParameters,
+    TzParameters,
+    UidParameters,
+    UrlParameters,
+    VersionParameters,
+    XmlParameters
 };
 
 export type {
