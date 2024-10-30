@@ -6,13 +6,11 @@ import isValidIndexParameter from '../util/is-valid-index-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
-export type InterestLevel = HobbyOrInterestLevel;
-
 export interface InterestParameters {
     altid?: number | string;
     index?: number; // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
     language?: string;
-    level?: InterestLevel;
+    level?: HobbyOrInterestLevel;
     pref?: Pref;
     type?: Type;
 }
