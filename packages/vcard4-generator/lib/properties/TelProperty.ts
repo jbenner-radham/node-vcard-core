@@ -7,14 +7,23 @@ import Property from './Property.js';
 
 export type TelType = 'cell' | 'fax' | 'pager' | 'text' | 'textphone' | 'video' | 'voice';
 
-export interface TelParameters {
-    value?: Extract<Value, 'text' | 'uri'>;
-    mediatype?: string; // For `URI` type only!
+type TelCommonParameters = {
     type?: Type | TelType | (Type | TelType)[];
     pid?: Pid;
     pref?: Pref;
     altid?: Altid;
-}
+};
+
+type TelUriValueParameters = {
+    value: Extract<Value, 'uri'>;
+    mediatype?: string;
+} & TelCommonParameters;
+
+type TelTextOrUndefinedValueParameters = {
+    value?: Extract<Value, 'text'>;
+} & TelCommonParameters;
+
+export type TelParameters = TelUriValueParameters | TelTextOrUndefinedValueParameters;
 
 export type TelRestConfig = [value: string, parameters?: TelParameters, options?: Options];
 
@@ -132,8 +141,10 @@ export default class TelProperty extends Property {
         throw new TypeError(`The value "${value}" is not a TelConfig type`);
     }
 
-    static validateParameters({ mediatype, pref, value }: TelParameters): void {
-        if (mediatype && value && value?.toLowerCase() !== 'uri') {
+    static validateParameters(parameters: TelParameters): void {
+        const { mediatype, pref, value } = parameters as TelUriValueParameters;
+
+        if (mediatype && (!value || (value && value?.toLowerCase() !== 'uri'))) {
             throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
         }
 
