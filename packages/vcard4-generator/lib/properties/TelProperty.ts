@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -11,7 +11,7 @@ export interface TelParameters {
     value?: Extract<Value, 'text' | 'uri'>;
     mediatype?: string; // For `URI` type only!
     type?: Type | TelType | (Type | TelType)[];
-    pid?: number | number[];
+    pid?: Pid;
     pref?: Pref;
     altid?: number | string;
 }

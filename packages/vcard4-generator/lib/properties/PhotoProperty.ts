@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -11,7 +11,7 @@ export interface PhotoParameters {
     type?: Type;
     mediatype?: string;
     pref?: Pref;
-    pid?: number | number[];
+    pid?: Pid;
 }
 
 export type PhotoRestConfig = [value: string, parameters?: PhotoParameters, options?: Options];

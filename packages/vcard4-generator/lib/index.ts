@@ -699,6 +699,7 @@ export type {
     Cardinality,
     Group,
     HobbyOrInterestLevel,
+    Pid,
     Pref,
     Type,
     Value,

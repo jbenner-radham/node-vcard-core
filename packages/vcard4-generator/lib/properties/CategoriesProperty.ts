@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -7,7 +7,7 @@ import Property from './Property.js';
 
 export interface CategoriesParameters {
     value?: Extract<Value, 'text'>;
-    pid?: number | number[];
+    pid?: Pid;
     pref?: Pref;
     type?: Type;
     altid?: number | string;

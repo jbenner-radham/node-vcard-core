@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
@@ -13,7 +13,7 @@ export interface AdrParameters {
     geo?: string;
     tz?: string;
     altid?: string;
-    pid?: string;
+    pid?: Pid;
     pref?: Pref;
     type?: Type;
 }

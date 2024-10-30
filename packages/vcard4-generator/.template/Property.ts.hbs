@@ -1,4 +1,4 @@
-import { Calscale, Cardinality, Pref, Type, Value } from '../types.js';
+import { Calscale, Cardinality, Pid, Pref, Type, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import Property from './Property.js';
 
@@ -11,7 +11,7 @@ export interface {{{pascalCase property}}}Parameters {
     label?: string;
     language?: string;
     mediatype?: string;
-    pid?: number | number[];
+    pid?: Pid;
     pref?: Pref;
     sortAs?: string;
     type?: Type;

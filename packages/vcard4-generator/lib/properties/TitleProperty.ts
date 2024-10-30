@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, Options, Value } from '../types.js';
+import type { Cardinality, Group, Pid, Pref, Options, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -7,7 +7,7 @@ import Property from './Property.js';
 
 export interface TitleParameters {
     value?: Extract<Value, 'text'>;
-    pid?: number | number[];
+    pid?: Pid;
     pref?: Pref;
     altid?: number | string;
     mediatype?: string;

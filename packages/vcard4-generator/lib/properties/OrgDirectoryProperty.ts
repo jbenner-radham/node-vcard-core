@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Pref, Options, Type, Value } from '../types.js';
+import type { Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -10,7 +10,7 @@ export interface OrgDirectoryParameters {
     altid?: number | string;
     index?: number; // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
     language?: string;
-    pid?: number | number[];
+    pid?: Pid;
     pref?: Pref;
     type?: Type;
 }
