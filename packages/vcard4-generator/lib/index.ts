@@ -42,7 +42,9 @@ import FburlProperty, { type FburlConfig, FburlParameters, FburlRestConfig } fro
 import FburlPropertyArray from './properties/arrays/FburlPropertyArray.js';
 import FnProperty, { type FnConfig, FnParameters, FnRestConfig } from './properties/FnProperty.js';
 import FnPropertyArray from './properties/arrays/FnPropertyArray.js';
-import GenderProperty, { type GenderConfig, GenderParameters, GenderRestConfig } from './properties/GenderProperty.js';
+import GenderProperty, {
+    type GenderConfig, GenderParameters, GenderRestConfig, Sex
+} from './properties/GenderProperty.js';
 import GeoProperty, { type GeoConfig, GeoParameters, GeoRestConfig } from './properties/GeoProperty.js';
 import GeoPropertyArray from './properties/arrays/GeoPropertyArray.js';
 import HobbyProperty, { type HobbyConfig, HobbyParameters, HobbyRestConfig } from './properties/HobbyProperty.js';
@@ -685,7 +687,8 @@ export type {
     UrlParameters,
     VersionParameters,
     XmlParameters,
-    ExpertiseLevel
+    ExpertiseLevel,
+    Sex
 };
 
 export type {
