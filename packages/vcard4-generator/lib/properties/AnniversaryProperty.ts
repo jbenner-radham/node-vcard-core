@@ -4,17 +4,22 @@ import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
-export interface AnniversaryParameters {
-    value?: Extract<Value, 'date-and-or-time' | 'text'>;
+type AnniversaryCommonParameters = {
     altid?: Altid;
-    calscale?: Calscale; // For `date-and-or-time` type only!
-}
+};
 
-export type AnniversaryRestConfig = [
-    value: string,
-    parameters?: AnniversaryParameters,
-    options?: Options
-];
+type AnniversaryDateAndOrTimeOrUndefinedValueParameters = {
+    value?: Extract<Value, 'date-and-or-time'>;
+    calscale?: Calscale;
+} & AnniversaryCommonParameters;
+
+type AnniversaryTextValueParameters = {
+    value: Extract<Value, 'text'>;
+} & AnniversaryCommonParameters;
+
+export type AnniversaryParameters = AnniversaryDateAndOrTimeOrUndefinedValueParameters | AnniversaryTextValueParameters;
+
+export type AnniversaryRestConfig = [value: string, parameters?: AnniversaryParameters, options?: Options];
 
 /** @todo Add Date type support. */
 export type AnniversaryConfig = AnniversaryProperty | AnniversaryRestConfig | string;
@@ -41,7 +46,6 @@ const VALUE: unique symbol = Symbol.for('value');
  * >   ANNIVERSARY:19960415
  *
  * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.6 RFC 6350 - vCard Format Specification § ANNIVERSARY}
- * @todo Add enforcement of calscale-param for only date-and-or-time types!
  */
 export default class AnniversaryProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*1'; // Exactly one instance per vCard MAY be present.
@@ -84,8 +88,10 @@ export default class AnniversaryProperty extends Property {
         throw new TypeError(`The value "${value}" is not a AnniversaryConfig type`);
     }
 
-    static validateParameters({ calscale, value }: AnniversaryParameters): void {
-        if (calscale && value && value?.toLowerCase() !== 'date-and-or-time') {
+    static validateParameters(parameters: AnniversaryParameters): void {
+        const { calscale, value } = parameters as Record<string, unknown>;
+
+        if (calscale && isString(value) && value.toLowerCase() !== 'date-and-or-time') {
             throw new TypeError(getInvalidCalscaleValueParameterMessage({ value }));
         }
     }
