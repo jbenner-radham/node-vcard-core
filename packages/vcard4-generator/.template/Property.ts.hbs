@@ -1,4 +1,4 @@
-import { Calscale, Cardinality, Pid, Pref, Type, Value } from '../types.js';
+import { Calscale, Cardinality, Group, Options, Pid, Pref, Type, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import Property from './Property.js';
 
@@ -18,7 +18,7 @@ export interface {{{pascalCase property}}}Parameters {
     tz?: string;
 }
 
-export type {{{pascalCase property}}}RestConfig = [value: string, parameters?: {{{pascalCase property}}}Parameters];
+export type {{{pascalCase property}}}RestConfig = [value: string, parameters?: {{{pascalCase property}}}Parameters, options?: Options];
 
 export type {{{pascalCase property}}}Config = {{{pascalCase property}}}Property | {{{pascalCase property}}}RestConfig | string;
 
@@ -44,16 +44,19 @@ export default class {{{pascalCase property}}}Property extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = '';
 
+    group: Group;
+
     parameters: {{{pascalCase property}}}Parameters = {};
 
     [VALUE]: string;
 
-    constructor(value: string, parameters: {{{pascalCase property}}}Parameters = {}) {
+    constructor(value: string, parameters: {{{pascalCase property}}}Parameters = {}, { group = '' }: Options = {}) {
         super();
 
         if (!isString(value))
             throw new TypeError(`The value "${value}" is not a string type`);
 
+        this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
     }
