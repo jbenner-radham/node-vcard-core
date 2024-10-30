@@ -7,12 +7,21 @@ import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
-export interface BdayParameters {
-    value?: Extract<Value, 'date-and-or-time' | 'text'>;
+type BdayCommonParameters = {
     altid?: Altid;
-    calscale?: Calscale; // For `date-and-or-time` type only!
-    language?: string; // For `text` type only!
-}
+};
+
+type BdayDateAndOrTimeOrUndefinedValueParameters = {
+    value?: Extract<Value, 'date-and-or-time'>;
+    calscale?: Calscale;
+} & BdayCommonParameters;
+
+type BdayTextValueParameters = {
+    value: Extract<Value, 'text'>;
+    language?: string;
+} & BdayCommonParameters;
+
+export type BdayParameters = BdayDateAndOrTimeOrUndefinedValueParameters | BdayTextValueParameters;
 
 export type BdayRestConfig = [value: string, parameters?: BdayParameters, options?: Options];
 
@@ -89,12 +98,14 @@ export default class BdayProperty extends Property {
         throw new TypeError(`The value "${value}" is not a BdayConfig type`);
     }
 
-    static validateParameters({ calscale, language, value }: BdayParameters): void {
-        if (calscale && value && value?.toLowerCase() !== 'date-and-or-time') {
+    static validateParameters(parameters: BdayParameters): void {
+        const { calscale, language, value } = parameters as Record<string, unknown>;
+
+        if (calscale && isString(value) && value.toLowerCase() !== 'date-and-or-time') {
             throw new TypeError(getInvalidCalscaleValueParameterMessage({ value }));
         }
 
-        if (language && (!value || value?.toLowerCase() !== 'text')) {
+        if (language && (!value || (isString(value) && value.toLowerCase() !== 'text'))) {
             throw new TypeError(getInvalidLanguageValueParameterMessage({ value }));
         }
     }
