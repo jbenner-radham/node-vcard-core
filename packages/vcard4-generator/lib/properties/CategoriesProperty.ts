@@ -13,11 +13,7 @@ export interface CategoriesParameters {
     altid?: Altid;
 }
 
-export type CategoriesRestConfig = [
-    value: string,
-    parameters?: CategoriesParameters,
-    options?: Options
-];
+export type CategoriesRestConfig = [value: string, parameters?: CategoriesParameters, options?: Options];
 
 export type CategoriesConfig = CategoriesProperty | CategoriesRestConfig | string | string[];
 
