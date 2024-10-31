@@ -15,11 +15,7 @@ export interface OrgDirectoryParameters {
     type?: Type;
 }
 
-export type OrgDirectoryRestConfig = [
-    value: string,
-    parameters?: OrgDirectoryParameters,
-    options?: Options
-];
+export type OrgDirectoryRestConfig = [value: string, parameters?: OrgDirectoryParameters, options?: Options];
 
 export type OrgDirectoryConfig = OrgDirectoryProperty | OrgDirectoryRestConfig | string;
 
