@@ -1,19 +1,32 @@
 import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
-import { getInvalidPidParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import {
+    getInvalidMediatypeValueParameterMessage,
+    getInvalidPidParameterMessage,
+    getInvalidPrefParameterMessage
+} from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
-export interface TzParameters {
-    value?: Extract<Value, 'text' | 'uri' | 'utc-offset'>;
+type TzCommonParameters = {
     altid?: Altid;
     pid?: Pid;
     pref?: Pref;
     type?: Type;
+};
+
+type TzTextOrUtcOffsetOrUndefinedValueParameters = {
+    value?: Extract<Value, 'text' | 'utc-offset'>;
+} & TzCommonParameters;
+
+type TzUriValueParameters = {
+    value: Extract<Value, 'uri'>;
     mediatype?: string;
-}
+} & TzCommonParameters;
+
+export type TzParameters = TzTextOrUtcOffsetOrUndefinedValueParameters | TzUriValueParameters;
 
 export type TzRestConfig = [value: string, parameters?: TzParameters, options?: Options];
 
@@ -100,7 +113,13 @@ export default class TzProperty extends Property {
         throw new TypeError(`The value "${value}" is not a TzConfig type`);
     }
 
-    static validateParameters({ pid, pref }: TzParameters): void {
+    static validateParameters(parameters: TzParameters): void {
+        const { mediatype, pid, pref, value } = parameters as Record<string, unknown>;
+
+        if (mediatype && (!value || (isString(value) && value.toLowerCase() !== 'uri'))) {
+            throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
+        }
+
         if (pid !== undefined && !isValidPidParameter(pid)) {
             throw new TypeError(getInvalidPidParameterMessage({ pid }));
         }
