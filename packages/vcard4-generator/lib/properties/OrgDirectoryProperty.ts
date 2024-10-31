@@ -1,8 +1,13 @@
 import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
-import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import {
+    getInvalidIndexParameterMessage,
+    getInvalidPidParameterMessage,
+    getInvalidPrefParameterMessage
+} from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import isValidIndexParameter from '../util/is-valid-index-parameter.js';
+import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
@@ -98,9 +103,13 @@ export default class OrgDirectoryProperty extends Property {
         throw new TypeError(`The value "${value}" is not a OrgDirectoryConfig type`);
     }
 
-    static validateParameters({ index, pref }: OrgDirectoryParameters): void {
+    static validateParameters({ index, pid, pref }: OrgDirectoryParameters): void {
         if (index && !isValidIndexParameter(index)) {
             throw new TypeError(getInvalidIndexParameterMessage({ index }));
+        }
+
+        if (pid !== undefined && !isValidPidParameter(pid)) {
+            throw new TypeError(getInvalidPidParameterMessage({ pid }));
         }
 
         if (pref && !isValidPrefParameter(pref)) {

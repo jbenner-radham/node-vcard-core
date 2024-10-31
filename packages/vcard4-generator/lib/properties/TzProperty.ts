@@ -1,7 +1,8 @@
 import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
-import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import { getInvalidPidParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
+import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
@@ -99,7 +100,11 @@ export default class TzProperty extends Property {
         throw new TypeError(`The value "${value}" is not a TzConfig type`);
     }
 
-    static validateParameters({ pref }: TzParameters): void {
+    static validateParameters({ pid, pref }: TzParameters): void {
+        if (pid !== undefined && !isValidPidParameter(pid)) {
+            throw new TypeError(getInvalidPidParameterMessage({ pid }));
+        }
+
         if (pref && !isValidPrefParameter(pref)) {
             throw new TypeError(getInvalidPrefParameterMessage({ pref }));
         }

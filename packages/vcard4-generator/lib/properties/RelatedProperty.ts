@@ -2,10 +2,12 @@ import type { Altid, Cardinality, Group, Pid, Pref, Options, Value } from '../ty
 import {
     getInvalidLanguageValueParameterMessage,
     getInvalidMediatypeValueParameterMessage,
+    getInvalidPidParameterMessage,
     getInvalidPrefParameterMessage
 } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
+import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
@@ -147,7 +149,7 @@ export default class RelatedProperty extends Property {
     }
 
     static validateParameters(parameters: RelatedParameters): void {
-        const { language, mediatype, pref, value } = parameters as Record<string, unknown>;
+        const { language, mediatype, pid, pref, value } = parameters as Record<string, unknown>;
 
         if (language && (!value || (isString(value) && value.toLowerCase() !== 'text'))) {
             throw new TypeError(getInvalidLanguageValueParameterMessage({ value }));
@@ -155,6 +157,10 @@ export default class RelatedProperty extends Property {
 
         if (mediatype && isString(value) && value.toLowerCase() !== 'uri') {
             throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
+        }
+
+        if (pid !== undefined && !isValidPidParameter(pid)) {
+            throw new TypeError(getInvalidPidParameterMessage({ pid }));
         }
 
         if (pref && !isValidPrefParameter(pref)) {

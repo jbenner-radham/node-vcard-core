@@ -1,7 +1,8 @@
 import type { Altid, Cardinality, Group, Pid, Pref, Options, Value } from '../types.js';
-import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import { getInvalidPidParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
+import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
@@ -79,7 +80,11 @@ export default class TitleProperty extends Property {
         throw new TypeError(`The value "${value}" is not a TitleConfig type`);
     }
 
-    static validateParameters({ pref }: TitleParameters): void {
+    static validateParameters({ pid, pref }: TitleParameters): void {
+        if (pid !== undefined && !isValidPidParameter(pid)) {
+            throw new TypeError(getInvalidPidParameterMessage({ pid }));
+        }
+
         if (pref && !isValidPrefParameter(pref)) {
             throw new TypeError(getInvalidPrefParameterMessage({ pref }));
         }

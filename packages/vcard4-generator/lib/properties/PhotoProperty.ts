@@ -1,7 +1,8 @@
 import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
-import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import { getInvalidPidParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
+import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
@@ -91,7 +92,11 @@ export default class PhotoProperty extends Property {
         throw new TypeError(`The value "${value}" is not a PhotoConfig type`);
     }
 
-    static validateParameters({ pref }: PhotoParameters): void {
+    static validateParameters({ pid, pref }: PhotoParameters): void {
+        if (pid !== undefined && !isValidPidParameter(pid)) {
+            throw new TypeError(getInvalidPidParameterMessage({ pid }));
+        }
+
         if (pref && !isValidPrefParameter(pref)) {
             throw new TypeError(getInvalidPrefParameterMessage({ pref }));
         }

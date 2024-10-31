@@ -1,7 +1,12 @@
 import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
-import { getInvalidMediatypeValueParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import {
+    getInvalidMediatypeValueParameterMessage,
+    getInvalidPidParameterMessage,
+    getInvalidPrefParameterMessage
+} from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
+import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
@@ -142,10 +147,14 @@ export default class TelProperty extends Property {
     }
 
     static validateParameters(parameters: TelParameters): void {
-        const { mediatype, pref, value } = parameters as Record<string, unknown>;
+        const { mediatype, pid, pref, value } = parameters as Record<string, unknown>;
 
         if (mediatype && (!value || (isString(value) && value.toLowerCase() !== 'uri'))) {
             throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
+        }
+
+        if (pid !== undefined && !isValidPidParameter(pid)) {
+            throw new TypeError(getInvalidPidParameterMessage({ pid }));
         }
 
         if (pref && !isValidPrefParameter(pref)) {
