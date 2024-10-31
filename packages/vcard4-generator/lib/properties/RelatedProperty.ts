@@ -30,15 +30,24 @@ export type RelatedType = 'acquaintance'
     | 'spouse'
     | 'sweetheart';
 
-export interface RelatedParameters {
-    value?: Extract<Value, 'uri' | 'text'>;
-    mediatype?: string;
-    language?: string;
+type RelatedCommonParameters = {
     pid?: Pid;
     pref?: Pref;
     altid?: Altid;
     type?: RelatedType;
-}
+};
+
+type RelatedUriOrUndefinedValueParameters = {
+    value?: Extract<Value, 'uri'>;
+    mediatype?: string;
+} & RelatedCommonParameters;
+
+type RelatedTextValueParameters = {
+    value: Extract<Value, 'text'>;
+    language?: string;
+} & RelatedCommonParameters;
+
+export type RelatedParameters = RelatedUriOrUndefinedValueParameters | RelatedTextValueParameters;
 
 export type RelatedRestConfig = [value: string, parameters?: RelatedParameters, options?: Options];
 
@@ -137,12 +146,14 @@ export default class RelatedProperty extends Property {
         throw new TypeError(`The value "${value}" is not a RelatedConfig type`);
     }
 
-    static validateParameters({ language, mediatype, pref, value }: RelatedParameters): void {
-        if (language && (!value || value?.toLowerCase() !== 'text')) {
+    static validateParameters(parameters: RelatedParameters): void {
+        const { language, mediatype, pref, value } = parameters as Record<string, unknown>;
+
+        if (language && (!value || (isString(value) && value.toLowerCase() !== 'text'))) {
             throw new TypeError(getInvalidLanguageValueParameterMessage({ value }));
         }
 
-        if (mediatype && value && value?.toLowerCase() !== 'uri') {
+        if (mediatype && isString(value) && value.toLowerCase() !== 'uri') {
             throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
         }
 
