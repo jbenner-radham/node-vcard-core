@@ -142,9 +142,9 @@ export default class TelProperty extends Property {
     }
 
     static validateParameters(parameters: TelParameters): void {
-        const { mediatype, pref, value } = parameters as TelUriValueParameters;
+        const { mediatype, pref, value } = parameters as Record<string, unknown>;
 
-        if (mediatype && (!value || (value && value?.toLowerCase() !== 'uri'))) {
+        if (mediatype && (!value || (isString(value) && value.toLowerCase() !== 'uri'))) {
             throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
         }
 
