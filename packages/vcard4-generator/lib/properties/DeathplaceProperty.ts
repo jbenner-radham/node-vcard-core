@@ -9,11 +9,7 @@ export interface DeathplaceParameters {
     language?: string;
 }
 
-export type DeathplaceRestConfig = [
-    value: string,
-    parameters?: DeathplaceParameters,
-    options?: Options
-];
+export type DeathplaceRestConfig = [value: string, parameters?: DeathplaceParameters, options?: Options];
 
 /** @todo Add URL support. */
 export type DeathplaceConfig = DeathplaceProperty | DeathplaceRestConfig | string;
