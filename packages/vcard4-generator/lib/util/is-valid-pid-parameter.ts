@@ -1,4 +1,5 @@
 import isNumber from './is-number.js';
+import { Pid } from '../types.js';
 
 /**
  * > The PID parameter is used to identify a specific property among
@@ -17,7 +18,7 @@ import isNumber from './is-number.js';
  *
  * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-5.5 RFC 6350 - vCard Format Specification § PID}
  */
-export default function isValidPidParameter(value: unknown): boolean {
+export default function isValidPidParameter(value: unknown): value is Pid {
     if ((!isNumber(value) && !Array.isArray(value)) || (Array.isArray(value) && !value.every(isNumber))) return false;
 
     function isValidPidNumber(number: number): boolean {
