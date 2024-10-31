@@ -5,14 +5,23 @@ import isValidGroup from '../util/is-valid-group.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
-export interface KeyParameters {
-    value?: Extract<Value, 'uri' | 'text'>;
-    mediatype?: string; // For `URI` type only!
+type KeyCommonParameters = {
     altid?: Altid;
     pid?: Pid;
     pref?: Pref;
     type?: Type;
-}
+};
+
+type KeyUriOrUndefinedValueParameters = {
+    value?: Extract<Value, 'uri'>;
+    mediatype?: string;
+} & KeyCommonParameters;
+
+type KeyTextValueParameters = {
+    value: Extract<Value, 'text'>;
+} & KeyCommonParameters;
+
+export type KeyParameters = KeyUriOrUndefinedValueParameters | KeyTextValueParameters;
 
 export type KeyRestConfig = [value: string, parameters?: KeyParameters, options?: Options];
 
@@ -93,8 +102,10 @@ export default class KeyProperty extends Property {
         throw new TypeError(`The value "${value}" is not a KeyConfig type`);
     }
 
-    static validateParameters({ mediatype, pref, value }: KeyParameters): void {
-        if (mediatype && value && value?.toLowerCase() !== 'uri') {
+    static validateParameters(parameters: KeyParameters): void {
+        const { mediatype, pref, value } = parameters as Record<string, unknown>;
+
+        if (mediatype && isString(value) && value.toLowerCase() !== 'uri') {
             throw new TypeError(getInvalidMediatypeValueParameterMessage({ value }));
         }
 
