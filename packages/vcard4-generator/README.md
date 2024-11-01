@@ -129,6 +129,7 @@ To-Do
     - [x] `PID` Parameter
     - [x] `PREF` Parameter
     - [x] `TYPE` Parameter
+    - [x] `CC` Parameter _(RFC 8605)_
   - [x] `ANNIVERSARY`
     - [x] Line Folding
     - [x] Value Escaping

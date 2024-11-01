@@ -1,7 +1,12 @@
-import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, Cc, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
-import { getInvalidPidParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
+import {
+    getInvalidCcParameterMessage,
+    getInvalidPidParameterMessage,
+    getInvalidPrefParameterMessage
+} from '../util/error-messages.js';
 import isString from '../util/is-string.js';
+import isValidCcParameter from '../util/is-valid-cc-parameter.js';
 import isValidGroup from '../util/is-valid-group.js';
 import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
@@ -17,6 +22,7 @@ export interface AdrParameters {
     pid?: Pid;
     pref?: Pref;
     type?: Type;
+    cc?: Cc;
 }
 
 export type AdrRestConfig = [value: string, parameters?: AdrParameters, options?: Options];
@@ -97,6 +103,7 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
  *
  * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1 RFC 6350 - vCard Format Specification § ADR}
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc8605/#section-3.1 RFC 8605 - vCard Format Extensions: ICANN Extensions for the Registration Data Access Protocol (RDAP) § Parameter: CC}
  */
 export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
@@ -189,7 +196,11 @@ export default class AdrProperty extends Property {
         throw new TypeError(`The value "${value}" is not a AdrConfig type`);
     }
 
-    static validateParameters({ pid, pref }: AdrParameters): void {
+    static validateParameters({ cc, pid, pref }: AdrParameters): void {
+        if (cc !== undefined && !isValidCcParameter(cc)) {
+            throw new TypeError(getInvalidCcParameterMessage({ cc }));
+        }
+
         if (pid !== undefined && !isValidPidParameter(pid)) {
             throw new TypeError(getInvalidPidParameterMessage({ pid }));
         }

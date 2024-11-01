@@ -3,6 +3,11 @@ export function getInvalidCalscaleValueParameterMessage({ value }: { value: any 
         `The value type of "${value}" was provided`;
 }
 
+export function getInvalidCcParameterMessage({ cc }: { cc: unknown }): string {
+    return 'The CC parameter must be a two alpha character uppercase string and should be an ISO 3166 two-letter ' +
+        `code. The value "${cc}" was provided`;
+}
+
 export function getInvalidIndexParameterMessage({ index }: { index: any }): string {
     return `The INDEX parameter must be a positive non-zero integer. The value ${index} was provided`;
 }
