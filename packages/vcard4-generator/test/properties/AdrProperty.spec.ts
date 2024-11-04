@@ -229,21 +229,22 @@ describe('AdrProperty', () => {
         });
     });
 
+    /** @see {@link https://en.wikipedia.org/wiki/Japanese_addressing_system} */
     describe('#block', () => {
         it('is a string property', () => {
-            const value = ';;123 Main Street Block 456;Any Town;CA;91921-1234;U.S.A.' +
-                ';;;;123;Main Street;;Block 456;;;;';
+            const value = ';;7-2, Marunouchi 2-Chome;Chiyoda-ku;Tokyo;100-8994;Japan' +
+                ';;;;;;2;7;;Marunouchi 2-Chome;;';
             const adr = new AdrProperty(value);
 
             expect(adr.block).to.be.a('string');
         });
 
-        it('returns the building component', () => {
-            const value = ';;123 Main Street Block 456;Any Town;CA;91921-1234;U.S.A.' +
-                ';;;;123;Main Street;;Block 456;;;;';
+        it('returns the block component', () => {
+            const value = ';;7-2, Marunouchi 2-Chome;Chiyoda-ku;Tokyo;100-8994;Japan' +
+                ';;;;;;2;7;;Marunouchi 2-Chome;;';
             const adr = new AdrProperty(value);
 
-            expect(adr.block).to.equal('Block 456');
+            expect(adr.block).to.equal('7');
         });
     });
 
