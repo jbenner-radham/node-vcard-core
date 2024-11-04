@@ -102,8 +102,111 @@ const VALUE: unique symbol = Symbol.for('value');
  * >    Mail Drop: TNE QB\n123 Main Street\nAny Town, CA  91921-1234\n
  * >    U.S.A.":;;123 Main Street;Any Town;CA;91921-1234;U.S.A.
  *
+ * --------------------------------------------------------------------
+ *
+ * > This specification modifies the definition of the ADR property. It
+ * > extends its structured value with additional address components to
+ * > better support the variety of international addresses. It separates
+ * > the address parts, which currently are typically combined in street
+ * > address component values, into distinct components.
+ * >
+ * > Implementations SHOULD write a combined value of these components in
+ * > the street address component for backwards compatibility, but they
+ * > SHOULD ignore the street component during reads if the ADR property
+ * > value contains any of the new components.
+ * >
+ * > The following change is made to the first paragraph under "Special
+ * > note", as originally specified in Section 6.3.1 of [RFC6350]. The
+ * > remaining paragraphs of that section in the original specification
+ * > still apply.
+ * >
+ * > Special note: The structured type value consists of a sequence of
+ * > address components. The component values MUST be specified in their
+ * > corresponding position. The structured type value corresponds, in
+ * > sequence, to the
+ * >
+ * >    post office box;
+ * >    extended address (e.g., apartment or suite number);
+ * >    street address;
+ * >    locality (e.g., city);
+ * >    region (e.g., state or province);
+ * >    postal code;
+ * >    country name (full name in the language specified in Section 5.1
+ * >    of [RFC6350]);
+ * >    room, suite number, or identifier;
+ * >    apartment number, extension designation, or box number;
+ * >    building floor or level;
+ * >    street number;
+ * >    street name;
+ * >    building, tower, or condominium;
+ * >    block name or number;
+ * >    subdistrict;
+ * >    district;
+ * >    landmark or another publicly known prominent feature that can
+ * >    substitute the street name and number (e.g., "White House" and
+ * >    "Taj Mahal"); and
+ * >    the cardinal direction or quadrant (e.g., "north").
+ * >
+ * > The following change is made to the definition of "ADR-value" under
+ * > "ABNF", as originally specified in Section 6.3.1 of [RFC6350].
+ * >
+ * > ABNF
+ * >
+ * > ADR-value = ; defined in RFC 6350, Section 6.3.1.:
+ * >             ADR-component-pobox ";"
+ * >             ADR-component-ext ";"
+ * >             ADR-component-street ";"
+ * >             ADR-component-locality ";"
+ * >             ADR-component-region ";"
+ * >             ADR-component-code ";"
+ * >             ADR-component-country ";"
+ * >             ; defined in this document:
+ * >             ADR-component-room ";"
+ * >             ADR-component-apartment ";"
+ * >             ADR-component-floor ";"
+ * >             ADR-component-streetnumber ";"
+ * >             ADR-component-streetname ";"
+ * >             ADR-component-building ";"
+ * >             ADR-component-block ";"
+ * >             ADR-component-subdistrict ";"
+ * >             ADR-component-district ";"
+ * >             ADR-component-landmark ";"
+ * >             ADR-component-direction
+ * >
+ * > ADR-component-pobox    = list-component
+ * > ADR-component-ext      = list-component
+ * > ADR-component-street   = list-component
+ * > ADR-component-locality = list-component
+ * > ADR-component-region   = list-component
+ * > ADR-component-code     = list-component
+ * > ADR-component-country  = list-component
+ * > ADR-component-room     = list-component
+ * > ADR-component-apartment = list-component
+ * > ADR-component-floor    = list-component
+ * > ADR-component-streetnumber = list-component
+ * > ADR-component-streetname = list-component
+ * > ADR-component-building = list-component
+ * > ADR-component-block    = list-component
+ * > ADR-component-subdistrict = list-component
+ * > ADR-component-district = list-component
+ * > ADR-component-landmark = list-component
+ * > ADR-component-direction = list-component
+ * >
+ * > The following change is made under "Example", as originally specified
+ * > in Section 6.3.1 of [RFC6350].
+ * >
+ * > Example: In this example, the post office box and the extended
+ * > address components are absent. The street number and name are both
+ * > added as separate components and are combined in the street component
+ * > for backwards compatibility.
+ * >
+ * > ADR;GEO="geo:12.3457,78.910":
+ * >   ;;123 Main Street;Any Town;CA;91921-1234;U.S.A
+ * >   ;;;;123;Main Street;;;;;;
+ *
  * @see {@link https://datatracker.ietf.org/doc/html/rfc6350#section-6.3.1 RFC 6350 - vCard Format Specification § ADR}
  * @see {@link https://datatracker.ietf.org/doc/html/rfc8605/#section-3.1 RFC 8605 - vCard Format Extensions: ICANN Extensions for the Registration Data Access Protocol (RDAP) § Parameter: CC}
+ * @see {@link https://datatracker.ietf.org/doc/html/rfc9554/#section-2.1 RFC 9554 - vCard Format Extensions for JSContact § ADR}
  */
 export default class AdrProperty extends Property {
     static readonly CARDINALITY: Cardinality = '*'; // One or more instances per vCard MAY be present.
@@ -117,45 +220,75 @@ export default class AdrProperty extends Property {
     [VALUE]: string;
 
     get postOfficeBox(): string {
-        const [postOfficeBox = ''] = this.components();
-
-        return postOfficeBox;
+        return this.components().at(0) ?? '';
     }
 
     get extendedAddress(): string {
-        const [, extendedAddress = ''] = this.components();
-
-        return extendedAddress;
+        return this.components().at(1) ?? '';
     }
 
     get streetAddress(): string {
-        const [, , streetAddress = ''] = this.components();
-
-        return streetAddress;
+        return this.components().at(2) ?? '';
     }
 
     get locality(): string {
-        const [, , , locality = ''] = this.components();
-
-        return locality;
+        return this.components().at(3) ?? '';
     }
 
     get region(): string {
-        const [, , , , region = ''] = this.components();
-
-        return region;
+        return this.components().at(4) ?? '';
     }
 
     get postalCode(): string {
-        const [, , , , , postalCode = ''] = this.components();
-
-        return postalCode;
+        return this.components().at(5) ?? '';
     }
 
     get countryName(): string {
-        const [, , , , , , countryName = ''] = this.components();
+        return this.components().at(6) ?? '';
+    }
 
-        return countryName;
+    get room(): string {
+        return this.components().at(7) ?? '';
+    }
+
+    get apartment(): string {
+        return this.components().at(8) ?? '';
+    }
+
+    get floor(): string {
+        return this.components().at(9) ?? '';
+    }
+
+    get streetNumber(): string {
+        return this.components().at(10) ?? '';
+    }
+
+    get streetName(): string {
+        return this.components().at(11) ?? '';
+    }
+
+    get building(): string {
+        return this.components().at(12) ?? '';
+    }
+
+    get block(): string {
+        return this.components().at(13) ?? '';
+    }
+
+    get subdistrict(): string {
+        return this.components().at(14) ?? '';
+    }
+
+    get district(): string {
+        return this.components().at(15) ?? '';
+    }
+
+    get landmark(): string {
+        return this.components().at(16) ?? '';
+    }
+
+    get direction(): string {
+        return this.components().at(17) ?? '';
     }
 
     constructor(value: string, parameters: AdrParameters = {}, { group = '' }: Options = {}) {
@@ -177,8 +310,10 @@ export default class AdrProperty extends Property {
 
     validate(value: string): void {
         const semicolonCount = getUnescapedSemicolonCount(value);
+        const rfc6350SemicolonCount = 6;
+        const rfc9554SemicolonCount = 17;
 
-        if (semicolonCount !== 6)
+        if (semicolonCount !== rfc6350SemicolonCount && semicolonCount !== rfc9554SemicolonCount)
             throw new TypeError(`The value "${value}" is not a valid ADR format`);
     }
 

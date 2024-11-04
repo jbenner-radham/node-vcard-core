@@ -127,6 +127,200 @@ describe('AdrProperty', () => {
         });
     });
 
+    describe('#room', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street Room 1352;Any Town;CA;91921-1234;U.S.A.;Room 1352;;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.room).to.be.a('string');
+        });
+
+        it('returns the room component', () => {
+            const value = ';;123 Main Street Room 1352;Any Town;CA;91921-1234;U.S.A.;Room 1352;;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.room).to.equal('Room 1352');
+        });
+    });
+
+    describe('#apartment', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street Apartment 101;Any Town;CA;91921-1234;U.S.A.' +
+                ';;Apartment 101;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.apartment).to.be.a('string');
+        });
+
+        it('returns the apartment component', () => {
+            const value = ';;123 Main Street Apartment 101;Any Town;CA;91921-1234;U.S.A.' +
+                ';;Apartment 101;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.apartment).to.equal('Apartment 101');
+        });
+    });
+
+    describe('#floor', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street Floor 2;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;Floor 2;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.floor).to.be.a('string');
+        });
+
+        it('returns the floor component', () => {
+            const value = ';;123 Main Street Floor 2;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;Floor 2;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.floor).to.equal('Floor 2');
+        });
+    });
+
+    describe('#streetNumber', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.streetNumber).to.be.a('string');
+        });
+
+        it('returns the streetNumber component', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.streetNumber).to.equal('123');
+        });
+    });
+
+    describe('#streetName', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.streetName).to.be.a('string');
+        });
+
+        it('returns the streetName component', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;;;123;Main Street;;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.streetName).to.equal('Main Street');
+        });
+    });
+
+    describe('#building', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street Building 14;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;;123;Main Street;Building 14;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.building).to.be.a('string');
+        });
+
+        it('returns the building component', () => {
+            const value = ';;123 Main Street Building 14;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;;123;Main Street;Building 14;;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.building).to.equal('Building 14');
+        });
+    });
+
+    describe('#block', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street Block 456;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;;123;Main Street;;Block 456;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.block).to.be.a('string');
+        });
+
+        it('returns the building component', () => {
+            const value = ';;123 Main Street Block 456;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;;123;Main Street;;Block 456;;;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.block).to.equal('Block 456');
+        });
+    });
+
+    /** @see {@link https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/thaEn.pdf} */
+    describe('#subdistrict', () => {
+        it('is a string property', () => {
+            const value = ';;491 Rangsit-Nakhon Nayok 4 Road;;Pathumthani;12130;Thailand' +
+               ';;;;491;Rangsit-Nakhon Nayok 4 Road;;;Prachathipat;Amphoe Tanyaburi;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.subdistrict).to.be.a('string');
+        });
+
+        it('returns the subdistrict component', () => {
+            const value = ';;491 Rangsit-Nakhon Nayok 4 Road;;Pathumthani;12130;Thailand' +
+                ';;;;491;Rangsit-Nakhon Nayok 4 Road;;;Prachathipat;Amphoe Tanyaburi;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.subdistrict).to.be.equal('Prachathipat');
+        });
+    });
+
+    /** @see {@link https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/thaEn.pdf} */
+    describe('#district', () => {
+        it('is a string property', () => {
+            const value = ';;491 Rangsit-Nakhon Nayok 4 Road;;Pathumthani;12130;Thailand' +
+                ';;;;491;Rangsit-Nakhon Nayok 4 Road;;;Prachathipat;Amphoe Tanyaburi;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.district).to.be.a('string');
+        });
+
+        it('returns the subdistrict component', () => {
+            const value = ';;491 Rangsit-Nakhon Nayok 4 Road;;Pathumthani;12130;Thailand' +
+                ';;;;491;Rangsit-Nakhon Nayok 4 Road;;;Prachathipat;Amphoe Tanyaburi;;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.district).to.be.equal('Amphoe Tanyaburi');
+        });
+    });
+
+    describe('#landmark', () => {
+        it('is a string', () => {
+            const value = ';;1600 Pennsylvania Avenue NW;Washington;DC;20500-0005;U.S.A.' +
+                ';;;;1600;Pennsylvania Avenue NW;;;;;White House;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.landmark).to.be.a('string');
+        });
+
+        it('returns the landmark component', () => {
+            const value = ';;1600 Pennsylvania Avenue NW;Washington;DC;20500-0005;U.S.A.' +
+                ';;;;1600;Pennsylvania Avenue NW;;;;;White House;';
+            const adr = new AdrProperty(value);
+
+            expect(adr.landmark).to.equal('White House');
+        });
+    });
+
+    describe('#direction', () => {
+        it('is a string property', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;;123;Main Street;;;;;;North';
+            const adr = new AdrProperty(value);
+
+            expect(adr.direction).to.be.a('string');
+        });
+
+        it('returns the direction component', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.' +
+                ';;;;123;Main Street;;;;;;North';
+            const adr = new AdrProperty(value);
+
+            expect(adr.direction).to.equal('North');
+        });
+    });
+
     describe('#components()', () => {
         it('is a method', () => {
             expect(AdrProperty.prototype.components).to.be.a('function');
