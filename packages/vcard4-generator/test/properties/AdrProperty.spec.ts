@@ -430,4 +430,11 @@ describe('AdrProperty', () => {
             expect(adr instanceof AdrProperty).to.equal(true);
         });
     });
+
+    it('sets a backwards compatible value when street number and name are set', () => {
+        const value = ';;;Any Town;CA;91921-1234;U.S.A.;;;;123;Main Street;;;;;;';
+        const adr = new AdrProperty(value);
+
+        expect(adr.valueOf()).to.equal(';;123 Main Street;Any Town;CA;91921-1234;U.S.A.;;;;123;Main Street;;;;;;');
+    });
 });

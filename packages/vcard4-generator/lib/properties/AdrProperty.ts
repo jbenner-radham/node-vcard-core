@@ -11,6 +11,7 @@ import isValidGroup from '../util/is-valid-group.js';
 import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
+import { SEPARATOR } from '@vcard/vcard4-meta';
 
 export interface AdrParameters {
     value?: Extract<Value, 'text'>;
@@ -213,6 +214,10 @@ export default class AdrProperty extends Property {
 
     static readonly DEFAULT_VALUE_TYPE: Value = 'text';
 
+    static readonly RFC6350_SEMICOLON_COUNT = 6;
+
+    static readonly RFC9554_SEMICOLON_COUNT = 17;
+
     group: Group;
 
     parameters: AdrParameters = {};
@@ -306,15 +311,66 @@ export default class AdrProperty extends Property {
         this.group = group;
         this.parameters = parameters;
         this[VALUE] = value;
+
+        this.maybeSetBackwardsCompatibleValue(value);
+    }
+
+    maybeSetBackwardsCompatibleValue(value: string): void {
+        if (getUnescapedSemicolonCount(value) !== AdrProperty.RFC9554_SEMICOLON_COUNT) return;
+
+        const {
+            postOfficeBox,
+            extendedAddress,
+            locality,
+            region,
+            postalCode,
+            countryName,
+            room,
+            apartment,
+            floor,
+            streetNumber,
+            streetName,
+            building,
+            block,
+            subdistrict,
+            district,
+            landmark,
+            direction
+        } = this;
+
+        if (!(streetNumber && streetName)) return;
+
+        this[VALUE] = [
+            postOfficeBox,
+            extendedAddress,
+            `${streetNumber} ${streetName}`,
+            locality,
+            region,
+            postalCode,
+            countryName,
+            room,
+            apartment,
+            floor,
+            streetNumber,
+            streetName,
+            building,
+            block,
+            subdistrict,
+            district,
+            landmark,
+            direction
+        ].join(SEPARATOR);
     }
 
     validate(value: string): void {
         const semicolonCount = getUnescapedSemicolonCount(value);
-        const rfc6350SemicolonCount = 6;
-        const rfc9554SemicolonCount = 17;
 
-        if (semicolonCount !== rfc6350SemicolonCount && semicolonCount !== rfc9554SemicolonCount)
+        if (
+            semicolonCount !== AdrProperty.RFC6350_SEMICOLON_COUNT &&
+            semicolonCount !== AdrProperty.RFC9554_SEMICOLON_COUNT
+        ) {
             throw new TypeError(`The value "${value}" is not a valid ADR format`);
+        }
     }
 
     valueOf(): string {
