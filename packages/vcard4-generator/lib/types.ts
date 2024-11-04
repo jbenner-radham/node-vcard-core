@@ -1,7 +1,7 @@
 import type { IntRange } from 'type-fest';
 
-type PREF_INCLUSIVE_FROM = 1;
-type PREF_EXCLUSIVE_TO = 101;
+type PrefInclusiveFrom = 1;
+type PrefExclusiveTo = 101;
 type UppercaseAlpha = 'A'
     | 'B'
     | 'C'
@@ -36,7 +36,7 @@ export type Cc = `${UppercaseAlpha}${UppercaseAlpha}`;
 export type Group = number | string;
 export type HobbyOrInterestLevel = 'low' | 'medium' | 'high';
 export type Pid = number | number[];
-export type Pref = IntRange<PREF_INCLUSIVE_FROM, PREF_EXCLUSIVE_TO>;
+export type Pref = IntRange<PrefInclusiveFrom, PrefExclusiveTo>;
 export type Type = 'home' | 'work';
 export type Value = 'boolean'
     | 'date'
