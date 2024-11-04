@@ -8,72 +8,114 @@ describe('NProperty', () => {
     });
 
     describe('#familyName', () => {
+        const value = 'Benner;Bella;;;';
+
         it('is a string property', () => {
-            const n = new NProperty('Benner;Bella;;;');
+            const n = new NProperty(value);
 
             expect(n.familyName).to.be.a('string');
         });
 
         it('returns the family name component', () => {
-            const n = new NProperty('Benner;Bella;;;');
+            const n = new NProperty(value);
 
             expect(n.familyName).to.equal('Benner');
         });
     });
 
     describe('#givenName', () => {
+        const value = 'Benner;Daisy;;;';
+
         it('is a string property', () => {
-            const n = new NProperty('Benner;Daisy;;;');
+            const n = new NProperty(value);
 
             expect(n.givenName).to.be.a('string');
         });
 
         it('returns the given name component', () => {
-            const n = new NProperty('Benner;Daisy;;;');
+            const n = new NProperty(value);
 
             expect(n.givenName).to.equal('Daisy');
         });
     });
 
     describe('#additionalName', () => {
+        const value = 'Public;John;Quinlan;Mr.;Esq.';
+
         it('is a string property', () => {
-            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+            const n = new NProperty(value);
 
             expect(n.additionalName).to.be.a('string');
         });
 
         it('returns the additional name component', () => {
-            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+            const n = new NProperty(value);
 
             expect(n.additionalName).to.equal('Quinlan');
         });
     });
 
     describe('#honorificPrefix', () => {
+        const value = 'Public;John;Quinlan;Mr.;Esq.';
+
         it('is a string property', () => {
-            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+            const n = new NProperty(value);
 
             expect(n.honorificPrefix).to.be.a('string');
         });
 
-        it('returns the additional name component', () => {
-            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+        it('returns the honorific prefix component', () => {
+            const n = new NProperty(value);
 
             expect(n.honorificPrefix).to.equal('Mr.');
         });
     });
 
     describe('#honorificSuffix', () => {
+        const value = 'Public;John;Quinlan;Mr.;Esq.';
+
         it('is a string property', () => {
-            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+            const n = new NProperty(value);
 
             expect(n.honorificSuffix).to.be.a('string');
         });
 
-        it('returns the additional name component', () => {
-            const n = new NProperty('Public;John;Quinlan;Mr.;Esq.');
+        it('returns the honorific suffix component', () => {
+            const n = new NProperty(value);
 
             expect(n.honorificSuffix).to.equal('Esq.');
+        });
+    });
+
+    describe('#secondarySurname', () => {
+        const value = 'Public;John;Quinlan;Mr.;Esq.;Pishner;';
+
+        it('is a string property', () => {
+            const n = new NProperty(value);
+
+            expect(n.secondarySurname).to.be.a('string');
+        });
+
+        it('returns the secondary surname component', () => {
+            const n = new NProperty(value);
+
+            expect(n.secondarySurname).to.equal('Pishner');
+        });
+    });
+
+    describe('#generation', () => {
+        const value = 'Stevenson;John;Philip,Paul;Dr.;Jr.,M.D.,A.C.P.;;Jr.';
+
+        it('is a string property', () => {
+            const n = new NProperty(value);
+
+            expect(n.generation).to.be.a('string');
+        });
+
+        it('returns the generation component', () => {
+            const n = new NProperty(value);
+
+            expect(n.generation).to.equal('Jr.');
         });
     });
 
