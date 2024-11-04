@@ -228,6 +228,9 @@ export default class AdrProperty extends Property {
         return this.components().at(0) ?? '';
     }
 
+    /**
+     * e.g., apartment, suite number
+     */
     get extendedAddress(): string {
         return this.components().at(1) ?? '';
     }
@@ -236,10 +239,16 @@ export default class AdrProperty extends Property {
         return this.components().at(2) ?? '';
     }
 
+    /**
+     * e.g., city
+     */
     get locality(): string {
         return this.components().at(3) ?? '';
     }
 
+    /**
+     * e.g., state, prefecture, province
+     */
     get region(): string {
         return this.components().at(4) ?? '';
     }
@@ -252,14 +261,23 @@ export default class AdrProperty extends Property {
         return this.components().at(6) ?? '';
     }
 
+    /**
+     * a.k.a. suite number, identifier
+     */
     get room(): string {
         return this.components().at(7) ?? '';
     }
 
+    /**
+     * a.k.a. extension designation, box number
+     */
     get apartment(): string {
         return this.components().at(8) ?? '';
     }
 
+    /**
+     * a.k.a. level
+     */
     get floor(): string {
         return this.components().at(9) ?? '';
     }
@@ -272,6 +290,9 @@ export default class AdrProperty extends Property {
         return this.components().at(11) ?? '';
     }
 
+    /**
+     * a.k.a. tower, condominium
+     */
     get building(): string {
         return this.components().at(12) ?? '';
     }
@@ -292,6 +313,9 @@ export default class AdrProperty extends Property {
         return this.components().at(16) ?? '';
     }
 
+    /**
+     * a.k.a. quadrant
+     */
     get direction(): string {
         return this.components().at(17) ?? '';
     }

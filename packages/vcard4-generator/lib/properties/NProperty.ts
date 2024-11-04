@@ -128,21 +128,21 @@ export default class NProperty extends Property {
     [VALUE]: string;
 
     /**
-     * a.k.a. "last name", "surname"
+     * a.k.a. last name, surname
      */
     get familyName(): string {
         return this.components().at(0) ?? '';
     }
 
     /**
-     * a.k.a. "first name", "personal name"
+     * a.k.a. first name, personal name
      */
     get givenName(): string {
         return this.components().at(1) ?? '';
     }
 
     /**
-     * a.k.a. "middle name", "patronymic name", "nasab", "a series of patronymics"
+     * a.k.a. middle name, patronymic name, nasab, a series of patronymics
      */
     get additionalName(): string {
         return this.components().at(2) ?? '';
@@ -163,7 +163,7 @@ export default class NProperty extends Property {
     }
 
     /**
-     * a.k.a. "maternal surname", "paternal surname", "generational name"
+     * a.k.a. maternal surname, paternal surname, generational name
      */
     get secondarySurname(): string {
         return this.components().at(5) ?? '';
