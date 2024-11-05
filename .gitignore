@@ -3,4 +3,3 @@ node_modules/
 packages/website/
 *.log
 *.tsbuildinfo
-.npmrc
