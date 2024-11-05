@@ -32,6 +32,12 @@ type UppercaseAlpha = 'A'
 export type Altid = number | string;
 export type Calscale = 'gregorian';
 export type Cardinality = '1' | '*1' | '1*' | '*';
+export type CommonParameters = {
+    author?: string;
+    authorName?: string;
+    created?: string;
+    derived?: boolean;
+};
 export type Cc = `${UppercaseAlpha}${UppercaseAlpha}`;
 export type Group = number | string;
 export type HobbyOrInterestLevel = 'low' | 'medium' | 'high';
