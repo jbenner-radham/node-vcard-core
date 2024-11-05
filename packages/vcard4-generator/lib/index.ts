@@ -1,5 +1,5 @@
 import { EOL } from '@vcard/vcard4-meta';
-import AdrProperty, { type AdrConfig, AdrParameters, AdrRestConfig } from './properties/AdrProperty.js';
+import AdrProperty, { type AdrConfig, AdrParameters, AdrRestConfig, AdrType } from './properties/AdrProperty.js';
 import AdrPropertyArray from './properties/arrays/AdrPropertyArray.js';
 import AnniversaryProperty, {
     type AnniversaryConfig, AnniversaryParameters, AnniversaryRestConfig
@@ -691,7 +691,8 @@ export type {
     Sex,
     Kind,
     RelatedType,
-    TelType
+    TelType,
+    AdrType
 };
 
 export type {
