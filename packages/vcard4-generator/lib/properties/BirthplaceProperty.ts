@@ -1,19 +1,15 @@
-import type { Altid, Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Cardinality, CommonParameters, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
-export interface BirthplaceParameters {
+export type BirthplaceParameters = {
     value?: Extract<Value, 'text' | 'uri'>;
     altid?: Altid;
     language?: string;
-}
+} & CommonParameters;
 
-export type BirthplaceRestConfig = [
-    value: string,
-    parameters?: BirthplaceParameters,
-    options?: Options
-];
+export type BirthplaceRestConfig = [value: string, parameters?: BirthplaceParameters, options?: Options];
 
 export type BirthplaceConfig = BirthplaceProperty | BirthplaceRestConfig | string;
 
