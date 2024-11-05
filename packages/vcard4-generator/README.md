@@ -233,6 +233,10 @@ To-Do
     - [ ] Line Folding
     - [ ] Value Escaping
     - [ ] `VALUE` Parameter
+    - [ ] `AUTHOR` Parameter _(RFC 9554)_
+    - [ ] `AUTHOR-NAME` Parameter _(RFC 9554)_
+    - [ ] `CREATED` Parameter _(RFC 9554)_
+    - [ ] `DERIVED` Parameter _(RFC 9554)_
   - [x] `DEATHDATE` _(RFC6474)_
     - [x] Line Folding
     - [x] Value Escaping
@@ -336,6 +340,11 @@ To-Do
     - [ ] Line Folding
     - [ ] Value Escaping
     - [ ] `LANGUAGE` Parameter
+    - [ ] `AUTHOR` Parameter _(RFC 9554)_
+    - [ ] `AUTHOR-NAME` Parameter _(RFC 9554)_
+    - [ ] `CREATED` Parameter _(RFC 9554)_
+    - [ ] `DERIVED` Parameter _(RFC 9554)_
+    - [ ] `PROP-ID` Parameter _(RFC 9554)_
   - [x] `HOBBY` _(RFC6715)_
     - [x] Line Folding
     - [x] Value Escaping
@@ -545,6 +554,11 @@ To-Do
     - [ ] `PREF` Parameter
     - [ ] `TYPE` Parameter
     - [ ] `ALTID` Parameter
+    - [ ] `AUTHOR` Parameter _(RFC 9554)_
+    - [ ] `AUTHOR-NAME` Parameter _(RFC 9554)_
+    - [ ] `CREATED` Parameter _(RFC 9554)_
+    - [ ] `DERIVED` Parameter _(RFC 9554)_
+    - [ ] `PROP-ID` Parameter _(RFC 9554)_
   - [x] `RELATED`
     - [x] Line Folding
     - [x] Value Escaping
@@ -587,6 +601,11 @@ To-Do
     - [ ] Value Escaping
     - [ ] `VALUE` Parameter
     - [ ] `SERVICE-TYPE` Parameter _(RFC 9554)_
+    - [ ] `AUTHOR` Parameter _(RFC 9554)_
+    - [ ] `AUTHOR-NAME` Parameter _(RFC 9554)_
+    - [ ] `CREATED` Parameter _(RFC 9554)_
+    - [ ] `DERIVED` Parameter _(RFC 9554)_
+    - [ ] `PROP-ID` Parameter _(RFC 9554)_
   - [x] `SOUND`
     - [x] Line Folding
     - [x] Value Escaping
