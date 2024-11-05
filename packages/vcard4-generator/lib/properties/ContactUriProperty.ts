@@ -1,14 +1,14 @@
-import type { Cardinality, Group, Pref, Options, Value } from '../types.js';
+import type { Cardinality, CommonParameters, Group, Pref, Options, Value } from '../types.js';
 import { getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
-export interface ContactUriParameters {
+export type ContactUriParameters = {
     value?: Extract<Value, 'uri'>;
     pref?: Pref;
-}
+} & CommonParameters;
 
 export type ContactUriRestConfig = [value: string, parameters?: ContactUriParameters, options?: Options];
 
