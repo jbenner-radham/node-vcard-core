@@ -136,6 +136,7 @@ To-Do
     - [ ] `DERIVED` Parameter _(RFC 9554)_
     - [ ] `PHONETIC` Parameter _(RFC 9554)_
     - [ ] `PROP-ID` Parameter _(RFC 9554)_
+    - [ ] `SCRIPT` Parameter _(RFC 9554)_
     - [x] Additional Address Components _(RFC 9554)_
     - [ ] Billing Address Type Value _(RFC 9554)_
     - [ ] Delivery Address Type Value _(RFC 9554)_
@@ -355,6 +356,8 @@ To-Do
     - [ ] `CREATED` Parameter _(RFC 9554)_
     - [ ] `DERIVED` Parameter _(RFC 9554)_
     - [ ] `PROP-ID` Parameter _(RFC 9554)_
+    - [ ] `SERVICE-TYPE` Parameter _(RFC 9554)_
+    - [ ] `USERNAME` Parameter _(RFC 9554)_
   - [x] `INTEREST` _(RFC6715)_
     - [x] Line Folding
     - [x] Value Escaping
@@ -444,6 +447,7 @@ To-Do
     - [ ] `CREATED` Parameter _(RFC 9554)_
     - [ ] `DERIVED` Parameter _(RFC 9554)_
     - [ ] `PHONETIC` Parameter _(RFC 9554)_
+    - [ ] `SCRIPT` Parameter _(RFC 9554)_
     - [x] Additional Name Components _(RFC 9554)_
   - [x] `NICKNAME`
     - [x] Line Folding
