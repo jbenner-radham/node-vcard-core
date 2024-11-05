@@ -1,4 +1,4 @@
-import type { Altid, Calscale, Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Calscale, Cardinality, CommonParameters, Group, Options, Value } from '../types.js';
 import { getInvalidCalscaleValueParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -6,7 +6,7 @@ import Property from './Property.js';
 
 type AnniversaryCommonParameters = {
     altid?: Altid;
-};
+} & CommonParameters;
 
 type AnniversaryDateAndOrTimeOrUndefinedValueParameters = {
     value?: Extract<Value, 'date-and-or-time'>;
