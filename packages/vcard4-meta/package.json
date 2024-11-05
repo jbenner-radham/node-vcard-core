@@ -15,7 +15,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jbenner-radham/vcardjs.git"
+    "url": "git+https://github.com/jbenner-radham/vcardjs.git",
+    "directory": "packages/vcard4-meta"
   },
   "license": "MIT",
   "author": "James Benner <hello@jamesbenner.com> (https://www.jamesbenner.com/)",
