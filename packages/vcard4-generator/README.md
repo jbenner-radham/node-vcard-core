@@ -244,10 +244,10 @@ To-Do
     - [x] `CALSCALE` Parameter _(for `date-and-or-time` type only)_
     - [x] `LANGUAGE` Parameter _(for `text` type only)_
     - [x] `ALTID` Parameter
-    - [ ] `AUTHOR` Parameter _(RFC 9554)_
-    - [ ] `AUTHOR-NAME` Parameter _(RFC 9554)_
-    - [ ] `CREATED` Parameter _(RFC 9554)_
-    - [ ] `DERIVED` Parameter _(RFC 9554)_
+    - [x] `AUTHOR` Parameter _(RFC 9554)_
+    - [x] `AUTHOR-NAME` Parameter _(RFC 9554)_
+    - [x] `CREATED` Parameter _(RFC 9554)_
+    - [x] `DERIVED` Parameter _(RFC 9554)_
   - [x] `DEATHPLACE` _(RFC6474)_
     - [x] Line Folding
     - [x] Value Escaping

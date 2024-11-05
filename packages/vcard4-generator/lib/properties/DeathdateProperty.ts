@@ -1,4 +1,4 @@
-import type { Altid, Calscale, Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Calscale, Cardinality, CommonParameters, Group, Options, Value } from '../types.js';
 import {
     getInvalidCalscaleValueParameterMessage,
     getInvalidLanguageValueParameterMessage
@@ -9,7 +9,7 @@ import Property from './Property.js';
 
 type DeathdateCommonParameters = {
     altid?: Altid;
-};
+} & CommonParameters;
 
 type DeathdateDateAndOrTimeOrUndefinedValueParameters = {
     value?: Extract<Value, 'date-and-or-time'>;
