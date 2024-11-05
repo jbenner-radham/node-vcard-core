@@ -13,6 +13,8 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 import { SEPARATOR } from '@vcard/vcard4-meta';
 
+export type AdrType = 'billing' | 'delivery';
+
 export type AdrParameters = {
     value?: Extract<Value, 'text'>;
     label?: string;
@@ -22,7 +24,7 @@ export type AdrParameters = {
     altid?: Altid;
     pid?: Pid;
     pref?: Pref;
-    type?: Type;
+    type?: Type | AdrType;
     cc?: Cc;
 } & CommonParameters;
 

@@ -369,7 +369,15 @@ describe('AdrProperty', () => {
             expect(adr.toString()).to.equal(`ADR:${value}`);
         });
 
-        it('correctly returns parameters', () => {
+        it('correctly returns the derived parameter', () => {
+            const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
+            const parameters = { derived: true };
+            const adr = new AdrProperty(value, parameters);
+
+            expect(adr.toString()).to.equal(`ADR;DERIVED=true:${value}`);
+        });
+
+        it('correctly returns geo and type parameters', () => {
             const parameters = { geo: 'geo:12.3457,78.910', type: 'home' as const };
             const value = ';;123 Main Street;Any Town;CA;91921-1234;U.S.A.';
             const adr = new AdrProperty(value, parameters);
