@@ -1,13 +1,13 @@
-import type { Altid, Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Cardinality, CommonParameters, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
-export interface DeathplaceParameters {
+export type DeathplaceParameters = {
     value?: Extract<Value, 'text' | 'uri'>;
     altid?: Altid;
     language?: string;
-}
+} & CommonParameters;
 
 export type DeathplaceRestConfig = [value: string, parameters?: DeathplaceParameters, options?: Options];
 
