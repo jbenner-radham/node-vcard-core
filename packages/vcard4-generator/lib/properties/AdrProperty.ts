@@ -1,4 +1,4 @@
-import type { Altid, Cardinality, Cc, Group, Pid, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, Cc, CommonParameters, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 import {
     getInvalidCcParameterMessage,
@@ -13,7 +13,7 @@ import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 import { SEPARATOR } from '@vcard/vcard4-meta';
 
-export interface AdrParameters {
+export type AdrParameters = {
     value?: Extract<Value, 'text'>;
     label?: string;
     language?: string;
@@ -24,7 +24,7 @@ export interface AdrParameters {
     pref?: Pref;
     type?: Type;
     cc?: Cc;
-}
+} & CommonParameters;
 
 export type AdrRestConfig = [value: string, parameters?: AdrParameters, options?: Options];
 
