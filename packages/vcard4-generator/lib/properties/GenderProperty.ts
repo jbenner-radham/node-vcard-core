@@ -1,4 +1,4 @@
-import type { Cardinality, Group, Options, Value } from '../types.js';
+import type { Cardinality, CommonParameters, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
@@ -6,9 +6,9 @@ import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js
 
 export type Sex = '' | 'F' | 'M' | 'N' | 'O' | 'U';
 
-export interface GenderParameters {
+export type GenderParameters = {
     value?: Extract<Value, 'text'>;
-}
+} & CommonParameters;
 
 export type GenderRestConfig = [value: string, parameters?: GenderParameters, options?: Options];
 
