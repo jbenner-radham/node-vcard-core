@@ -1,4 +1,4 @@
-import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, CommonParameters, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import {
     getInvalidMediatypeValueParameterMessage,
     getInvalidPidParameterMessage,
@@ -15,7 +15,7 @@ type KeyCommonParameters = {
     pid?: Pid;
     pref?: Pref;
     type?: Type;
-};
+} & CommonParameters;
 
 type KeyUriOrUndefinedValueParameters = {
     value?: Extract<Value, 'uri'>;
