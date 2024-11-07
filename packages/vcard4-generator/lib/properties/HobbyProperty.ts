@@ -1,4 +1,14 @@
-import type { Altid, Cardinality, Group, HobbyOrInterestLevel, Pref, Options, Type, Value } from '../types.js';
+import type {
+    Altid,
+    Cardinality,
+    CommonParameters,
+    Group,
+    HobbyOrInterestLevel,
+    Pref,
+    Options,
+    Type,
+    Value
+} from '../types.js';
 import { getInvalidIndexParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -6,14 +16,14 @@ import isValidIndexParameter from '../util/is-valid-index-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
-export interface HobbyParameters {
+export type HobbyParameters = {
     level?: HobbyOrInterestLevel;
     index?: number; // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
     altid?: Altid;
     language?: string;
     pref?: Pref;
     type?: Type;
-}
+} & CommonParameters;
 
 export type HobbyRestConfig = [value: string, parameters?: HobbyParameters, options?: Options];
 
