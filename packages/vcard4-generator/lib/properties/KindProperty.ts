@@ -1,13 +1,13 @@
-import type { Cardinality, Group, Options, Value } from '../types.js';
+import type { Cardinality, CommonParameters, Group, Options, Value } from '../types.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 
 export type Kind = 'application' | 'group' | 'individual' | 'location' | 'org';
 
-export interface KindParameters {
+export type KindParameters = {
     value?: Extract<Value, 'text'>;
-}
+} & CommonParameters;
 
 export type KindRestConfig = [value: Kind, parameters?: KindParameters, options?: Options];
 
