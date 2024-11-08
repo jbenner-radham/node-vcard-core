@@ -1,15 +1,15 @@
-import type { Altid, Cardinality, Group, Options, Value } from '../types.js';
+import type { Altid, Cardinality, CommonParameters, Group, Options, Value } from '../types.js';
 import getUnescapedSemicolonCount from '../util/get-unescaped-semicolon-count.js';
 import isValidGroup from '../util/is-valid-group.js';
 import Property from './Property.js';
 import isString from '../util/is-string.js';
 
-export interface NParameters {
+export type NParameters = {
     value?: Extract<Value, 'text'>;
     sortAs?: string;
     language?: string;
     altid?: Altid;
-}
+} & CommonParameters;
 
 export type NRestConfig = [value: string, parameters?: NParameters, options?: Options];
 

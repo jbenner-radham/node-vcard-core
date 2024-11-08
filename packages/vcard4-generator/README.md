@@ -461,10 +461,10 @@ To-Do
     - [x] `SORT-AS` Parameter
     - [x] `LANGUAGE` Parameter
     - [x] `ALTID` Parameter
-    - [ ] `AUTHOR` Parameter _(RFC 9554)_
-    - [ ] `AUTHOR-NAME` Parameter _(RFC 9554)_
-    - [ ] `CREATED` Parameter _(RFC 9554)_
-    - [ ] `DERIVED` Parameter _(RFC 9554)_
+    - [x] `AUTHOR` Parameter _(RFC 9554)_
+    - [x] `AUTHOR-NAME` Parameter _(RFC 9554)_
+    - [x] `CREATED` Parameter _(RFC 9554)_
+    - [x] `DERIVED` Parameter _(RFC 9554)_
     - [ ] `PHONETIC` Parameter _(RFC 9554)_
     - [ ] `SCRIPT` Parameter _(RFC 9554)_
     - [x] Additional Name Components _(RFC 9554)_
