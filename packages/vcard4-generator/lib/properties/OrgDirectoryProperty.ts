@@ -1,4 +1,4 @@
-import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, CommonParameters, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import {
     getInvalidIndexParameterMessage,
     getInvalidPidParameterMessage,
@@ -11,14 +11,14 @@ import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
-export interface OrgDirectoryParameters {
+export type OrgDirectoryParameters = {
     altid?: Altid;
     index?: number; // > INDEX values must be strictly positive. Zero is not allowed. _(integer)_
     language?: string;
     pid?: Pid;
     pref?: Pref;
     type?: Type;
-}
+} & CommonParameters;
 
 export type OrgDirectoryRestConfig = [value: string, parameters?: OrgDirectoryParameters, options?: Options];
 
