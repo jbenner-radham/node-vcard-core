@@ -1,4 +1,4 @@
-import type { Altid, Cardinality, Group, Pid, Pref, Options, Type, Value } from '../types.js';
+import type { Altid, Cardinality, CommonParameters, Group, Pid, Pref, Options, Type, Value } from '../types.js';
 import { getInvalidPidParameterMessage, getInvalidPrefParameterMessage } from '../util/error-messages.js';
 import isString from '../util/is-string.js';
 import isValidGroup from '../util/is-valid-group.js';
@@ -6,13 +6,13 @@ import isValidPidParameter from '../util/is-valid-pid-parameter.js';
 import isValidPrefParameter from '../util/is-valid-pref-parameter.js';
 import Property from './Property.js';
 
-export interface LangParameters {
+export type LangParameters = {
     value?: Extract<Value, 'language-tag'>;
     pid?: Pid;
     pref?: Pref;
     altid?: Altid;
     type?: Type;
-}
+} & CommonParameters;
 
 export type LangRestConfig = [value: string, parameters?: LangParameters, options?: Options];
 
