@@ -6,10 +6,12 @@ A suite for working with [vCards](https://en.wikipedia.org/wiki/VCard).
 
 Heads Up!
 ---------
-This is still very much a WIP project and is _**not**_ feature complete.
+This repository has been deprecated and all current work on this project is now taking place [here](https://github.com/vcardjs). The monorepo paradigm just wasn't working for how I wanted to do things so now everything is centralized under a GitHub organization with multiple repos.
 
-Currently only vCard 4.0 is supported but support for other versions is planned for the future.
-vCard generation is complete, work is currently being done on parsing.
+~~This is still very much a WIP project and is _**not**_ feature complete.~~
+
+~~Currently only vCard 4.0 is supported but support for other versions is planned for the future.
+vCard generation is complete, work is currently being done on parsing.~~
 
 Testing
 -------
